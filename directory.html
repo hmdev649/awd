@@ -353,11 +353,6 @@
             </nav>
         </header>
 
-        <div class="page-header">
-            <h1>Directory</h1>
-            <p class="subtitle">Discover American watchmakers, craftsmen, and suppliers</p>
-        </div>
-
         <section class="filters-section">
             <h2 class="filters-title">Find Your Perfect Match</h2>
             <div class="filters-grid">
@@ -403,94 +398,66 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script>
-        console.log('Script is running!'); // This should appear immediately
-        
         let allCompanies = [];
         let filteredCompanies = [];
         
-        console.log('Variables declared'); // This should also appear
-        
-        // Load and parse company data
+        // Load and parse CSV data
         async function loadCompaniesData() {
-            console.log('Test version loading...');
-            
-            const companiesData = [
-                {
-                    "Company Name": "Test Company 1",
-                    "City": "New York", 
-                    "State": "NY",
-                    "Website": "https://example.com",
-                    "Instagram": "https://instagram.com/test",
-                    "Contact Name": "John Doe",
-                    "Contact Title": "Founder",
-                    "Company Contact": "info@test.com",
-                    "Company Founded": 2020,
-                    "Country": "US"
-                },
-                {
-                    "Company Name": "Test Company 2",
-                    "City": "Los Angeles", 
-                    "State": "CA",
-                    "Website": "https://example2.com",
-                    "Instagram": "",
-                    "Contact Name": "Jane Smith",
-                    "Contact Title": "CEO",
-                    "Company Contact": "hello@test2.com",
-                    "Company Founded": 2018,
-                    "Country": "US"
+            try {
+                const response = await fetch('american-watch-makers.csv');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-            ];
-            
-            console.log('Companies data created:', companiesData.length);
-            
-            allCompanies = companiesData;
-            filteredCompanies = [...allCompanies];
-            
-            console.log('About to setup filters...');
-            setupFilters();
-            
-            console.log('About to display companies...');
-            displayCompanies();
-            
-            console.log('About to update results info...');
-            updateResultsInfo();
-            
-            console.log('Load complete!');
+                const csvText = await response.text();
+                
+                const parsed = Papa.parse(csvText, {
+                    header: true,
+                    dynamicTyping: true,
+                    skipEmptyLines: true,
+                    delimitersToGuess: [',', '\t', '|', ';']
+                });
+                
+                // Clean headers and data
+                allCompanies = parsed.data.map(row => {
+                    const cleanedRow = {};
+                    Object.keys(row).forEach(key => {
+                        const cleanKey = key.trim();
+                        cleanedRow[cleanKey] = row[key];
+                    });
+                    return cleanedRow;
+                }).filter(company => company['Company Name']); // Remove empty rows
+                
+                filteredCompanies = [...allCompanies];
+                
+                setupFilters();
+                displayCompanies();
+                updateResultsInfo();
+                
+            } catch (error) {
+                console.error('Error loading CSV:', error);
+                document.getElementById('results-info').innerHTML = 
+                    '<div class="no-results"><h3>Error Loading Data</h3><p>Unable to load company data. Please try again later.</p></div>';
+            }
         }
         
         // Setup filter options
         function setupFilters() {
-            console.log('setupFilters started');
+            // Populate state filter
+            const stateFilter = document.getElementById('state-filter');
+            const states = [...new Set(allCompanies.map(company => company.State).filter(state => state))].sort();
             
-            try {
-                // Populate state filter
-                const stateFilter = document.getElementById('state-filter');
-                console.log('Found state filter element:', stateFilter);
-                
-                const states = [...new Set(allCompanies.map(company => company.State).filter(state => state))].sort();
-                console.log('States found:', states);
-                
-                states.forEach(state => {
-                    const option = document.createElement('option');
-                    option.value = state;
-                    option.textContent = state;
-                    stateFilter.appendChild(option);
-                });
-                
-                console.log('States populated');
-                
-                // Add event listeners
-                document.getElementById('search').addEventListener('input', applyFilters);
-                document.getElementById('state-filter').addEventListener('change', applyFilters);
-                document.getElementById('year-from').addEventListener('input', applyFilters);
-                document.getElementById('year-to').addEventListener('input', applyFilters);
-                
-                console.log('Event listeners added');
-                console.log('setupFilters completed successfully');
-                
-            } catch (error) {
-                console.error('Error in setupFilters:', error);
-            }
+            states.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state;
+                option.textContent = state;
+                stateFilter.appendChild(option);
+            });
+            
+            // Add event listeners
+            document.getElementById('search').addEventListener('input', applyFilters);
+            document.getElementById('state-filter').addEventListener('change', applyFilters);
+            document.getElementById('year-from').addEventListener('input', applyFilters);
+            document.getElementById('year-to').addEventListener('input', applyFilters);
         }
         
         // Apply all filters
@@ -515,109 +482,73 @@
         
         // Display companies
         function displayCompanies() {
-            console.log('displayCompanies started');
+            const grid = document.getElementById('companies-grid');
             
-            try {
-                const grid = document.getElementById('companies-grid');
-                console.log('Found companies-grid element:', grid);
-                console.log('Companies to display:', filteredCompanies.length);
+            if (filteredCompanies.length === 0) {
+                grid.innerHTML = '';
+                return;
+            }
+            
+            const companiesHTML = filteredCompanies.map(company => {
+                const logoPath = `images/logos/${company['Company Name'].replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}.png`;
+                const websiteIcon = `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.93-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`;
+                const instagramIcon = `<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/></svg>`;
+                const emailIcon = `<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`;
                 
-                if (filteredCompanies.length === 0) {
-                    grid.innerHTML = '';
-                    console.log('No companies to display, cleared grid');
-                    return;
+                let links = '';
+                if (company.Website) {
+                    links += `<a href="${company.Website}" target="_blank" class="company-link" title="Visit Website">${websiteIcon}</a>`;
+                }
+                if (company.Instagram) {
+                    links += `<a href="${company.Instagram}" target="_blank" class="company-link" title="View Instagram">${instagramIcon}</a>`;
+                }
+                if (company['Company Contact']) {
+                    links += `<a href="mailto:${company['Company Contact']}" class="company-link" title="Send Email">${emailIcon}</a>`;
                 }
                 
-                console.log('About to generate HTML for', filteredCompanies.length, 'companies');
+                const location = [company.City, company.State].filter(Boolean).join(', ');
+                const founded = company['Company Founded'] ? `Founded ${company['Company Founded']}` : '';
                 
-                const companiesHTML = filteredCompanies.map((company, index) => {
-                    console.log(`Processing company ${index + 1}:`, company['Company Name']);
-                    
-                    const logoPath = `images/logos/${company['Company Name'].replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}.png`;
-                    const websiteIcon = `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.93-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`;
-                    const instagramIcon = `<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/></svg>`;
-                    const emailIcon = `<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`;
-                    
-                    let links = '';
-                    if (company.Website) {
-                        links += `<a href="${company.Website}" target="_blank" class="company-link" title="Visit Website">${websiteIcon}</a>`;
-                    }
-                    if (company.Instagram) {
-                        links += `<a href="${company.Instagram}" target="_blank" class="company-link" title="View Instagram">${instagramIcon}</a>`;
-                    }
-                    if (company['Company Contact']) {
-                        links += `<a href="mailto:${company['Company Contact']}" class="company-link" title="Send Email">${emailIcon}</a>`;
-                    }
-                    
-                    const location = [company.City, company.State].filter(Boolean).join(', ');
-                    const founded = company['Company Founded'] ? `Founded ${company['Company Founded']}` : '';
-                    
-                    return `
-                        <div class="company-card">
-                            <div class="company-logo">
-                                <img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;" 
-                                     onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';" />
-                            </div>
-                            <h3 class="company-name">${company['Company Name']}</h3>
-                            ${location ? `<div class="company-location">${location}</div>` : ''}
-                            ${founded ? `<div class="company-founded">${founded}</div>` : ''}
-                            <div class="company-links">
-                                ${links}
-                            </div>
-                            <div class="last-updated">Last updated: ${new Date().toLocaleDateString()}</div>
+                return `
+                    <div class="company-card">
+                        <div class="company-logo">
+                            <img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;" 
+                                 onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';" />
                         </div>
-                    `;
-                }).join('');
-                
-                console.log('Generated HTML for all companies, about to set innerHTML');
-                grid.innerHTML = companiesHTML;
-                console.log('displayCompanies completed successfully');
-                
-            } catch (error) {
-                console.error('Error in displayCompanies:', error);
-            }
+                        <h3 class="company-name">${company['Company Name']}</h3>
+                        ${location ? `<div class="company-location">${location}</div>` : ''}
+                        ${founded ? `<div class="company-founded">${founded}</div>` : ''}
+                        <div class="company-links">
+                            ${links}
+                        </div>
+                        <div class="last-updated">Last updated: ${new Date().toLocaleDateString()}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            grid.innerHTML = companiesHTML;
         }
         
         // Update results information
         function updateResultsInfo() {
-            console.log('updateResultsInfo started');
+            const info = document.getElementById('results-info');
+            const total = filteredCompanies.length;
+            const totalAll = allCompanies.length;
             
-            try {
-                const info = document.getElementById('results-info');
-                console.log('Found results-info element:', info);
-                
-                const total = filteredCompanies.length;
-                const totalAll = allCompanies.length;
-                
-                console.log('Total filtered companies:', total);
-                console.log('Total all companies:', totalAll);
-                
-                if (total === 0) {
-                    const noResultsHTML = `
-                        <div class="no-results">
-                            <h3>No companies found</h3>
-                            <p>Try adjusting your search criteria to see more results.</p>
-                        </div>
-                    `;
-                    info.innerHTML = noResultsHTML;
-                    console.log('Set no results message');
-                } else {
-                    const resultsHTML = `Showing ${total} of ${totalAll} companies`;
-                    info.innerHTML = resultsHTML;
-                    console.log('Set results message:', resultsHTML);
-                }
-                
-                console.log('updateResultsInfo completed successfully');
-                
-            } catch (error) {
-                console.error('Error in updateResultsInfo:', error);
+            if (total === 0) {
+                info.innerHTML = `
+                    <div class="no-results">
+                        <h3>No companies found</h3>
+                        <p>Try adjusting your search criteria to see more results.</p>
+                    </div>
+                `;
+            } else {
+                info.innerHTML = `Showing ${total} of ${totalAll} companies`;
             }
         }
         
         // Initialize the page
-        console.log('About to call loadCompaniesData...');
         loadCompaniesData();
-        console.log('loadCompaniesData called');
     </script>
 </body>
 </html>
