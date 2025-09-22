@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directory - American Watchmaking Directory</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fbe9cd;
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+
+        .site-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #304047;
+            text-decoration: none;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .header-nav .nav-link {
+            color: #304047;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .header-nav .nav-link:hover {
+            color: #1f2a2f;
+        }
+
+        .header-nav .nav-link.active {
+            color: #1f2a2f;
+            font-weight: 600;
+        }
+
+        .instagram-link {
+            display: flex;
+            align-items: center;
+            color: #304047;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .instagram-link:hover {
+            color: #1f2a2f;
+            transform: translateY(-1px);
+        }
+
+        .instagram-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #304047;
+        }
+
+        .page-header h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .page-header .subtitle {
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .filters-section {
+            background: #f8f4ec;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .filters-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #304047;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            color: #304047;
+            margin-bottom: 8px;
+        }
+
+        .filter-input {
+            padding: 12px 16px;
+            border: 2px solid #e0d5c7;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            color: #304047;
+            transition: all 0.3s ease;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: #304047;
+            box-shadow: 0 0 0 3px rgba(48, 64, 71, 0.1);
+        }
+
+        .results-info {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #304047;
+            font-weight: 500;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .company-card {
+            background: #f8f4ec;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            background: #e0d5c7;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #304047;
+            opacity: 0.7;
+            border: 2px solid #ddd;
+        }
+
+        .company-name {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #304047;
+            margin-bottom: 8px;
+        }
+
+        .company-location {
+            color: #304047;
+            opacity: 0.7;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .company-founded {
+            background: #304047;
+            color: #fbe9cd;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .company-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .company-link {
+            width: 36px;
+            height: 36px;
+            background: #304047;
+            color: #fbe9cd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .company-link:hover {
+            background: #1f2a2f;
+            transform: translateY(-2px);
+        }
+
+        .company-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .last-updated {
+            color: #304047;
+            opacity: 0.6;
+            font-size: 0.8rem;
+            border-top: 1px solid #e0d5c7;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .footer {
+            background: #f8f4ec;
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav .nav-link {
+            color: #304047;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-nav .nav-link:hover {
+            color: #1f2a2f;
+        }
+
+        .footer-text {
+            text-align: center;
+            color: #304047;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #304047;
+            font-size: 1.2rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            color: #304047;
+        }
+
+        .no-results h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .top-header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="top-header">
+            <a href="index.html" class="site-title">American Watchmaking Directory</a>
+            <nav class="header-nav">
+                <a href="directory.html" class="nav-link active">Directory</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="https://instagram.com/watchmakingusa" target="_blank" class="instagram-link" title="Follow us on Instagram">
+                    <svg class="instagram-icon" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/>
+                    </svg>
+                </a>
+            </nav>
+        </header>
+
+        <section class="filters-section">
+            <h2 class="filters-title">Find Your Perfect Match</h2>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label class="filter-label" for="search">Search Companies</label>
+                    <input type="text" id="search" class="filter-input" placeholder="Type company name..." />
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label" for="state-filter">Filter by State</label>
+                    <select id="state-filter" class="filter-input">
+                        <option value="">All States</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label" for="year-from">Founded From</label>
+                    <input type="number" id="year-from" class="filter-input" placeholder="e.g. 1950" min="1900" max="2024" />
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label" for="year-to">Founded To</label>
+                    <input type="number" id="year-to" class="filter-input" placeholder="e.g. 2020" min="1900" max="2024" />
+                </div>
+            </div>
+        </section>
+
+        <div class="results-info" id="results-info">
+            <div class="loading">Loading companies...</div>
+        </div>
+
+        <section class="companies-grid" id="companies-grid">
+        </section>
+
+        <footer class="footer">
+            <nav class="footer-nav">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="faqs.html" class="nav-link">FAQs</a>
+                <a href="terms.html" class="nav-link">Terms</a>
+                <a href="privacy.html" class="nav-link">Privacy Policy</a>
+            </nav>
+            <p class="footer-text">&copy; 2025 American Watchmaking Directory.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script>
+        let allCompanies = [];
+        let filteredCompanies = [];
+        
+        // Load and parse CSV data
+        async function loadCompaniesData() {
+            try {
+                const response = await fetch('American Watch Makers.csv');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const csvText = await response.text();
+                
+                const parsed = Papa.parse(csvText, {
+                    header: true,
+                    dynamicTyping: true,
+                    skipEmptyLines: true,
+                    delimitersToGuess: [',', '\t', '|', ';']
+                });
+                
+                // Clean headers and data
+                allCompanies = parsed.data.map(row => {
+                    const cleanedRow = {};
+                    Object.keys(row).forEach(key => {
+                        const cleanKey = key.trim();
+                        cleanedRow[cleanKey] = row[key];
+                    });
+                    return cleanedRow;
+                }).filter(company => company['Company Name']); // Remove empty rows
+                
+                filteredCompanies = [...allCompanies];
+                
+                setupFilters();
+                displayCompanies();
+                updateResultsInfo();
+                
+            } catch (error) {
+                console.error('Error loading CSV:', error);
+                document.getElementById('results-info').innerHTML = 
+                    '<div class="no-results"><h3>Error Loading Data</h3><p>Unable to load company data. Please try again later.</p></div>';
+            }
+        }
+        
+        // Setup filter options
+        function setupFilters() {
+            // Populate state filter
+            const stateFilter = document.getElementById('state-filter');
+            const states = [...new Set(allCompanies.map(company => company.State).filter(state => state))].sort();
+            
+            states.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state;
+                option.textContent = state;
+                stateFilter.appendChild(option);
+            });
+            
+            // Add event listeners
+            document.getElementById('search').addEventListener('input', applyFilters);
+            document.getElementById('state-filter').addEventListener('change', applyFilters);
+            document.getElementById('year-from').addEventListener('input', applyFilters);
+            document.getElementById('year-to').addEventListener('input', applyFilters);
+        }
+        
+        // Apply all filters
+        function applyFilters() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const selectedState = document.getElementById('state-filter').value;
+            const yearFrom = parseInt(document.getElementById('year-from').value) || 0;
+            const yearTo = parseInt(document.getElementById('year-to').value) || 9999;
+            
+            filteredCompanies = allCompanies.filter(company => {
+                const matchesSearch = company['Company Name'].toLowerCase().includes(searchTerm);
+                const matchesState = !selectedState || company.State === selectedState;
+                const foundedYear = company['Company Founded'] || 0;
+                const matchesYear = foundedYear >= yearFrom && foundedYear <= yearTo;
+                
+                return matchesSearch && matchesState && matchesYear;
+            });
+            
+            displayCompanies();
+            updateResultsInfo();
+        }
+        
+        // Display companies
+        function displayCompanies() {
+            const grid = document.getElementById('companies-grid');
+            
+            if (filteredCompanies.length === 0) {
+                grid.innerHTML = '';
+                return;
+            }
+            
+            const companiesHTML = filteredCompanies.map(company => {
+                const logoPath = `images/logos/${company['Company Name'].replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}.png`;
+                const websiteIcon = `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.93-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`;
+                const instagramIcon = `<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/></svg>`;
+                const emailIcon = `<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`;
+                
+                let links = '';
+                if (company.Website) {
+                    links += `<a href="${company.Website}" target="_blank" class="company-link" title="Visit Website">${websiteIcon}</a>`;
+                }
+                if (company.Instagram) {
+                    links += `<a href="${company.Instagram}" target="_blank" class="company-link" title="View Instagram">${instagramIcon}</a>`;
+                }
+                if (company['Company Contact']) {
+                    links += `<a href="mailto:${company['Company Contact']}" class="company-link" title="Send Email">${emailIcon}</a>`;
+                }
+                
+                const location = [company.City, company.State].filter(Boolean).join(', ');
+                const founded = company['Company Founded'] ? `Founded ${company['Company Founded']}` : '';
+                
+                return `
+                    <div class="company-card">
+                        <div class="company-logo">
+                            <img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;" 
+                                 onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';" />
+                        </div>
+                        <h3 class="company-name">${company['Company Name']}</h3>
+                        ${location ? `<div class="company-location">${location}</div>` : ''}
+                        ${founded ? `<div class="company-founded">${founded}</div>` : ''}
+                        <div class="company-links">
+                            ${links}
+                        </div>
+                        <div class="last-updated">Last updated: ${new Date().toLocaleDateString()}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            grid.innerHTML = companiesHTML;
+        }
+        
+        // Update results information
+        function updateResultsInfo() {
+            const info = document.getElementById('results-info');
+            const total = filteredCompanies.length;
+            const totalAll = allCompanies.length;
+            
+            if (total === 0) {
+                info.innerHTML = `
+                    <div class="no-results">
+                        <h3>No companies found</h3>
+                        <p>Try adjusting your search criteria to see more results.</p>
+                    </div>
+                `;
+            } else {
+                info.innerHTML = `Showing ${total} of ${totalAll} companies`;
+            }
+        }
+        
+        // Initialize the page
+        loadCompaniesData();
+    </script>
+</body>
+</html>
