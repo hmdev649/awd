@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Directory - American Watchmaking Directory</title>
-    <link rel="icon" href="images/favicon.png" type="image/png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -494,50 +493,40 @@
         </footer>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script>
         let allCompanies = [];
         let filteredCompanies = [];
         let currentSortBy = 'name';
         let sortAscending = true;
         
-        // Load and parse CSV data
-        async function loadCompaniesData() {
-            try {
-                const response = await fetch('american-watch-makers.csv');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+        // Sample company data
+        function loadCompaniesData() {
+            allCompanies = [
+                {
+                    'Company Name': 'American Classic Timepieces',
+                    'City': 'Boston',
+                    'State': 'Massachusetts',
+                    'Company Founded': 1987,
+                    'Website': 'https://americanclassictimepieces.com',
+                    'Instagram': 'https://instagram.com/americanclassictime',
+                    'Company Contact': 'info@americanclassictimepieces.com'
+                },
+                {
+                    'Company Name': 'Rocky Mountain Watch Co.',
+                    'City': 'Denver',
+                    'State': 'Colorado',
+                    'Company Founded': 2003,
+                    'Website': 'https://rockymountainwatch.com',
+                    'Instagram': 'https://instagram.com/rmwatchco',
+                    'Company Contact': 'hello@rockymountainwatch.com'
                 }
-                const csvText = await response.text();
-                
-                const parsed = Papa.parse(csvText, {
-                    header: true,
-                    dynamicTyping: true,
-                    skipEmptyLines: true,
-                    delimitersToGuess: [',', '\t', '|', ';']
-                });
-                
-                // Clean headers and data
-                allCompanies = parsed.data.map(row => {
-                    const cleanedRow = {};
-                    Object.keys(row).forEach(key => {
-                        const cleanKey = key.trim();
-                        cleanedRow[cleanKey] = row[key];
-                    });
-                    return cleanedRow;
-                }).filter(company => company['Company Name']); // Remove empty rows
-                
-                filteredCompanies = [...allCompanies];
-                
-                setupFilters();
-                setupSorting();
-                applyFiltersAndSort();
-                
-            } catch (error) {
-                console.error('Error loading CSV:', error);
-                document.getElementById('results-info').innerHTML = 
-                    '<div class="no-results"><h3>Error Loading Data</h3><p>Unable to load company data. Please try again later.</p></div>';
-            }
+            ];
+            
+            filteredCompanies = [...allCompanies];
+            
+            setupFilters();
+            setupSorting();
+            applyFiltersAndSort();
         }
         
         // Setup filter options
