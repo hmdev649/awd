@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - American Watchmaking Directory</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fbe9cd;
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+
+        .site-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #304047;
+            text-decoration: none;
+            text-shadow: none;
+            box-shadow: none;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .header-nav .nav-link {
+            color: #304047;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .header-nav .nav-link:hover {
+            color: #1f2a2f;
+        }
+
+        .header-nav .nav-link.active {
+            color: #1f2a2f;
+            font-weight: 600;
+        }
+
+        .instagram-link {
+            display: flex;
+            align-items: center;
+            color: #304047;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .instagram-link:hover {
+            color: #1f2a2f;
+            transform: translateY(-1px);
+        }
+
+        .instagram-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .content-section {
+            background: #f8f4ec;
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .content-section h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #304047;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .faq-item {
+            background: #f0ebe0;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            background: #f0ebe0;
+            padding: 25px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #304047;
+            margin-bottom: 0;
+        }
+
+        .faq-answer {
+            background: white;
+            padding: 25px;
+            color: #304047;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .footer {
+            background: #f8f4ec;
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav .nav-link {
+            color: #304047;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-nav .nav-link:hover {
+            color: #1f2a2f;
+        }
+
+        .footer-nav .nav-link.active {
+            color: #1f2a2f;
+            font-weight: 600;
+        }
+
+        .footer-text {
+            text-align: center;
+            color: #304047;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 30px 20px;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .faq-question {
+                padding: 20px;
+                font-size: 1.1rem;
+            }
+
+            .faq-answer-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="top-header">
+            <a href="index.html" class="site-title">American Watchmaking Directory</a>
+            <nav class="header-nav">
+                <a href="directory.html" class="nav-link">Directory</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="https://instagram.com/watchmakingusa" target="_blank" class="instagram-link" title="Follow us on Instagram">
+                    <svg class="instagram-icon" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/>
+                    </svg>
+                </a>
+            </nav>
+        </header>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What is the American Watchmaking Directory?</h3>
+                <div class="faq-answer">
+                    The American Watchmaking Directory is a comprehensive online resource that connects watchmakers, suppliers, and artisans across the United States. We provide a centralized platform where watch enthusiasts, collectors, and industry professionals can discover and connect with the finest American watchmaking talent, from heritage brands to innovative newcomers.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Who's running the Directory?</h3>
+                <div class="faq-answer">
+                    The American Watchmaking Directory is a volunteer-driven initiative created and maintained by two passionate watch enthusiasts in Seattle, Washington: Hamza (Business Development Manager at WatchCharts and Seattle RedBar chapter organizer) and Vivek (Software Development Engineer at Expedia).
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Are you affiliated with any of the listed brands?</h3>
+                <div class="faq-answer">
+                    No, we are completely independent and not affiliated with any of the watch brands listed in our directory. We maintain editorial independence and do not receive compensation from brands for listings. Our goal is to provide unbiased information to help users discover American watchmaking talent.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How do I use the directory?</h3>
+                <div class="faq-answer">
+                    Simply browse our directory page to explore American watch brands. You can search by brand name, location, or founding year. Use our filters to narrow down results by country, state, or time period. Each listing includes contact information, website links, and social media profiles to help you connect directly with the brands that interest you.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Is this directory only for watch brands based in the United States?</h3>
+                <div class="faq-answer">
+                    While our primary focus is on American watchmakers, we also include select Canadian brands to provide a comprehensive North American perspective. Our mission is to highlight the watchmaking talent and innovation happening across the continent, with a special emphasis on supporting domestic manufacturing and craftsmanship.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How do I get my company listed in the directory?</h3>
+                <div class="faq-answer">
+                    To request a listing, please visit our Contact page and fill out the form with your company information. Include details about your brand, location, founding date, and website. We review all submissions to ensure they align with our focus on American watchmaking. There is no cost for basic directory listings.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Can I suggest changes to an existing listing?</h3>
+                <div class="faq-answer">
+                    Absolutely! We welcome corrections and updates to keep our information accurate. Please contact us through our Contact page with the specific changes needed, and we'll review and update the listing promptly. This helps ensure our directory remains a reliable resource for the community.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What kind of information do you include for each brand?</h3>
+                <div class="faq-answer">
+                    Each listing typically includes the brand name, location (city and state), founding year, official website, social media links, and contact information. We also include brand logos when available. Our goal is to provide enough information for users to learn about and connect with each watchmaker.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Where do you get your information from?</h3>
+                <div class="faq-answer">
+                    We compile information from official brand websites, direct submissions from companies, industry publications, and verified public sources. We continuously verify and update our data to maintain accuracy and encourage brands to contact us with any corrections or updates.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How often is the directory updated?</h3>
+                <div class="faq-answer">
+                    We update the directory regularly as we receive new information, corrections, or listing requests. Our goal is to keep the information as current as possible, and we encourage brands and users to notify us of any changes or additions needed.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What happens when I fill out the contact form?</h3>
+                <div class="faq-answer">
+                    When you submit our contact form, your message goes directly to our team. We typically respond within 24-48 hours. For listing requests, we'll review your submission and follow up with any questions or next steps. For general inquiries, we'll provide the information or assistance you need.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Do you collect any personal data while I browse the site?</h3>
+                <div class="faq-answer">
+                    We respect your privacy and only collect information when you voluntarily provide it through our contact form. We do not use tracking cookies or collect browsing data. Any information you provide is used solely to respond to your inquiry and is not shared with third parties.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Will you be adding more brands or features in the future?</h3>
+                <div class="faq-answer">
+                    Yes! We're continuously working to expand our directory with new American watch brands and enhance the user experience. We welcome suggestions for new features or improvements that would make the directory more useful for the watchmaking community.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Will you expand the directory to other company types involved in watchmaking in the future?</h3>
+                <div class="faq-answer">
+                    We're considering expanding to include suppliers, parts manufacturers, repair services, and other watchmaking-related businesses in the future. This would create a more comprehensive resource for the entire American watchmaking ecosystem. Stay tuned for updates!
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Can I advertise or sponsor a listing on the site?</h3>
+                <div class="faq-answer">
+                    Currently, we operate as a non-commercial, volunteer-driven directory and do not offer paid advertising or sponsored listings. Our focus is on providing unbiased information about American watchmaking. If you're interested in supporting our mission, please contact us to discuss potential collaboration opportunities.
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <nav class="footer-nav">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="#" class="nav-link active">FAQs</a>
+                <a href="terms.html" class="nav-link">Terms</a>
+                <a href="privacy.html" class="nav-link">Privacy Policy</a>
+            </nav>
+            <p class="footer-text">&copy; 2024 American Watchmaking Directory.</p>
+        </footer>
+    </div>
+</body>
+</html>
