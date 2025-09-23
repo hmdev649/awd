@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Directory - American Watchmaking Directory</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -268,6 +269,13 @@
             font-weight: 600;
             color: #304047;
             margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .company-name:hover {
+            color: #1f2a2f;
+            text-decoration: underline;
         }
 
         .company-location {
@@ -327,6 +335,164 @@
             margin-top: 15px;
         }
 
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal {
+            background: #fbe9cd;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            padding: 30px 30px 20px;
+            border-bottom: 1px solid #e0d5c7;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #304047;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #e0d5c7;
+            transform: rotate(90deg);
+        }
+
+        .modal-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 16px;
+            background: #e0d5c7;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: #304047;
+            opacity: 0.7;
+            border: 2px solid #ddd;
+        }
+
+        .modal-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #304047;
+            margin-bottom: 10px;
+        }
+
+        .modal-location {
+            color: #304047;
+            opacity: 0.7;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .modal-founded {
+            background: #304047;
+            color: #fbe9cd;
+            padding: 6px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-section {
+            margin-bottom: 30px;
+        }
+
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #304047;
+            margin-bottom: 15px;
+        }
+
+        .modal-description {
+            color: #304047;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .modal-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: #304047;
+            color: #fbe9cd;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .modal-link:hover {
+            background: #1f2a2f;
+            transform: translateY(-2px);
+        }
+
+        .modal-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
         .footer {
             background: #f8f4ec;
             border-radius: 16px;
@@ -380,6 +546,22 @@
             margin-bottom: 15px;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @media (max-width: 768px) {
             .companies-grid {
                 grid-template-columns: 1fr;
@@ -411,6 +593,27 @@
 
             .sort-select {
                 min-width: 200px;
+            }
+
+            .modal {
+                width: 95%;
+                margin: 20px;
+            }
+
+            .modal-header {
+                padding: 20px 20px 15px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .modal-title {
+                font-size: 1.6rem;
+            }
+
+            .modal-links {
+                flex-direction: column;
             }
         }
     </style>
@@ -481,6 +684,37 @@
         <section class="companies-grid" id="companies-grid">
         </section>
 
+        <!-- Modal -->
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <button class="modal-close" id="modal-close">&times;</button>
+                    <div class="modal-logo" id="modal-logo">LOGO</div>
+                    <h2 class="modal-title" id="modal-title">Company Name</h2>
+                    <div class="modal-location" id="modal-location">Location</div>
+                    <div class="modal-founded" id="modal-founded">Founded Year</div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <div class="modal-description" id="modal-description">
+                            This innovative watchmaking company represents the finest in American craftsmanship, combining traditional techniques with modern innovation to create timepieces that are both beautiful and precise.
+                        </div>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="modal-section-title">Making in America</h3>
+                        <div class="modal-description" id="modal-making-description">
+                            Proudly manufacturing their timepieces on American soil, this company upholds the tradition of domestic craftsmanship while supporting local communities and maintaining the highest standards of quality and precision.
+                        </div>
+                    </div>
+                    
+                    <div class="modal-links" id="modal-links">
+                        <!-- Links will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <footer class="footer">
             <nav class="footer-nav">
                 <a href="about.html" class="nav-link">About</a>
@@ -500,6 +734,110 @@
         let currentSortBy = 'name';
         let sortAscending = true;
         
+        // Generate standardized filename from company name
+        function generateLogoFilename(companyName) {
+            return companyName
+                .replace(/[^a-zA-Z0-9\s]/g, '') // Remove special characters except spaces
+                .replace(/\s+/g, '_') // Replace spaces with underscores
+                .toLowerCase(); // Convert to lowercase
+        }
+
+        // Generate sample descriptions for companies
+        function generateCompanyDescription(companyName) {
+            const descriptions = [
+                `${companyName} stands as a beacon of American watchmaking excellence, crafting timepieces that blend traditional artistry with cutting-edge technology. Each watch tells a story of precision, passion, and unwavering commitment to quality.`,
+                `Founded on the principles of innovation and craftsmanship, ${companyName} has established itself as a premier destination for discerning watch enthusiasts who appreciate the finest in American-made timepieces.`,
+                `${companyName} represents the pinnacle of horological achievement, where master craftsmen dedicate countless hours to perfecting every detail of their exceptional timepieces, ensuring each watch is a work of art.`,
+                `With a rich heritage of watchmaking expertise, ${companyName} continues to push the boundaries of what's possible in timepiece creation, combining time-honored techniques with modern innovation.`,
+                `${companyName} embodies the spirit of American ingenuity, creating watches that are not just instruments of time, but expressions of artistry and technical excellence that will be treasured for generations.`
+            ];
+            return descriptions[Math.floor(Math.random() * descriptions.length)];
+        }
+
+        function generateMakingInAmericaDescription(companyName) {
+            const descriptions = [
+                `${companyName} is committed to preserving the art of American watchmaking, employing skilled artisans and utilizing domestically sourced materials whenever possible. Their dedication to local manufacturing supports American jobs and maintains the highest standards of quality control.`,
+                `By choosing to manufacture in America, ${companyName} ensures that every timepiece benefits from the meticulous attention to detail and craftsmanship that American workers are known for worldwide. This commitment to domestic production strengthens local communities and preserves traditional skills.`,
+                `${companyName} proudly carries on the American tradition of excellence in manufacturing, working with local suppliers and craftsmen to create timepieces that represent the very best of American ingenuity and workmanship.`,
+                `The decision to manufacture in America allows ${companyName} to maintain complete control over the production process, ensuring that each timepiece meets their exacting standards while supporting the American economy and workforce.`,
+                `${companyName} believes that true quality comes from the passion and skill of American craftspeople. By keeping production domestic, they preserve traditional watchmaking techniques while fostering innovation and supporting their local community.`
+            ];
+            return descriptions[Math.floor(Math.random() * descriptions.length)];
+        }
+
+        // Modal functionality
+        function openModal(company) {
+            const modal = document.getElementById('modal-overlay');
+            const logoPath = `images/logos/${company['Company Name'].replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}.png`;
+            
+            // Update modal content
+            document.getElementById('modal-title').textContent = company['Company Name'];
+            
+            const location = [company.City, company.State].filter(Boolean).join(', ');
+            document.getElementById('modal-location').textContent = location || 'Location not specified';
+            
+            const founded = company['Company Founded'] ? `Founded ${company['Company Founded']}` : 'Founded year not specified';
+            document.getElementById('modal-founded').textContent = founded;
+            
+            // Set logo
+            const modalLogo = document.getElementById('modal-logo');
+            modalLogo.innerHTML = `<img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;" 
+                                   onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';" />`;
+            
+            // Set descriptions
+            document.getElementById('modal-description').textContent = generateCompanyDescription(company['Company Name']);
+            document.getElementById('modal-making-description').textContent = generateMakingInAmericaDescription(company['Company Name']);
+            
+            // Create links
+            const linksContainer = document.getElementById('modal-links');
+            linksContainer.innerHTML = '';
+            
+            if (company.Website) {
+                const websiteLink = document.createElement('a');
+                websiteLink.href = company.Website;
+                websiteLink.target = '_blank';
+                websiteLink.className = 'modal-link';
+                websiteLink.innerHTML = `
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.93-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    Visit Website
+                `;
+                linksContainer.appendChild(websiteLink);
+            }
+            
+            if (company.Instagram) {
+                const instagramLink = document.createElement('a');
+                instagramLink.href = company.Instagram;
+                instagramLink.target = '_blank';
+                instagramLink.className = 'modal-link';
+                instagramLink.innerHTML = `
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/></svg>
+                    Instagram
+                `;
+                linksContainer.appendChild(instagramLink);
+            }
+            
+            if (company['Company Contact']) {
+                const emailLink = document.createElement('a');
+                emailLink.href = `mailto:${company['Company Contact']}`;
+                emailLink.className = 'modal-link';
+                emailLink.innerHTML = `
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    Contact
+                `;
+                linksContainer.appendChild(emailLink);
+            }
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal-overlay');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
         // Load and parse CSV data
         async function loadCompaniesData() {
             try {
@@ -530,13 +868,44 @@
                 
                 setupFilters();
                 setupSorting();
+                setupModal();
                 applyFiltersAndSort();
+                
+                // Log expected logo filenames for debugging
+                console.log('Expected logo filenames:');
+                allCompanies.forEach(company => {
+                    const filename = generateLogoFilename(company['Company Name']);
+                    console.log(`"${company['Company Name']}" → ${filename}.png`);
+                });
                 
             } catch (error) {
                 console.error('Error loading CSV:', error);
                 document.getElementById('results-info').innerHTML = 
                     '<div class="no-results"><h3>Error Loading Data</h3><p>Unable to load company data. Please try again later.</p></div>';
             }
+        }
+
+        // Setup modal event listeners
+        function setupModal() {
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modalClose = document.getElementById('modal-close');
+            
+            // Close modal when clicking close button
+            modalClose.addEventListener('click', closeModal);
+            
+            // Close modal when clicking overlay
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            });
         }
         
         // Setup filter options
@@ -700,7 +1069,7 @@
                             <img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;" 
                                  onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';" />
                         </div>
-                        <h3 class="company-name">${company['Company Name']}</h3>
+                        <h3 class="company-name" onclick="openModal(${JSON.stringify(company).replace(/"/g, '&quot;')})">${company['Company Name']}</h3>
                         ${location ? `<div class="company-location">${location}</div>` : ''}
                         ${founded ? `<div class="company-founded">${founded}</div>` : ''}
                         <div class="company-links">
