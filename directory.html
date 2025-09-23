@@ -501,6 +501,14 @@
         let currentSortBy = 'name';
         let sortAscending = true;
         
+        // Generate standardized filename from company name
+        function generateLogoFilename(companyName) {
+            return companyName
+                .replace(/[^a-zA-Z0-9\s]/g, '') // Remove special characters except spaces
+                .replace(/\s+/g, '_') // Replace spaces with underscores
+                .toLowerCase(); // Convert to lowercase
+        }
+
         // Load and parse CSV data
         async function loadCompaniesData() {
             try {
@@ -532,6 +540,13 @@
                 setupFilters();
                 setupSorting();
                 applyFiltersAndSort();
+                
+                // Log expected logo filenames for debugging
+                console.log('Expected logo filenames:');
+                allCompanies.forEach(company => {
+                    const filename = generateLogoFilename(company['Company Name']);
+                    console.log(`"${company['Company Name']}" → ${filename}.png`);
+                });
                 
             } catch (error) {
                 console.error('Error loading CSV:', error);
