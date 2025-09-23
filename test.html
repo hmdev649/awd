@@ -742,28 +742,7 @@
                 .toLowerCase(); // Convert to lowercase
         }
 
-        // Generate sample descriptions for companies
-        function generateCompanyDescription(companyName) {
-            const descriptions = [
-                `${companyName} stands as a beacon of American watchmaking excellence, crafting timepieces that blend traditional artistry with cutting-edge technology. Each watch tells a story of precision, passion, and unwavering commitment to quality.`,
-                `Founded on the principles of innovation and craftsmanship, ${companyName} has established itself as a premier destination for discerning watch enthusiasts who appreciate the finest in American-made timepieces.`,
-                `${companyName} represents the pinnacle of horological achievement, where master craftsmen dedicate countless hours to perfecting every detail of their exceptional timepieces, ensuring each watch is a work of art.`,
-                `With a rich heritage of watchmaking expertise, ${companyName} continues to push the boundaries of what's possible in timepiece creation, combining time-honored techniques with modern innovation.`,
-                `${companyName} embodies the spirit of American ingenuity, creating watches that are not just instruments of time, but expressions of artistry and technical excellence that will be treasured for generations.`
-            ];
-            return descriptions[Math.floor(Math.random() * descriptions.length)];
-        }
 
-        function generateMakingInAmericaDescription(companyName) {
-            const descriptions = [
-                `${companyName} is committed to preserving the art of American watchmaking, employing skilled artisans and utilizing domestically sourced materials whenever possible. Their dedication to local manufacturing supports American jobs and maintains the highest standards of quality control.`,
-                `By choosing to manufacture in America, ${companyName} ensures that every timepiece benefits from the meticulous attention to detail and craftsmanship that American workers are known for worldwide. This commitment to domestic production strengthens local communities and preserves traditional skills.`,
-                `${companyName} proudly carries on the American tradition of excellence in manufacturing, working with local suppliers and craftsmen to create timepieces that represent the very best of American ingenuity and workmanship.`,
-                `The decision to manufacture in America allows ${companyName} to maintain complete control over the production process, ensuring that each timepiece meets their exacting standards while supporting the American economy and workforce.`,
-                `${companyName} believes that true quality comes from the passion and skill of American craftspeople. By keeping production domestic, they preserve traditional watchmaking techniques while fostering innovation and supporting their local community.`
-            ];
-            return descriptions[Math.floor(Math.random() * descriptions.length)];
-        }
 
         // Modal functionality
         function openModal(company) {
@@ -784,9 +763,12 @@
             modalLogo.innerHTML = `<img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;" 
                                    onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';" />`;
             
-            // Set descriptions
-            document.getElementById('modal-description').textContent = generateCompanyDescription(company['Company Name']);
-            document.getElementById('modal-making-description').textContent = generateMakingInAmericaDescription(company['Company Name']);
+            // Set descriptions from CSV data
+            const companyDescription = company['Company Description'] || 'This innovative watchmaking company represents the finest in American craftsmanship, combining traditional techniques with modern innovation to create timepieces that are both beautiful and precise.';
+            const makingInAmericaDescription = company['Making in America Description'] || 'Proudly manufacturing their timepieces on American soil, this company upholds the tradition of domestic craftsmanship while supporting local communities and maintaining the highest standards of quality and precision.';
+            
+            document.getElementById('modal-description').textContent = companyDescription;
+            document.getElementById('modal-making-description').textContent = makingInAmericaDescription;
             
             // Create links
             const linksContainer = document.getElementById('modal-links');
