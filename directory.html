@@ -543,6 +543,12 @@
                     <input type="text" id="search" class="filter-input" placeholder="Type company name..." />
                 </div>
                 <div class="filter-group">
+                    <label class="filter-label" for="country-filter">Filter by Country</label>
+                    <select id="country-filter" class="filter-input">
+                        <option value="">All Countries</option>
+                    </select>
+                </div>
+                <div class="filter-group">
                     <label class="filter-label" for="state-filter">Filter by State</label>
                     <select id="state-filter" class="filter-input">
                         <option value="">All States</option>
@@ -793,19 +799,31 @@
         
         // Setup filter options
         function setupFilters() {
+            // Populate country filter
+            const countryFilter = document.getElementById('country-filter');
+            const countries = [...new Set(allCompanies.map(company => company.Country).filter(country => country))].sort();
+
+            countries.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country;
+                option.textContent = country === 'US' ? 'United States' : country === 'CA' ? 'Canada' : country;
+                countryFilter.appendChild(option);
+            });
+
             // Populate state filter
             const stateFilter = document.getElementById('state-filter');
             const states = [...new Set(allCompanies.map(company => company.State).filter(state => state))].sort();
-            
+
             states.forEach(state => {
                 const option = document.createElement('option');
                 option.value = state;
                 option.textContent = state;
                 stateFilter.appendChild(option);
             });
-            
+
             // Add event listeners for filters
             document.getElementById('search').addEventListener('input', applyFiltersAndSort);
+            document.getElementById('country-filter').addEventListener('change', applyFiltersAndSort);
             document.getElementById('state-filter').addEventListener('change', applyFiltersAndSort);
             document.getElementById('year-from').addEventListener('input', applyFiltersAndSort);
             document.getElementById('year-to').addEventListener('input', applyFiltersAndSort);
@@ -861,17 +879,19 @@
         // Apply all filters
         function applyFilters() {
             const searchTerm = document.getElementById('search').value.toLowerCase();
+            const selectedCountry = document.getElementById('country-filter').value;
             const selectedState = document.getElementById('state-filter').value;
             const yearFrom = parseInt(document.getElementById('year-from').value) || 0;
             const yearTo = parseInt(document.getElementById('year-to').value) || 9999;
-            
+
             filteredCompanies = allCompanies.filter(company => {
                 const matchesSearch = company['Company Name'].toLowerCase().includes(searchTerm);
+                const matchesCountry = !selectedCountry || company.Country === selectedCountry;
                 const matchesState = !selectedState || company.State === selectedState;
                 const foundedYear = company['Company Founded'] || 0;
                 const matchesYear = foundedYear >= yearFrom && foundedYear <= yearTo;
-                
-                return matchesSearch && matchesState && matchesYear;
+
+                return matchesSearch && matchesCountry && matchesState && matchesYear;
             });
         }
         
