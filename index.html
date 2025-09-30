@@ -5,47 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>American Watchmaking Directory</title>
     <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/shared.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-929LXJ5RWX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-929LXJ5RWX');
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #fbe9cd;
-            min-height: 100vh;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            margin-bottom: 40px;
-        }
-
-        .site-title {
-            font-family: 'Manrope', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #304047;
-            text-decoration: none;
-            text-shadow: none;
-            box-shadow: none;
-        }
-
         .page-header {
             text-align: center;
             margin-bottom: 60px;
@@ -68,48 +39,6 @@
             opacity: 0.8;
             max-width: 800px;
             margin: 0 auto;
-        }
-
-        .header-nav {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .header-nav .nav-link {
-            color: #304047;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .header-nav .nav-link:hover {
-            color: #1f2a2f;
-        }
-
-        .header-nav .nav-link.active {
-            color: #1f2a2f;
-            font-weight: 600;
-        }
-
-        .instagram-link {
-            display: flex;
-            align-items: center;
-            color: #304047;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .instagram-link:hover {
-            color: #1f2a2f;
-            transform: translateY(-1px);
-        }
-
-        .instagram-icon {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
         }
 
         .hero-section {
@@ -191,59 +120,20 @@
             opacity: 0.8;
         }
 
-        .footer {
-            background: #f8f4ec;
-            border-radius: 16px;
-            padding: 40px;
-            margin-top: 60px;
+        .hero-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            object-position: -31px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: block;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border: 5px solid #ffffff;
         }
-
-        .footer-nav {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .footer-nav .nav-link {
-            color: #304047;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .footer-nav .nav-link:hover {
-            color: #1f2a2f;
-        }
-
-        .footer-text {
-            text-align: center;
-            color: #304047;
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-
-.hero-image {
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    object-position: -31px;
-    border-radius: 50%;
-    margin: 0 auto 30px;
-    display: block;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-    border: 5px solid #ffffff;
-}
-
-.hero-image {
-    width: 250px;
-    height: 250px;
-}
 
         @media (max-width: 768px) {
-            .header h1 {
+            .page-header h1 {
                 font-size: 2.5rem;
             }
 
@@ -253,11 +143,6 @@
 
             .hero-section h2 {
                 font-size: 2rem;
-            }
-
-            .nav-links {
-                flex-direction: column;
-                gap: 15px;
             }
 
             .features-section {
