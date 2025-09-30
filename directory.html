@@ -459,14 +459,52 @@
         }
 
         @keyframes slideUp {
-            from { 
+            from {
                 opacity: 0;
                 transform: translateY(50px);
             }
-            to { 
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #304047;
+            color: #fbe9cd;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            border: none;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #1f2a2f;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
         }
 
         @media (max-width: 768px) {
@@ -552,6 +590,12 @@
                     <label class="filter-label" for="state-filter">Filter by State</label>
                     <select id="state-filter" class="filter-input">
                         <option value="">All States</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label" for="product-filter">Filter by Product Type</label>
+                    <select id="product-filter" class="filter-input">
+                        <option value="">All Products</option>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -821,10 +865,31 @@
                 stateFilter.appendChild(option);
             });
 
+            // Populate product filter
+            const productFilter = document.getElementById('product-filter');
+            const productSet = new Set();
+
+            allCompanies.forEach(company => {
+                if (company.Products) {
+                    // Split by semicolon and trim whitespace
+                    const products = company.Products.split(';').map(p => p.trim()).filter(p => p);
+                    products.forEach(product => productSet.add(product));
+                }
+            });
+
+            const products = [...productSet].sort();
+            products.forEach(product => {
+                const option = document.createElement('option');
+                option.value = product;
+                option.textContent = product;
+                productFilter.appendChild(option);
+            });
+
             // Add event listeners for filters
             document.getElementById('search').addEventListener('input', applyFiltersAndSort);
             document.getElementById('country-filter').addEventListener('change', applyFiltersAndSort);
             document.getElementById('state-filter').addEventListener('change', applyFiltersAndSort);
+            document.getElementById('product-filter').addEventListener('change', applyFiltersAndSort);
             document.getElementById('year-from').addEventListener('input', applyFiltersAndSort);
             document.getElementById('year-to').addEventListener('input', applyFiltersAndSort);
         }
@@ -881,6 +946,7 @@
             const searchTerm = document.getElementById('search').value.toLowerCase();
             const selectedCountry = document.getElementById('country-filter').value;
             const selectedState = document.getElementById('state-filter').value;
+            const selectedProduct = document.getElementById('product-filter').value;
             const yearFrom = parseInt(document.getElementById('year-from').value) || 0;
             const yearTo = parseInt(document.getElementById('year-to').value) || 9999;
 
@@ -888,10 +954,18 @@
                 const matchesSearch = company['Company Name'].toLowerCase().includes(searchTerm);
                 const matchesCountry = !selectedCountry || company.Country === selectedCountry;
                 const matchesState = !selectedState || company.State === selectedState;
+
+                // Check if company's products include the selected product
+                let matchesProduct = true;
+                if (selectedProduct) {
+                    const companyProducts = company.Products ? company.Products.split(';').map(p => p.trim()) : [];
+                    matchesProduct = companyProducts.includes(selectedProduct);
+                }
+
                 const foundedYear = company['Company Founded'] || 0;
                 const matchesYear = foundedYear >= yearFrom && foundedYear <= yearTo;
 
-                return matchesSearch && matchesCountry && matchesState && matchesYear;
+                return matchesSearch && matchesCountry && matchesState && matchesProduct && matchesYear;
             });
         }
         
@@ -965,16 +1039,18 @@
                 
                 const location = [company.City, company.State].filter(Boolean).join(', ');
                 const founded = company['Company Founded'] ? `Founded ${company['Company Founded']}` : '';
-                
+                const products = company.Products ? company.Products.split(';').map(p => p.trim()).filter(p => p).join(', ') : '';
+
                 return `
                     <div class="company-card">
                         <div class="company-logo">
-                            <img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; background: white;" 
+                            <img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; background: white;"
                                  onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';" />
                         </div>
                         <h3 class="company-name" onclick="openModal(${JSON.stringify(company).replace(/"/g, '&quot;')})">${company['Company Name']}</h3>
                         ${location ? `<div class="company-location">${location}</div>` : ''}
                         ${founded ? `<div class="company-founded">${founded}</div>` : ''}
+                        ${products ? `<div class="company-founded">Products: ${products}</div>` : ''}
                         <div class="company-links">
                             ${links}
                         </div>
@@ -1020,6 +1096,31 @@
         
         // Initialize the page
         loadCompaniesData();
+
+        // Back to top button functionality
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     </script>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to top">
+        <svg viewBox="0 0 24 24">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+        </svg>
+    </button>
 </body>
 </html>
