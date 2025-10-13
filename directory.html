@@ -174,6 +174,22 @@
             position: relative;
         }
 
+        .country-flag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            opacity: 1;
+        }
+
+        .country-flag img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
         .company-logo img {
         background: white;
             border-radius: 8px;
@@ -1009,15 +1025,29 @@
             });
         }
         
+        // Get country flag icon
+        function getCountryFlag(country) {
+            if (country === 'US') {
+                return `<div class="country-flag" title="United States">
+                    <img src="images/us_flag.png" alt="US Flag" />
+                </div>`;
+            } else if (country === 'CA') {
+                return `<div class="country-flag" title="Canada">
+                    <img src="images/ca_flag.png" alt="Canada Flag" />
+                </div>`;
+            }
+            return '';
+        }
+
         // Display companies
         function displayCompanies() {
             const grid = document.getElementById('companies-grid');
-            
+
             if (filteredCompanies.length === 0) {
                 grid.innerHTML = '';
                 return;
             }
-            
+
             const companiesHTML = filteredCompanies.map(company => {
                 const logoPath = `images/logos/${company['Company Name'].replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}.png`;
                 const websiteIcon = `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.93-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`;
@@ -1041,6 +1071,7 @@
 
                 return `
                     <div class="company-card">
+                        ${getCountryFlag(company.Country)}
                         <div class="company-logo">
                             <img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; background: white;"
                                  onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';" />
