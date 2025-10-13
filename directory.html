@@ -698,13 +698,167 @@
         let filteredCompanies = [];
         let currentSortBy = 'name';
         let sortAscending = true;
-        
-        // Generate standardized filename from company name
-        function generateLogoFilename(companyName) {
-            return companyName
-                .replace(/[^a-zA-Z0-9\s]/g, '') // Remove special characters except spaces
-                .replace(/\s+/g, '_') // Replace spaces with underscores
-                .toLowerCase(); // Convert to lowercase
+
+        // Hardcoded logo filename mapping for brands with logos
+        const logoMapping = {
+            '1776 Atelier': '1776_atelier.png',
+            '5280 Watch Company': '5280_watch_company.png',
+            'Abingdon': 'abingdon.png',
+            'ADPT': 'adpt.png',
+            'Aevum': 'aevum.png',
+            'Alex Voss': 'alex_voss.png',
+            'Alexander James': 'alexander_james.png',
+            'Alterum': 'alterum.png',
+            'Altsha': 'altsha.png',
+            'American Watch Company': 'american_watch_company.png',
+            'Ares': 'ares.png',
+            'Armitron': 'armitron.png',
+            'ArmourLite Watch Company': 'armourlite_watch_company.png',
+            'Artefkt Watches': 'artefkt_watches.png',
+            'Artur Akmaev': 'artur_akmaev.png',
+            'Astor + Banks': 'astor___banks.png',
+            'Autodromo': 'autodromo.png',
+            'Axia Watch': 'axia_watch.png',
+            'Barrelhand Inc.': 'barrelhand_inc_.png',
+            'Barrington Griffiths Watch Company': 'barrington_griffiths_watch_company.png',
+            'Benrus': 'benrus.png',
+            'Bertucci Watches': 'bertucci_watches.png',
+            'Bespoke': 'bespoke.png',
+            'Bespoke Watch Projects': 'bespoke_watch_projects.png',
+            'Bradley Taylor': 'bradley_taylor.png',
+            'Bremoir': 'bremoir.png',
+            'Brew': 'brew.png',
+            'Brillier': 'brillier.png',
+            'Camp Watches': 'camp_watches.png',
+            'Canister': 'canister.png',
+            'Canopy Watch Company': 'canopy_watch_company.png',
+            'Celeste Watch Company': 'celeste_watch_company.png',
+            'Cincinnati Watch Company': 'cincinnati_watch_company.png',
+            'Clement Design Studio': 'clement_design_studio.png',
+            'Colorado Watch Company': 'colorado_watch_company.png',
+            'Cornell Watch Co.': 'cornell_watch_co_.png',
+            'Craft and Lore': 'craft_and_lore.png',
+            'Crown & Buckle': 'crown___buckle.png',
+            'DaLuca Straps': 'daluca_straps.png',
+            'Dan Henry': 'dan_henry.png',
+            'Dan Spitz': 'dan_spitz.png',
+            'David E Walter': 'david_e_walter.png',
+            'Deep Blue Watches': 'deep_blue_watches.png',
+            'Despain Made': 'despain_made.png',
+            'Detroit Mint': 'detroit_mint.png',
+            'Detroit Watch Company': 'detroit_watch_company.png',
+            'Devon': 'devon.png',
+            'DM Tiffany': 'dm_tiffany.png',
+            'DuFrane': 'dufrane.png',
+            'E Stohlman': 'e_stohlman.png',
+            'Ferro & Co.': 'ferro___co_.png',
+            'Fleming': 'fleming.png',
+            'FTS American Manufacturing': 'fts_american_manufacturing.png',
+            'Ganance': 'ganance.png',
+            'Geo': 'geo.png',
+            'Hager Watches': 'hager_watches.png',
+            'Haim Watch Company': 'haim_watch_company.png',
+            'Halios': 'halios.png',
+            'Hampden Watch': 'hampden_watch.png',
+            'Haven': 'haven.png',
+            'Havid Nagan': 'havid_nagan.png',
+            'Helgray': 'helgray.png',
+            'Hemel': 'hemel.png',
+            'Heron': 'heron.png',
+            'Hesili': 'hesili.png',
+            'Hoffman': 'hoffman.png',
+            'Hour Precision': 'hour_precision.png',
+            'Icon 4x4': 'icon_4x4.png',
+            'Islander': 'islander.png',
+            'Jack Foster': 'jack_foster.png',
+            'Jack Mason': 'jack_mason.png',
+            'Jack Sloane': 'jack_sloane.png',
+            'JN Shapiro': 'jn_shapiro.png',
+            'Jose Cermeno': 'jose_cermeno.png',
+            'Keaton B. Myrick': 'keaton_b__myrick.png',
+            'Kobold': 'kobold.png',
+            'La Motte Watch Co.': 'la_motte_watch_company.png',
+            'Lindow Rose Engineer': 'lindow_rose_engineer.png',
+            'Lineage Watch Co.': 'lineage_watch_co_.png',
+            'Loci Watch': 'loci_watch.png',
+            'Locke & King': 'locke___king.png',
+            'Lorca': 'lorca.png',
+            'Lorier': 'lorier.png',
+            'Lum-Tec': 'lum_tec.png',
+            'Makoto': 'makoto.png',
+            'Marathon': 'marathon.png',
+            'Marin Instruments': 'marin_instruments.png',
+            'Mark Carson Watches': 'mark_carson_watches.png',
+            'Massena LAB': 'massena_lab.png',
+            'McDowell Time': 'mcdowell_time.png',
+            'MEC Watches': 'mec_watches.png',
+            'Mercer Watch Co.': 'mercer_watch_co_.png',
+            'Minuteman': 'minuteman.png',
+            'Mission': 'mission.png',
+            'Mollinger': 'mollinger.png',
+            'Momentum': 'momentum.png',
+            'Monta': 'monta.png',
+            'Montana Watch Company': 'montana_watch_company.png',
+            'MVMT': 'mvmt.png',
+            'Nixon': 'nixon.png',
+            'Noctua': 'noctua.png',
+            'Nodus': 'nodus.png',
+            'North Street Watch Co.': 'north_street_watch_co_.png',
+            'Novo Watch': 'novo_watch.png',
+            'Oak and Oscar': 'oak_and_oscar.png',
+            'Oberlin Watch Co': 'oberlin_watch_co.png',
+            'Oceaneva': 'oceaneva.png',
+            'Origin Watch Company': 'origin_watch_company.png',
+            'Original Grain': 'original_grain.png',
+            'Orion': 'orion.png',
+            'Pacific Watch Co.': 'pacific_watch_company.png',
+            'Pelton': 'pelton.png',
+            'Phoenix Watch Company': 'phoenix_watch_company.png',
+            'Praesidus': 'praesidus.png',
+            'Primitive Haus': 'primitive_haus.png',
+            'Raven': 'raven.png',
+            'Resco Instruments': 'resco_instruments.png',
+            'RGM': 'rgm.png',
+            'Rockwell Time Inc': 'rockwell_time_inc.png',
+            'Royter': 'royter.png',
+            'Sangin Instruments': 'sangin_instruments.png',
+            'Santurce Collection': 'santurce_collection.png',
+            'SeaPro': 'seapro.png',
+            'Sel': 'sel.png',
+            'Shinola': 'shinola.png',
+            'Stella': 'stella.png',
+            'Swiss Watch Company': 'swiss_watch_company.png',
+            'Talley & Twine': 'talley__twine.png',
+            'Teleport': 'teleport.png',
+            'Tenacity Watches': 'tenacity_watches.png',
+            'The American Time Companies': 'the_american_time_companies.png',
+            'The Watchmakers Shop': 'the_watchmakers_shop.png',
+            'Throne': 'throne.png',
+            'Thumm and Co.': 'thumm_and_co_.png',
+            'Timex': 'timex.png',
+            'Towson': 'towson.png',
+            'Trafford Watch Company': 'trafford_watch_company.png',
+            'Traska': 'traska.png',
+            'Treiber Timepieces': 'treiber_timepieces.png',
+            'Tsao Baltimore': 'tsao_baltimore.png',
+            'Typsim': 'typsim.png',
+            'Vaer': 'vaer.png',
+            'VanBanner': 'vanbanner.png',
+            'Vero': 'vero.png',
+            'Visitor': 'visitor.png',
+            'Vortic': 'vortic.png',
+            'Waldan': 'waldan.png',
+            'Wasson Watches': 'wasson_watches.png',
+            'Weiss': 'weiss.png',
+            'Wiegand': 'wiegand.png',
+            'Wilbur': 'wilbur.png',
+            'Wren Watches': 'wren_watches.png',
+            'Xeric Watches': 'xeric_watches.png'
+        };
+
+        // Get logo filename for a company
+        function getLogoFilename(companyName) {
+            return logoMapping[companyName] || null;
         }
 
 
@@ -712,21 +866,26 @@
         // Modal functionality
         function openModal(company) {
             const modal = document.getElementById('modal-overlay');
-            const logoPath = `images/logos/${company['Company Name'].replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}.png`;
-            
+            const logoFilename = getLogoFilename(company['Company Name']);
+            const logoPath = logoFilename ? `images/logos/${logoFilename}` : null;
+
             // Update modal content
             document.getElementById('modal-title').textContent = company['Company Name'];
-            
+
             const location = [company.City, company.State].filter(Boolean).join(', ');
             document.getElementById('modal-location').textContent = location || 'Location not specified';
-            
+
             const founded = company['Company Founded'] ? `Founded ${company['Company Founded']}` : 'Founded year not specified';
             document.getElementById('modal-founded').textContent = founded;
-            
+
             // Set logo
             const modalLogo = document.getElementById('modal-logo');
-            modalLogo.innerHTML = `<img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px; background: white;" 
-                                   onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';" />`;
+            if (logoPath) {
+                modalLogo.innerHTML = `<img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px; background: white;"
+                                       onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';" />`;
+            } else {
+                modalLogo.innerHTML = 'LOGO';
+            }
             
             // Set descriptions from CSV data
             const companyDescription = company['Company Description'] || 'This innovative watchmaking company represents the finest in American craftsmanship, combining traditional techniques with modern innovation to create timepieces that are both beautiful and precise.';
@@ -817,14 +976,7 @@
                 setupSorting();
                 setupModal();
                 applyFiltersAndSort();
-                
-                // Log expected logo filenames for debugging
-                console.log('Expected logo filenames:');
-                allCompanies.forEach(company => {
-                    const filename = generateLogoFilename(company['Company Name']);
-                    console.log(`"${company['Company Name']}" → ${filename}.png`);
-                });
-                
+
             } catch (error) {
                 console.error('Error loading CSV:', error);
                 document.getElementById('results-info').innerHTML = 
@@ -1049,7 +1201,8 @@
             }
 
             const companiesHTML = filteredCompanies.map(company => {
-                const logoPath = `images/logos/${company['Company Name'].replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}.png`;
+                const logoFilename = getLogoFilename(company['Company Name']);
+                const logoPath = logoFilename ? `images/logos/${logoFilename}` : null;
                 const websiteIcon = `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.93-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`;
                 const instagramIcon = `<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/></svg>`;
                 const emailIcon = `<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`;
@@ -1073,8 +1226,7 @@
                     <div class="company-card">
                         ${getCountryFlag(company.Country)}
                         <div class="company-logo">
-                            <img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; background: white;"
-                                 onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';" />
+                            ${logoPath ? `<img src="${logoPath}" alt="${company['Company Name']} logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; background: white;" onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';" />` : 'LOGO'}
                         </div>
                         <h3 class="company-name" onclick="openModal(${JSON.stringify(company).replace(/"/g, '&quot;')})">${company['Company Name']}</h3>
                         ${location ? `<div class="company-location">${location}</div>` : ''}
