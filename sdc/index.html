@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ScrewDownCrown — Theme Map</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+  :root{
+    --bg:#13151b; --bg2:#171a21; --panel:rgba(255,255,255,.045); --panel-strong:rgba(22,25,32,.92);
+    --ink:#eceef2; --muted:#9aa1ad; --faint:#6b7280; --line:rgba(255,255,255,.10);
+    --accent:#d8b15a;
+    --c-collecting:#E15759; --c-behaviour:#4E89C7; --c-money:#59A14F; --c-meaning:#B07AA1;
+    --c-culture:#F28E2B; --c-industry:#56B6B0; --c-craft:#E6C84B; --c-self:#B0795E;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:radial-gradient(1200px 800px at 70% -10%,#1b2230 0%,var(--bg) 55%);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow:hidden}
+  #app{position:fixed;inset:0;display:flex;flex-direction:column}
+  header{padding:14px 22px 12px;border-bottom:1px solid var(--line);display:flex;align-items:flex-end;
+    justify-content:space-between;gap:18px;flex-wrap:wrap;backdrop-filter:blur(6px);z-index:6}
+  .title{font-family:Georgia,"Times New Roman",serif;font-size:21px;letter-spacing:.2px}
+  .title b{color:var(--accent);font-weight:700}
+  .sub{color:var(--muted);font-size:12.5px;margin-top:3px;max-width:680px;line-height:1.45}
+  .stats{display:flex;gap:20px;text-align:right}
+  .stat .n{font-family:Georgia,serif;font-size:19px;color:var(--ink)}
+  .stat .l{font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.7px}
+  #stage{position:relative;flex:1;overflow:hidden}
+  svg{width:100%;height:100%;display:block;cursor:grab}
+  svg.grabbing{cursor:grabbing}
+  .link{stroke-linecap:round}
+  .node circle{cursor:pointer;transition:stroke-opacity .15s}
+  .node text{font-size:10px;fill:var(--ink);pointer-events:none;paint-order:stroke;
+    stroke:rgba(8,9,12,.82);stroke-width:3px;stroke-linejoin:round;font-weight:500}
+  .node.dim{opacity:.12}
+  .link.dim{opacity:.03!important}
+  .node.faded{opacity:.06}
+
+  /* floating controls */
+  .card{position:absolute;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    backdrop-filter:blur(9px);box-shadow:0 8px 30px rgba(0,0,0,.32)}
+  #controls{top:14px;left:14px;width:236px;padding:13px 14px;z-index:5}
+  #controls h4{margin:0 0 9px;font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .search{width:100%;background:rgba(0,0,0,.28);border:1px solid var(--line);color:var(--ink);
+    border-radius:8px;padding:8px 10px;font-size:13px;outline:none}
+  .search:focus{border-color:var(--accent)}
+  .row{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink);margin:9px 0;cursor:pointer;user-select:none}
+  .row input{accent-color:var(--accent);cursor:pointer}
+  .swatch{width:11px;height:11px;border-radius:3px;flex:0 0 auto}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:12px;padding:3px 5px;border-radius:6px;cursor:pointer;color:var(--ink)}
+  .legend-item:hover{background:rgba(255,255,255,.05)}
+  .legend-item.off{opacity:.32}
+  .legend-item .ct{margin-left:auto;color:var(--faint);font-size:10.5px}
+  .slider-wrap{margin:6px 0 2px}
+  input[type=range]{width:100%;accent-color:var(--accent)}
+  .hint{font-size:11px;color:var(--faint);line-height:1.5;margin-top:4px}
+  .divider{height:1px;background:var(--line);margin:12px 0}
+  .btns{display:flex;gap:7px;margin-top:6px}
+  .btn{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink);
+    border-radius:7px;padding:6px;font-size:11.5px;cursor:pointer}
+  .btn:hover{background:rgba(255,255,255,.12)}
+
+  /* zoom buttons */
+  #zoom{bottom:16px;left:14px;display:flex;flex-direction:column;gap:0;width:36px;z-index:5;overflow:hidden}
+  #zoom button{width:36px;height:34px;background:var(--panel);border:none;border-bottom:1px solid var(--line);
+    color:var(--ink);font-size:17px;cursor:pointer}
+  #zoom button:last-child{border-bottom:none;font-size:12px}
+  #zoom button:hover{background:rgba(255,255,255,.12)}
+
+  /* tooltip */
+  #tip{position:absolute;pointer-events:none;z-index:20;max-width:280px;padding:10px 12px;border-radius:10px;
+    background:var(--panel-strong);border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.45);
+    font-size:12.5px;opacity:0;transition:opacity .12s;line-height:1.45}
+  #tip .tt{font-weight:600;font-size:13.5px;margin-bottom:2px}
+  #tip .tc{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+  #tip .td{color:var(--muted)}
+  #tip .tm{margin-top:7px;font-size:11px;color:var(--faint)}
+
+  /* detail drawer */
+  #detail{position:absolute;top:0;right:0;height:100%;width:360px;background:var(--panel-strong);
+    border-left:1px solid var(--line);transform:translateX(102%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+    z-index:15;display:flex;flex-direction:column;backdrop-filter:blur(10px)}
+  #detail.open{transform:translateX(0)}
+  .dh{padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+  .dh .cl{font-size:10.5px;text-transform:uppercase;letter-spacing:.7px;font-weight:600}
+  .dh h2{margin:7px 0 4px;font-family:Georgia,serif;font-size:20px;line-height:1.2}
+  .dh .pv{font-size:12px;color:var(--muted);margin-top:7px}
+  .bar{height:6px;border-radius:4px;background:rgba(255,255,255,.09);margin-top:7px;overflow:hidden}
+  .bar > i{display:block;height:100%;border-radius:4px}
+  .dbody{padding:16px 20px;overflow-y:auto;flex:1}
+  .dbody .lab{font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin:16px 0 8px;font-weight:600}
+  .dbody p{font-size:13.5px;line-height:1.55;color:var(--ink);margin:0}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-size:11px;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:20px;padding:3px 9px;color:var(--muted)}
+  .post{display:block;font-size:12.5px;color:var(--ink);text-decoration:none;padding:6px 8px;border-radius:7px;border:1px solid transparent}
+  .post:hover{background:rgba(255,255,255,.06);border-color:var(--line)}
+  .post .pm{color:var(--faint);font-size:11px}
+  .conn{padding:7px 9px;border-radius:8px;margin-bottom:6px;background:rgba(255,255,255,.035);border:1px solid var(--line);cursor:pointer}
+  .conn:hover{background:rgba(255,255,255,.07)}
+  .conn .cn{font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:7px}
+  .conn .cr{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.45}
+  .conn .tag{font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;padding:1px 6px;border-radius:10px;margin-left:auto}
+  .tag.tc{background:rgba(216,177,90,.16);color:var(--accent)}
+  .tag.td2{background:rgba(86,182,176,.16);color:#7fd3cd}
+  .close{position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:7px;border:1px solid var(--line);
+    background:rgba(255,255,255,.05);color:var(--ink);cursor:pointer;font-size:15px;line-height:1}
+  .close:hover{background:rgba(255,255,255,.12)}
+  .edge-key{display:flex;gap:14px;align-items:center;margin-top:9px;font-size:11px;color:var(--muted);flex-wrap:wrap}
+  .edge-key span{display:flex;align-items:center;gap:6px}
+  .ek-line{width:22px;height:0}
+  @media(max-width:720px){#detail{width:100%}.stats{display:none}#controls{width:200px}}
+</style>
+</head>
+<body>
+<div id="gate" aria-hidden="false">
+  <form id="gate-form" autocomplete="off">
+    <div class="gate-title">ScrewDownCrown — Theme Map</div>
+    <div class="gate-sub">This page is private. Enter the password to continue.</div>
+    <input id="gate-pw" type="password" placeholder="Password" autofocus />
+    <button type="submit">Enter</button>
+    <div id="gate-err">Incorrect password. Try again.</div>
+  </form>
+</div>
+<style>
+  #gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(1200px 800px at 70% -10%,#1b2230 0%,#13151b 55%);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  #gate.hidden{display:none}
+  #gate-form{display:flex;flex-direction:column;gap:12px;width:min(340px,86vw);
+    padding:28px 26px;border:1px solid rgba(255,255,255,.10);border-radius:14px;
+    background:rgba(22,25,32,.92);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+  #gate .gate-title{font-family:Georgia,serif;font-size:20px;color:#eceef2}
+  #gate .gate-title::first-letter{color:#d8b15a}
+  #gate .gate-sub{font-size:12.5px;color:#9aa1ad;line-height:1.45;margin-bottom:4px}
+  #gate input{padding:11px 13px;border-radius:9px;border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.05);color:#eceef2;font-size:14px;outline:none}
+  #gate input:focus{border-color:#d8b15a}
+  #gate button{padding:11px 13px;border-radius:9px;border:0;cursor:pointer;
+    background:#d8b15a;color:#13151b;font-weight:700;font-size:14px}
+  #gate-err{display:none;color:#E15759;font-size:12.5px;text-align:center}
+  #gate-err.show{display:block}
+</style>
+<script>
+(function(){
+  var HASH = "7df1de57891e0c0129a470a9e2823c4ceeed7d11338ea3d1dcf53dc20b5cad4c";
+  var KEY = "sdc-unlocked";
+  var gate = document.getElementById("gate");
+  function unlock(){ gate.classList.add("hidden"); }
+  if (sessionStorage.getItem(KEY) === HASH){ unlock(); return; }
+  async function sha256(s){
+    var buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+    return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,"0");}).join("");
+  }
+  document.getElementById("gate-form").addEventListener("submit", async function(e){
+    e.preventDefault();
+    var err = document.getElementById("gate-err");
+    var h = await sha256(document.getElementById("gate-pw").value);
+    if (h === HASH){ sessionStorage.setItem(KEY, HASH); unlock(); }
+    else { err.classList.add("show"); document.getElementById("gate-pw").value=""; }
+  });
+})();
+</script>
+<div id="app">
+  <header>
+    <div>
+      <div class="title"><b>ScrewDownCrown</b> · Theme Map</div>
+      <div class="sub">A network of the ideas Faheem returns to across the full Substack archive — watch collecting woven together with behavioural psychology, money, meaning and culture. Node size = how many posts engage the theme. Lines show themes that are intellectually linked and that recur together.</div>
+      <div class="edge-key">
+        <span><svg class="ek-line" width="22" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="#d8b15a" stroke-width="2.4"/></svg>conceptual link</span>
+        <span><svg class="ek-line" width="22" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="#7fd3cd" stroke-width="2.4" stroke-dasharray="3,3"/></svg>recur together (co-occurrence)</span>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n" id="s-posts">—</div><div class="l">Posts</div></div>
+      <div class="stat"><div class="n" id="s-words">—</div><div class="l">Words</div></div>
+      <div class="stat"><div class="n" id="s-themes">—</div><div class="l">Themes</div></div>
+    </div>
+  </header>
+
+  <div id="stage">
+    <svg id="svg"></svg>
+
+    <div id="controls" class="card">
+      <input class="search" id="search" placeholder="Search a theme…" autocomplete="off"/>
+      <div class="divider"></div>
+      <h4>Links</h4>
+      <label class="row"><input type="checkbox" id="t-conc" checked/> Conceptual links</label>
+      <label class="row"><input type="checkbox" id="t-cooc" checked/> Co-occurrence links</label>
+      <div class="slider-wrap">
+        <div class="hint" style="margin-bottom:4px">Co-occurrence strength ≥ <b id="thrval">0</b></div>
+        <input type="range" id="thr" min="0" max="50" value="0"/>
+      </div>
+      <div class="divider"></div>
+      <h4>Theme groups</h4>
+      <div id="legend"></div>
+      <div class="btns"><button class="btn" id="reset">Reset view</button><button class="btn" id="lab">Labels</button></div>
+      <div class="hint" style="margin-top:9px">Hover a theme to trace its links · click for detail · drag to reposition.</div>
+    </div>
+
+    <div id="zoom" class="card">
+      <button id="zin">+</button><button id="zout">−</button><button id="zfit">fit</button>
+    </div>
+
+    <div id="tip"></div>
+
+    <aside id="detail">
+      <button class="close" id="dclose">✕</button>
+      <div class="dh">
+        <div class="cl" id="d-cluster"></div>
+        <h2 id="d-title"></h2>
+        <div class="pv" id="d-prev"></div>
+        <div class="bar"><i id="d-bar"></i></div>
+      </div>
+      <div class="dbody">
+        <p id="d-desc"></p>
+        <div class="lab">Language Faheem uses</div>
+        <div class="chips" id="d-phrases"></div>
+        <div class="lab">Representative posts</div>
+        <div id="d-posts"></div>
+        <div class="lab" id="d-conn-lab">Connected themes</div>
+        <div id="d-conn"></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+const DATA = {"meta": {"posts": 605, "essays": 457, "weekly": 148, "words": 1747704, "themes": 36, "clusters": 8}, "clusters": [{"id": "collecting", "label": "Collecting Psychology & Behaviour", "color": "#C0504D"}, {"id": "behaviour", "label": "Behavioural Economics & Decisions", "color": "#4F81BD"}, {"id": "money", "label": "Money, Wealth & 'Enough'", "color": "#9BBB59"}, {"id": "meaning", "label": "Meaning, Value & Philosophy", "color": "#8064A2"}, {"id": "culture", "label": "Taste, Culture & Society", "color": "#F79646"}, {"id": "industry", "label": "The Watch Industry & Market", "color": "#2C4D75"}, {"id": "craft", "label": "Craft, Innovation & the Future", "color": "#4BACC6"}, {"id": "self", "label": "Work, Self & World Problems", "color": "#C0843D"}], "nodes": [{"id": "journey", "label": "The Collecting Journey", "cluster": "collecting", "clusterLabel": "Collecting Psychology & Behaviour", "color": "#C0504D", "prev": 20, "pct": 3.3, "mentions": 269, "desc": "How a collector matures over time — first watch, the rabbit hole, and tastes evolving with experience.", "phrases": ["entry-level", "collecting journey", "rabbit hole", "first watch", "entry level", "seasoned collector", "entry point", "new collector"], "examples": [{"title": "Thenewvacheron", "slug": "thenewvacheron", "id": "41714546", "hits": 3, "wc": 1447}, {"title": "Watch collecting fundamentals lessons", "slug": "watch-collecting-fundamentals-lessons", "id": "156161078", "hits": 3, "wc": 1684}, {"title": "Sdc weekly 19", "slug": "sdc-weekly-19", "id": "137798795", "hits": 3, "wc": 1933}, {"title": "Brand power", "slug": "brand-power", "id": "135461408", "hits": 9, "wc": 7226}, {"title": "Watch collecting why we ignore advice", "slug": "watch-collecting-why-we-ignore-advice", "id": "146671118", "hits": 4, "wc": 3332}, {"title": "Morgan stanley q4 2024", "slug": "morgan-stanley-q4-2024", "id": "154852576", "hits": 3, "wc": 2693}]}, {"id": "grail", "label": "Grail & the Endless Chase", "cluster": "collecting", "clusterLabel": "Collecting Psychology & Behaviour", "color": "#C0504D", "prev": 39, "pct": 6.4, "mentions": 299, "desc": "The 'grail' and the endless chase: the next watch, the 'new watch alert', and the doom-cycle with no endgame.", "phrases": ["grail", "the hunt", "the chase", "insatiable", "next piece", "nwa", "next purchase", "next watch"], "examples": [{"title": "What is the grail watch for watch collectors", "slug": "what-is-the-grail-watch-for-watch-collectors", "id": "38117645", "hits": 15, "wc": 796}, {"title": "Dostoevsky prison metaphor watch collector enthusiast", "slug": "dostoevsky-prison-metaphor-watch-collector-enthusiast", "id": "170962466", "hits": 4, "wc": 792}, {"title": "The hunt", "slug": "the-hunt", "id": "66276257", "hits": 5, "wc": 1150}, {"title": "Pleasure vs happiness", "slug": "pleasure-vs-happiness", "id": "76795336", "hits": 4, "wc": 1372}, {"title": "How does watch allocation work", "slug": "how-does-watch-allocation-work", "id": "41903129", "hits": 4, "wc": 1485}, {"title": "The freedom to have enough", "slug": "the-freedom-to-have-enough", "id": "126127126", "hits": 3, "wc": 1115}]}, {"id": "acquire", "label": "Acquisition & Letting Go", "cluster": "collecting", "clusterLabel": "Collecting Psychology & Behaviour", "color": "#C0504D", "prev": 103, "pct": 17.0, "mentions": 833, "desc": "The mechanics of buying, selling, flipping and rotating — and the discipline of letting go.", "phrases": ["pre-owned", "acquisition", "budget", "flip", "rotation", "flipping", "flipper", "buying and sell"], "examples": [{"title": "Pre owned watch market 2025 deloitte report", "slug": "pre-owned-watch-market-2025-deloitte-report", "id": "155535077", "hits": 34, "wc": 2539}, {"title": "Lange and sohne cpo", "slug": "lange-and-sohne-cpo", "id": "137063211", "hits": 10, "wc": 1550}, {"title": "Do you have the right to sell your", "slug": "do-you-have-the-right-to-sell-your", "id": "44795294", "hits": 14, "wc": 2625}, {"title": "7 undeniable truths of employee pay", "slug": "7-undeniable-truths-of-employee-pay", "id": "38117572", "hits": 4, "wc": 806}, {"title": "Hodinkee acquisition watches of switzerland analysis", "slug": "hodinkee-acquisition-watches-of-switzerland-analysis", "id": "149836996", "hits": 8, "wc": 1781}, {"title": "Want to put your kid on road to millionaire row by 21 heres how", "slug": "want-to-put-your-kid-on-road-to-millionaire-row-by-21-heres-how", "id": "38117473", "hits": 4, "wc": 912}]}, {"id": "obsession", "label": "Obsession & Addiction", "cluster": "collecting", "clusterLabel": "Collecting Psychology & Behaviour", "color": "#C0504D", "prev": 35, "pct": 5.8, "mentions": 411, "desc": "Collecting framed as a drug or addiction — compulsion, the hunt, and the vice that never satisfies.", "phrases": ["obsession", "obsessed", "addiction", "vice", "obsessive", "obsessing", "addictive", "compulsion"], "examples": [{"title": "Dopamine and watch collecting", "slug": "dopamine-and-watch-collecting", "id": "44734102", "hits": 19, "wc": 1861}, {"title": "Why you want the new ipad so badly", "slug": "why-you-want-the-new-ipad-so-badly", "id": "38117579", "hits": 5, "wc": 798}, {"title": "Pleasure vs happiness", "slug": "pleasure-vs-happiness", "id": "76795336", "hits": 7, "wc": 1372}, {"title": "The mcribs magic marketing sauce", "slug": "the-mcribs-magic-marketing-sauce", "id": "38117480", "hits": 4, "wc": 828}, {"title": "The daily watch wind", "slug": "the-daily-watch-wind", "id": "164798308", "hits": 4, "wc": 1719}, {"title": "Sdc weekly 105", "slug": "sdc-weekly-105", "id": "167894190", "hits": 11, "wc": 5334}]}, {"id": "likewant", "label": "Liking vs Wanting", "cluster": "collecting", "clusterLabel": "Collecting Psychology & Behaviour", "color": "#C0504D", "prev": 30, "pct": 5.0, "mentions": 317, "desc": "Berridge's neuroscience of liking vs wanting, dopamine, and 'miswanting' the things we desire.", "phrases": ["desire", "wanting", "delayed gratification", "berridge", "liking and wanting", "nucleus accumbens", "incentive salience", "miswanting"], "examples": [{"title": "Do you like it", "slug": "do-you-like-it", "id": "126128341", "hits": 25, "wc": 1619}, {"title": "Choosing between making money and doing what you love", "slug": "choosing-between-making-money-and-doing-what-you-love", "id": "38117599", "hits": 3, "wc": 939}, {"title": "Enough tolerance bottle new year reflection 2026", "slug": "enough-tolerance-bottle-new-year-reflection-2026", "id": "183118540", "hits": 7, "wc": 2550}, {"title": "Watch collectors matrix 2", "slug": "watch-collectors-matrix-2", "id": "153373849", "hits": 3, "wc": 1308}, {"title": "Rumsfeld matrix watch collecting", "slug": "rumsfeld-matrix-watch-collecting", "id": "154901158", "hits": 4, "wc": 1973}, {"title": "Social comparison pt3", "slug": "social-comparison-pt3", "id": "137517495", "hits": 8, "wc": 4137}]}, {"id": "bias", "label": "Cognitive Biases & Irrationality", "cluster": "behaviour", "clusterLabel": "Behavioural Economics & Decisions", "color": "#4F81BD", "prev": 71, "pct": 11.7, "mentions": 803, "desc": "Cognitive biases and the myth of 'homo economicus' — collectors are predictably irrational (Kahneman, Thaler).", "phrases": ["cognitive", "bias", "biases", "irrational", "kahneman", "confirmation bias", "biased", "anchoring"], "examples": [{"title": "Homo economicus watch collecting", "slug": "homo-economicus-watch-collecting", "id": "38117672", "hits": 16, "wc": 984}, {"title": "Watch collecting psychology cognitive biases", "slug": "watch-collecting-psychology-cognitive-biases", "id": "145717389", "hits": 84, "wc": 5482}, {"title": "Behavioural economics and watch collecting", "slug": "behavioural-economics-and-watch-collecting", "id": "136821278", "hits": 18, "wc": 1438}, {"title": "Thinking in a foreign language makes decisions more rational", "slug": "thinking-in-a-foreign-language-makes-decisions-more-rational", "id": "38117620", "hits": 9, "wc": 972}, {"title": "Social psychology and watches", "slug": "social-psychology-and-watches", "id": "38117686", "hits": 17, "wc": 1945}, {"title": "The ambiguity effect", "slug": "the-ambiguity-effect", "id": "122043634", "hits": 9, "wc": 1070}]}, {"id": "decide", "label": "Decision-Making & Framing", "cluster": "behaviour", "clusterLabel": "Behavioural Economics & Decisions", "color": "#4F81BD", "prev": 58, "pct": 9.6, "mentions": 540, "desc": "Decision-making and framing: weighing pros, cons and trade-offs in a purchase decision.", "phrases": ["decision-making", "deliberately", "framing", "deliberate", "decision making", "rationale", "opportunity cost", "costs and"], "examples": [{"title": "Thinking in a foreign language makes decisions more rational", "slug": "thinking-in-a-foreign-language-makes-decisions-more-rational", "id": "38117620", "hits": 8, "wc": 972}, {"title": "The ambiguity effect", "slug": "the-ambiguity-effect", "id": "122043634", "hits": 5, "wc": 1070}, {"title": "Sdc weekly 6", "slug": "sdc-weekly-6", "id": "133276761", "hits": 9, "wc": 2220}, {"title": "Framing a purchase decision", "slug": "framing-a-purchase-decision", "id": "100248657", "hits": 10, "wc": 3000}, {"title": "The playmakers advantage", "slug": "the-playmakers-advantage", "id": "38117651", "hits": 7, "wc": 2410}, {"title": "Motivated reasoning", "slug": "motivated-reasoning", "id": "60155134", "hits": 5, "wc": 1813}]}, {"id": "nudge", "label": "Nudging & Social Influence", "cluster": "behaviour", "clusterLabel": "Behavioural Economics & Decisions", "color": "#4F81BD", "prev": 34, "pct": 5.6, "mentions": 318, "desc": "Nudging and social influence — herd behaviour, FOMO and the subtle steering of choice.", "phrases": ["manipulation", "nudge", "fomo", "herd", "bandwagon", "conformity", "conform", "manipulate"], "examples": [{"title": "Nudge improving decisions", "slug": "nudge-improving-decisions", "id": "38117678", "hits": 37, "wc": 3350}, {"title": "Watch collecting psychology cognitive biases", "slug": "watch-collecting-psychology-cognitive-biases", "id": "145717389", "hits": 22, "wc": 5482}, {"title": "Self deception watch collecting robert trivers", "slug": "self-deception-watch-collecting-robert-trivers", "id": "176814024", "hits": 16, "wc": 4578}, {"title": "Homo economicus watch collecting", "slug": "homo-economicus-watch-collecting", "id": "38117672", "hits": 3, "wc": 984}, {"title": "Psychology watch collectors personality", "slug": "psychology-watch-collectors-personality", "id": "147477825", "hits": 4, "wc": 2240}, {"title": "Sdc weekly 46", "slug": "sdc-weekly-46", "id": "143416420", "hits": 11, "wc": 6964}]}, {"id": "luckrisk", "label": "Risk, Luck & Uncertainty", "cluster": "behaviour", "clusterLabel": "Behavioural Economics & Decisions", "color": "#4F81BD", "prev": 117, "pct": 19.3, "mentions": 990, "desc": "The roles of luck, risk and uncertainty in outcomes — and humility about the 'role of luck' (Housel).", "phrases": ["risk", "luck", "uncertainty", "probability", "odds", "gambling", "gamble", "hindsight"], "examples": [{"title": "The worst place to sit on a plane", "slug": "the-worst-place-to-sit-on-a-plane", "id": "38117595", "hits": 3, "wc": 263}, {"title": "Do you want 100m", "slug": "do-you-want-100m", "id": "141857246", "hits": 39, "wc": 3804}, {"title": "Luck vs risk", "slug": "luck-vs-risk", "id": "107220522", "hits": 13, "wc": 1301}, {"title": "Psychology of money", "slug": "psychology-of-money", "id": "126123711", "hits": 28, "wc": 2944}, {"title": "The ambiguity effect", "slug": "the-ambiguity-effect", "id": "122043634", "hits": 10, "wc": 1070}, {"title": "Luxury bazaar courtyard long degeneracy loot box", "slug": "luxury-bazaar-courtyard-long-degeneracy-loot-box", "id": "190012113", "hits": 19, "wc": 2834}]}, {"id": "regret", "label": "Regret & Loss Aversion", "cluster": "behaviour", "clusterLabel": "Behavioural Economics & Decisions", "color": "#4F81BD", "prev": 12, "pct": 2.0, "mentions": 142, "desc": "Regret and loss aversion — buyer's remorse, missing out, and 'should have bought it' counterfactuals.", "phrases": ["regret", "loss aversion", "missed out", "buyer's remorse", "wish i had", "should have bought", "wish you had", "counterfactual"], "examples": [{"title": "The power of regret", "slug": "the-power-of-regret", "id": "48668162", "hits": 32, "wc": 1805}, {"title": "Do you want 100m", "slug": "do-you-want-100m", "id": "141857246", "hits": 9, "wc": 3804}, {"title": "Watch collecting psychology cognitive biases", "slug": "watch-collecting-psychology-cognitive-biases", "id": "145717389", "hits": 9, "wc": 5482}, {"title": "Art of spending money morgan housel", "slug": "art-of-spending-money-morgan-housel", "id": "176153526", "hits": 6, "wc": 5186}, {"title": "Etiquette unwritten rules watch collecting part 2", "slug": "etiquette-unwritten-rules-watch-collecting-part-2", "id": "181234400", "hits": 3, "wc": 2975}, {"title": "Sdc weekly 80", "slug": "sdc-weekly-80", "id": "152922769", "hits": 9, "wc": 10403}]}, {"id": "moneypsych", "label": "The Psychology of Money", "cluster": "money", "clusterLabel": "Money, Wealth & 'Enough'", "color": "#9BBB59", "prev": 26, "pct": 4.3, "mentions": 288, "desc": "The psychology of money: behaviour beats knowledge, and money habits decide outcomes (Housel).", "phrases": ["saving", "housel", "compound", "spending money", "spend money", "compounds", "making money", "compounding"], "examples": [{"title": "Art of spending money morgan housel", "slug": "art-of-spending-money-morgan-housel", "id": "176153526", "hits": 41, "wc": 5186}, {"title": "Our present vs future being", "slug": "our-present-vs-future-being", "id": "59168439", "hits": 5, "wc": 667}, {"title": "Thinking in a foreign language makes decisions more rational", "slug": "thinking-in-a-foreign-language-makes-decisions-more-rational", "id": "38117620", "hits": 4, "wc": 972}, {"title": "Psychology of money", "slug": "psychology-of-money", "id": "126123711", "hits": 12, "wc": 2944}, {"title": "Luck vs risk", "slug": "luck-vs-risk", "id": "107220522", "hits": 4, "wc": 1301}, {"title": "Why watch collectors disagree tinbergen", "slug": "why-watch-collectors-disagree-tinbergen", "id": "184328128", "hits": 9, "wc": 3245}]}, {"id": "wealth", "label": "Wealth, Status & Success", "cluster": "money", "clusterLabel": "Money, Wealth & 'Enough'", "color": "#9BBB59", "prev": 243, "pct": 40.2, "mentions": 2024, "desc": "Wealth, status and success — what it means to be 'rich' and how watches stand in for achievement.", "phrases": ["success", "wealth", "successful", "wealthy", "rich", "succession", "successfully", "billionaire"], "examples": [{"title": "Top 10 traits of highly successful people", "slug": "top-10-traits-of-highly-successful-people", "id": "38117467", "hits": 20, "wc": 820}, {"title": "Happy family successful start up", "slug": "happy-family-successful-start-up", "id": "38117553", "hits": 12, "wc": 672}, {"title": "Want to put your kid on road to millionaire row by 21 heres how", "slug": "want-to-put-your-kid-on-road-to-millionaire-row-by-21-heres-how", "id": "38117473", "hits": 16, "wc": 912}, {"title": "Ubs global wealth report 2025 luxury watch market", "slug": "ubs-global-wealth-report-2025-luxury-watch-market", "id": "184536641", "hits": 47, "wc": 2837}, {"title": "The hard truth about how success really works", "slug": "the-hard-truth-about-how-success-really-works", "id": "38117500", "hits": 8, "wc": 487}, {"title": "Wealth money jobs hard work", "slug": "wealth-money-jobs-hard-work", "id": "135296714", "hits": 72, "wc": 5339}]}, {"id": "enough", "label": "The Freedom to Have 'Enough'", "cluster": "money", "clusterLabel": "Money, Wealth & 'Enough'", "color": "#9BBB59", "prev": 46, "pct": 7.6, "mentions": 513, "desc": "The Stoic freedom of 'enough' — contentment, needs vs wants, and desire as a moving target.", "phrases": ["content", "have enough", "contentment", "hedonic treadmill", "diminishing returns", "when enough", "knowing when you have enough", "moving target"], "examples": [{"title": "First post on the new blog", "slug": "first-post-on-the-new-blog", "id": "38117643", "hits": 4, "wc": 310}, {"title": "Hodinkee acquisition watches of switzerland analysis", "slug": "hodinkee-acquisition-watches-of-switzerland-analysis", "id": "149836996", "hits": 8, "wc": 1781}, {"title": "Sdc weekly 4", "slug": "sdc-weekly-4", "id": "131443107", "hits": 8, "wc": 1817}, {"title": "Subtract negatives", "slug": "subtract-negatives", "id": "120769811", "hits": 7, "wc": 1780}, {"title": "The freedom to have enough", "slug": "the-freedom-to-have-enough", "id": "126127126", "hits": 4, "wc": 1115}, {"title": "Watch collecting philosophy finding enough", "slug": "watch-collecting-philosophy-finding-enough", "id": "163048429", "hits": 11, "wc": 3102}]}, {"id": "invest", "label": "Investment Mindset & Speculation", "cluster": "money", "clusterLabel": "Money, Wealth & 'Enough'", "color": "#9BBB59", "prev": 205, "pct": 33.9, "mentions": 1569, "desc": "Watches as assets — investment mindset, ROI, speculation and the bubble psychology of appreciation.", "phrases": ["investment", "appreciate", "appreciation", "investing", "bubble", "portfolio", "speculation", "appreciated"], "examples": [{"title": "Watches as an asset class", "slug": "watches-as-an-asset-class", "id": "38117671", "hits": 22, "wc": 1377}, {"title": "A disciplined approach to evaluating ideas", "slug": "a-disciplined-approach-to-evaluating-ideas", "id": "38117531", "hits": 7, "wc": 749}, {"title": "Top 3 priorities of the best cfos", "slug": "top-3-priorities-of-the-best-cfos", "id": "38117509", "hits": 3, "wc": 350}, {"title": "Why la is the new hot place to launch", "slug": "why-la-is-the-new-hot-place-to-launch", "id": "38117516", "hits": 3, "wc": 412}, {"title": "Moral superiority complex communal narcissism watch collecting", "slug": "moral-superiority-complex-communal-narcissism-watch-collecting", "id": "174934838", "hits": 19, "wc": 2776}, {"title": "The 5 hardest jobs to fill in 2012", "slug": "the-5-hardest-jobs-to-fill-in-2012", "id": "38117521", "hits": 4, "wc": 597}]}, {"id": "class", "label": "Class & Social Mobility", "cluster": "money", "clusterLabel": "Money, Wealth & 'Enough'", "color": "#9BBB59", "prev": 25, "pct": 4.1, "mentions": 268, "desc": "Social class, privilege and mobility — inequality and the entrenchment of elites.", "phrases": ["elite", "privilege", "middle class", "inequality", "upper class", "middle-class", "social class", "privileged"], "examples": [{"title": "Pierre bourdieu on taste", "slug": "pierre-bourdieu-on-taste", "id": "142351395", "hits": 38, "wc": 2961}, {"title": "Enrichment economy luxury watch collecting", "slug": "enrichment-economy-luxury-watch-collecting", "id": "153305331", "hits": 11, "wc": 3172}, {"title": "Sdc weekly 71", "slug": "sdc-weekly-71", "id": "150011384", "hits": 30, "wc": 8654}, {"title": "The playmakers advantage", "slug": "the-playmakers-advantage", "id": "38117651", "hits": 6, "wc": 2410}, {"title": "Wealth concentration transforming luxury watch industry", "slug": "wealth-concentration-transforming-luxury-watch-industry", "id": "157906801", "hits": 7, "wc": 3394}, {"title": "Social status and watch collecting 2", "slug": "social-status-and-watch-collecting-2", "id": "159077157", "hits": 4, "wc": 2272}]}, {"id": "meaningmap", "label": "Meaning & Map vs Territory", "cluster": "meaning", "clusterLabel": "Meaning, Value & Philosophy", "color": "#8064A2", "prev": 26, "pct": 4.3, "mentions": 341, "desc": "Watches as 'vessels of meaning' — meaning lives in the map (our psychology), not the territory (the metal).", "phrases": ["meaning", "emotional connection", "sentimental", "heirloom", "imbued", "imbue", "emotional attachment", "emotional value"], "examples": [{"title": "Watches meaning psychology map territory", "slug": "watches-meaning-psychology-map-territory", "id": "158364813", "hits": 30, "wc": 2325}, {"title": "Emotional bonds watch collectors", "slug": "emotional-bonds-watch-collectors", "id": "143748822", "hits": 5, "wc": 1151}, {"title": "How and why do you collect watches", "slug": "how-and-why-do-you-collect-watches", "id": "38117691", "hits": 3, "wc": 1052}, {"title": "8 things everybody ought to know about concentrating", "slug": "8-things-everybody-ought-to-know-about-concentrating", "id": "38117550", "hits": 7, "wc": 3262}, {"title": "Sdc weekly 50", "slug": "sdc-weekly-50", "id": "144586843", "hits": 11, "wc": 6849}, {"title": "New luxury watch market trends", "slug": "new-luxury-watch-market-trends", "id": "148540466", "hits": 7, "wc": 5278}]}, {"id": "authentic", "label": "Authenticity & Individual Taste", "cluster": "meaning", "clusterLabel": "Meaning, Value & Philosophy", "color": "#8064A2", "prev": 102, "pct": 16.9, "mentions": 820, "desc": "Authenticity and individual taste — liking what you genuinely like, regardless of the crowd.", "phrases": ["genuine", "genuinely", "authenticity", "authentic", "what you like", "authentication", "individuality", "authenticate"], "examples": [{"title": "The bs asymmetry principle", "slug": "the-bs-asymmetry-principle", "id": "38117675", "hits": 5, "wc": 293}, {"title": "Watch collectors dont buy what you like", "slug": "watch-collectors-dont-buy-what-you-like", "id": "38117677", "hits": 4, "wc": 565}, {"title": "The rolex albino daytona", "slug": "the-rolex-albino-daytona", "id": "141754610", "hits": 10, "wc": 1437}, {"title": "The daily watch wind", "slug": "the-daily-watch-wind", "id": "164798308", "hits": 9, "wc": 1719}, {"title": "Self deception watch collecting robert trivers", "slug": "self-deception-watch-collecting-robert-trivers", "id": "176814024", "hits": 21, "wc": 4578}, {"title": "Sdc weekly 113", "slug": "sdc-weekly-113", "id": "173103110", "hits": 18, "wc": 5117}]}, {"id": "stoic", "label": "Stoicism & Philosophy", "cluster": "meaning", "clusterLabel": "Meaning, Value & Philosophy", "color": "#8064A2", "prev": 48, "pct": 7.9, "mentions": 475, "desc": "Stoic and classical philosophy — Seneca, Marcus Aurelius, Aristotle and Kant on virtue and the good life.", "phrases": ["philosophy", "philosophical", "virtue", "existential", "philosopher", "aristotle", "nietzsche", "seneca"], "examples": [{"title": "Whats love got to do with business", "slug": "whats-love-got-to-do-with-business", "id": "38117510", "hits": 15, "wc": 947}, {"title": "Lets talk about envy", "slug": "lets-talk-about-envy", "id": "54035560", "hits": 18, "wc": 3433}, {"title": "Intelligence moral worth luxury watches", "slug": "intelligence-moral-worth-luxury-watches", "id": "145721237", "hits": 12, "wc": 2711}, {"title": "The freedom to have enough", "slug": "the-freedom-to-have-enough", "id": "126127126", "hits": 4, "wc": 1115}, {"title": "The brain part 1", "slug": "the-brain-part-1", "id": "38117681", "hits": 7, "wc": 2434}, {"title": "Is it worth having children", "slug": "is-it-worth-having-children", "id": "38117673", "hits": 4, "wc": 1471}]}, {"id": "happy", "label": "Happiness & the Good Life", "cluster": "meaning", "clusterLabel": "Meaning, Value & Philosophy", "color": "#8064A2", "prev": 124, "pct": 20.5, "mentions": 1068, "desc": "Happiness and the good life — where contentment, joy and fulfilment actually come from.", "phrases": ["happy", "joy", "happiness", "gratitude", "well-being", "contentment", "fulfilling", "fulfillment"], "examples": [{"title": "Happiness versus relief", "slug": "happiness-versus-relief", "id": "48426315", "hits": 26, "wc": 832}, {"title": "The hunt", "slug": "the-hunt", "id": "66276257", "hits": 26, "wc": 1150}, {"title": "Watch collecting and happiness", "slug": "watch-collecting-and-happiness", "id": "38117688", "hits": 54, "wc": 2885}, {"title": "Happiness revisited", "slug": "happiness-revisited", "id": "126651629", "hits": 23, "wc": 1246}, {"title": "Pleasure vs happiness", "slug": "pleasure-vs-happiness", "id": "76795336", "hits": 20, "wc": 1372}, {"title": "Subtract negatives", "slug": "subtract-negatives", "id": "120769811", "hits": 21, "wc": 1780}]}, {"id": "mortality", "label": "Mortality, Time & Memory", "cluster": "meaning", "clusterLabel": "Meaning, Value & Philosophy", "color": "#8064A2", "prev": 92, "pct": 15.2, "mentions": 695, "desc": "Mortality, time and memory — heirlooms, legacy, nostalgia and the brevity that gives objects weight.", "phrases": ["memory", "memories", "death", "legacy", "next generation", "nostalgia", "dying", "passage of time"], "examples": [{"title": "Emotional bonds watch collectors", "slug": "emotional-bonds-watch-collectors", "id": "143748822", "hits": 8, "wc": 1151}, {"title": "Simplest way to get smarter", "slug": "simplest-way-to-get-smarter", "id": "38117608", "hits": 4, "wc": 582}, {"title": "6 exercises to strengthen compassionate leadership", "slug": "6-exercises-to-strengthen-compassionate-leadership", "id": "38117633", "hits": 7, "wc": 1240}, {"title": "Sdc weekly 54", "slug": "sdc-weekly-54", "id": "145471381", "hits": 29, "wc": 6732}, {"title": "What is time 2", "slug": "what-is-time-2", "id": "38117684", "hits": 3, "wc": 743}, {"title": "Time einstein relativity watch collecting", "slug": "time-einstein-relativity-watch-collecting", "id": "163639769", "hits": 7, "wc": 1858}]}, {"id": "taste", "label": "Taste & Cultural Capital", "cluster": "culture", "clusterLabel": "Taste, Culture & Society", "color": "#F79646", "prev": 66, "pct": 10.9, "mentions": 718, "desc": "Taste as cultural capital — Bourdieu's habitus, distinction, and how class shapes what we find beautiful.", "phrases": ["taste", "sophisticated", "distinction", "bourdieu", "cultural capital", "refined", "sophistication", "good taste"], "examples": [{"title": "Pierre bourdieu on taste", "slug": "pierre-bourdieu-on-taste", "id": "142351395", "hits": 73, "wc": 2961}, {"title": "Good taste in watches bourdieu philosophy cultural capital", "slug": "good-taste-in-watches-bourdieu-philosophy-cultural-capital", "id": "174035802", "hits": 87, "wc": 3590}, {"title": "Social status and watch collecting 2", "slug": "social-status-and-watch-collecting-2", "id": "159077157", "hits": 17, "wc": 2272}, {"title": "Horology and human nature", "slug": "horology-and-human-nature", "id": "142552794", "hits": 12, "wc": 2068}, {"title": "Self deception watch collecting robert trivers", "slug": "self-deception-watch-collecting-robert-trivers", "id": "176814024", "hits": 16, "wc": 4578}, {"title": "The high priest of horology", "slug": "the-high-priest-of-horology", "id": "38117648", "hits": 4, "wc": 1159}]}, {"id": "status", "label": "Status Signaling & Conspicuous Consumption", "cluster": "culture", "clusterLabel": "Taste, Culture & Society", "color": "#F79646", "prev": 130, "pct": 21.5, "mentions": 1511, "desc": "Status signalling and conspicuous consumption — Veblen, the flex, and positional goods.", "phrases": ["status", "signal", "signalling", "signals", "veblen", "flexibility", "flex", "flexible"], "examples": [{"title": "Social status and watch collecting 1", "slug": "social-status-and-watch-collecting-1", "id": "159073829", "hits": 92, "wc": 2409}, {"title": "Social status and watch collecting 2", "slug": "social-status-and-watch-collecting-2", "id": "159077157", "hits": 59, "wc": 2272}, {"title": "Watchpro independents conglomerates veblen", "slug": "watchpro-independents-conglomerates-veblen", "id": "192632556", "hits": 36, "wc": 2869}, {"title": "Pricing of luxury watches", "slug": "pricing-of-luxury-watches", "id": "42007232", "hits": 19, "wc": 2170}, {"title": "Sinners commons analogue intelligence", "slug": "sinners-commons-analogue-intelligence", "id": "190405771", "hits": 45, "wc": 5700}, {"title": "Sdc weekly 122", "slug": "sdc-weekly-122", "id": "177997436", "hits": 60, "wc": 8027}]}, {"id": "tribe", "label": "Tribalism & Community", "cluster": "culture", "clusterLabel": "Taste, Culture & Society", "color": "#F79646", "prev": 110, "pct": 18.2, "mentions": 914, "desc": "Tribalism and community — #watchfam, RedBar, forums and the human need to belong.", "phrases": ["community", "tribe", "forum", "belong", "tribal", "redbar", "belongs", "tribalism"], "examples": [{"title": "Sdc weekly 20 tribalism and nihilism", "slug": "sdc-weekly-20-tribalism-and-nihilism", "id": "138005814", "hits": 29, "wc": 2802}, {"title": "Wristwatches and religions", "slug": "wristwatches-and-religions", "id": "138034953", "hits": 15, "wc": 2558}, {"title": "Sinners commons analogue intelligence", "slug": "sinners-commons-analogue-intelligence", "id": "190405771", "hits": 33, "wc": 5700}, {"title": "Psychology watch collectors personality", "slug": "psychology-watch-collectors-personality", "id": "147477825", "hits": 12, "wc": 2240}, {"title": "Attention economy watch collecting experiential luxury", "slug": "attention-economy-watch-collecting-experiential-luxury", "id": "176659770", "hits": 18, "wc": 3484}, {"title": "Mbf sp one review identity crisis", "slug": "mbf-sp-one-review-identity-crisis", "id": "164162283", "hits": 9, "wc": 1919}]}, {"id": "marketing", "label": "Marketing & Consumerism", "cluster": "culture", "clusterLabel": "Taste, Culture & Society", "color": "#F79646", "prev": 233, "pct": 38.5, "mentions": 2405, "desc": "Marketing, consumerism and manufactured desire — how brands make us want.", "phrases": ["marketing", "consumers", "consumer", "advertising", "positioning", "consumption", "branding", "campaign"], "examples": [{"title": "The mcribs magic marketing sauce", "slug": "the-mcribs-magic-marketing-sauce", "id": "38117480", "hits": 15, "wc": 828}, {"title": "7 ways to make a mini marketing campaign", "slug": "7-ways-to-make-a-mini-marketing-campaign", "id": "38117454", "hits": 19, "wc": 1082}, {"title": "Linkedin will outlive facebook heres why", "slug": "linkedin-will-outlive-facebook-heres-why", "id": "38117601", "hits": 7, "wc": 451}, {"title": "Secrets of the 10 most trusted brands", "slug": "secrets-of-the-10-most-trusted-brands", "id": "38117587", "hits": 39, "wc": 3043}, {"title": "No longer simply chic cheap is now a badge of honor", "slug": "no-longer-simply-chic-cheap-is-now-a-badge-of-honor", "id": "38117485", "hits": 20, "wc": 1763}, {"title": "The 5 hardest jobs to fill in 2012", "slug": "the-5-hardest-jobs-to-fill-in-2012", "id": "38117521", "hits": 6, "wc": 597}]}, {"id": "socialmedia", "label": "Social Media & Influencers", "cluster": "culture", "clusterLabel": "Taste, Culture & Society", "color": "#F79646", "prev": 189, "pct": 31.2, "mentions": 1544, "desc": "Social media and influencers — Instagram, Hodinkee, tastemakers (John Mayer) and the hype machine.", "phrases": ["instagram", "hodinkee", "social media", "youtube", "influencers", "on social media", "twitter", "influencer"], "examples": [{"title": "Hodinkee acquisition watches of switzerland analysis", "slug": "hodinkee-acquisition-watches-of-switzerland-analysis", "id": "149836996", "hits": 39, "wc": 1781}, {"title": "Watches of switzerland hodinkee acquisition price", "slug": "watches-of-switzerland-hodinkee-acquisition-price", "id": "152608922", "hits": 15, "wc": 719}, {"title": "Translating viral youtube videos into sales", "slug": "translating-viral-youtube-videos-into-sales", "id": "38117499", "hits": 20, "wc": 975}, {"title": "Social media is usually a waste of time", "slug": "social-media-is-usually-a-waste-of-time", "id": "38117464", "hits": 16, "wc": 950}, {"title": "Can you tell the difference between cheap and expensive watches", "slug": "can-you-tell-the-difference-between-cheap-and-expensive-watches", "id": "38117665", "hits": 3, "wc": 181}, {"title": "Tim cook tweets story of users apple watch detecting atrial fibrillation", "slug": "tim-cook-tweets-story-of-users-apple-watch-detecting-atrial-fibrillation", "id": "38117664", "hits": 3, "wc": 186}]}, {"id": "brand", "label": "Brand Power & Heritage", "cluster": "industry", "clusterLabel": "The Watch Industry & Market", "color": "#2C4D75", "prev": 288, "pct": 47.6, "mentions": 5175, "desc": "Brand power and heritage — Rolex, Patek, the 'holy trinity' and the mythology that adds value beyond the metal.", "phrases": ["rolex", "patek", "heritage", "nautilus", "wilsdorf", "audemars", "royal oak", "iconic"], "examples": [{"title": "Rolex founder hans wilsdorf", "slug": "rolex-founder-hans-wilsdorf", "id": "145667807", "hits": 183, "wc": 4887}, {"title": "The rolex story hans wilsdorf history", "slug": "the-rolex-story-hans-wilsdorf-history", "id": "162122502", "hits": 138, "wc": 5050}, {"title": "A brief history the rolex day date", "slug": "a-brief-history-the-rolex-day-date", "id": "38117654", "hits": 20, "wc": 780}, {"title": "Sdc weekly 12", "slug": "sdc-weekly-12", "id": "136155980", "hits": 61, "wc": 2917}, {"title": "Morgan stanley q4 2025", "slug": "morgan-stanley-q4-2025", "id": "185416151", "hits": 48, "wc": 2609}, {"title": "Morgan stanley q1 2024", "slug": "morgan-stanley-q1-2024", "id": "143475710", "hits": 21, "wc": 1224}]}, {"id": "scarcity", "label": "Scarcity, Allocation & the AD Game", "cluster": "industry", "clusterLabel": "The Watch Industry & Market", "color": "#2C4D75", "prev": 104, "pct": 17.2, "mentions": 833, "desc": "Scarcity, allocation and the AD game — hype, waitlists and engineered, artificial scarcity.", "phrases": ["hype", "scarcity", "allocation", "artificial scarcity", "authorised dealer", "supply and demand", "waitlist", "unobtainable"], "examples": [{"title": "How scarcity creates desire psychology watches", "slug": "how-scarcity-creates-desire-psychology-watches", "id": "179145054", "hits": 27, "wc": 2999}, {"title": "Pricing of luxury watches", "slug": "pricing-of-luxury-watches", "id": "42007232", "hits": 16, "wc": 2170}, {"title": "Thenewvacheron", "slug": "thenewvacheron", "id": "41714546", "hits": 10, "wc": 1447}, {"title": "Enrichment economy luxury watch collecting", "slug": "enrichment-economy-luxury-watch-collecting", "id": "153305331", "hits": 20, "wc": 3172}, {"title": "Shorter product cycles and the enjoyment", "slug": "shorter-product-cycles-and-the-enjoyment", "id": "45483967", "hits": 10, "wc": 1651}, {"title": "A new way of pricing hyped watches", "slug": "a-new-way-of-pricing-hyped-watches", "id": "46743609", "hits": 9, "wc": 1667}]}, {"id": "secondary", "label": "Secondary Market & Pricing", "cluster": "industry", "clusterLabel": "The Watch Industry & Market", "color": "#2C4D75", "prev": 121, "pct": 20.0, "mentions": 1163, "desc": "The secondary market and pricing — grey market, Chrono24, WatchCharts and the indexing of watch value.", "phrases": ["secondary market", "grey market", "chrono24", "retail price", "watchcharts", "resale", "market value", "liquidity"], "examples": [{"title": "Morgan stanley q2 2025", "slug": "morgan-stanley-q2-2025", "id": "167977696", "hits": 31, "wc": 2791}, {"title": "Morgan stanley q2 2024", "slug": "morgan-stanley-q2-2024", "id": "146606294", "hits": 15, "wc": 1518}, {"title": "Morgan stanley q1 2024", "slug": "morgan-stanley-q1-2024", "id": "143475710", "hits": 11, "wc": 1224}, {"title": "Pre owned watch market 2025 deloitte report", "slug": "pre-owned-watch-market-2025-deloitte-report", "id": "155535077", "hits": 22, "wc": 2539}, {"title": "Morgan stanley q3 2025", "slug": "morgan-stanley-q3-2025", "id": "175786505", "hits": 26, "wc": 3057}, {"title": "Rolex daytona why does it defy logic", "slug": "rolex-daytona-why-does-it-defy-logic", "id": "46274741", "hits": 19, "wc": 2358}]}, {"id": "indie", "label": "Independent Watchmaking & Craft", "cluster": "industry", "clusterLabel": "The Watch Industry & Market", "color": "#2C4D75", "prev": 204, "pct": 33.7, "mentions": 2316, "desc": "Independent watchmaking and craft — Dufour, Journe, Greubel, hand-finishing and haute horlogerie.", "phrases": ["journe", "craftsmanship", "dufour", "finishing", "greubel", "independent watchmakers", "f.p. journe", "independent watchmaking"], "examples": [{"title": "Guilloche deception atelier wen revolution", "slug": "guilloche-deception-atelier-wen-revolution", "id": "149055590", "hits": 122, "wc": 5085}, {"title": "Stephen forsey leaves greubel forsey", "slug": "stephen-forsey-leaves-greubel-forsey", "id": "186742361", "hits": 30, "wc": 2196}, {"title": "Watchpro independents conglomerates veblen", "slug": "watchpro-independents-conglomerates-veblen", "id": "192632556", "hits": 34, "wc": 2869}, {"title": "Philippe dufour watch sells for 1bn", "slug": "philippe-dufour-watch-sells-for-1bn", "id": "132947081", "hits": 65, "wc": 6570}, {"title": "Hand finishing fairy tale cnc sharp inner angles watch hand polishing", "slug": "hand-finishing-fairy-tale-cnc-sharp-inner-angles-watch-hand-polishing", "id": "175539412", "hits": 30, "wc": 3070}, {"title": "Wine fraud rudy kurniawan watch collecting psychology", "slug": "wine-fraud-rudy-kurniawan-watch-collecting-psychology", "id": "179129964", "hits": 16, "wc": 2008}]}, {"id": "industryecon", "label": "Industry Economics & Power", "cluster": "industry", "clusterLabel": "The Watch Industry & Market", "color": "#2C4D75", "prev": 148, "pct": 24.5, "mentions": 1687, "desc": "Industry economics and power — Swatch Group, Richemont, LVMH, Swiss exports and Morgan Stanley data.", "phrases": ["lvmh", "revenue", "richemont", "swatch group", "swiss watch industry", "morgan stanley", "quartz crisis", "vertical integration"], "examples": [{"title": "Lvmh wolf in cashmere", "slug": "lvmh-wolf-in-cashmere", "id": "143647710", "hits": 80, "wc": 6315}, {"title": "The swatch group", "slug": "the-swatch-group", "id": "143635801", "hits": 74, "wc": 5896}, {"title": "Morgan stanley q1 2024", "slug": "morgan-stanley-q1-2024", "id": "143475710", "hits": 14, "wc": 1224}, {"title": "Morgan stanley luxeconsult 2025 2026 ninth swiss watcher reissue", "slug": "morgan-stanley-luxeconsult-2025-2026-ninth-swiss-watcher-reissue", "id": "189001568", "hits": 55, "wc": 5493}, {"title": "4 business metrics you cant afford to ignore", "slug": "4-business-metrics-you-cant-afford-to-ignore", "id": "38117524", "hits": 6, "wc": 640}, {"title": "The watch industrys biggest problems in 2019 beyond", "slug": "the-watch-industrys-biggest-problems-in-2019-beyond", "id": "38117650", "hits": 10, "wc": 1070}]}, {"id": "mechdigital", "label": "Mechanical vs Digital", "cluster": "craft", "clusterLabel": "Craft, Innovation & the Future", "color": "#4BACC6", "prev": 67, "pct": 11.1, "mentions": 699, "desc": "Mechanical vs digital — why we wear deliberate anachronisms when a phone tells better time.", "phrases": ["quartz", "mechanical watches", "mechanical watch", "apple watch", "mechanical watchmaking", "smartwatch", "obsolete", "tell time"], "examples": [{"title": "Will the apple watch kill the luxury", "slug": "will-the-apple-watch-kill-the-luxury", "id": "42577959", "hits": 35, "wc": 2293}, {"title": "10 ways the apple watch can keep you productive", "slug": "10-ways-the-apple-watch-can-keep-you-productive", "id": "38117644", "hits": 22, "wc": 1715}, {"title": "The swatch group", "slug": "the-swatch-group", "id": "143635801", "hits": 31, "wc": 5896}, {"title": "The daily watch wind", "slug": "the-daily-watch-wind", "id": "164798308", "hits": 8, "wc": 1719}, {"title": "Sdc weekly 55", "slug": "sdc-weekly-55", "id": "145505230", "hits": 33, "wc": 7182}, {"title": "Sdc weekly 96", "slug": "sdc-weekly-96", "id": "163216377", "hits": 23, "wc": 6836}]}, {"id": "aifuture", "label": "AI & the Future", "cluster": "craft", "clusterLabel": "Craft, Innovation & the Future", "color": "#4BACC6", "prev": 63, "pct": 10.4, "mentions": 690, "desc": "AI and the future — automation, disruption and what technology means for watches and work.", "phrases": ["ai", "chatgpt", "disruption", "algorithm", "automation", "algorithms", "artificial intelligence", "disrupted"], "examples": [{"title": "Ai and watch collecting", "slug": "ai-and-watch-collecting", "id": "116036572", "hits": 24, "wc": 1667}, {"title": "Ai watchmakers future of watches and horology", "slug": "ai-watchmakers-future-of-watches-and-horology", "id": "161495713", "hits": 27, "wc": 2687}, {"title": "Sdc weekly 60", "slug": "sdc-weekly-60", "id": "146784700", "hits": 67, "wc": 8400}, {"title": "Horology meets virtual reality", "slug": "horology-meets-virtual-reality", "id": "143860153", "hits": 10, "wc": 2351}, {"title": "The watch industrys biggest problems in 2019 beyond", "slug": "the-watch-industrys-biggest-problems-in-2019-beyond", "id": "38117650", "hits": 4, "wc": 1070}, {"title": "The escapement watch collector consumer event", "slug": "the-escapement-watch-collector-consumer-event", "id": "169139386", "hits": 8, "wc": 2193}]}, {"id": "innovation", "label": "Innovation & Watchmaking", "cluster": "craft", "clusterLabel": "Craft, Innovation & the Future", "color": "#4BACC6", "prev": 220, "pct": 36.4, "mentions": 2774, "desc": "Innovation and watchmaking — complications, movements, materials and technical achievement.", "phrases": ["movement", "innovation", "escapement", "tourbillon", "engineering", "patent", "innovative", "perpetual calendar"], "examples": [{"title": "Rolex calendar patent 2025 annual perpetual ep4632499a1", "slug": "rolex-calendar-patent-2025-annual-perpetual-ep4632499a1", "id": "176315545", "hits": 45, "wc": 2554}, {"title": "50 years ago the omega calibre 321 landed on the moon", "slug": "50-years-ago-the-omega-calibre-321-landed-on-the-moon", "id": "38117656", "hits": 16, "wc": 951}, {"title": "Screw down crown changed the blog name", "slug": "screw-down-crown-changed-the-blog-name", "id": "38117649", "hits": 20, "wc": 1743}, {"title": "Cleguer inspiration one innate escapement rolex dynapulse", "slug": "cleguer-inspiration-one-innate-escapement-rolex-dynapulse", "id": "192978460", "hits": 51, "wc": 4690}, {"title": "Sdc weekly 119", "slug": "sdc-weekly-119", "id": "176149403", "hits": 71, "wc": 7427}, {"title": "How london is luring start ups", "slug": "how-london-is-luring-start-ups", "id": "38117565", "hits": 4, "wc": 419}]}, {"id": "artbeauty", "label": "Art, Beauty & Design", "cluster": "craft", "clusterLabel": "Craft, Innovation & the Future", "color": "#4BACC6", "prev": 74, "pct": 12.2, "mentions": 708, "desc": "Art, beauty and design — aesthetics, proportion, and the watch as a 'work of art' (Benjamin's aura).", "phrases": ["aesthetic", "beautiful", "beauty", "aesthetics", "work of art", "proportions", "design language", "proportion"], "examples": [{"title": "Good taste in watches bourdieu philosophy cultural capital", "slug": "good-taste-in-watches-bourdieu-philosophy-cultural-capital", "id": "174035802", "hits": 20, "wc": 3590}, {"title": "The work of art in the age of mechanical", "slug": "the-work-of-art-in-the-age-of-mechanical", "id": "133280584", "hits": 72, "wc": 13177}, {"title": "Confessions of a watch modder watch collecting modification authenticity ethics", "slug": "confessions-of-a-watch-modder-watch-collecting-modification-authenticity-ethics", "id": "178292993", "hits": 16, "wc": 5401}, {"title": "Royal pop audemars piguet swatch collaboration mechanical reproduction", "slug": "royal-pop-audemars-piguet-swatch-collaboration-mechanical-reproduction", "id": "196666930", "hits": 9, "wc": 3986}, {"title": "Watch collector wishful thinking psychology bias", "slug": "watch-collector-wishful-thinking-psychology-bias", "id": "165195248", "hits": 7, "wc": 3123}, {"title": "The perfection paradox in luxury watchmaking", "slug": "the-perfection-paradox-in-luxury-watchmaking", "id": "146749794", "hits": 5, "wc": 2524}]}, {"id": "work", "label": "Work, Career & Productivity", "cluster": "self", "clusterLabel": "Work, Self & World Problems", "color": "#C0843D", "prev": 123, "pct": 20.3, "mentions": 879, "desc": "Work, career and productivity — leadership, entrepreneurship and 'doing what you love' vs chasing money.", "phrases": ["leadership", "entrepreneurs", "career", "leader", "entrepreneur", "productivity", "productive", "entrepreneurship"], "examples": [{"title": "4 critical traits of an entrepreneur", "slug": "4-critical-traits-of-an-entrepreneur", "id": "38117515", "hits": 10, "wc": 520}, {"title": "How to lead with purpose", "slug": "how-to-lead-with-purpose", "id": "38117491", "hits": 22, "wc": 1177}, {"title": "Will geny entrepreneurship be a disaster", "slug": "will-geny-entrepreneurship-be-a-disaster", "id": "38117478", "hits": 20, "wc": 1101}, {"title": "How to assess your leadership skills", "slug": "how-to-assess-your-leadership-skills", "id": "38117483", "hits": 16, "wc": 996}, {"title": "8 essential principles of effective leadership", "slug": "8-essential-principles-of-effective-leadership", "id": "38117580", "hits": 10, "wc": 709}, {"title": "In startups and life you need plan a b and z", "slug": "in-startups-and-life-you-need-plan-a-b-and-z", "id": "38117564", "hits": 15, "wc": 1108}]}, {"id": "ego", "label": "Self, Ego & Insecurity", "cluster": "self", "clusterLabel": "Work, Self & World Problems", "color": "#C0843D", "prev": 67, "pct": 11.1, "mentions": 786, "desc": "Self, ego and insecurity — identity, validation, envy and comparison to others.", "phrases": ["envy", "identity", "validation", "ego", "jealousy", "inferior", "jealous", "insecurity"], "examples": [{"title": "Lets talk about envy", "slug": "lets-talk-about-envy", "id": "54035560", "hits": 77, "wc": 3433}, {"title": "Social comparison pt2", "slug": "social-comparison-pt2", "id": "137197263", "hits": 56, "wc": 2731}, {"title": "Social comparison pt3", "slug": "social-comparison-pt3", "id": "137517495", "hits": 54, "wc": 4137}, {"title": "Sdc weekly 51", "slug": "sdc-weekly-51", "id": "144829605", "hits": 69, "wc": 5538}, {"title": "Social comparison pt1", "slug": "social-comparison-pt1", "id": "137003596", "hits": 30, "wc": 3224}, {"title": "The power of business imagination", "slug": "the-power-of-business-imagination", "id": "38117618", "hits": 4, "wc": 801}]}], "edges": [{"source": "meaningmap", "target": "authentic", "type": "conceptual", "strength": 3, "rationale": "Meaning lives in the map (our psychology), so what matters is whether you genuinely value it — not external validation.", "n": 11, "jac": 0.094, "lift": 2.509}, {"source": "meaningmap", "target": "mortality", "type": "conceptual", "strength": 3, "rationale": "Heirlooms, milestones and memory are how watches become 'vessels of meaning'.", "n": 11, "jac": 0.103, "lift": 2.782}, {"source": "meaningmap", "target": "brand", "type": "conceptual", "strength": 2, "rationale": "Brand mythology (the holy trinity, the Paul Newman Daytona) imbues models with meaning beyond the metal.", "n": 17, "jac": 0.057, "lift": 1.374}, {"source": "meaningmap", "target": "happy", "type": "conceptual", "strength": 2, "rationale": "Where you locate meaning decides whether collecting actually brings happiness.", "n": 8, "jac": 0.056, "lift": 1.501}, {"source": "meaningmap", "target": "artbeauty", "type": "conceptual", "strength": 2, "rationale": "Like Benjamin's 'aura', a watch's beauty and meaning exist in perception, not the object.", "n": 4, "jac": 0.042, "lift": 1.258}, {"source": "meaningmap", "target": "mechdigital", "type": "conceptual", "strength": 2, "rationale": "A mechanical watch is irrational as a timekeeper — its whole value is the meaning we project onto it.", "n": 4, "jac": 0.045, "lift": 1.389}, {"source": "likewant", "target": "meaningmap", "type": "conceptual", "strength": 2, "rationale": "Wanting ≠ liking: 'miswanting' is mistaking projected meaning for real enjoyment.", "n": 0, "jac": 0, "lift": 0}, {"source": "likewant", "target": "obsession", "type": "conceptual", "strength": 2, "rationale": "Compulsive 'wanting' (incentive salience / dopamine) is the engine of the addiction.", "n": 3, "jac": 0.048, "lift": 1.729}, {"source": "likewant", "target": "bias", "type": "conceptual", "strength": 2, "rationale": "Dopamine drives wanting, not liking — more evidence collectors aren't rational actors.", "n": 7, "jac": 0.074, "lift": 1.988}, {"source": "bias", "target": "decide", "type": "both", "strength": 3, "rationale": "Biases distort the purchase decision; framing changes the choice.", "n": 21, "jac": 0.194, "lift": 3.085}, {"source": "bias", "target": "nudge", "type": "conceptual", "strength": 2, "rationale": "Nudges work precisely by exploiting predictable biases (Thaler & Sunstein).", "n": 11, "jac": 0.117, "lift": 2.757}, {"source": "nudge", "target": "socialmedia", "type": "conceptual", "strength": 3, "rationale": "Instagram and 'NWA' culture nudge desire through social proof.", "n": 15, "jac": 0.072, "lift": 1.412}, {"source": "nudge", "target": "grail", "type": "conceptual", "strength": 2, "rationale": "FOMO and herd behaviour fuel the chase for the next watch.", "n": 4, "jac": 0.058, "lift": 1.825}, {"source": "decide", "target": "enough", "type": "conceptual", "strength": 2, "rationale": "Good decisions start from knowing what you actually need versus merely want.", "n": 8, "jac": 0.083, "lift": 1.814}, {"source": "decide", "target": "regret", "type": "conceptual", "strength": 2, "rationale": "Anticipated regret and loss aversion bend buying and selling decisions.", "n": 2, "jac": 0.029, "lift": 1.739}, {"source": "luckrisk", "target": "invest", "type": "conceptual", "strength": 3, "rationale": "Luck and risk — not skill — drive most 'investment' outcomes.", "n": 51, "jac": 0.188, "lift": 1.286}, {"source": "luckrisk", "target": "moneypsych", "type": "conceptual", "strength": 3, "rationale": "Respecting the role of luck and risk is the heart of the psychology of money.", "n": 7, "jac": 0.051, "lift": 1.392}, {"source": "regret", "target": "grail", "type": "conceptual", "strength": 2, "rationale": "Fear of missing out and regret power the endless chase.", "n": 2, "jac": 0.041, "lift": 2.585}, {"source": "moneypsych", "target": "enough", "type": "conceptual", "strength": 3, "rationale": "The core money lesson is behavioural: knowing when you have 'enough'.", "n": 8, "jac": 0.125, "lift": 4.047}, {"source": "moneypsych", "target": "wealth", "type": "conceptual", "strength": 2, "rationale": "Behaviour with money, not income, determines lasting wealth.", "n": 11, "jac": 0.043, "lift": 1.053}, {"source": "moneypsych", "target": "invest", "type": "conceptual", "strength": 2, "rationale": "Treating watches as investments imports money psychology — and its traps.", "n": 14, "jac": 0.065, "lift": 1.589}, {"source": "enough", "target": "happy", "type": "both", "strength": 3, "rationale": "Contentment ('enough') is the route to happiness; desire is a moving target.", "n": 18, "jac": 0.118, "lift": 1.909}, {"source": "enough", "target": "stoic", "type": "conceptual", "strength": 3, "rationale": "The 'enough' philosophy comes straight from the Stoics (Seneca, Marcus Aurelius, Epictetus).", "n": 5, "jac": 0.056, "lift": 1.37}, {"source": "enough", "target": "ego", "type": "conceptual", "strength": 2, "rationale": "Discontent comes from comparison and ego, not from actually lacking.", "n": 8, "jac": 0.076, "lift": 1.57}, {"source": "enough", "target": "work", "type": "conceptual", "strength": 2, "rationale": "Choosing 'doing what you love' over chasing money is the 'enough' principle applied to work.", "n": 7, "jac": 0.043, "lift": 0.748}, {"source": "wealth", "target": "status", "type": "both", "strength": 3, "rationale": "Wealth is pursued as a status symbol, not just for utility.", "n": 83, "jac": 0.286, "lift": 1.59}, {"source": "wealth", "target": "class", "type": "both", "strength": 2, "rationale": "Money is sought as a ticket between social classes.", "n": 18, "jac": 0.072, "lift": 1.793}, {"source": "wealth", "target": "work", "type": "conceptual", "strength": 2, "rationale": "Work and career are the engine of the wealth that funds collecting.", "n": 63, "jac": 0.208, "lift": 1.275}, {"source": "taste", "target": "class", "type": "conceptual", "strength": 3, "rationale": "Taste is shaped by social class — Bourdieu's habitus and cultural capital.", "n": 9, "jac": 0.11, "lift": 3.3}, {"source": "taste", "target": "status", "type": "both", "strength": 3, "rationale": "Cultural capital is converted into status and 'distinction'.", "n": 40, "jac": 0.256, "lift": 2.821}, {"source": "taste", "target": "authentic", "type": "both", "strength": 2, "rationale": "Real taste means liking what you like, not signalling to others.", "n": 26, "jac": 0.183, "lift": 2.337}, {"source": "taste", "target": "tribe", "type": "both", "strength": 2, "rationale": "Shared taste sorts people into tribes and reproduces social boundaries.", "n": 30, "jac": 0.205, "lift": 2.5}, {"source": "taste", "target": "journey", "type": "conceptual", "strength": 2, "rationale": "The collecting journey is really the maturing of personal taste.", "n": 2, "jac": 0.024, "lift": 0.917}, {"source": "status", "target": "ego", "type": "both", "strength": 3, "rationale": "Status signalling is driven by ego, insecurity and the need for validation.", "n": 39, "jac": 0.247, "lift": 2.709}, {"source": "status", "target": "brand", "type": "both", "strength": 2, "rationale": "Luxury brands sell status as much as they sell watches.", "n": 103, "jac": 0.327, "lift": 1.664}, {"source": "status", "target": "class", "type": "conceptual", "strength": 2, "rationale": "Status signalling is how class boundaries get policed.", "n": 16, "jac": 0.115, "lift": 2.978}, {"source": "status", "target": "marketing", "type": "conceptual", "strength": 2, "rationale": "Marketing manufactures desire by attaching status to objects.", "n": 72, "jac": 0.247, "lift": 1.438}, {"source": "tribe", "target": "socialmedia", "type": "both", "strength": 3, "rationale": "Online communities (#watchfam, RedBar, forums) are the modern tribe.", "n": 63, "jac": 0.267, "lift": 1.833}, {"source": "tribe", "target": "status", "type": "both", "strength": 2, "rationale": "Belonging to the right tribe is itself a status game.", "n": 51, "jac": 0.27, "lift": 2.158}, {"source": "marketing", "target": "brand", "type": "both", "strength": 3, "rationale": "Brand-building is the engine of manufactured desire.", "n": 178, "jac": 0.519, "lift": 1.605}, {"source": "socialmedia", "target": "grail", "type": "both", "strength": 2, "rationale": "Instagram normalises the 'new watch alert' and the chase.", "n": 20, "jac": 0.096, "lift": 1.642}, {"source": "socialmedia", "target": "scarcity", "type": "conceptual", "strength": 2, "rationale": "Influencers and tastemakers manufacture the hype that drives scarcity.", "n": 50, "jac": 0.206, "lift": 1.539}, {"source": "brand", "target": "scarcity", "type": "both", "strength": 3, "rationale": "Brands curate access and engineer artificial scarcity (the AD game).", "n": 84, "jac": 0.273, "lift": 1.697}, {"source": "scarcity", "target": "secondary", "type": "both", "strength": 3, "rationale": "Constrained supply plus a liquid secondary market = the 'enrichment economy'.", "n": 47, "jac": 0.264, "lift": 2.26}, {"source": "scarcity", "target": "invest", "type": "both", "strength": 2, "rationale": "Allocation 'privileges' convert into 'enrichment opportunities' — i.e. profit.", "n": 62, "jac": 0.251, "lift": 1.759}, {"source": "secondary", "target": "invest", "type": "both", "strength": 3, "rationale": "A transparent secondary market (Chrono24, WatchCharts) turns watches into tradable assets.", "n": 68, "jac": 0.264, "lift": 1.659}, {"source": "brand", "target": "secondary", "type": "both", "strength": 2, "rationale": "Strong secondary-market performance feeds back into primary desirability.", "n": 105, "jac": 0.345, "lift": 1.823}, {"source": "invest", "target": "authentic", "type": "both", "strength": 3, "rationale": "The central tension: investing for ROI vs collecting for genuine love ('don't lose the soul').", "n": 64, "jac": 0.263, "lift": 1.852}, {"source": "invest", "target": "grail", "type": "conceptual", "strength": 2, "rationale": "Hype and the profit motive corrupt collecting into speculation.", "n": 16, "jac": 0.07, "lift": 1.211}, {"source": "industryecon", "target": "brand", "type": "both", "strength": 2, "rationale": "Conglomerates (Swatch, Richemont, LVMH) wield brand power and market control.", "n": 126, "jac": 0.406, "lift": 1.788}, {"source": "industryecon", "target": "secondary", "type": "both", "strength": 2, "rationale": "Industry data (Morgan Stanley, Swiss exports) tracks where market value is heading.", "n": 64, "jac": 0.312, "lift": 2.162}, {"source": "indie", "target": "innovation", "type": "both", "strength": 3, "rationale": "Independent watchmakers are where craft and technical innovation meet.", "n": 147, "jac": 0.531, "lift": 1.982}, {"source": "indie", "target": "artbeauty", "type": "both", "strength": 3, "rationale": "Hand-finishing elevates a watch toward being a work of art.", "n": 56, "jac": 0.252, "lift": 2.244}, {"source": "indie", "target": "authentic", "type": "both", "strength": 2, "rationale": "Independents attract collectors chasing authenticity over hype.", "n": 66, "jac": 0.275, "lift": 1.919}, {"source": "mechdigital", "target": "innovation", "type": "both", "strength": 2, "rationale": "Mechanical watchmaking survives as deliberate craft against digital convenience.", "n": 52, "jac": 0.221, "lift": 2.134}, {"source": "aifuture", "target": "mechdigital", "type": "conceptual", "strength": 2, "rationale": "AI and smartwatches keep challenging the relevance of mechanical watches.", "n": 16, "jac": 0.14, "lift": 2.293}, {"source": "aifuture", "target": "work", "type": "conceptual", "strength": 2, "rationale": "AI reshapes the future of work itself.", "n": 4, "jac": 0.022, "lift": 0.312}, {"source": "obsession", "target": "grail", "type": "conceptual", "strength": 3, "rationale": "The addiction framing: the chase is a 'drug' with no endgame watch.", "n": 8, "jac": 0.121, "lift": 3.546}, {"source": "acquire", "target": "grail", "type": "conceptual", "strength": 2, "rationale": "Flipping and upgrading keep feeding the endless-chase cycle.", "n": 15, "jac": 0.118, "lift": 2.259}, {"source": "acquire", "target": "secondary", "type": "both", "strength": 2, "rationale": "Buying and selling play out on the secondary market.", "n": 49, "jac": 0.28, "lift": 2.379}, {"source": "happy", "target": "mortality", "type": "both", "strength": 2, "rationale": "Time's brevity reframes what actually makes a collection meaningful.", "n": 34, "jac": 0.187, "lift": 1.803}, {"source": "stoic", "target": "happy", "type": "conceptual", "strength": 2, "rationale": "Stoic philosophy underpins the good life and contentment.", "n": 17, "jac": 0.11, "lift": 1.728}, {"source": "ego", "target": "authentic", "type": "conceptual", "strength": 2, "rationale": "Setting ego aside is what lets you collect authentically.", "n": 19, "jac": 0.127, "lift": 1.682}, {"source": "journey", "target": "grail", "type": "conceptual", "strength": 2, "rationale": "Early in the journey the chase dominates; maturity tempers it.", "n": 3, "jac": 0.054, "lift": 2.327}, {"source": "indie", "target": "mortality", "type": "cooccur", "strength": 0, "rationale": "", "n": 49, "jac": 0.198, "lift": 1.58}, {"source": "aifuture", "target": "socialmedia", "type": "cooccur", "strength": 0, "rationale": "", "n": 37, "jac": 0.172, "lift": 1.88}, {"source": "happy", "target": "invest", "type": "cooccur", "strength": 0, "rationale": "", "n": 60, "jac": 0.223, "lift": 1.428}, {"source": "likewant", "target": "status", "type": "cooccur", "strength": 0, "rationale": "", "n": 18, "jac": 0.127, "lift": 2.792}, {"source": "brand", "target": "luckrisk", "type": "cooccur", "strength": 0, "rationale": "", "n": 83, "jac": 0.258, "lift": 1.49}, {"source": "brand", "target": "nudge", "type": "cooccur", "strength": 0, "rationale": "", "n": 23, "jac": 0.077, "lift": 1.421}, {"source": "invest", "target": "marketing", "type": "cooccur", "strength": 0, "rationale": "", "n": 127, "jac": 0.408, "lift": 1.609}, {"source": "happy", "target": "socialmedia", "type": "cooccur", "strength": 0, "rationale": "", "n": 54, "jac": 0.208, "lift": 1.394}, {"source": "brand", "target": "mortality", "type": "cooccur", "strength": 0, "rationale": "", "n": 59, "jac": 0.184, "lift": 1.347}, {"source": "indie", "target": "marketing", "type": "cooccur", "strength": 0, "rationale": "", "n": 128, "jac": 0.414, "lift": 1.629}, {"source": "industryecon", "target": "marketing", "type": "cooccur", "strength": 0, "rationale": "", "n": 112, "jac": 0.416, "lift": 1.965}, {"source": "indie", "target": "invest", "type": "cooccur", "strength": 0, "rationale": "", "n": 126, "jac": 0.445, "lift": 1.823}, {"source": "marketing", "target": "scarcity", "type": "cooccur", "strength": 0, "rationale": "", "n": 60, "jac": 0.217, "lift": 1.498}, {"source": "ego", "target": "taste", "type": "cooccur", "strength": 0, "rationale": "", "n": 19, "jac": 0.167, "lift": 2.6}, {"source": "invest", "target": "socialmedia", "type": "cooccur", "strength": 0, "rationale": "", "n": 84, "jac": 0.271, "lift": 1.312}, {"source": "indie", "target": "secondary", "type": "cooccur", "strength": 0, "rationale": "", "n": 71, "jac": 0.28, "lift": 1.74}, {"source": "artbeauty", "target": "invest", "type": "cooccur", "strength": 0, "rationale": "", "n": 47, "jac": 0.203, "lift": 1.874}, {"source": "indie", "target": "socialmedia", "type": "cooccur", "strength": 0, "rationale": "", "n": 98, "jac": 0.332, "lift": 1.538}, {"source": "invest", "target": "stoic", "type": "cooccur", "strength": 0, "rationale": "", "n": 24, "jac": 0.105, "lift": 1.476}, {"source": "aifuture", "target": "brand", "type": "cooccur", "strength": 0, "rationale": "", "n": 51, "jac": 0.17, "lift": 1.701}, {"source": "brand", "target": "taste", "type": "cooccur", "strength": 0, "rationale": "", "n": 55, "jac": 0.184, "lift": 1.751}, {"source": "indie", "target": "stoic", "type": "cooccur", "strength": 0, "rationale": "", "n": 24, "jac": 0.105, "lift": 1.483}, {"source": "acquire", "target": "happy", "type": "cooccur", "strength": 0, "rationale": "", "n": 37, "jac": 0.195, "lift": 1.753}, {"source": "acquire", "target": "industryecon", "type": "cooccur", "strength": 0, "rationale": "", "n": 50, "jac": 0.249, "lift": 1.984}, {"source": "bias", "target": "luckrisk", "type": "cooccur", "strength": 0, "rationale": "", "n": 27, "jac": 0.168, "lift": 1.966}, {"source": "happy", "target": "likewant", "type": "cooccur", "strength": 0, "rationale": "", "n": 18, "jac": 0.132, "lift": 2.927}, {"source": "brand", "target": "stoic", "type": "cooccur", "strength": 0, "rationale": "", "n": 33, "jac": 0.109, "lift": 1.444}, {"source": "acquire", "target": "marketing", "type": "cooccur", "strength": 0, "rationale": "", "n": 67, "jac": 0.249, "lift": 1.689}, {"source": "decide", "target": "luckrisk", "type": "cooccur", "strength": 0, "rationale": "", "n": 22, "jac": 0.144, "lift": 1.961}, {"source": "bias", "target": "happy", "type": "cooccur", "strength": 0, "rationale": "", "n": 27, "jac": 0.161, "lift": 1.855}, {"source": "invest", "target": "tribe", "type": "cooccur", "strength": 0, "rationale": "", "n": 64, "jac": 0.255, "lift": 1.717}, {"source": "ego", "target": "tribe", "type": "cooccur", "strength": 0, "rationale": "", "n": 27, "jac": 0.18, "lift": 2.216}, {"source": "acquire", "target": "invest", "type": "cooccur", "strength": 0, "rationale": "", "n": 61, "jac": 0.247, "lift": 1.748}, {"source": "indie", "target": "tribe", "type": "cooccur", "strength": 0, "rationale": "", "n": 77, "jac": 0.325, "lift": 2.076}, {"source": "marketing", "target": "obsession", "type": "cooccur", "strength": 0, "rationale": "", "n": 19, "jac": 0.076, "lift": 1.41}, {"source": "decide", "target": "happy", "type": "cooccur", "strength": 0, "rationale": "", "n": 21, "jac": 0.13, "lift": 1.767}, {"source": "status", "target": "stoic", "type": "cooccur", "strength": 0, "rationale": "", "n": 20, "jac": 0.127, "lift": 1.939}, {"source": "indie", "target": "taste", "type": "cooccur", "strength": 0, "rationale": "", "n": 42, "jac": 0.184, "lift": 1.887}, {"source": "artbeauty", "target": "brand", "type": "cooccur", "strength": 0, "rationale": "", "n": 60, "jac": 0.199, "lift": 1.703}, {"source": "invest", "target": "status", "type": "cooccur", "strength": 0, "rationale": "", "n": 73, "jac": 0.279, "lift": 1.657}, {"source": "indie", "target": "status", "type": "cooccur", "strength": 0, "rationale": "", "n": 82, "jac": 0.325, "lift": 1.871}, {"source": "mortality", "target": "status", "type": "cooccur", "strength": 0, "rationale": "", "n": 36, "jac": 0.194, "lift": 1.821}, {"source": "industryecon", "target": "innovation", "type": "cooccur", "strength": 0, "rationale": "", "n": 96, "jac": 0.353, "lift": 1.784}, {"source": "brand", "target": "tribe", "type": "cooccur", "strength": 0, "rationale": "", "n": 85, "jac": 0.272, "lift": 1.623}, {"source": "enough", "target": "industryecon", "type": "cooccur", "strength": 0, "rationale": "", "n": 18, "jac": 0.102, "lift": 1.6}, {"source": "artbeauty", "target": "status", "type": "cooccur", "strength": 0, "rationale": "", "n": 37, "jac": 0.222, "lift": 2.327}, {"source": "decide", "target": "invest", "type": "cooccur", "strength": 0, "rationale": "", "n": 29, "jac": 0.124, "lift": 1.476}, {"source": "brand", "target": "class", "type": "cooccur", "strength": 0, "rationale": "", "n": 18, "jac": 0.061, "lift": 1.512}, {"source": "brand", "target": "innovation", "type": "cooccur", "strength": 0, "rationale": "", "n": 172, "jac": 0.512, "lift": 1.642}, {"source": "aifuture", "target": "indie", "type": "cooccur", "strength": 0, "rationale": "", "n": 40, "jac": 0.176, "lift": 1.883}, {"source": "decide", "target": "socialmedia", "type": "cooccur", "strength": 0, "rationale": "", "n": 25, "jac": 0.113, "lift": 1.38}, {"source": "enough", "target": "invest", "type": "cooccur", "strength": 0, "rationale": "", "n": 24, "jac": 0.106, "lift": 1.54}, {"source": "innovation", "target": "invest", "type": "cooccur", "strength": 0, "rationale": "", "n": 121, "jac": 0.398, "lift": 1.623}, {"source": "innovation", "target": "wealth", "type": "cooccur", "strength": 0, "rationale": "", "n": 123, "jac": 0.362, "lift": 1.392}, {"source": "aifuture", "target": "innovation", "type": "cooccur", "strength": 0, "rationale": "", "n": 43, "jac": 0.179, "lift": 1.877}, {"source": "invest", "target": "mechdigital", "type": "cooccur", "strength": 0, "rationale": "", "n": 44, "jac": 0.193, "lift": 1.938}, {"source": "invest", "target": "obsession", "type": "cooccur", "strength": 0, "rationale": "", "n": 19, "jac": 0.086, "lift": 1.602}, {"source": "enough", "target": "socialmedia", "type": "cooccur", "strength": 0, "rationale": "", "n": 28, "jac": 0.135, "lift": 1.948}, {"source": "indie", "target": "mechdigital", "type": "cooccur", "strength": 0, "rationale": "", "n": 47, "jac": 0.21, "lift": 2.08}, {"source": "indie", "target": "obsession", "type": "cooccur", "strength": 0, "rationale": "", "n": 21, "jac": 0.096, "lift": 1.779}, {"source": "industryecon", "target": "mechdigital", "type": "cooccur", "strength": 0, "rationale": "", "n": 38, "jac": 0.215, "lift": 2.318}, {"source": "acquire", "target": "brand", "type": "cooccur", "strength": 0, "rationale": "", "n": 84, "jac": 0.274, "lift": 1.713}, {"source": "stoic", "target": "wealth", "type": "cooccur", "strength": 0, "rationale": "", "n": 30, "jac": 0.115, "lift": 1.556}, {"source": "aifuture", "target": "industryecon", "type": "cooccur", "strength": 0, "rationale": "", "n": 32, "jac": 0.179, "lift": 2.076}, {"source": "marketing", "target": "mechdigital", "type": "cooccur", "strength": 0, "rationale": "", "n": 50, "jac": 0.2, "lift": 1.938}, {"source": "ego", "target": "indie", "type": "cooccur", "strength": 0, "rationale": "", "n": 36, "jac": 0.153, "lift": 1.594}, {"source": "innovation", "target": "luckrisk", "type": "cooccur", "strength": 0, "rationale": "", "n": 58, "jac": 0.208, "lift": 1.363}, {"source": "brand", "target": "obsession", "type": "cooccur", "strength": 0, "rationale": "", "n": 23, "jac": 0.077, "lift": 1.38}, {"source": "bias", "target": "brand", "type": "cooccur", "strength": 0, "rationale": "", "n": 48, "jac": 0.154, "lift": 1.42}, {"source": "industryecon", "target": "luckrisk", "type": "cooccur", "strength": 0, "rationale": "", "n": 44, "jac": 0.199, "lift": 1.537}, {"source": "authentic", "target": "happy", "type": "cooccur", "strength": 0, "rationale": "", "n": 37, "jac": 0.196, "lift": 1.77}, {"source": "scarcity", "target": "status", "type": "cooccur", "strength": 0, "rationale": "", "n": 48, "jac": 0.258, "lift": 2.148}, {"source": "artbeauty", "target": "innovation", "type": "cooccur", "strength": 0, "rationale": "", "n": 55, "jac": 0.23, "lift": 2.044}, {"source": "likewant", "target": "socialmedia", "type": "cooccur", "strength": 0, "rationale": "", "n": 19, "jac": 0.095, "lift": 2.027}, {"source": "brand", "target": "indie", "type": "cooccur", "strength": 0, "rationale": "", "n": 174, "jac": 0.547, "lift": 1.792}, {"source": "indie", "target": "industryecon", "type": "cooccur", "strength": 0, "rationale": "", "n": 88, "jac": 0.333, "lift": 1.763}, {"source": "enough", "target": "marketing", "type": "cooccur", "strength": 0, "rationale": "", "n": 30, "jac": 0.12, "lift": 1.693}, {"source": "bias", "target": "status", "type": "cooccur", "strength": 0, "rationale": "", "n": 30, "jac": 0.175, "lift": 1.966}, {"source": "innovation", "target": "marketing", "type": "cooccur", "strength": 0, "rationale": "", "n": 132, "jac": 0.411, "lift": 1.558}, {"source": "authentic", "target": "brand", "type": "cooccur", "strength": 0, "rationale": "", "n": 78, "jac": 0.25, "lift": 1.606}, {"source": "authentic", "target": "tribe", "type": "cooccur", "strength": 0, "rationale": "", "n": 41, "jac": 0.24, "lift": 2.211}, {"source": "invest", "target": "wealth", "type": "cooccur", "strength": 0, "rationale": "", "n": 119, "jac": 0.362, "lift": 1.445}, {"source": "ego", "target": "wealth", "type": "cooccur", "strength": 0, "rationale": "", "n": 40, "jac": 0.148, "lift": 1.486}, {"source": "indie", "target": "wealth", "type": "cooccur", "strength": 0, "rationale": "", "n": 113, "jac": 0.338, "lift": 1.379}, {"source": "mortality", "target": "wealth", "type": "cooccur", "strength": 0, "rationale": "", "n": 52, "jac": 0.184, "lift": 1.407}, {"source": "industryecon", "target": "invest", "type": "cooccur", "strength": 0, "rationale": "", "n": 87, "jac": 0.327, "lift": 1.735}, {"source": "obsession", "target": "socialmedia", "type": "cooccur", "strength": 0, "rationale": "", "n": 18, "jac": 0.087, "lift": 1.646}, {"source": "marketing", "target": "wealth", "type": "cooccur", "strength": 0, "rationale": "", "n": 137, "jac": 0.404, "lift": 1.464}, {"source": "authentic", "target": "status", "type": "cooccur", "strength": 0, "rationale": "", "n": 44, "jac": 0.234, "lift": 2.008}, {"source": "marketing", "target": "socialmedia", "type": "cooccur", "strength": 0, "rationale": "", "n": 103, "jac": 0.323, "lift": 1.415}, {"source": "brand", "target": "invest", "type": "cooccur", "strength": 0, "rationale": "", "n": 156, "jac": 0.463, "lift": 1.599}, {"source": "brand", "target": "wealth", "type": "cooccur", "strength": 0, "rationale": "", "n": 152, "jac": 0.401, "lift": 1.314}, {"source": "grail", "target": "happy", "type": "cooccur", "strength": 0, "rationale": "", "n": 25, "jac": 0.181, "lift": 3.128}, {"source": "indie", "target": "luckrisk", "type": "cooccur", "strength": 0, "rationale": "", "n": 60, "jac": 0.23, "lift": 1.521}, {"source": "luckrisk", "target": "secondary", "type": "cooccur", "strength": 0, "rationale": "", "n": 42, "jac": 0.214, "lift": 1.795}, {"source": "indie", "target": "nudge", "type": "cooccur", "strength": 0, "rationale": "", "n": 20, "jac": 0.092, "lift": 1.745}, {"source": "brand", "target": "socialmedia", "type": "cooccur", "strength": 0, "rationale": "", "n": 127, "jac": 0.363, "lift": 1.412}]};
+const SUB = "https://screwdowncrown.substack.com/p/";
+const CV = { collecting:'--c-collecting',behaviour:'--c-behaviour',money:'--c-money',meaning:'--c-meaning',
+  culture:'--c-culture',industry:'--c-industry',craft:'--c-craft',self:'--c-self' };
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const colorOf = id => css(CV[id]);
+
+// ---- meta ----
+const fmt = n => n>=1e6 ? (n/1e6).toFixed(2)+'M' : n>=1e3 ? (n/1e3).toFixed(0)+'k' : ''+n;
+document.getElementById('s-posts').textContent = DATA.meta.posts;
+document.getElementById('s-words').textContent = fmt(DATA.meta.words);
+document.getElementById('s-themes').textContent = DATA.meta.themes;
+
+const nodes = DATA.nodes.map(d=>Object.assign({},d));
+const idMap = new Map(nodes.map(n=>[n.id,n]));
+const links = DATA.edges.map(e=>Object.assign({},e));
+links.forEach(l=>{ l.jacN = Math.round(l.jac*100); });
+
+// neighbor index
+const nbr = new Map(nodes.map(n=>[n.id,[]]));
+links.forEach(l=>{ nbr.get(l.source).push(l); nbr.get(l.target).push(l); });
+
+// ---- svg ----
+const svg = d3.select('#svg');
+const stage = document.getElementById('stage');
+let W = stage.clientWidth, H = stage.clientHeight;
+svg.attr('viewBox',[0,0,W,H]);
+const root = svg.append('g');
+const gLink = root.append('g');
+const gNode = root.append('g');
+
+const zoom = d3.zoom().scaleExtent([0.25,4]).on('zoom',ev=>root.attr('transform',ev.transform));
+svg.call(zoom).on('dblclick.zoom',null);
+svg.on('mousedown',()=>svg.classed('grabbing',true)).on('mouseup',()=>svg.classed('grabbing',false));
+
+// node radius
+const rExt = d3.extent(nodes,d=>d.prev);
+const rS = d3.scaleSqrt().domain(rExt).range([7,30]);
+nodes.forEach(n=>n.r=rS(n.prev));
+
+// cluster focus points (loose gravity to group clusters)
+const clusters = DATA.clusters.map(c=>c.id);
+const ang = d3.scalePoint().domain(clusters).range([0,2*Math.PI]).padding(0.5);
+const focus = {};
+clusters.forEach(c=>{ focus[c]=[W/2 + Math.cos(ang(c)-Math.PI/2)*Math.min(W,H)*0.30,
+                                H/2 + Math.sin(ang(c)-Math.PI/2)*Math.min(W,H)*0.30]; });
+
+const linkForce = d3.forceLink(links).id(d=>d.id)
+  .distance(l=> (l.type==='cooccur'?120:90) - (l.type==='both'?20:0) )
+  .strength(l=> l.type==='cooccur' ? 0.05+0.5*l.jac : 0.10+0.05*(l.strength||1));
+
+const sim = d3.forceSimulation(nodes)
+  .force('link', linkForce)
+  .force('charge', d3.forceManyBody().strength(-300))
+  .force('collide', d3.forceCollide().radius(d=>d.r+7).iterations(2))
+  .force('x', d3.forceX(d=>focus[d.cluster][0]).strength(0.055))
+  .force('y', d3.forceY(d=>focus[d.cluster][1]).strength(0.055))
+  .force('center', d3.forceCenter(W/2,H/2).strength(0.02));
+
+// ---- draw links ----
+const link = gLink.selectAll('line').data(links).join('line')
+  .attr('class','link')
+  .attr('stroke', l=> l.type==='cooccur' ? '#7fd3cd' : css('--accent'))
+  .attr('stroke-dasharray', l=> l.type==='cooccur' ? '3,3' : null)
+  .attr('stroke-opacity', l=> l.type==='cooccur'?0.16:0.30)
+  .attr('stroke-width', l=> l.type==='cooccur' ? 0.6+2.2*l.jac : 0.8+0.7*(l.strength||1));
+
+// ---- draw nodes ----
+const node = gNode.selectAll('g').data(nodes).join('g').attr('class','node')
+  .call(d3.drag()
+    .on('start',(ev,d)=>{ if(!ev.active) sim.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+    .on('drag',(ev,d)=>{ d.fx=ev.x; d.fy=ev.y; })
+    .on('end',(ev,d)=>{ if(!ev.active) sim.alphaTarget(0); }));
+
+node.append('circle')
+  .attr('r',d=>d.r)
+  .attr('fill',d=>colorOf(d.cluster))
+  .attr('stroke','#0b0c10').attr('stroke-width',1.5).attr('stroke-opacity',.5);
+
+node.append('text')
+  .attr('x',0).attr('y',d=>d.r+11).attr('text-anchor','middle')
+  .text(d=>d.label)
+  .style('font-size',d=>Math.max(9.5,Math.min(13, 8+d.r*0.13))+'px');
+
+node.on('mouseover',(ev,d)=>hover(d))
+    .on('mousemove',ev=>moveTip(ev))
+    .on('mouseout',()=>{ if(!selected) clearHover(); hideTip(); })
+    .on('click',(ev,d)=>{ ev.stopPropagation(); select(d); });
+svg.on('click',()=>deselect());
+
+sim.on('tick',()=>{
+  link.attr('x1',l=>l.source.x).attr('y1',l=>l.source.y).attr('x2',l=>l.target.x).attr('y2',l=>l.target.y);
+  node.attr('transform',d=>`translate(${d.x},${d.y})`);
+});
+
+// ---- hover / highlight ----
+let selected=null;
+function neighborSet(d){
+  const s=new Set([d.id]);
+  nbr.get(d.id).forEach(l=>{ if(linkVisible(l)){ s.add(l.source.id||l.source); s.add(l.target.id||l.target);} });
+  return s;
+}
+function hover(d){
+  const s=neighborSet(d);
+  node.classed('faded',n=>!s.has(n.id)).classed('dim',false);
+  node.select('circle').attr('stroke-opacity',n=>s.has(n.id)?.9:.5)
+      .attr('stroke',n=>n.id===d.id?'#fff':'#0b0c10');
+  link.attr('stroke-opacity',l=>{
+      if(!linkVisible(l)) return 0;
+      const on = (l.source.id===d.id||l.target.id===d.id);
+      return on ? (l.type==='cooccur'?0.55:0.8) : 0.03;
+  }).attr('stroke-width',l=>{
+      const base = l.type==='cooccur'?0.6+2.2*l.jac:0.8+0.7*(l.strength||1);
+      const on=(l.source.id===d.id||l.target.id===d.id);
+      return on?base+1.1:base;
+  });
+  showTip(d);
+}
+function clearHover(){
+  node.classed('faded',false);
+  node.select('circle').attr('stroke-opacity',.5).attr('stroke','#0b0c10');
+  applyLinkStyle();
+}
+function applyLinkStyle(){
+  link.attr('stroke-opacity',l=> !linkVisible(l)?0 : (l.type==='cooccur'?0.16:0.30))
+      .attr('stroke-width',l=> l.type==='cooccur'?0.6+2.2*l.jac:0.8+0.7*(l.strength||1));
+}
+
+// ---- tooltip ----
+const tip=document.getElementById('tip');
+function showTip(d){
+  tip.innerHTML=`<div class="tt">${d.label}</div>
+    <div class="tc" style="color:${colorOf(d.cluster)}">${d.clusterLabel}</div>
+    <div class="td">${d.desc}</div>
+    <div class="tm">${d.pct}% of posts (${d.prev}) · ${d.mentions} mentions · ${nbr.get(d.id).filter(linkVisible).length} links</div>`;
+  tip.style.opacity=1;
+}
+function moveTip(ev){
+  const pad=16, w=tip.offsetWidth, h=tip.offsetHeight;
+  let x=ev.clientX+pad, y=ev.clientY+pad;
+  if(x+w>window.innerWidth-10) x=ev.clientX-w-pad;
+  if(y+h>window.innerHeight-10) y=ev.clientY-h-pad;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hideTip(){ tip.style.opacity=0; }
+
+// ---- selection / detail ----
+const detail=document.getElementById('detail');
+function select(d){
+  selected=d; hover(d); detail.classList.add('open');
+  document.getElementById('d-cluster').textContent=d.clusterLabel;
+  document.getElementById('d-cluster').style.color=colorOf(d.cluster);
+  document.getElementById('d-title').textContent=d.label;
+  document.getElementById('d-prev').textContent=`Appears in ${d.prev} of ${DATA.meta.posts} posts (${d.pct}%) · ${d.mentions} total mentions`;
+  const bar=document.getElementById('d-bar');
+  bar.style.width=Math.max(4,(d.prev/rExt[1])*100)+'%'; bar.style.background=colorOf(d.cluster);
+  document.getElementById('d-desc').textContent=d.desc;
+  document.getElementById('d-phrases').innerHTML=d.phrases.map(p=>`<span class="chip">${p}</span>`).join('');
+  document.getElementById('d-posts').innerHTML=d.examples.map(e=>
+    `<a class="post" href="${SUB}${e.slug}" target="_blank" rel="noopener">${titleCase(e.slug)}<div class="pm">${e.hits} mentions · ${e.wc.toLocaleString()} words</div></a>`).join('');
+  // connections
+  const conns=nbr.get(d.id).filter(linkVisible).map(l=>{
+    const otherId=(l.source.id===d.id)?l.target.id:l.source.id;
+    return {o:idMap.get(otherId),l};
+  }).sort((a,b)=> (b.l.type!=='cooccur') - (a.l.type!=='cooccur') || (b.l.strength-a.l.strength) || (b.l.jac-a.l.jac));
+  document.getElementById('d-conn-lab').textContent=`Connected themes (${conns.length})`;
+  document.getElementById('d-conn').innerHTML=conns.map(({o,l})=>{
+    const tag = l.type==='cooccur' ? `<span class="tag td2">together</span>`
+              : (l.type==='both' ? `<span class="tag tc">linked · together</span>` : `<span class="tag tc">linked</span>`);
+    const r = l.rationale ? l.rationale : `Frequently discussed in the same posts (${l.n} posts).`;
+    const co = (l.type!=='conceptual' && l.n) ? ` <span style="color:var(--faint)">· ${l.n} shared posts</span>`:'';
+    return `<div class="conn" data-id="${o.id}"><div class="cn"><span class="swatch" style="background:${colorOf(o.cluster)}"></span>${o.label}${tag}</div><div class="cr">${r}${co}</div></div>`;
+  }).join('');
+  document.querySelectorAll('#d-conn .conn').forEach(el=>el.onclick=()=>select(idMap.get(el.dataset.id)));
+  document.getElementById('dbody-scroll')&&0;
+  detail.querySelector('.dbody').scrollTop=0;
+}
+function deselect(){ selected=null; detail.classList.remove('open'); clearHover(); }
+document.getElementById('dclose').onclick=deselect;
+
+function titleCase(slug){
+  return slug.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase())
+    .replace(/\bSdc\b/,'SDC').replace(/\bAi\b/,'AI').replace(/\bLvmh\b/,'LVMH')
+    .replace(/\bAp\b/,'AP').replace(/\bUk\b/,'UK');
+}
+
+// ---- link visibility (toggles + threshold) ----
+let showConc=true, showCooc=true, thr=0;
+function linkVisible(l){
+  if(l.type==='conceptual') return showConc;
+  if(l.type==='cooccur')   return showCooc && l.jacN>=thr;
+  // both
+  return showConc || (showCooc && l.jacN>=thr);
+}
+function refreshLinks(){
+  link.style('display',l=>linkVisible(l)?null:'none');
+  if(selected) hover(selected); else applyLinkStyle();
+}
+document.getElementById('t-conc').onchange=e=>{showConc=e.target.checked;refreshLinks();};
+document.getElementById('t-cooc').onchange=e=>{showCooc=e.target.checked;refreshLinks();};
+document.getElementById('thr').oninput=e=>{thr=+e.target.value;document.getElementById('thrval').textContent=thr;refreshLinks();};
+
+// ---- legend ----
+const counts={}; nodes.forEach(n=>counts[n.cluster]=(counts[n.cluster]||0)+1);
+const legend=d3.select('#legend');
+const active=new Set(clusters);
+DATA.clusters.forEach(c=>{
+  const it=legend.append('div').attr('class','legend-item').attr('data-c',c.id);
+  it.html(`<span class="swatch" style="background:${colorOf(c.id)}"></span>${c.label}<span class="ct">${counts[c.id]||0}</span>`);
+  it.on('click',()=>{
+    if(active.has(c.id)) active.delete(c.id); else active.add(c.id);
+    it.classed('off',!active.has(c.id));
+    node.style('display',n=>active.has(n.cluster)?null:'none');
+    link.style('display',l=>{
+      const sv=active.has((l.source.cluster)||idMap.get(l.source).cluster);
+      const tv=active.has((l.target.cluster)||idMap.get(l.target).cluster);
+      return (sv&&tv&&linkVisible(l))?null:'none';
+    });
+  });
+});
+
+// ---- search ----
+const search=document.getElementById('search');
+search.oninput=()=>{
+  const q=search.value.trim().toLowerCase();
+  if(!q){ node.classed('dim',false); return; }
+  const hits=nodes.filter(n=>n.label.toLowerCase().includes(q)||n.phrases.join(' ').toLowerCase().includes(q));
+  const hs=new Set(hits.map(n=>n.id));
+  node.classed('dim',n=>!hs.has(n.id));
+  if(hits.length===1){ const d=hits[0]; const t=d3.zoomTransform(svg.node());
+    svg.transition().duration(500).call(zoom.transform,
+      d3.zoomIdentity.translate(W/2,H/2).scale(1.4).translate(-d.x,-d.y)); select(d); }
+};
+
+// ---- buttons ----
+document.getElementById('reset').onclick=()=>{ search.value=''; node.classed('dim',false);
+  active.clear(); clusters.forEach(c=>active.add(c)); legend.selectAll('.legend-item').classed('off',false);
+  node.style('display',null); link.style('display',l=>linkVisible(l)?null:'none');
+  deselect(); fit(); };
+let labelsOn=true;
+document.getElementById('lab').onclick=()=>{ labelsOn=!labelsOn; node.selectAll('text').style('display',labelsOn?null:'none'); };
+document.getElementById('zin').onclick=()=>svg.transition().call(zoom.scaleBy,1.4);
+document.getElementById('zout').onclick=()=>svg.transition().call(zoom.scaleBy,0.7);
+document.getElementById('zfit').onclick=fit;
+
+function fit(){
+  const pad=70;
+  const xs=d3.extent(nodes,d=>d.x), ys=d3.extent(nodes,d=>d.y);
+  const w=xs[1]-xs[0], h=ys[1]-ys[0];
+  const k=Math.min(3, 0.92/Math.max(w/(W-pad*2), h/(H-pad*2)));
+  const tx=W/2-k*(xs[0]+w/2), ty=H/2-k*(ys[0]+h/2);
+  svg.transition().duration(550).call(zoom.transform, d3.zoomIdentity.translate(tx,ty).scale(k));
+}
+sim.on('end',fit);
+setTimeout(fit,2600);
+
+// ---- resize ----
+window.addEventListener('resize',()=>{
+  W=stage.clientWidth;H=stage.clientHeight;svg.attr('viewBox',[0,0,W,H]);
+  sim.force('center',d3.forceCenter(W/2,H/2).strength(0.02)); sim.alpha(0.2).restart();
+});
+refreshLinks();
+</script>
+</body>
+</html>
