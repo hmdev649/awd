@@ -6,24 +6,25 @@
 <title>ScrewDownCrown — Theme Map</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
   :root{
-    --bg:#272c38; --bg2:#2d3340; --panel:rgba(255,255,255,.045); --panel-strong:rgba(22,25,32,.92);
-    --ink:#eceef2; --muted:#9aa1ad; --faint:#6b7280; --line:rgba(255,255,255,.10);
-    --accent:#d8b15a;
+    --bg:#fbe9cd; --bg2:#f8f4ec; --panel:rgba(255,255,255,.55); --panel-strong:rgba(252,248,240,.97);
+    --ink:#304047; --muted:#5d6f76; --faint:#94a0a5; --line:rgba(48,64,71,.15);
+    --accent:#b08d57;
     --c-collecting:#E15759; --c-behaviour:#4E89C7; --c-money:#59A14F; --c-meaning:#B07AA1;
     --c-culture:#F28E2B; --c-industry:#56B6B0; --c-craft:#E6C84B; --c-self:#B0795E;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%;background:radial-gradient(1200px 800px at 70% -10%,#384458 0%,var(--bg) 55%);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow:hidden}
+  html,body{margin:0;height:100%;background:radial-gradient(1200px 800px at 70% -10%,#fff4df 0%,var(--bg) 55%);color:var(--ink);
+    font-family:'Poppins',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow:hidden}
   #app{position:fixed;inset:0;display:flex;flex-direction:column}
   header{padding:14px 22px 12px;border-bottom:1px solid var(--line);display:flex;align-items:flex-end;
     justify-content:space-between;gap:18px;flex-wrap:wrap;backdrop-filter:blur(6px);z-index:6}
-  .title{font-family:Georgia,"Times New Roman",serif;font-size:21px;letter-spacing:.2px}
+  .title{font-family:'Manrope',sans-serif;font-weight:700;font-size:21px;letter-spacing:.2px}
   .title b{color:var(--accent);font-weight:700}
   .sub{color:var(--muted);font-size:12.5px;margin-top:3px;max-width:680px;line-height:1.45}
   .stats{display:flex;gap:20px;text-align:right}
-  .stat .n{font-family:Georgia,serif;font-size:19px;color:var(--ink)}
+  .stat .n{font-family:'Manrope',sans-serif;font-weight:700;font-size:19px;color:var(--ink)}
   .stat .l{font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.7px}
   #stage{position:relative;flex:1;overflow:hidden}
   svg{width:100%;height:100%;display:block;cursor:grab}
@@ -31,24 +32,24 @@
   .link{stroke-linecap:round}
   .node circle{cursor:pointer;transition:stroke-opacity .15s}
   .node text{font-size:10px;fill:var(--ink);pointer-events:none;paint-order:stroke;
-    stroke:rgba(8,9,12,.82);stroke-width:3px;stroke-linejoin:round;font-weight:500}
+    stroke:rgba(251,233,205,.9);stroke-width:3px;stroke-linejoin:round;font-weight:600}
   .node.dim{opacity:.12}
   .link.dim{opacity:.03!important}
   .node.faded{opacity:.06}
 
   /* floating controls */
   .card{position:absolute;background:var(--panel);border:1px solid var(--line);border-radius:12px;
-    backdrop-filter:blur(9px);box-shadow:0 8px 30px rgba(0,0,0,.32)}
+    backdrop-filter:blur(9px);box-shadow:0 8px 30px rgba(48,64,71,.14)}
   #controls{top:14px;left:14px;width:236px;padding:13px 14px;z-index:5}
   #controls h4{margin:0 0 9px;font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);font-weight:600}
-  .search{width:100%;background:rgba(0,0,0,.28);border:1px solid var(--line);color:var(--ink);
+  .search{width:100%;background:rgba(255,255,255,.7);border:1px solid var(--line);color:var(--ink);
     border-radius:8px;padding:8px 10px;font-size:13px;outline:none}
   .search:focus{border-color:var(--accent)}
   .row{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink);margin:9px 0;cursor:pointer;user-select:none}
   .row input{accent-color:var(--accent);cursor:pointer}
   .swatch{width:11px;height:11px;border-radius:3px;flex:0 0 auto}
   .legend-item{display:flex;align-items:center;gap:8px;font-size:12px;padding:3px 5px;border-radius:6px;cursor:pointer;color:var(--ink)}
-  .legend-item:hover{background:rgba(255,255,255,.05)}
+  .legend-item:hover{background:rgba(48,64,71,.06)}
   .legend-item.off{opacity:.32}
   .legend-item .ct{margin-left:auto;color:var(--faint);font-size:10.5px}
   .slider-wrap{margin:6px 0 2px}
@@ -56,20 +57,20 @@
   .hint{font-size:11px;color:var(--faint);line-height:1.5;margin-top:4px}
   .divider{height:1px;background:var(--line);margin:12px 0}
   .btns{display:flex;gap:7px;margin-top:6px}
-  .btn{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink);
+  .btn{flex:1;background:rgba(48,64,71,.05);border:1px solid var(--line);color:var(--ink);
     border-radius:7px;padding:6px;font-size:11.5px;cursor:pointer}
-  .btn:hover{background:rgba(255,255,255,.12)}
+  .btn:hover{background:rgba(48,64,71,.10)}
 
   /* zoom buttons */
   #zoom{bottom:16px;left:14px;display:flex;flex-direction:column;gap:0;width:36px;z-index:5;overflow:hidden}
   #zoom button{width:36px;height:34px;background:var(--panel);border:none;border-bottom:1px solid var(--line);
     color:var(--ink);font-size:17px;cursor:pointer}
   #zoom button:last-child{border-bottom:none;font-size:12px}
-  #zoom button:hover{background:rgba(255,255,255,.12)}
+  #zoom button:hover{background:rgba(48,64,71,.10)}
 
   /* tooltip */
   #tip{position:absolute;pointer-events:none;z-index:20;max-width:280px;padding:10px 12px;border-radius:10px;
-    background:var(--panel-strong);border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.45);
+    background:var(--panel-strong);border:1px solid var(--line);box-shadow:0 10px 30px rgba(48,64,71,.20);
     font-size:12.5px;opacity:0;transition:opacity .12s;line-height:1.45}
   #tip .tt{font-weight:600;font-size:13.5px;margin-bottom:2px}
   #tip .tc{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
@@ -83,28 +84,28 @@
   #detail.open{transform:translateX(0)}
   .dh{padding:18px 20px 14px;border-bottom:1px solid var(--line)}
   .dh .cl{font-size:10.5px;text-transform:uppercase;letter-spacing:.7px;font-weight:600}
-  .dh h2{margin:7px 0 4px;font-family:Georgia,serif;font-size:20px;line-height:1.2}
+  .dh h2{margin:7px 0 4px;font-family:'Manrope',sans-serif;font-weight:700;font-size:20px;line-height:1.2}
   .dh .pv{font-size:12px;color:var(--muted);margin-top:7px}
-  .bar{height:6px;border-radius:4px;background:rgba(255,255,255,.09);margin-top:7px;overflow:hidden}
+  .bar{height:6px;border-radius:4px;background:rgba(48,64,71,.10);margin-top:7px;overflow:hidden}
   .bar > i{display:block;height:100%;border-radius:4px}
   .dbody{padding:16px 20px;overflow-y:auto;flex:1}
   .dbody .lab{font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin:16px 0 8px;font-weight:600}
   .dbody p{font-size:13.5px;line-height:1.55;color:var(--ink);margin:0}
   .chips{display:flex;flex-wrap:wrap;gap:6px}
-  .chip{font-size:11px;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:20px;padding:3px 9px;color:var(--muted)}
+  .chip{font-size:11px;background:rgba(48,64,71,.06);border:1px solid var(--line);border-radius:20px;padding:3px 9px;color:var(--muted)}
   .post{display:block;font-size:12.5px;color:var(--ink);text-decoration:none;padding:6px 8px;border-radius:7px;border:1px solid transparent}
-  .post:hover{background:rgba(255,255,255,.06);border-color:var(--line)}
+  .post:hover{background:rgba(48,64,71,.06);border-color:var(--line)}
   .post .pm{color:var(--faint);font-size:11px}
-  .conn{padding:7px 9px;border-radius:8px;margin-bottom:6px;background:rgba(255,255,255,.035);border:1px solid var(--line);cursor:pointer}
-  .conn:hover{background:rgba(255,255,255,.07)}
+  .conn{padding:7px 9px;border-radius:8px;margin-bottom:6px;background:rgba(48,64,71,.04);border:1px solid var(--line);cursor:pointer}
+  .conn:hover{background:rgba(48,64,71,.07)}
   .conn .cn{font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:7px}
   .conn .cr{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.45}
   .conn .tag{font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;padding:1px 6px;border-radius:10px;margin-left:auto}
   .tag.tc{background:rgba(216,177,90,.16);color:var(--accent)}
-  .tag.td2{background:rgba(86,182,176,.16);color:#7fd3cd}
+  .tag.td2{background:rgba(58,155,148,.16);color:#2f7d77}
   .close{position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:7px;border:1px solid var(--line);
-    background:rgba(255,255,255,.05);color:var(--ink);cursor:pointer;font-size:15px;line-height:1}
-  .close:hover{background:rgba(255,255,255,.12)}
+    background:rgba(48,64,71,.05);color:var(--ink);cursor:pointer;font-size:15px;line-height:1}
+  .close:hover{background:rgba(48,64,71,.10)}
   .edge-key{display:flex;gap:14px;align-items:center;margin-top:9px;font-size:11px;color:var(--muted);flex-wrap:wrap}
   .edge-key span{display:flex;align-items:center;gap:6px}
   .ek-line{width:22px;height:0}
@@ -123,21 +124,20 @@
 </div>
 <style>
   #gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
-    background:radial-gradient(1200px 800px at 70% -10%,#384458 0%,#272c38 55%);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+    background:radial-gradient(1200px 800px at 70% -10%,#fff4df 0%,#fbe9cd 55%);
+    font-family:'Poppins',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
   #gate.hidden{display:none}
   #gate-form{display:flex;flex-direction:column;gap:12px;width:min(340px,86vw);
-    padding:28px 26px;border:1px solid rgba(255,255,255,.10);border-radius:14px;
-    background:rgba(22,25,32,.92);box-shadow:0 20px 60px rgba(0,0,0,.45)}
-  #gate .gate-title{font-family:Georgia,serif;font-size:20px;color:#eceef2}
-  #gate .gate-title::first-letter{color:#d8b15a}
-  #gate .gate-sub{font-size:12.5px;color:#9aa1ad;line-height:1.45;margin-bottom:4px}
-  #gate input{padding:11px 13px;border-radius:9px;border:1px solid rgba(255,255,255,.14);
-    background:rgba(255,255,255,.05);color:#eceef2;font-size:14px;outline:none}
-  #gate input:focus{border-color:#d8b15a}
+    padding:28px 26px;border:1px solid rgba(48,64,71,.12);border-radius:14px;
+    background:#f8f4ec;box-shadow:0 20px 60px rgba(48,64,71,.20)}
+  #gate .gate-title{font-family:'Manrope',sans-serif;font-weight:700;font-size:20px;color:#304047}
+  #gate .gate-sub{font-size:12.5px;color:#5d6f76;line-height:1.45;margin-bottom:4px}
+  #gate input{padding:11px 13px;border-radius:9px;border:1px solid rgba(48,64,71,.18);
+    background:#fff;color:#304047;font-size:14px;outline:none}
+  #gate input:focus{border-color:#b08d57}
   #gate button{padding:11px 13px;border-radius:9px;border:0;cursor:pointer;
-    background:#d8b15a;color:#13151b;font-weight:700;font-size:14px}
-  #gate-err{display:none;color:#E15759;font-size:12.5px;text-align:center}
+    background:#304047;color:#fbe9cd;font-weight:700;font-size:14px}
+  #gate-err{display:none;color:#b3261e;font-size:12.5px;text-align:center}
   #gate-err.show{display:block}
 </style>
 <script>
@@ -166,8 +166,8 @@
       <div class="title"><b>ScrewDownCrown</b> · Theme Map</div>
       <div class="sub">A network of the ideas Faheem returns to across the full Substack archive — watch collecting woven together with behavioural psychology, money, meaning and culture. Node size = how many posts engage the theme. Lines show themes that are intellectually linked and that recur together.</div>
       <div class="edge-key">
-        <span><svg class="ek-line" width="22" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="#d8b15a" stroke-width="2.4"/></svg>conceptual link</span>
-        <span><svg class="ek-line" width="22" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="#7fd3cd" stroke-width="2.4" stroke-dasharray="3,3"/></svg>recur together (co-occurrence)</span>
+        <span><svg class="ek-line" width="22" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="#b08d57" stroke-width="2.4"/></svg>conceptual link</span>
+        <span><svg class="ek-line" width="22" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="#3a9b94" stroke-width="2.4" stroke-dasharray="3,3"/></svg>recur together (co-occurrence)</span>
       </div>
     </div>
     <div class="stats">
@@ -287,9 +287,9 @@ const sim = d3.forceSimulation(nodes)
 // ---- draw links ----
 const link = gLink.selectAll('line').data(links).join('line')
   .attr('class','link')
-  .attr('stroke', l=> l.type==='cooccur' ? '#7fd3cd' : css('--accent'))
+  .attr('stroke', l=> l.type==='cooccur' ? '#3a9b94' : css('--accent'))
   .attr('stroke-dasharray', l=> l.type==='cooccur' ? '3,3' : null)
-  .attr('stroke-opacity', l=> l.type==='cooccur'?0.16:0.30)
+  .attr('stroke-opacity', l=> l.type==='cooccur'?0.30:0.45)
   .attr('stroke-width', l=> l.type==='cooccur' ? 0.6+2.2*l.jac : 0.8+0.7*(l.strength||1));
 
 // ---- draw nodes ----
@@ -302,7 +302,7 @@ const node = gNode.selectAll('g').data(nodes).join('g').attr('class','node')
 node.append('circle')
   .attr('r',d=>d.r)
   .attr('fill',d=>colorOf(d.cluster))
-  .attr('stroke','#0b0c10').attr('stroke-width',1.5).attr('stroke-opacity',.5);
+  .attr('stroke','#1f2a2f').attr('stroke-width',1.5).attr('stroke-opacity',.45);
 
 node.append('text')
   .attr('x',0).attr('y',d=>d.r+11).attr('text-anchor','middle')
@@ -330,8 +330,8 @@ function neighborSet(d){
 function hover(d){
   const s=neighborSet(d);
   node.classed('faded',n=>!s.has(n.id)).classed('dim',false);
-  node.select('circle').attr('stroke-opacity',n=>s.has(n.id)?.9:.5)
-      .attr('stroke',n=>n.id===d.id?'#fff':'#0b0c10');
+  node.select('circle').attr('stroke-opacity',n=>s.has(n.id)?.9:.45)
+      .attr('stroke',n=>n.id===d.id?'#1f2a2f':'#1f2a2f');
   link.attr('stroke-opacity',l=>{
       if(!linkVisible(l)) return 0;
       const on = (l.source.id===d.id||l.target.id===d.id);
@@ -345,11 +345,11 @@ function hover(d){
 }
 function clearHover(){
   node.classed('faded',false);
-  node.select('circle').attr('stroke-opacity',.5).attr('stroke','#0b0c10');
+  node.select('circle').attr('stroke-opacity',.45).attr('stroke','#1f2a2f');
   applyLinkStyle();
 }
 function applyLinkStyle(){
-  link.attr('stroke-opacity',l=> !linkVisible(l)?0 : (l.type==='cooccur'?0.16:0.30))
+  link.attr('stroke-opacity',l=> !linkVisible(l)?0 : (l.type==='cooccur'?0.30:0.45))
       .attr('stroke-width',l=> l.type==='cooccur'?0.6+2.2*l.jac:0.8+0.7*(l.strength||1));
 }
 
