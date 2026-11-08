@@ -80,6 +80,7 @@
                         {%- if region %}{% if city %}{{ city }}, {% endif %}<a href="{{ region | regionUrl }}">{{ region.name }}</a>, {{ country | countryName }}{% else %}{{ loc }}{% endif -%}
                     </div>
                     <div class="chips">
+                        {% if status and statusLabels[status] %}<span class="chip status {{ status }}">{{ statusLabels[status] }}</span>{% endif %}
                         {% if tier %}<span class="chip tier">{{ tier.short }}</span>{% endif %}
                         {% if founded %}<span class="chip">Founded {{ founded }}</span>{% endif %}
                         {% if revived %}<span class="chip">Revived {{ revived }}</span>{% endif %}
@@ -94,6 +95,20 @@
                 {% if instagram %}<a class="btn brand-link" href="{{ instagram }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true">{% include "icon-instagram.njk" %}</svg>Instagram</a>{% endif %}
                 {% if email %}<a class="btn brand-link" href="mailto:{{ email }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>{% endif %}
             </div>
+
+            {% if status == "inactive" or status == "defunct" %}
+            <div class="tier-box">
+                <span class="chip status {{ status }}">{{ statusLabels[status] }}</span>
+                <div>
+                    <p>As far as we know, {{ name }} is no longer making or selling products. We keep the listing for the record. Know otherwise? <a href="/update/?brand={{ name | urlencode }}">Let us know</a>.</p>
+                </div>
+            </div>
+            {% elif status == "upcoming" %}
+            <div class="tier-box">
+                <span class="chip status upcoming">{{ statusLabels.upcoming }}</span>
+                <div><p>{{ name }} hasn't released products yet.</p></div>
+            </div>
+            {% endif %}
 
             {% if tier %}
             <div class="tier-box">

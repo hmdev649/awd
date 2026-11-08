@@ -178,6 +178,8 @@ body {
 }
 .chip.light { background: var(--line); color: var(--ink); }
 .chip.tier { background: #b08d57; color: #fff; }
+.chip.status { background: #fff; color: #8a3b2e; border: 1.5px solid #8a3b2e; }
+.chip.status.upcoming { color: #2e5e8a; border-color: #2e5e8a; }
 
 .chip-link {
     display: inline-flex; align-items: center; gap: 6px;

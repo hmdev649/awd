@@ -27,6 +27,7 @@
     <span class="bcard-name">{{ d.name }}</span>
     <span class="bcard-loc">{{ d.city | location(d.state, d.country) }}</span>
     <span class="bcard-chips">
+      {%- if d.status and statusLabels[d.status] %}<span class="chip status {{ d.status }}">{{ statusLabels[d.status] }}</span>{% endif -%}
       {%- if d.made_in_america and tiers[d.made_in_america] %}<span class="chip tier">{{ tiers[d.made_in_america].short }}</span>{% endif -%}
       {%- if d.founded %}<span class="chip">Est. {{ d.founded }}</span>{% endif -%}
       {%- for p in d.products %}<span class="chip light">{{ p }}</span>{% endfor -%}
