@@ -4,7 +4,7 @@ city: "Vancouver"
 state: "BC"
 country: "CA"
 website: "https://www.ferrowatches.com/"
-instagram: "https://www.instagram.com/ferrowatches/"
+instagram: "https://www.instagram.com/ferrotime/"
 email: 
 contact_name: 
 contact_title: 
@@ -18,6 +18,6 @@ movements: []
 price_range: ""
 sources: []
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
