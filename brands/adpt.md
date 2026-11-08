@@ -1,9 +1,9 @@
 ---
 name: "ADPT"
-city: 
-state: 
+city: "Brooklyn"
+state: "NY"
 country: "US"
-website: 
+website: "https://windupwatchshop.com/collections/straps/products/adpt-strap"
 instagram: 
 email: 
 contact_name: 
@@ -16,8 +16,8 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://wornandwound.com/introducing-adpt-strap-american-made-nylon-watch-strap", "https://windupwatchshop.com/pages/showroom"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---

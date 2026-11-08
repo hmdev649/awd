@@ -1,13 +1,13 @@
 ---
 name: "Worden"
-city: 
-state: 
+city: "Guelph"
+state: "ON"
 country: "CA"
 website: 
 instagram: 
 email: 
-contact_name: 
-contact_title: 
+contact_name: "Tyler Worden"
+contact_title: "Founder"
 founded: 
 revived: 
 products: ["Watches"]
@@ -16,8 +16,8 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://thecalibratedwrist.com/tag/canadian-watch-brand/page/2/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---

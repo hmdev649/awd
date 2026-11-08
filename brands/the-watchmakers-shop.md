@@ -1,10 +1,10 @@
 ---
 name: "The Watchmakers Shop"
-city: 
-state: 
+city: "Asheville"
+state: "NC"
 country: "US"
 website: "https://www.thewatchmakersshop.com/pages/service"
-instagram: 
+instagram: "https://www.instagram.com/thewatchmakersshop/"
 email: 
 contact_name: 
 contact_title: 
@@ -16,8 +16,8 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.thewatchmakersshop.com/pages/service"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---

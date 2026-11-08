@@ -1,10 +1,10 @@
 ---
 name: "Veblenist"
-city: 
-state: 
+city: "Chicago"
+state: "IL"
 country: "US"
-website: 
-instagram: 
+website: "https://veblenist.com/"
+instagram: "https://www.instagram.com/veblenist/"
 email: 
 contact_name: 
 contact_title: 
@@ -16,8 +16,8 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://uncrate.com/veblenist-watch-straps", "https://www.thecoolector.com/?p=172177"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---

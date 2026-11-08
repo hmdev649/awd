@@ -1,7 +1,17 @@
 {
+  "|ON|CA": {
+    "lat": 50.0007,
+    "lng": -86.001,
+    "approximate": true
+  },
   "Alamo|NV|US": {
     "lat": 37.365,
     "lng": -115.1645,
+    "approximate": false
+  },
+  "Asheville|NC|US": {
+    "lat": 35.5954,
+    "lng": -82.5508,
     "approximate": false
   },
   "Austin|TX|US": {
@@ -29,6 +39,21 @@
     "lng": -71.0578,
     "approximate": false
   },
+  "Brandon|MB|CA": {
+    "lat": 49.8511,
+    "lng": -99.9609,
+    "approximate": false
+  },
+  "Brooklyn|NY|US": {
+    "lat": 40.6526,
+    "lng": -73.9497,
+    "approximate": false
+  },
+  "Calgary|AB|CA": {
+    "lat": 51.0456,
+    "lng": -114.0575,
+    "approximate": false
+  },
   "Camas|WA|US": {
     "lat": 45.5863,
     "lng": -122.4033,
@@ -47,6 +72,11 @@
   "Cincinnati|OH|US": {
     "lat": 39.1013,
     "lng": -84.5127,
+    "approximate": false
+  },
+  "Coeur d'Alene|ID|US": {
+    "lat": 47.6743,
+    "lng": -116.7812,
     "approximate": false
   },
   "Columbus|OH|US": {
@@ -134,9 +164,24 @@
     "lng": -85.6679,
     "approximate": false
   },
+  "Greenville|SC|US": {
+    "lat": 34.8514,
+    "lng": -82.3985,
+    "approximate": false
+  },
+  "Greenwich|CT|US": {
+    "lat": 41.0265,
+    "lng": -73.6285,
+    "approximate": false
+  },
   "Greenwood|IN|US": {
     "lat": 39.6137,
     "lng": -86.1095,
+    "approximate": false
+  },
+  "Guelph|ON|CA": {
+    "lat": 43.5461,
+    "lng": -80.2493,
     "approximate": false
   },
   "Gurnee|IL|US": {
@@ -147,6 +192,11 @@
   "Hagerstown|MD|US": {
     "lat": 39.643,
     "lng": -77.7191,
+    "approximate": false
+  },
+  "Hamilton|ON|CA": {
+    "lat": 43.2561,
+    "lng": -79.8729,
     "approximate": false
   },
   "Honolulu|HI|US": {
@@ -172,6 +222,11 @@
   "Las Vegas|NV|US": {
     "lat": 36.1674,
     "lng": -115.1484,
+    "approximate": false
+  },
+  "Lethbridge|AB|CA": {
+    "lat": 49.6946,
+    "lng": -112.8331,
     "approximate": false
   },
   "Little Neck|NY|US": {
@@ -217,6 +272,16 @@
   "Middlebury|CT|US": {
     "lat": 41.5279,
     "lng": -73.1283,
+    "approximate": false
+  },
+  "Minneapolis|MN|US": {
+    "lat": 44.9773,
+    "lng": -93.2655,
+    "approximate": false
+  },
+  "Montreal|QC|CA": {
+    "lat": 45.5032,
+    "lng": -73.5698,
     "approximate": false
   },
   "Nashville|TN|US": {
@@ -409,6 +474,11 @@
     "lng": -123.114,
     "approximate": false
   },
+  "Vaughan|ON|CA": {
+    "lat": 43.7942,
+    "lng": -79.5268,
+    "approximate": false
+  },
   "Venice Beach|CA|US": {
     "lat": 33.985,
     "lng": -118.4695,
@@ -422,6 +492,11 @@
   "Warren|OH|US": {
     "lat": 41.2368,
     "lng": -80.819,
+    "approximate": false
+  },
+  "Whitby|ON|CA": {
+    "lat": 43.8798,
+    "lng": -78.9422,
     "approximate": false
   },
   "Woods Cross|UT|US": {

@@ -1,14 +1,14 @@
 ---
 name: "Barrington Griffiths Watch Company"
-city: 
-state: 
+city: "Calgary"
+state: "AB"
 country: "CA"
 website: "https://bgwatch.com/"
 instagram: 
 email: 
-contact_name: 
-contact_title: 
-founded: 
+contact_name: "Mark Griffiths"
+contact_title: "Founder"
+founded: 2010
 revived: 
 products: ["Watches"]
 logo: "barrington_griffiths_watch_company.png"
@@ -16,8 +16,8 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://en.wikipedia.org/wiki/Barrington_Griffiths_Watch_Company", "https://www.avenuecalgary.com/shopping-style/barrington-griffiths-watch-company-the-sandon"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---

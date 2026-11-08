@@ -1,13 +1,13 @@
 ---
 name: "North Street Watch Co."
-city: 
-state: 
+city: "Greenwich"
+state: "CT"
 country: "US"
-website: 
-instagram: 
+website: "https://northstreetwatch.com/"
+instagram: "https://www.instagram.com/northstreetwatch/"
 email: 
-contact_name: 
-contact_title: 
+contact_name: "Chrystéle Zawislack"
+contact_title: "Founder"
 founded: 
 revived: 
 products: ["Straps"]
@@ -16,8 +16,8 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://suburbs101.com/north-street-watch-chrystele-zawislack/", "https://thecalibratedwrist.com/2023/01/23/off-the-cuff-north-street-watch-strap/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---

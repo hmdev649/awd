@@ -1,10 +1,10 @@
 ---
 name: "Momentum"
-city: 
-state: 
+city: "Vancouver"
+state: "BC"
 country: "CA"
-website: 
-instagram: 
+website: "https://momentumwatch.com/"
+instagram: "https://www.instagram.com/momentumwatch/"
 email: 
 contact_name: 
 contact_title: 
@@ -16,8 +16,8 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.aurifo.com/ie/history-and-interesting-facts-about-momentum-watch"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---

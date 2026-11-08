@@ -1,13 +1,13 @@
 ---
 name: "Craft and Lore"
-city: 
-state: 
+city: "Coeur d'Alene"
+state: "ID"
 country: "US"
-website: 
-instagram: 
+website: "https://craftandlore.com/"
+instagram: "https://www.instagram.com/craftnlore/"
 email: 
-contact_name: 
-contact_title: 
+contact_name: "Nathaniel Von Lind"
+contact_title: "Founder"
 founded: 
 revived: 
 products: ["Straps"]
@@ -16,8 +16,8 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://silodrome.com/mountain-belt-by-craft-lore/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---

@@ -1,10 +1,10 @@
 ---
 name: "Whitby"
-city: 
-state: 
+city: "Whitby"
+state: "ON"
 country: "CA"
-website: 
-instagram: 
+website: "https://whitbywatchco.com/"
+instagram: "https://www.instagram.com/whitbywatchco/"
 email: 
 contact_name: 
 contact_title: 
@@ -16,8 +16,8 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://ablogtowatch.com/whitby-watch-co-intrepid-diver", "https://www.thetimebum.com/?p=13437"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---

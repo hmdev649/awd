@@ -1,13 +1,13 @@
 ---
 name: "Jack Foster"
-city: 
-state: 
+city: "Greenville"
+state: "SC"
 country: "US"
 website: 
 instagram: 
 email: 
-contact_name: 
-contact_title: 
+contact_name: "Matt Crowder"
+contact_title: "Founder"
 founded: 
 revived: 
 products: ["Straps"]
@@ -16,8 +16,8 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://paneraisource.com/aftermarket_straps_jackfoster.shtml", "https://gvltoday.6amcity.com/no-time-like-present"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
