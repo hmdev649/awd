@@ -1,0 +1,35 @@
+---
+permalink: /map/
+title: "Map of American Watch Brands & Watchmakers | American Watchmaking Directory"
+description: "An interactive map of watch brands, independent watchmakers and suppliers across the United States and Canada. Find who's making watches near you."
+navActive: "map"
+---
+{% extends "base.njk" %}
+{% import "macros.njk" as m with context %}
+{%- set unplaced = collections.brands | unplaced -%}
+
+{% block head %}{{ m.mapAssets() }}{% endblock %}
+
+{% block main %}
+        <div class="page-intro">
+            <h1>Map</h1>
+            <p>Where America's watch brands, watchmakers and suppliers are based. Click a cluster to zoom in, or a pin for details. Alaska, Hawaii and Puerto Rico are a short pan away. You can also <a href="/states/">browse by state or province</a>.</p>
+        </div>
+
+        {{ m.map(collections.brands, "map-full", "full", "", "north-america") }}
+        <p class="map-note">{{ collections.brands.length - unplaced.length }} of {{ collections.brands.length }} listings are on the map. Grey pins are placed at the state level because we only know the state.</p>
+
+        {% if unplaced.length %}
+        <section class="section">
+            <div class="section-head">
+                <h2>Not on the map yet ({{ unplaced.length }})</h2>
+                <a href="/suggest/">Know where they're based? Tell us &rarr;</a>
+            </div>
+            <div class="chip-list">
+                {% for b in unplaced %}<a class="chip-link" href="{{ b.url }}">{{ b.data.name }} <span class="n">{{ b.data.country }}</span></a>{% endfor %}
+            </div>
+        </section>
+        {% endif %}
+{% endblock %}
+
+{% block scripts %}{{ m.mapScripts() }}{% endblock %}

@@ -1,0 +1,50 @@
+---
+permalink: /states/
+title: "American Watch Brands by State & Province | American Watchmaking Directory"
+description: "Browse watch brands, independent watchmakers and suppliers by US state and Canadian province, from California and New York to British Columbia."
+navActive: "states"
+---
+{% extends "base.njk" %}
+{% import "macros.njk" as m with context %}
+{%- set placed = collections.regions | brandCount -%}
+
+{% block head %}
+    {{ m.mapAssets() }}
+    <style>
+        .region-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+        .region-tile {
+            display: flex; justify-content: space-between; align-items: center; gap: 10px;
+            background: #fff; border: 2px solid transparent; border-radius: 12px; padding: 12px 16px;
+            color: var(--ink); text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+        }
+        .region-tile:hover { border-color: var(--ink); }
+        .region-tile strong { font-family: 'Manrope', sans-serif; font-size: 1.05rem; }
+        .region-tile span { color: var(--muted); font-size: .9rem; white-space: nowrap; }
+    </style>
+{% endblock %}
+
+{% block main %}
+        <div class="page-intro">
+            <h1>Browse by state &amp; province</h1>
+            <p>{{ collections.regions.length }} states and provinces have at least one listing. Pick one to see who's there.</p>
+        </div>
+
+        {{ m.map(collections.brands, "map-states", "preview", "small", "north-america") }}
+
+        {% for country in ["US", "CA"] %}
+        <section class="section">
+            <div class="section-head"><h2>{{ country | countryName }}</h2></div>
+            <div class="region-grid">
+                {% for r in collections.regions %}{% if r.country == country %}
+                <a class="region-tile" href="{{ r | regionUrl }}"><strong>{{ r.name }}</strong><span>{{ r.brands.length }} listing{{ "s" if r.brands.length != 1 }}</span></a>
+                {% endif %}{% endfor %}
+            </div>
+        </section>
+        {% endfor %}
+
+        {% if collections.brands.length > placed %}
+        <p class="map-note">{{ collections.brands.length - placed }} listings don't have a state or province yet. <a href="/directory.html">See them all in the directory</a>.</p>
+        {% endif %}
+{% endblock %}
+
+{% block scripts %}{{ m.mapScripts() }}{% endblock %}

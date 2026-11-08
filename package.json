@@ -6,12 +6,14 @@
   "scripts": {
     "build": "eleventy",
     "serve": "eleventy --serve --port=8888",
-    "clean": "rm -rf _site"
+    "clean": "rm -rf _site",
+    "geocode": "node scripts/geocode.js"
   },
   "engines": {
     "node": ">=20"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.8"
+    "@11ty/eleventy": "^3.1.8",
+    "@11ty/eleventy-img": "^6.0.4"
   }
 }

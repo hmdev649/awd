@@ -1,0 +1,109 @@
+---
+permalink: /suggest/
+title: "Suggest a Brand | American Watchmaking Directory"
+description: "Know a watch brand, watchmaker or supplier in the US (or Canada) that we're missing? Tell us about it. Listings are free."
+navActive: "contact"
+---
+{% extends "base.njk" %}
+
+{% block main %}
+        <div class="page-intro">
+            <h1>Suggest a brand</h1>
+            <p>Know a watch brand, independent watchmaker or supplier we're missing? Tell us what you know; partial answers are fine. Listings are always free, and brands can suggest themselves. Already listed but something's wrong? <a href="/update/">Update a listing</a> instead.</p>
+        </div>
+
+        <div class="panel form-panel">
+            <form class="js-form" action="{{ site.formspree }}" method="POST" data-subject="Brand suggestion: {brand}" data-success="suggest-done">
+                <input type="hidden" name="form" value="suggest-a-brand">
+                <input type="hidden" name="_subject" value="Brand suggestion">
+                <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+
+                <div class="form-grid">
+                    <div class="field full">
+                        <label for="brand">Brand or business name *</label>
+                        <input type="text" id="brand" name="brand" required>
+                    </div>
+                    <div class="field">
+                        <label for="website">Website</label>
+                        <input type="url" id="website" name="website" placeholder="https://">
+                    </div>
+                    <div class="field">
+                        <label for="instagram">Instagram <span class="hint">(link or @handle)</span></label>
+                        <input type="text" id="instagram" name="instagram">
+                    </div>
+                    <div class="field">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city">
+                    </div>
+                    <div class="field">
+                        <label for="state">State / Province *</label>
+                        <input type="text" id="state" name="state" required placeholder="e.g. TX or Ontario">
+                    </div>
+                    <div class="field">
+                        <label for="founded">Year founded</label>
+                        <input type="number" id="founded" name="founded" min="1700" max="{{ site.year }}">
+                    </div>
+                    <div class="field">
+                        <fieldset>
+                            <legend>What do they make?</legend>
+                            <div class="checks">
+                                {% for p in ["Watches", "Straps", "Components", "Tools", "Restoration"] %}
+                                <label><input type="checkbox" name="products" value="{{ p }}"> {{ p }}</label>
+                                {% endfor %}
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="field full">
+                        <label>What's made in America? <span class="hint">Answer what you know.</span></label>
+                    </div>
+                    <div class="field">
+                        <label for="movement_made">Where is the movement made?</label>
+                        <input type="text" id="movement_made" name="movement_made" placeholder="e.g. in-house in Ohio, Swiss ETA">
+                    </div>
+                    <div class="field">
+                        <label for="case_made">Where are the cases made?</label>
+                        <input type="text" id="case_made" name="case_made">
+                    </div>
+                    <div class="field full">
+                        <label for="assembly">Where is final assembly done?</label>
+                        <input type="text" id="assembly" name="assembly">
+                    </div>
+
+                    <div class="field full">
+                        <label for="notes">Anything else? <span class="hint">Sources, history, what makes them interesting</span></label>
+                        <textarea id="notes" name="notes"></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="name">Your name</label>
+                        <input type="text" id="name" name="name">
+                    </div>
+                    <div class="field">
+                        <label for="email">Your email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="field full">
+                        <label for="relationship">Your connection to the brand</label>
+                        <select id="relationship" name="relationship">
+                            <option value="">Choose one</option>
+                            <option>I own it or work there</option>
+                            <option>I'm a customer or fan</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn">Send suggestion</button>
+                    <span class="form-status" role="status"></span>
+                </div>
+            </form>
+
+            <div id="suggest-done" class="form-success" hidden>
+                <h2>Thank you!</h2>
+                <p>We review every suggestion and will add it once we've checked the details. Want to suggest another? <a href="/suggest/">Start again</a>.</p>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}<script src="/js/forms.js"></script>{% endblock %}

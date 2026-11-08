@@ -1,0 +1,50 @@
+{#- Shared building blocks. Import with: {% import "macros.njk" as m with context %} -#}
+
+{% macro logo(d, size=56) -%}
+<span class="logo-box"{% if size != 56 %} style="width:{{ size }}px;height:{{ size }}px"{% endif %}>
+  {%- if d.thumb -%}
+  <img src="{{ d.thumb.src }}" srcset="{{ d.thumb.src }} 1x, {{ d.thumb.src2x }} 2x" alt="" width="{{ size }}" height="{{ size }}" loading="lazy" decoding="async">
+  {%- else -%}
+  <span class="monogram" aria-hidden="true">{{ d.name | first | upper }}</span>
+  {%- endif -%}
+</span>
+{%- endmacro %}
+
+{% macro brandCard(b) -%}
+{%- set d = b.data -%}
+<a class="bcard" href="{{ b.url }}"
+   data-search="{{ [d.name, d.city, d.state, d.region.name if d.region else ''] | join(' ') | lower }}"
+   data-name="{{ d.name | lower }}"
+   data-country="{{ d.country }}"
+   data-region="{{ (d.country + '-' + d.state) if d.state else '' }}"
+   data-products="{{ d.products | join('|') }}"
+   data-founded="{{ d.founded or '' }}">
+  {%- if d.country == "US" or d.country == "CA" %}
+  <span class="bcard-flag" title="{{ d.country | countryName }}"><img src="/images/{{ d.country | lower }}_flag.png" alt="{{ d.country | countryName }}" width="18" height="18"></span>
+  {%- endif %}
+  {{ logo(d) }}
+  <span class="bcard-body">
+    <span class="bcard-name">{{ d.name }}</span>
+    <span class="bcard-loc">{{ d.city | location(d.state, d.country) }}</span>
+    <span class="bcard-chips">
+      {%- if d.made_in_america and tiers[d.made_in_america] %}<span class="chip tier">{{ tiers[d.made_in_america].short }}</span>{% endif -%}
+      {%- if d.founded %}<span class="chip">Est. {{ d.founded }}</span>{% endif -%}
+      {%- for p in d.products %}<span class="chip light">{{ p }}</span>{% endfor -%}
+    </span>
+  </span>
+</a>
+{%- endmacro %}
+
+{#- A Leaflet map of the given brands. mode: "full" (pannable everywhere) or "preview" (no one-finger drag on phones). -#}
+{% macro map(brands, id, mode="preview", cls="", view="fit") -%}
+<div id="{{ id }}" class="map {{ cls }}" data-mode="{{ mode }}" data-view="{{ view }}" data-points="{{ brands | mapPoints | json }}" role="region" aria-label="Map of brand locations"></div>
+{%- endmacro %}
+
+{% macro mapAssets() -%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css">
+{%- endmacro %}
+
+{% macro mapScripts() -%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js"></script>
+<script src="/js/map.js"></script>
+{%- endmacro %}

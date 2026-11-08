@@ -1,0 +1,69 @@
+---
+permalink: /update/
+title: "Update a Listing | American Watchmaking Directory"
+description: "Spotted something wrong or out of date in the American Watchmaking Directory, or want to add detail to your brand's listing? Send us a correction."
+navActive: "contact"
+---
+{% extends "base.njk" %}
+
+{% block main %}
+        <div class="page-intro">
+            <h1>Update a listing</h1>
+            <p>Spotted something wrong or out of date? Own a brand and want to add detail, like what you make in America? Tell us below. Links to sources help us check changes quickly. Brand not listed yet? <a href="/suggest/">Suggest it</a>.</p>
+        </div>
+
+        <div class="panel form-panel">
+            <form class="js-form" action="{{ site.formspree }}" method="POST" data-subject="Listing update: {brand}" data-success="update-done">
+                <input type="hidden" name="form" value="update-a-listing">
+                <input type="hidden" name="_subject" value="Listing update">
+                <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+
+                <div class="form-grid">
+                    <div class="field full">
+                        <label for="brand">Which listing? *</label>
+                        <input type="text" id="brand" name="brand" required list="brand-names" autocomplete="off">
+                        <datalist id="brand-names">
+                            {% for b in collections.brands %}<option value="{{ b.data.name }}">{% endfor %}
+                        </datalist>
+                    </div>
+                    <div class="field full">
+                        <label for="changes">What should change? *</label>
+                        <textarea id="changes" name="changes" required placeholder="e.g. We moved to Austin, TX. Our website is now ... We assemble in-house; movements are from ..."></textarea>
+                    </div>
+                    <div class="field full">
+                        <label for="source">Source link <span class="hint">(optional, e.g. your website or an article)</span></label>
+                        <input type="url" id="source" name="source" placeholder="https://">
+                    </div>
+                    <div class="field">
+                        <label for="name">Your name</label>
+                        <input type="text" id="name" name="name">
+                    </div>
+                    <div class="field">
+                        <label for="email">Your email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="field full">
+                        <label for="relationship">Your connection to the brand</label>
+                        <select id="relationship" name="relationship">
+                            <option value="">Choose one</option>
+                            <option>I own it or work there</option>
+                            <option>I'm a customer or fan</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn">Send update</button>
+                    <span class="form-status" role="status"></span>
+                </div>
+            </form>
+
+            <div id="update-done" class="form-success" hidden>
+                <h2>Thanks, got it.</h2>
+                <p>We'll check the details and update the listing. If you're the brand, we may email you to confirm.</p>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}<script src="/js/forms.js"></script>{% endblock %}

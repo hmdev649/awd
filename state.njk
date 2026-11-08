@@ -1,0 +1,51 @@
+---
+pagination:
+  data: collections.regions
+  size: 1
+  alias: region
+permalink: "/states/{{ region.slug }}/"
+navActive: "states"
+eleventyComputed:
+  title: "Watch Brands & Watchmakers in {{ region.name }} | American Watchmaking Directory"
+---
+{% extends "base.njk" %}
+{% import "macros.njk" as m with context %}
+{%- set brands = region.brands -%}
+{%- set n = brands.length -%}
+{%- set cities = brands | topCities(3) -%}
+{%- set oldestBrand = brands | oldest -%}
+{%- set noun = "listing" if n == 1 else "listings" -%}
+{%- set description = n + " watch " + ("brand, watchmaker or supplier" if n == 1 else "brands, watchmakers and suppliers") + " based in " + region.name + ": " + (brands | names(3)) + (" and more" if n > 3 else "") + ". Locations, founding years and links." -%}
+
+{% block head %}{{ m.mapAssets() }}{% endblock %}
+
+{% block main %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/states/">States &amp; provinces</a> &rsaquo; {{ region.name }}</nav>
+        <div class="page-intro">
+            <h1>Watch brands &amp; watchmakers in {{ region.name }}</h1>
+            <p>
+                {{ n }} {{ noun }} in the directory {{ "is" if n == 1 else "are" }} based in {{ region.name }}
+                {%- if cities.length %}, {% if cities.length == 1 and cities[0].count == n %}all in {{ cities[0].city }}{% else %}including {% for c in cities %}{{ c.city }}{% if c.count > 1 %} ({{ c.count }}){% endif %}{{ ", " if not loop.last }}{% endfor %}{% endif %}{% endif %}.
+                {%- if oldestBrand and n > 1 %} The longest-established is <a href="{{ oldestBrand.url }}">{{ oldestBrand.data.name }}</a>, founded in {{ oldestBrand.data.founded }}.{% endif %}
+            </p>
+        </div>
+
+        {{ m.map(brands, "map-region", "preview", "small") }}
+
+        <section class="section">
+            <div class="bgrid">
+                {% for b in brands %}{{ m.brandCard(b) }}{% endfor %}
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-head"><h2>Other states &amp; provinces</h2><a href="/states/">All &rarr;</a></div>
+            <div class="chip-list">
+                {% for r in collections.regions %}{% if r.key != region.key %}<a class="chip-link" href="{{ r | regionUrl }}">{{ r.name }} <span class="n">{{ r.brands.length }}</span></a>{% endif %}{% endfor %}
+            </div>
+        </section>
+
+        <p class="map-note">Missing someone from {{ region.name }}? <a href="/suggest/">Suggest a brand</a>.</p>
+{% endblock %}
+
+{% block scripts %}{{ m.mapScripts() }}{% endblock %}

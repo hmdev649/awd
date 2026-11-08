@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <meta name="description" content="{{ description }}">
-    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <title>{{ title or site.name }}</title>
+    <meta name="description" content="{{ description or site.description }}">
+    <link rel="canonical" href="{{ site.url }}{{ page.url | replace('/index.html', '/') }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ site.name }}">
-    <meta property="og:title" content="{{ title }}">
-    <meta property="og:description" content="{{ description }}">
-    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-    {% if ogImage %}<meta property="og:image" content="{{ site.url }}{{ ogImage }}">{% endif %}
+    <meta property="og:title" content="{{ title or site.name }}">
+    <meta property="og:description" content="{{ description or site.description }}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url | replace('/index.html', '/') }}">
+    <meta property="og:image" content="{{ site.url }}{{ ogImage or site.ogImage }}">
+    <meta name="twitter:card" content="summary">
     <link rel="icon" href="/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="/css/shared.css">
 
@@ -29,28 +30,35 @@
     <div class="container">
         <header class="top-header">
             <a href="/" class="site-title">{{ site.name }}</a>
-            <nav class="header-nav">
-                <a href="/directory.html" class="nav-link{% if navActive == 'directory' %} active{% endif %}">Directory</a>
-                <a href="/about.html" class="nav-link">About</a>
-                <a href="/contact.html" class="nav-link">Contact</a>
-                <a href="{{ site.instagram }}" target="_blank" rel="noopener" class="instagram-link" title="Follow us on Instagram">
-                    <svg class="instagram-icon" viewBox="0 0 24 24">{% include "icon-instagram.njk" %}</svg>
+            <nav class="header-nav" aria-label="Main">
+                {%- for item in site.nav %}
+                <a href="{{ item.url }}" class="nav-link{% if navActive == item.key %} active{% endif %}"{% if navActive == item.key %} aria-current="page"{% endif %}>{{ item.label }}</a>
+                {%- endfor %}
+                <a href="{{ site.instagram }}" target="_blank" rel="noopener" class="instagram-link" title="Follow us on Instagram" aria-label="Instagram">
+                    <svg class="instagram-icon" viewBox="0 0 24 24" aria-hidden="true">{% include "icon-instagram.njk" %}</svg>
                 </a>
             </nav>
         </header>
 
+        <main>
         {% block main %}{% endblock %}
+        </main>
 
         <footer class="footer">
-            <nav class="footer-nav">
+            <nav class="footer-nav" aria-label="Footer">
+                <a href="/directory.html" class="nav-link">Directory</a>
+                <a href="/map/" class="nav-link">Map</a>
+                <a href="/states/" class="nav-link">States &amp; provinces</a>
+                <a href="/suggest/" class="nav-link">Suggest a brand</a>
                 <a href="/about.html" class="nav-link">About</a>
                 <a href="/contact.html" class="nav-link">Contact</a>
                 <a href="/faqs.html" class="nav-link">FAQs</a>
                 <a href="/terms.html" class="nav-link">Terms</a>
                 <a href="/privacy.html" class="nav-link">Privacy Policy</a>
             </nav>
-            <p class="footer-text">&copy; 2025 {{ site.name }}.</p>
+            <p class="footer-text">&copy; {{ site.year }} {{ site.name }}. Run by volunteers; not affiliated with any brand listed.</p>
         </footer>
     </div>
+    {% block scripts %}{% endblock %}
 </body>
 </html>
