@@ -1,0 +1,13 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for p in ["/", "/directory.html", "/about.html", "/contact.html", "/faqs.html"] %}
+  <url><loc>{{ site.url }}{{ p }}</loc></url>
+{%- endfor %}
+{%- for b in collections.brands %}
+  <url><loc>{{ site.url }}{{ b.url }}</loc>{% if b.data.last_updated %}<lastmod>{{ b.data.last_updated }}</lastmod>{% endif %}</url>
+{%- endfor %}
+</urlset>

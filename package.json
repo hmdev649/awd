@@ -1,0 +1,17 @@
+{
+  "name": "american-watchmaking-directory",
+  "private": true,
+  "type": "module",
+  "description": "Source for americanwatchmakingdirectory.org",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve --port=8888",
+    "clean": "rm -rf _site"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.8"
+  }
+}

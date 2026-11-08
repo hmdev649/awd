@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    {% if ogImage %}<meta property="og:image" content="{{ site.url }}{{ ogImage }}">{% endif %}
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/css/shared.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ site.gaId }}');
+    </script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <header class="top-header">
+            <a href="/" class="site-title">{{ site.name }}</a>
+            <nav class="header-nav">
+                <a href="/directory.html" class="nav-link{% if navActive == 'directory' %} active{% endif %}">Directory</a>
+                <a href="/about.html" class="nav-link">About</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="{{ site.instagram }}" target="_blank" rel="noopener" class="instagram-link" title="Follow us on Instagram">
+                    <svg class="instagram-icon" viewBox="0 0 24 24">{% include "icon-instagram.njk" %}</svg>
+                </a>
+            </nav>
+        </header>
+
+        {% block main %}{% endblock %}
+
+        <footer class="footer">
+            <nav class="footer-nav">
+                <a href="/about.html" class="nav-link">About</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="/faqs.html" class="nav-link">FAQs</a>
+                <a href="/terms.html" class="nav-link">Terms</a>
+                <a href="/privacy.html" class="nav-link">Privacy Policy</a>
+            </nav>
+            <p class="footer-text">&copy; 2025 {{ site.name }}.</p>
+        </footer>
+    </div>
+</body>
+</html>

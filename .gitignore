@@ -1,2 +1,6 @@
 # macOS
 .DS_Store
+
+# Build
+node_modules/
+_site/

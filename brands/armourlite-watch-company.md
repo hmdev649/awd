@@ -1,0 +1,22 @@
+---
+name: "ArmourLite Watch Company"
+city: "North Miami Beach"
+state: "FL"
+country: "US"
+website: "https://www.armourlite.com/"
+instagram: "https://www.instagram.com/armourlite/"
+email: "customerservice@armourlite.com"
+contact_name: "Ashley Diener"
+contact_title: "Founder"
+founded: 2007
+revived: 
+products: ["Watches"]
+logo: "armourlite_watch_company.png"
+status: "active"
+made_in_america: ""
+movements: []
+price_range: ""
+sources: []
+instagram_posts: []
+last_updated: "2025-09-29"
+---

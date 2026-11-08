@@ -1,0 +1,99 @@
+{% extends "base.njk" %}
+{%- set loc = city | location(state, country) -%}
+{%- set bodyText = content | plainText -%}
+{%- set title = name + " — " + loc + " | " + site.name -%}
+{%- if bodyText -%}
+  {%- set description = bodyText | truncate(155) -%}
+{%- else -%}
+  {%- set description = name + ": " + (products | join(", ") | lower) + " from " + loc + ((", " + (country | countryName)) if state else "") + ((". Founded " + founded) if founded else "") + ". Listed in the " + site.name + "." -%}
+{%- endif -%}
+{%- set ogImage = ("/images/logos/" + logo) if logo else "/images/favicon.png" -%}
+{%- set navActive = "directory" -%}
+
+{% block head %}
+    <style>
+        .back-link { display: inline-block; color: #304047; text-decoration: none; font-weight: 500; margin-bottom: 20px; opacity: .8; }
+        .back-link:hover { opacity: 1; text-decoration: underline; }
+        .brand-card { background: #f8f4ec; border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); color: #304047; }
+        .brand-head { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; padding-bottom: 28px; border-bottom: 1px solid #e0d5c7; margin-bottom: 28px; position: relative; }
+        .brand-logo { width: 120px; height: 120px; border-radius: 16px; background: #fff; border: 2px solid #ddd; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 2rem; }
+        .brand-logo img { width: 100%; height: 100%; object-fit: contain; }
+        .brand-head h1 { font-family: 'Manrope', sans-serif; font-size: 2.4rem; line-height: 1.15; margin-bottom: 6px; }
+        .brand-loc { font-size: 1.1rem; opacity: .75; margin-bottom: 12px; }
+        .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+        .chip { background: #304047; color: #fbe9cd; padding: 4px 14px; border-radius: 20px; font-size: .85rem; font-weight: 500; }
+        .chip.light { background: #e0d5c7; color: #304047; }
+        .flag { position: absolute; top: 0; right: 0; width: 32px; height: 32px; }
+        .flag img { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; }
+        .brand-links { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+        .brand-link { display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background: #304047; color: #fbe9cd; text-decoration: none; border-radius: 10px; font-weight: 500; transition: all .3s ease; }
+        .brand-link:hover { background: #1f2a2f; transform: translateY(-2px); }
+        .brand-link svg { width: 20px; height: 20px; fill: currentColor; }
+        .brand-body h2 { font-family: 'Manrope', sans-serif; font-size: 1.4rem; margin: 28px 0 12px; }
+        .brand-body h2:first-child { margin-top: 0; }
+        .brand-body p { line-height: 1.75; margin-bottom: 14px; }
+        .brand-body a { color: #304047; }
+        .brand-body img { max-width: 100%; border-radius: 12px; }
+        .placeholder { background: #fbe9cd; border-radius: 12px; padding: 20px 24px; }
+        .placeholder a { color: #304047; font-weight: 600; }
+        .brand-meta { margin-top: 32px; padding-top: 16px; border-top: 1px solid #e0d5c7; font-size: .85rem; opacity: .65; }
+        @media (max-width: 768px) {
+            .brand-card { padding: 24px; }
+            .brand-head h1 { font-size: 1.8rem; }
+            .brand-logo { width: 90px; height: 90px; }
+        }
+    </style>
+    <script type="application/ld+json">{{ {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": name,
+        "url": website or (site.url + page.url),
+        "logo": (site.url + "/images/logos/" + logo) if logo else undefined,
+        "foundingDate": (founded | string) if founded else undefined,
+        "address": { "@type": "PostalAddress", "addressLocality": city or undefined, "addressRegion": state or undefined, "addressCountry": country },
+        "sameAs": [instagram] if instagram else undefined
+    } | json | safe }}</script>
+{% endblock %}
+
+{% block main %}
+        <a class="back-link" href="/directory.html">&larr; Back to the directory</a>
+        <article class="brand-card">
+            <div class="brand-head">
+                {% if country == "US" or country == "CA" %}
+                <div class="flag" title="{{ country | countryName }}"><img src="/images/{{ country | lower }}_flag.png" alt="{{ country | countryName }} flag"></div>
+                {% endif %}
+                <div class="brand-logo">
+                    {% if logo %}<img src="/images/logos/{{ logo }}" alt="{{ name }} logo">{% else %}{{ name | first | upper }}{% endif %}
+                </div>
+                <div>
+                    <h1>{{ name }}</h1>
+                    <div class="brand-loc">{{ loc }}{% if state %}, {{ country | countryName }}{% endif %}</div>
+                    <div class="chips">
+                        {% if founded %}<span class="chip">Founded {{ founded }}</span>{% endif %}
+                        {% if revived %}<span class="chip">Revived {{ revived }}</span>{% endif %}
+                        {% for p in products %}<span class="chip light">{{ p }}</span>{% endfor %}
+                        {% for m in movements %}<span class="chip light">{{ m | capitalize }}</span>{% endfor %}
+                        {% if made_in_america %}<span class="chip light">Made in America: {{ made_in_america }}</span>{% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-links">
+                {% if website %}<a class="brand-link" href="{{ website }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.93-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Website</a>{% endif %}
+                {% if instagram %}<a class="brand-link" href="{{ instagram }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24">{% include "icon-instagram.njk" %}</svg>Instagram</a>{% endif %}
+                {% if email %}<a class="brand-link" href="mailto:{{ email }}"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>{% endif %}
+            </div>
+
+            <div class="brand-body">
+                {% if bodyText %}
+                {{ content | safe }}
+                {% else %}
+                <div class="placeholder">
+                    <p>We're still writing this profile. Know {{ name }} well, or work there? <a href="/contact.html">Send us details</a> about what they make and what's made in America.</p>
+                </div>
+                {% endif %}
+            </div>
+
+            {% if last_updated %}<div class="brand-meta">Last updated {{ last_updated | readableDate }}</div>{% endif %}
+        </article>
+{% endblock %}
