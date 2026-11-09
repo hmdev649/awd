@@ -11,7 +11,7 @@ contact_title:
 founded: 2008
 revived: 
 products: ["Watches"]
-logo: "lum_tec.png"
+logo: "lum-tec.png"
 status: "active"
 made_in_america: ""
 movements: []

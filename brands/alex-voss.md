@@ -11,7 +11,7 @@ contact_title: "Founder, Watchmaker"
 founded: 2018
 revived: 
 products: ["Watches"]
-logo: "alex_voss.png"
+logo: "alex-voss.png"
 status: "active"
 made_in_america: ""
 movements: []

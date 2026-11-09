@@ -11,7 +11,7 @@ contact_title: "Co-Founder & CEO"
 founded: 
 revived: 
 products: ["Watches"]
-logo: 
+logo: "parivas.png"
 status: "active"
 made_in_america: ""
 movements: []

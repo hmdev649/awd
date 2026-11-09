@@ -11,7 +11,7 @@ contact_title:
 founded: 2018
 revived: 
 products: ["Watches"]
-logo: "axia_watch.png"
+logo: "axia-watch.png"
 status: "active"
 made_in_america: ""
 movements: []

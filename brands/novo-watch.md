@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 
 revived: 
 products: ["Watches"]
-logo: "novo_watch.png"
+logo: "novo-watch.png"
 status: "active"
 made_in_america: ""
 movements: []

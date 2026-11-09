@@ -11,7 +11,7 @@ contact_title:
 founded: 2022
 revived: 
 products: ["Watches"]
-logo: "e_stohlman.png"
+logo: "e-stohlman.png"
 status: "active"
 made_in_america: ""
 movements: []

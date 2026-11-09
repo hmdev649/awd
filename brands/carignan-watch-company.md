@@ -11,7 +11,7 @@ contact_title: "Owner"
 founded: 
 revived: 
 products: ["Restoration", "Components"]
-logo: 
+logo: "carignan-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

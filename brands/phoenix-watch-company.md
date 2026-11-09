@@ -11,7 +11,7 @@ contact_title:
 founded: 2023
 revived: 
 products: ["Watches"]
-logo: "phoenix_watch_company.png"
+logo: "phoenix-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

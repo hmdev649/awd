@@ -11,7 +11,7 @@ contact_title:
 founded: 2013
 revived: 
 products: ["Watches"]
-logo: "original_grain.png"
+logo: "original-grain.png"
 status: "active"
 made_in_america: ""
 movements: []

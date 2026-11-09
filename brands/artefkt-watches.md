@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2024
 revived: 
 products: ["Watches"]
-logo: "artefkt_watches.png"
+logo: "artefkt-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

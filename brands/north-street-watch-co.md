@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 
 revived: 
 products: ["Straps"]
-logo: "north_street_watch_co_.png"
+logo: "north-street-watch-co.png"
 status: "active"
 made_in_america: ""
 movements: []

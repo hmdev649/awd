@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2020
 revived: 
 products: ["Watches"]
-logo: 
+logo: "vieren.png"
 status: "active"
 made_in_america: ""
 movements: []

@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2017
 revived: 
 products: ["Watches"]
-logo: 
+logo: "avoirdupois.png"
 status: "active"
 made_in_america: ""
 movements: []

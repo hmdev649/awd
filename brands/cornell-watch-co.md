@@ -11,7 +11,7 @@ contact_title: "CEO"
 founded: 2024
 revived: 
 products: ["Watches"]
-logo: "cornell_watch_co_.png"
+logo: "cornell-watch-co.png"
 status: "active"
 made_in_america: ""
 movements: []

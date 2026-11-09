@@ -11,7 +11,7 @@ contact_title:
 founded: 2020
 revived: 
 products: ["Watches"]
-logo: "trafford_watch_company.png"
+logo: "trafford-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

@@ -11,7 +11,7 @@ contact_title:
 founded: 2003
 revived: 
 products: ["Watches"]
-logo: "bertucci_watches.png"
+logo: "bertucci-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

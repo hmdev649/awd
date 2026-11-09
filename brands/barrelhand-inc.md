@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2014
 revived: 
 products: ["Watches"]
-logo: "barrelhand_inc_.png"
+logo: "barrelhand-inc.png"
 status: "active"
 made_in_america: ""
 movements: []

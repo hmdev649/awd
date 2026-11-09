@@ -11,7 +11,7 @@ contact_title:
 founded: 2020
 revived: 
 products: ["Watches"]
-logo: "canopy_watch_company.png"
+logo: "canopy-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

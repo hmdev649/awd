@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2022
 revived: 
 products: ["Watches"]
-logo: "havid_nagan.png"
+logo: "havid-nagan.png"
 status: "active"
 made_in_america: ""
 movements: []

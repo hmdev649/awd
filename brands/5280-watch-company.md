@@ -11,7 +11,7 @@ contact_title:
 founded: 2023
 revived: 
 products: ["Watches"]
-logo: "5280_watch_company.png"
+logo: "5280-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

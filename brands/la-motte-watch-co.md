@@ -11,7 +11,7 @@ contact_title:
 founded: 2023
 revived: 
 products: ["Watches"]
-logo: "la_motte_watch_company.png"
+logo: "la-motte-watch-co.png"
 status: "active"
 made_in_america: ""
 movements: []

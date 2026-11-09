@@ -11,7 +11,7 @@ contact_title:
 founded: 2014
 revived: 
 products: ["Watches"]
-logo: "origin_watch_company.png"
+logo: "origin-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

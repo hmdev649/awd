@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2019
 revived: 
 products: ["Components"]
-logo: "hour_precision.png"
+logo: "hour-precision.png"
 status: "active"
 made_in_america: ""
 movements: []

@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 
 revived: 
 products: ["Watches"]
-logo: 
+logo: "jgj-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

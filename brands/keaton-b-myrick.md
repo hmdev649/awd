@@ -11,7 +11,7 @@ contact_title:
 founded: 2012
 revived: 
 products: ["Watches"]
-logo: "keaton_b__myrick.png"
+logo: "keaton-b-myrick.png"
 status: "active"
 made_in_america: ""
 movements: []

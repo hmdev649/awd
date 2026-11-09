@@ -11,7 +11,7 @@ contact_title:
 founded: 2014
 revived: 
 products: ["Watches"]
-logo: "mercer_watch_co_.png"
+logo: "mercer-watch-co.png"
 status: "active"
 made_in_america: ""
 movements: []

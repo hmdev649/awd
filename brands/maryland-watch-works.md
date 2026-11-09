@@ -11,7 +11,7 @@ contact_title:
 founded: 
 revived: 
 products: ["Watches"]
-logo: 
+logo: "maryland-watch-works.png"
 status: "inactive"
 made_in_america: ""
 movements: []

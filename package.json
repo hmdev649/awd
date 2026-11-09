@@ -7,7 +7,8 @@
     "build": "eleventy",
     "serve": "eleventy --serve --port=8888",
     "clean": "rm -rf _site",
-    "geocode": "node scripts/geocode.js"
+    "geocode": "node scripts/geocode.js",
+    "logos": "node scripts/standardize-logos.js"
   },
   "engines": {
     "node": ">=20"

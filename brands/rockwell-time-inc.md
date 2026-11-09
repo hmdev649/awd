@@ -11,7 +11,7 @@ contact_title:
 founded: 2007
 revived: 
 products: ["Watches"]
-logo: "rockwell_time_inc.png"
+logo: "rockwell-time-inc.png"
 status: "active"
 made_in_america: ""
 movements: []

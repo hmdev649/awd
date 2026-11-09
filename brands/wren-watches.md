@@ -11,7 +11,7 @@ contact_title:
 founded: 2023
 revived: 
 products: ["Watches"]
-logo: "wren_watches.png"
+logo: "wren-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

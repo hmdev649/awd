@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 
 revived: 
 products: ["Watches"]
-logo: 
+logo: "worden.png"
 status: "active"
 made_in_america: ""
 movements: []

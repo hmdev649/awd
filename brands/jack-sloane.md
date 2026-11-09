@@ -11,7 +11,7 @@ contact_title:
 founded: 2023
 revived: 
 products: ["Watches"]
-logo: "jack_sloane.png"
+logo: "jack-sloane.png"
 status: "active"
 made_in_america: ""
 movements: []

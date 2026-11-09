@@ -11,7 +11,7 @@ contact_title:
 founded: 2014
 revived: 
 products: ["Watches"]
-logo: "bespoke_watch_projects.png"
+logo: "bespoke-watch-projects.png"
 status: "active"
 made_in_america: ""
 movements: []

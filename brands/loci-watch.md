@@ -11,7 +11,7 @@ contact_title:
 founded: 2023
 revived: 
 products: ["Watches"]
-logo: "loci_watch.png"
+logo: "loci-watch.png"
 status: "active"
 made_in_america: ""
 movements: []

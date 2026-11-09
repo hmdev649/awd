@@ -11,7 +11,7 @@ contact_title:
 founded: 2007
 revived: 
 products: ["Watches"]
-logo: "deep_blue_watches.png"
+logo: "deep-blue-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

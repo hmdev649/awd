@@ -11,7 +11,7 @@ contact_title:
 founded: 2009
 revived: 
 products: ["Watches"]
-logo: "hager_watches.png"
+logo: "hager-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

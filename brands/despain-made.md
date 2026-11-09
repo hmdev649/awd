@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2024
 revived: 
 products: ["Watches"]
-logo: "despain_made.png"
+logo: "despain-made.png"
 status: "active"
 made_in_america: ""
 movements: []

@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2009
 revived: 
 products: ["Watches"]
-logo: "mark_carson_watches.png"
+logo: "mark-carson-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

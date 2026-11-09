@@ -11,7 +11,7 @@ contact_title:
 founded: 2023
 revived: 
 products: ["Watches"]
-logo: "colorado_watch_company.png"
+logo: "colorado-watch-company.png"
 status: "inactive"
 made_in_america: ""
 movements: []

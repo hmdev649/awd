@@ -11,7 +11,7 @@ contact_title: "Watchmaker"
 founded: 2019
 revived: 
 products: ["Watches"]
-logo: "jose_cermeno.png"
+logo: "jose-cermeno.png"
 status: "active"
 made_in_america: ""
 movements: []

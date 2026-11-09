@@ -11,7 +11,7 @@ contact_title:
 founded: 1998
 revived: 
 products: ["Watches"]
-logo: "montana_watch_company.png"
+logo: "montana-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2010
 revived: 
 products: ["Watches"]
-logo: 
+logo: "wilk.png"
 status: "active"
 made_in_america: ""
 movements: []

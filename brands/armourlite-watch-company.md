@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2007
 revived: 
 products: ["Watches"]
-logo: "armourlite_watch_company.png"
+logo: "armourlite-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

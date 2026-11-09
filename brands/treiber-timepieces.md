@@ -11,7 +11,7 @@ contact_title:
 founded: 2023
 revived: 
 products: ["Watches"]
-logo: "treiber_timepieces.png"
+logo: "treiber-timepieces.png"
 status: "active"
 made_in_america: ""
 movements: []

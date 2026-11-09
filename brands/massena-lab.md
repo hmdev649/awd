@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2018
 revived: 
 products: ["Watches"]
-logo: "massena_lab.png"
+logo: "massena-lab.png"
 status: "active"
 made_in_america: ""
 movements: []

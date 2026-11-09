@@ -11,7 +11,7 @@ contact_title: "Co-Founders"
 founded: 
 revived: 
 products: ["Watches"]
-logo: 
+logo: "solios.png"
 status: "active"
 made_in_america: ""
 movements: []

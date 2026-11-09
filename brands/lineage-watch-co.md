@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2021
 revived: 
 products: ["Watches"]
-logo: "lineage_watch_co_.png"
+logo: "lineage-watch-co.png"
 status: "active"
 made_in_america: ""
 movements: []

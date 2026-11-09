@@ -11,7 +11,7 @@ contact_title:
 founded: 2024
 revived: 
 products: ["Watches"]
-logo: "1776_atelier.png"
+logo: "1776-atelier.png"
 status: "active"
 made_in_america: ""
 movements: []

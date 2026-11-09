@@ -11,7 +11,7 @@ contact_title:
 founded: 2017
 revived: 
 products: ["Watches"]
-logo: "fts_american_manufacturing.png"
+logo: "fts-american-manufacturing.png"
 status: "active"
 made_in_america: ""
 movements: []

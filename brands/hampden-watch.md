@@ -11,7 +11,7 @@ contact_title:
 founded: 1922
 revived: 
 products: ["Watches"]
-logo: "hampden_watch.png"
+logo: "hampden-watch.png"
 status: "active"
 made_in_america: ""
 movements: []

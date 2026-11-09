@@ -11,7 +11,7 @@ contact_title:
 founded: 2009
 revived: 
 products: ["Watches"]
-logo: "resco_instruments.png"
+logo: "resco-instruments.png"
 status: "active"
 made_in_america: ""
 movements: []

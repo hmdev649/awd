@@ -11,7 +11,7 @@ contact_title:
 founded: 2012
 revived: 
 products: ["Watches"]
-logo: "astor___banks.png"
+logo: "astor-and-banks.png"
 status: "active"
 made_in_america: ""
 movements: []

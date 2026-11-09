@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2016
 revived: 
 products: ["Watches"]
-logo: "sangin_instruments.png"
+logo: "sangin-instruments.png"
 status: "active"
 made_in_america: ""
 movements: []

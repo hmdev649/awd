@@ -11,7 +11,7 @@ contact_title: "Founder, Watchmaker"
 founded: 2020
 revived: 
 products: ["Watches"]
-logo: "dm_tiffany.png"
+logo: "dm-tiffany.png"
 status: "active"
 made_in_america: ""
 movements: []

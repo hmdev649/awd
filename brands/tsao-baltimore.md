@@ -11,7 +11,7 @@ contact_title:
 founded: 2017
 revived: 
 products: ["Watches"]
-logo: "tsao_baltimore.png"
+logo: "tsao-baltimore.png"
 status: "active"
 made_in_america: ""
 movements: []

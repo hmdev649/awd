@@ -11,7 +11,7 @@ contact_title:
 founded: 2014
 revived: 
 products: ["Watches"]
-logo: "talley__twine.png"
+logo: "talley-and-twine.png"
 status: "active"
 made_in_america: ""
 movements: []

@@ -11,7 +11,7 @@ contact_title:
 founded: 2020
 revived: 
 products: ["Watches"]
-logo: "clement_design_studio.png"
+logo: "clement-design-studio.png"
 status: "active"
 made_in_america: ""
 movements: []

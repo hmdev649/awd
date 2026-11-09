@@ -11,7 +11,7 @@ contact_title:
 founded: 
 revived: 
 products: ["Watches"]
-logo: "mcdowell_time.png"
+logo: "mcdowell-time.png"
 status: "active"
 made_in_america: ""
 movements: []

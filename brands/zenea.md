@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2019
 revived: 
 products: ["Watches"]
-logo: 
+logo: "zenea.png"
 status: "active"
 made_in_america: ""
 movements: []

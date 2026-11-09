@@ -11,7 +11,7 @@ contact_title:
 founded: 
 revived: 
 products: ["Watches"]
-logo: "detroit_mint.png"
+logo: "detroit-mint.png"
 status: "active"
 made_in_america: ""
 movements: []

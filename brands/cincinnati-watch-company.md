@@ -11,7 +11,7 @@ contact_title:
 founded: 2016
 revived: 
 products: ["Watches"]
-logo: "cincinnati_watch_company.png"
+logo: "cincinnati-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

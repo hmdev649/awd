@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 
 revived: 
 products: ["Watches"]
-logo: "lindow_rose_engineer.png"
+logo: "lindow-rose-engineer.png"
 status: "active"
 made_in_america: ""
 movements: []

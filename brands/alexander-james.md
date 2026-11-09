@@ -11,7 +11,7 @@ contact_title:
 founded: 2014
 revived: 
 products: ["Watches"]
-logo: "alexander_james.png"
+logo: "alexander-james.png"
 status: "active"
 made_in_america: ""
 movements: []

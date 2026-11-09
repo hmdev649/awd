@@ -11,7 +11,7 @@ contact_title: "Founder & CEO"
 founded: 1996
 revived: 
 products: ["Watches"]
-logo: "swiss_watch_company.png"
+logo: "swiss-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

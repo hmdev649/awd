@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 
 revived: 
 products: ["Straps"]
-logo: 
+logo: "velle-alexander.png"
 status: "active"
 made_in_america: ""
 movements: []

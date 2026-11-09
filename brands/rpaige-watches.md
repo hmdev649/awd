@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2012
 revived: 
 products: ["Watches"]
-logo: 
+logo: "rpaige-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

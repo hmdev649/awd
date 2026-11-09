@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2013
 revived: 
 products: ["Watches"]
-logo: "detroit_watch_company.png"
+logo: "detroit-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

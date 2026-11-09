@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2016
 revived: 
 products: ["Watches"]
-logo: "primitive_haus.png"
+logo: "primitive-haus.png"
 status: "active"
 made_in_america: ""
 movements: []

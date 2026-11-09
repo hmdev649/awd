@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2020
 revived: 
 products: ["Watches"]
-logo: "locke___king.png"
+logo: "locke-and-king.png"
 status: "active"
 made_in_america: ""
 movements: []

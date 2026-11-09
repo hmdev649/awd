@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 
 revived: 
 products: ["Straps"]
-logo: "jack_foster.png"
+logo: "jack-foster.png"
 status: "active"
 made_in_america: ""
 movements: []

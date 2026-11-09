@@ -11,7 +11,7 @@ contact_title:
 founded: 2018
 revived: 
 products: ["Watches"]
-logo: "wasson_watches.png"
+logo: "wasson-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

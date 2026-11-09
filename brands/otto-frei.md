@@ -11,7 +11,7 @@ contact_title:
 founded: 1930
 revived: 
 products: ["Tools", "Components"]
-logo: 
+logo: "otto-frei.png"
 status: "active"
 made_in_america: ""
 movements: []

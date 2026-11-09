@@ -11,7 +11,7 @@ contact_title: "Founder, Watchmaker"
 founded: 1995
 revived: 
 products: ["Watches"]
-logo: "dan_spitz.png"
+logo: "dan-spitz.png"
 status: "active"
 made_in_america: ""
 movements: []

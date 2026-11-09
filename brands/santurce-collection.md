@@ -11,7 +11,7 @@ contact_title:
 founded: 
 revived: 
 products: ["Watches"]
-logo: "santurce_collection.png"
+logo: "santurce-collection.png"
 status: "active"
 made_in_america: ""
 movements: []

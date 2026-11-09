@@ -11,7 +11,7 @@ contact_title:
 founded: 2020
 revived: 
 products: ["Watches"]
-logo: "oberlin_watch_co.png"
+logo: "oberlin-watch-co.png"
 status: "active"
 made_in_america: ""
 movements: []

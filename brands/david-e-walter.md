@@ -11,7 +11,7 @@ contact_title: "Founder, Watchmaker"
 founded: 2002
 revived: 
 products: ["Watches"]
-logo: "david_e_walter.png"
+logo: "david-e-walter.png"
 status: "active"
 made_in_america: ""
 movements: []

@@ -11,7 +11,7 @@ contact_title:
 founded: 1990
 revived: 
 products: ["Watches"]
-logo: "the_american_time_companies.png"
+logo: "the-american-time-companies.png"
 status: "active"
 made_in_america: ""
 movements: []

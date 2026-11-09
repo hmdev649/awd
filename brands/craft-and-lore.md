@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 
 revived: 
 products: ["Straps"]
-logo: "craft_and_lore.png"
+logo: "craft-and-lore.png"
 status: "active"
 made_in_america: ""
 movements: []

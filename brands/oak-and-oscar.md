@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2015
 revived: 
 products: ["Watches"]
-logo: "oak_and_oscar.png"
+logo: "oak-and-oscar.png"
 status: "active"
 made_in_america: ""
 movements: []

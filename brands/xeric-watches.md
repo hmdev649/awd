@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2013
 revived: 
 products: ["Watches"]
-logo: "xeric_watches.png"
+logo: "xeric-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

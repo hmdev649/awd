@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2009
 revived: 
 products: ["Straps"]
-logo: "daluca_straps.png"
+logo: "daluca-straps.png"
 status: "active"
 made_in_america: ""
 movements: []

@@ -11,7 +11,7 @@ contact_title:
 founded: 2022
 revived: 
 products: ["Watches"]
-logo: "pacific_watch_company.png"
+logo: "pacific-watch-co.png"
 status: "active"
 made_in_america: ""
 movements: []

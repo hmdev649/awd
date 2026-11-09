@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2010
 revived: 
 products: ["Watches"]
-logo: "barrington_griffiths_watch_company.png"
+logo: "barrington-griffiths-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

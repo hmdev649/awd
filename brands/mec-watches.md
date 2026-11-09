@@ -11,7 +11,7 @@ contact_title:
 founded: 2022
 revived: 
 products: ["Watches"]
-logo: "mec_watches.png"
+logo: "mec-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

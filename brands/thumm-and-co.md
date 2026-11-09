@@ -11,7 +11,7 @@ contact_title:
 founded: 2019
 revived: 
 products: ["Watches"]
-logo: "thumm_and_co_.png"
+logo: "thumm-and-co.png"
 status: "active"
 made_in_america: ""
 movements: []

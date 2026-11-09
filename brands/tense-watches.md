@@ -11,7 +11,7 @@ contact_title:
 founded: 1971
 revived: 
 products: ["Watches"]
-logo: 
+logo: "tense-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

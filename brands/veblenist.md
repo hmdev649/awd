@@ -11,7 +11,7 @@ contact_title:
 founded: 
 revived: 
 products: ["Straps"]
-logo: 
+logo: "veblenist.png"
 status: "active"
 made_in_america: ""
 movements: []
