@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.tenacitywatches.com/pages/our-story"]
 instagram_posts: []
-last_updated: "2025-10-05"
+last_updated: "2026-11-08"
 added: "2025-10-05"
 ---
+Tenacity Watches was started by two sailors in the US Submarine Force. They noticed there was no US submarine watch, and took inspiration from the WWII submariners Dudley "Mush" Morton and Medal of Honor recipient Richard O'Kane. Its collections include Anchor, Bubblehead and Midwatch, and it also makes custom watches.

@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://hourprecision.com/about/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Hour Precision is a Columbus, Ohio, manufacturer of ultra-precise CNC-machined components. It started in fine watchmaking and now also makes parts for the medical, aerospace and semiconductor industries, alongside watch components.

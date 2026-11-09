@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://talleyandtwine.com/pages/our-story"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Talley & Twine is a Portsmouth, Virginia, watch company that makes Swiss-made watches with clean, classic designs. A number seven appears on each dial as a symbol of completion. Collections include Red Tails, which honors the Tuskegee Airmen.

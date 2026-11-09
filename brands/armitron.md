@@ -18,6 +18,7 @@ movements: []
 price_range: ""
 sources: []
 instagram_posts: []
-last_updated: "2025-10-05"
+last_updated: "2026-11-08"
 added: "2025-10-05"
 ---
+Armitron is the house brand of E. Gluck Corporation, a watch company based in Little Neck, Queens, New York. Since 1975 it has sold affordable quartz and digital watches through department stores and mass-market retailers.

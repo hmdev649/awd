@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.clementdesignstudio.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Clement Design Studio is the Brooklyn workshop of independent watchmaker Giles Clement. He machines every part of each titanium watch from scratch by hand. His limited editions include the Paris-Toulouse GMT, the Model 255 and the Orbital Chronograph, and buyers order by email.

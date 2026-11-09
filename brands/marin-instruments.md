@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.marininstruments.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Marin Instruments is a Santa Fe, New Mexico, brand that makes purpose-built tool watches for land, sea and air, aimed at people who make adventure a way of life.

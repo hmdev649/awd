@@ -21,3 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Solios is a Montreal brand founded by Samuel Leroux and Alexandre Desabrais that makes solar-powered watches with sustainability in mind. It launched on Kickstarter in 2018 and delivered its first watches in 2019. The watches use Japanese solar movements, recycled stainless steel and vegan leather, and come in recycled packaging. Final assembly and quality control are done in Montreal.

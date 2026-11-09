@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.bertucciwatches.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Bertucci makes titanium field watches in Gurnee, Illinois. It has been making them since 2003, and they are built for outdoor and military-style use. The range includes tritium-lit models and the Pro-Guard line, and the brand also sells its own straps.

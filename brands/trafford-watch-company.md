@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.traffordwatchco.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Trafford Watch Co. makes bold automatic watches in Austin, Texas, with what it calls a modern Americana style. Its range includes the Daytripper, with special editions such as the Violet Crown.

@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.montanawatch.com/pages/about"]
 instagram_posts: []
-last_updated: "2025-10-05"
+last_updated: "2026-11-08"
 added: "2025-10-05"
 ---
+Montana Watch Company has made heirloom watches by hand in Livingston, Montana, since 1998. It works with artisans near and far, and offers a bespoke service for custom pieces.

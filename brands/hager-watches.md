@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.hagerwatches.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Hager Watches is a Hagerstown, Maryland brand that has made watches for more than fifteen years. Its designs are clean and uncluttered, aimed at what it calls the gentleman adventurer.

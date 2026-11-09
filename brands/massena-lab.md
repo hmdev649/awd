@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://massenalab.com/pages/about"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Massena LAB was founded in New York by watch collector and industry expert William Massena. It conceives limited-edition watches and develops them together with independent watchmakers and manufacturers around the world, often proposing designs beyond those makers' usual collections.

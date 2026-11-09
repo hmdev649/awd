@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.originwatch.com/about"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Origin Watch Company is a Memphis brand founded in 2014 that designs and builds fully mechanical watches inspired by American and Swiss timepieces from the late 1800s to the mid-20th century. Its models include a field watch and a Railway Edition.

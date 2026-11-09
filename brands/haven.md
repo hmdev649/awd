@@ -16,8 +16,11 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://havenwatchco.com/pages/about-us"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Haven Watch Co. is a Midwestern brand in Fort Wayne, Indiana. Its in-house watchmakers assemble, adjust, regulate and repair its watches in the US, and some components are also made in the US. The movements are Swiss.
+
+Its watches aim to be well made and everyday-tough, without needing to be babied.

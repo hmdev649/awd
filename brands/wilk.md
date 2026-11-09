@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: ["https://watchclicker.com/interview-wilk-watchworks/", "https://madeinca.ca/accessories-wilk-watchworks/"]
+sources: ["https://watchclicker.com/interview-wilk-watchworks/", "https://madeinca.ca/accessories-wilk-watchworks/", "https://www.wilkwatchworks.com/about.html"]
 instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Wilk Watchworks has designed and built custom handmade watches in Toronto for more than ten years. It makes quartz and automatic models, including a tourbillon, and offers customization of materials and dials as well as full servicing.

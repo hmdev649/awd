@@ -16,8 +16,11 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.americanwatch.com/about-us/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+American Watch Company is a Los Angeles private-label watch manufacturer. It started in 1988 and makes custom watches, private-label timepieces and smartwatches for other brands.
+
+It describes itself as vertically integrated, handling product development, design, production and logistics for clients that range from heritage-style mechanical watches to fashion models.

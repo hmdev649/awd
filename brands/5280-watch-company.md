@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://wornandwound.com/colorados-best-kept-secret-the-5280-watch-company-is-making-timepieces-with-enamel-dials-for-under-4000/", "https://thecalibratedwrist.com/tag/5280-watch-company/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+5280 Watch Company is a Denver brand run by a husband-and-wife team, named after the city's mile-high elevation. It makes limited-edition watches with handmade enamel dials. The Ajax, limited to 250 numbered pieces, has a guilloché champlevé enamel dial. The Antero has a basse-taille enamel dial.

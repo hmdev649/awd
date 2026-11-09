@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.visitorwatchco.com/about-us"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Visitor Watch Co. is a small independent mechanical watch company in Greenwood, Indiana, founded in 2013 as a creative outlet where art meets mechanics. It designs as many parts as it can itself, down to the buckle tang, and avoids catalog cases and homage designs. Teddy Baldassarre named it one of America's top 25 watch brands.

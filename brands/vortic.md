@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://vorticwatches.com/pages/about-us"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Vortic Watch Company of Fort Collins, Colorado, is known for its American Artisan Series. These watches convert salvaged and restored antique American pocket-watch movements into one-of-a-kind wristwatches. The brand says its watches are designed, manufactured and built in America.

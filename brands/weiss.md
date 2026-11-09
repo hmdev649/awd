@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://weisswatchcompany.com/pages/about"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Weiss Watch Company was founded by watchmaker Cameron Weiss in 2013 and is now an independent atelier in Nashville. It makes limited-edition mechanical watches by hand, drawing on the discipline of Swiss watchmaking. The brand's motto is restoring prestige to American watchmaking.

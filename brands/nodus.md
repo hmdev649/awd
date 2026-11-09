@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.noduswatches.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Nodus is a Los Angeles brand founded in 2017 that develops its designs through hands-on research and testing. Its range includes the Sector II pilot and sport watches and the Deep tool watch. It has collaborated with Raven Watches on the Trailtrekker.

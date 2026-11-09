@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.towsonwatchcompany.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Towson Watch Company has made watches in Maryland since 1998. It makes limited-edition mechanical watches, usually in editions of 100, assembled and regulated by hand with Swiss and German movements and sold direct. Its newest model is the Talbot.

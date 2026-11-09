@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.bremoir.com/pages/about-us"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+BREMOIR is a New York brand whose designs draw on the Art Deco era of the 1920s and 1930s. Its South Beach collection takes its colors and curves from the Art Deco architecture of Miami Beach. Other collections reference Hollywood's golden age.

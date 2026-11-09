@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.xeric.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Xeric is a Provo, Utah, brand founded in 2013 that makes affordable mechanical watches with unusual time displays. Its models include retrograde, jump-hour and wandering-hour designs such as the Halograph, Vendetta and Triptych.

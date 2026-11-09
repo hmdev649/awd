@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://parivas.com"]
 instagram_posts: []
-last_updated: "2026-11-07"
+last_updated: "2026-11-08"
 added: "2026-11-07"
 ---
+Parivas is a Los Angeles watch house focused on additive (3D-printed) case design. Its first watch, the Exo.1 from the Genesis Collection, has a case it describes as built up from nothing.

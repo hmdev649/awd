@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://montawatch.com/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+MONTA is a St. Louis brand, founded in 2016, whose designs pay tribute to the tool, military and dive watches of the 1950s and '60s. It uses only Swiss movements and Swiss manufacturers. Models include the Triton, Noble, Skyquest and Oceanking.

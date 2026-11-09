@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.lamottewatchco.com/about/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+LaMotte Watch Co. is a family company in California that designs and assembles mechanical watches in the USA. Its first model is the Balboa automatic, launched in 2023.

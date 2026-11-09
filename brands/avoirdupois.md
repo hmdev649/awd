@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://avoirdupois.com"]
 instagram_posts: []
-last_updated: "2026-11-07"
+last_updated: "2026-11-08"
 added: "2026-11-07"
 ---
+Avoirdupois is a watch manufacturer in lower Manhattan that makes its watches in-house rather than buying finished parts. Its models include the Force Majeure 150, the Force Majeure 150R and the Practitioner 150.

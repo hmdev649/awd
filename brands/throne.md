@@ -12,12 +12,13 @@ founded: 2012
 revived: 
 products: ["Watches"]
 logo: "throne.png"
-status: "active"
+status: "inactive"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://zacksears.com/throne/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Throne was a New York watch brand founded in 2012. Its owners have announced that they are pausing the company for the foreseeable future, and they refer owners who need repairs to 1:46 Watch Repair.

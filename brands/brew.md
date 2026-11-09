@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.brew-watches.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Brew Watch Co. was founded in New York City in 2015 by designer Jonathan Ferrer. Its retro-styled watches take cues from espresso machines and coffee-shop culture. Models include the Metric, Super Metric and Retrograph chronographs.

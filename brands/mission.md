@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: ["https://sharpmagazine.com/2020/03/23/5-watch-microbrands-that-make-a-major-statement-on-your-wrist/", "https://monocle.com/radio/shows/the-entrepreneurs/eureka-164"]
+sources: ["https://sharpmagazine.com/2020/03/23/5-watch-microbrands-that-make-a-major-statement-on-your-wrist/", "https://monocle.com/radio/shows/the-entrepreneurs/eureka-164", "https://monocle.com/radio/shows/the-entrepreneurs/eureka-164/"]
 instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Mission Watch Company is a Toronto brand launched in early 2019 by lifelong collector Peter Carayiannis and Aron Solomon. They saw a gap in the market for well-designed, affordable watches.

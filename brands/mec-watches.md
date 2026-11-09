@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.mecwatches.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+MEC Watches is an independent American brand whose first watch is the MEC-1, a jumping-hour watch with a manual-wind movement of its own design. It is made in limited numbers. The MEC-1 has been covered by Hodinkee and GQ and was pre-selected for the GPHG watch awards.

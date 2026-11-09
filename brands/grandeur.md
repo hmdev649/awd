@@ -16,8 +16,11 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://grandeur-usa.com/pages/about"]
 instagram_posts: []
-last_updated: "2026-11-07"
+last_updated: "2026-11-08"
 added: "2026-11-07"
 ---
+Grandeur is a Texas brand that makes complicated watches with its own movements at accessible prices. Founder Belal Shaher, a collector, spent three years learning movement development at a movement factory in China run by his wife's family. In 2016 he bought the factory outright, and it now produces Grandeur's movements.
+
+The brand also makes simpler pieces, such as watches with dials cut from stone.

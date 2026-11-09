@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://oakandoscar.com/pages/our-team"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Oak & Oscar is an independent watch company founded in Chicago in 2015. Its models include the Atwood Chronograph, the Olmsted and the Humboldt GMT, along with hand-painted dial pieces. It also makes straps and accessories, and sees customers by appointment.

@@ -21,3 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Makoto Watch Company is an Ontario microbrand founded by Ryan LeClair. Its signature line, the Kodawari Collection, is a series of automatic watches with real stone dials.

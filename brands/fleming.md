@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.fleming.watch"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Fleming is an independent New York watch brand that pairs traditional watchmaking craft with contemporary design. Its Series 1 Mark II comes in editions such as Redwood and Pacific.

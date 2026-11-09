@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://hesiliny.com/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+HESILI is a New York brand that sells affordable Swiss-made watches. Its first collection has lacquered dials in classic colors under a double-domed sapphire crystal.

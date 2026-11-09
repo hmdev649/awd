@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://teleportwatches.com/pages/our-story"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Teleport is a New York designer watch company that makes sporty men's and women's watches on silicone and metal straps. A number seven, the brand's signature, appears on every watch.

@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://lindowroseengine.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Lindow makes the Lindow Rose Engine, a modern ornamental lathe used for rose-engine turning, the technique behind guilloché patterns on watch dials and other objects. The machine is built in Columbus, Ohio, by Columbus Machine.

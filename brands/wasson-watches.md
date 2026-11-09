@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://wassonwatch.com/pages/about"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Wasson Watch Co. is a veteran-owned, Christian watch company in Dallas, Texas. It makes military-inspired field watches with Swiss-made movements, Dominion dive watches and a 250th Anniversary watch.

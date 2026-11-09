@@ -18,6 +18,7 @@ movements: []
 price_range: ""
 sources: []
 instagram_posts: []
-last_updated: "2026-11-07"
+last_updated: "2026-11-08"
 added: "2026-11-07"
 ---
+Otto Frei is an Oakland, California, supplier of watchmaking and jewelry tools, parts and materials. Founded in 1930, it serves professional watchmakers, students and hobbyists across the US.

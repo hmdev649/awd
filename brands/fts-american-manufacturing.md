@@ -16,8 +16,11 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.ftsusa.us/about-us/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+FTS USA is a watch manufacturer in Mesa, Arizona, that helps brands move production to the United States. It designs, engineers, sources, builds and tests watches for client brands.
+
+Its stated goals include building an American watchmaking workforce, bringing manufacturing back to the US and promoting a neurodiverse workplace.

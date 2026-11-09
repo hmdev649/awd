@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://longislandwatch.com/collections/islander-watches"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Islander is the house brand of Long Island Watch, a family-run watch retailer in Farmingdale, New York. Launched in 2019, it covers nearly every style, including dive, pilot, field, dress and everyday watches, at prices below comparable big-brand models.

@@ -16,8 +16,11 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://lineagewatchco.com/pages/about-us"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Lineage Watch Co. is a San Diego watch company founded by siblings Brianna and Evan. It grew out of their tradition of giving each other watches. The company is woman-, minority- and family-owned, and emphasizes American craftsmanship and giving back to local communities.
+
+It is a partner of the Anaheim Ducks and the official timepiece of the San Diego Gulls. Its collections include the Destiny II.

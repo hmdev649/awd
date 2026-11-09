@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://mercerwatch.co"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Mercer Watch Company is a Princeton, New Jersey, brand founded in 2014. It makes watches such as the Lexington Chronograph, and also sells straps.

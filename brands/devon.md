@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.devonworks.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Devon Works is an American luxury watchmaker known for unusual mechanical-electronic designs. Its watches show the time on moving belts instead of hands. Only a limited number are available today, and the company still offers service and accessories for existing owners.

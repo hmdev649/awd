@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: ["https://nuvomagazine.com/daily-edit/toronto-based-watchmaker-vieren-takes-centre-stage-with-the-release-of-gold-sunray", "https://sharpmagazine.com/2022/02/04/vieren-watches-profile"]
+sources: ["https://nuvomagazine.com/daily-edit/toronto-based-watchmaker-vieren-takes-centre-stage-with-the-release-of-gold-sunray", "https://sharpmagazine.com/2022/02/04/vieren-watches-profile", "https://vieren.co/pages/about"]
 instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+VIEREN is a Toronto brand that makes Swiss-made automatic rectangular watches with an architectural look, in limited editions. Its founder grew up in a watchmaking family: their grandparents worked in watches, and their parents met at Baselworld.

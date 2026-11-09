@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://koboldwatch.com/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+KOBOLD has made professional-grade tool watches since 1998. It is known for expedition watches such as the Polar Surveyor chronograph and the Soarway Diver, and also makes travel accessories and pens. In 2026 the brand announced that it had temporarily suspended operations.

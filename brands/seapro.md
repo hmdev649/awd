@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.seaprowatches.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+SeaPro is a Los Angeles brand founded in 2003. It makes water-resistant watches for surfing, scuba diving, spearfishing and everyday wear.

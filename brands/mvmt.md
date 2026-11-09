@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://mvmt.com/pages/our-story"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+MVMT is a Los Angeles watch and accessories brand founded in 2013. It sells affordable, minimalist fashion watches and eyewear, mainly online. It has been owned by the Movado Group since 2018.

@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.shinola.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Shinola was founded in Detroit in 2011 with the goal of bringing watchmaking back to the United States. It assembles watches in Detroit, and also makes leather goods, bicycles and audio products.

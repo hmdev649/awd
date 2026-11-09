@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://www.rgmwatches.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+RGM Watch Co. was founded in 1992 by watchmaker Roland G. Murphy and is based in Lancaster County, Pennsylvania. It is one of the few American companies making its own mechanical movements. It is also known for engine-turned (guilloché) dials, glass enamel work and bespoke watches.

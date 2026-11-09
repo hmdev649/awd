@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://ravenwatches.com/pages/about"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Raven Watches is owned and run by Steve Laughlin in Overland Park, Kansas, who has designed and produced watches since 2008. Raven makes automatic dive watches in limited quantities for divers, collectors and enthusiasts, and also makes knives.

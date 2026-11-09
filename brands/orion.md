@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://orionwatch.com"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Orion is a watch brand in Swarthmore, Pennsylvania, founded in 2016. It makes the Hellcat, Calamity dive watch, Sylph and Standard models, as well as hand-engraved and special-edition pieces. It also sells straps, parts and what it calls horological curios.

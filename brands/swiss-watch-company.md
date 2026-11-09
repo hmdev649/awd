@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://swcusa.com/pages/about-us"]
 instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Swiss Watch Company (SWC) was founded in 1996 by Stephen Roemer. It started out making watches for the armed forces and first responders. Its range includes the Convertible, Pioneer, Bunker, Hyper-G and ARK models, as well as the MKII Diver and a chronograph.

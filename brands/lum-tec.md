@@ -16,8 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: []
+sources: ["https://lum-tec.com/"]
 instagram_posts: []
-last_updated: "2025-09-29"
+last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
+Lüm-Tec is a family-run watch company in Mentor, Ohio, founded in 2008. It is known for bright luminous dials on its sport and tool watches, which it releases as yearly collections along with straps and accessories.
