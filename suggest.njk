@@ -2,7 +2,7 @@
 permalink: /suggest/
 title: "Suggest a Brand | American Watchmaking Directory"
 description: "Know a watch brand, watchmaker or supplier in the US (or Canada) that we're missing? Tell us about it. Listings are free."
-navActive: "contact"
+navActive: "suggest"
 ---
 {% extends "base.njk" %}
 
@@ -12,12 +12,14 @@ navActive: "contact"
             <p>Know a watch brand, independent watchmaker or supplier we're missing? Tell us what you know; partial answers are fine. Listings are always free, and brands can suggest themselves. Already listed but something's wrong? <a href="/update/">Update a listing</a> instead.</p>
         </div>
 
+        <div class="form-layout">
         <div class="panel form-panel">
             <form class="js-form" action="{{ site.formspree }}" method="POST" data-subject="Brand suggestion: {brand}" data-success="suggest-done">
                 <input type="hidden" name="form" value="suggest-a-brand">
                 <input type="hidden" name="_subject" value="Brand suggestion">
                 <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
 
+                <p class="required-note">Fields marked * are required. Partial answers are fine.</p>
                 <div class="form-grid">
                     <div class="field full">
                         <label for="brand">Brand or business name *</label>
@@ -55,7 +57,7 @@ navActive: "contact"
                     </div>
 
                     <div class="field full">
-                        <label>What's made in America? <span class="hint">Answer what you know.</span></label>
+                        <p class="group-label">What's made in America? <span class="hint">Answer what you know.</span></p>
                     </div>
                     <div class="field">
                         <label for="movement_made">Where is the movement made?</label>
@@ -103,6 +105,21 @@ navActive: "contact"
                 <h2>Thank you!</h2>
                 <p>We review every suggestion and will add it once we've checked the details. Want to suggest another? <a href="/suggest/">Start again</a>.</p>
             </div>
+        </div>
+            <aside class="form-aside">
+                <div class="card">
+                    <h2>What happens next</h2>
+                    <ol>
+                        <li>We read every suggestion and check the details against the brand's own website and social accounts.</li>
+                        <li>We usually add it within a week. We're volunteers, so it can sometimes take longer.</li>
+                        <li>Listings are always free, with no ads or paid placements.</li>
+                    </ol>
+                </div>
+                <div class="card">
+                    <h2>Already listed?</h2>
+                    <p>Use <a href="/update/">Update a listing</a> to fix something or add detail, like what's made in America.</p>
+                </div>
+            </aside>
         </div>
 {% endblock %}
 

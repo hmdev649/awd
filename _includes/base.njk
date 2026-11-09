@@ -13,7 +13,12 @@
     <meta property="og:url" content="{{ site.url }}{{ page.url | replace('/index.html', '/') }}">
     <meta property="og:image" content="{{ site.url }}{{ ogImage or site.ogImage }}">
     <meta name="twitter:card" content="summary">
-    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <meta name="theme-color" content="#fbe9cd">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..800&display=swap">
     <link rel="stylesheet" href="/css/shared.css">
 
     <!-- Google tag (gtag.js) -->
@@ -27,6 +32,7 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="container">
         <header class="top-header">
             <a href="/" class="site-title">{{ site.name }}</a>
@@ -34,29 +40,52 @@
                 {%- for item in site.nav %}
                 <a href="{{ item.url }}" class="nav-link{% if navActive == item.key %} active{% endif %}"{% if navActive == item.key %} aria-current="page"{% endif %}>{{ item.label }}</a>
                 {%- endfor %}
+                <a href="/suggest/" class="btn ghost btn-sm nav-cta{% if navActive == 'suggest' %} active{% endif %}"{% if navActive == 'suggest' %} aria-current="page"{% endif %}>Suggest<span class="long">&nbsp;a brand</span></a>
             </nav>
             <a href="{{ site.instagram }}" target="_blank" rel="noopener" class="instagram-link" title="Follow us on Instagram" aria-label="Instagram">
                 <svg class="instagram-icon" viewBox="0 0 24 24" aria-hidden="true">{% include "icon-instagram.njk" %}</svg>
             </a>
         </header>
 
-        <main>
+        <main id="main">
         {% block main %}{% endblock %}
         </main>
 
         <footer class="footer">
-            <nav class="footer-nav" aria-label="Footer">
-                <a href="/directory.html" class="nav-link">Directory</a>
-                <a href="/map/" class="nav-link">Map</a>
-                <a href="/states/" class="nav-link">States &amp; provinces</a>
-                <a href="/suggest/" class="nav-link">Suggest a brand</a>
-                <a href="/about.html" class="nav-link">About</a>
-                <a href="/contact.html" class="nav-link">Contact</a>
-                <a href="/faqs.html" class="nav-link">FAQs</a>
-                <a href="/terms.html" class="nav-link">Terms</a>
-                <a href="/privacy.html" class="nav-link">Privacy Policy</a>
-            </nav>
-            <p class="footer-text">&copy; {{ site.year }} {{ site.name }}. Run by volunteers; not affiliated with any brand listed.</p>
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="/" class="footer-title">{{ site.name }}</a>
+                    <p>A free, volunteer-run guide to the people making watches in America.</p>
+                    <a href="{{ site.instagram }}" class="footer-ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true">{% include "icon-instagram.njk" %}</svg>@watchmakingusa</a>
+                </div>
+                <nav class="footer-col" aria-labelledby="f-explore">
+                    <h2 id="f-explore">Explore</h2>
+                    <ul>
+                        <li><a href="/directory.html">Directory</a></li>
+                        <li><a href="/map/">Map</a></li>
+                        <li><a href="/states/">States &amp; provinces</a></li>
+                    </ul>
+                </nav>
+                <nav class="footer-col" aria-labelledby="f-contribute">
+                    <h2 id="f-contribute">Contribute</h2>
+                    <ul>
+                        <li><a href="/suggest/">Suggest a brand</a></li>
+                        <li><a href="/update/">Update a listing</a></li>
+                        <li><a href="/american-watch-makers.csv">Download the data</a></li>
+                    </ul>
+                </nav>
+                <nav class="footer-col" aria-labelledby="f-about">
+                    <h2 id="f-about">About</h2>
+                    <ul>
+                        <li><a href="/about.html">About us</a></li>
+                        <li><a href="/faqs.html">FAQs</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/terms.html">Terms</a></li>
+                        <li><a href="/privacy.html">Privacy</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <p class="footer-bottom">&copy; {{ site.year }} {{ site.name }}. Run by volunteers; not affiliated with any brand listed.</p>
         </footer>
     </div>
     {% block scripts %}{% endblock %}

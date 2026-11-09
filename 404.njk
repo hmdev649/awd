@@ -1,0 +1,25 @@
+---
+permalink: /404.html
+title: "Page not found | American Watchmaking Directory"
+description: "This page doesn't exist. Search the American Watchmaking Directory instead."
+eleventyExcludeFromCollections: true
+---
+{% extends "base.njk" %}
+
+{% block main %}
+        <div class="page-intro notfound">
+            <h1>We couldn't find that page</h1>
+            <p>The link may be old, or the brand may have moved. Try searching the directory:</p>
+            <form class="hero-search" action="/directory.html" method="get" role="search">
+                <label for="nf-q" class="sr-only">Search the directory</label>
+                <input id="nf-q" name="q" type="search" placeholder="Search a brand, city or state">
+                <button class="btn" type="submit">Search</button>
+            </form>
+            <div class="hero-links">
+                <a href="/">Home</a>
+                <a href="/directory.html">Directory</a>
+                <a href="/map/">Map</a>
+                <a href="/states/">States &amp; provinces</a>
+            </div>
+        </div>
+{% endblock %}

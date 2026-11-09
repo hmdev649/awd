@@ -14,46 +14,6 @@
 {%- set regionGroup = collections.regions | regionGroup(region) -%}
 
 {% block head %}
-    <style>
-        .back-link { display: inline-block; color: var(--ink); text-decoration: none; font-weight: 500; margin-bottom: 16px; opacity: .85; }
-        .back-link:hover { opacity: 1; text-decoration: underline; }
-        .brand-card { background: var(--paper); border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); color: var(--ink); }
-        .brand-head { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; padding-bottom: 28px; border-bottom: 1px solid var(--line); margin-bottom: 28px; position: relative; }
-        .brand-head .logo-box { border-radius: 16px; border: 2px solid #ddd; }
-        .brand-head .monogram { font-size: 2.4rem; }
-        .brand-head h1 { font-family: 'Manrope', sans-serif; font-size: 2.4rem; line-height: 1.15; margin-bottom: 6px; }
-        .brand-loc { font-size: 1.1rem; color: var(--muted); margin-bottom: 12px; }
-        .brand-loc a { color: inherit; }
-        .chips { display: flex; gap: 8px; flex-wrap: wrap; }
-        .chips .chip { font-size: .85rem; padding: 4px 14px; }
-        .flag { position: absolute; top: 0; right: 0; width: 32px; height: 32px; }
-        .flag img { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; }
-        .brand-links { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
-        .brand-link svg { width: 20px; height: 20px; fill: currentColor; }
-        .brand-body h2 { font-family: 'Manrope', sans-serif; font-size: 1.4rem; margin: 28px 0 12px; }
-        .brand-body h2:first-child { margin-top: 0; }
-        .brand-body p { line-height: 1.75; margin-bottom: 14px; }
-        .brand-body a { color: var(--ink); }
-        .placeholder { background: var(--cream); border-radius: 12px; padding: 20px 24px; }
-        .placeholder a { color: var(--ink); font-weight: 600; }
-        .tier-box { display: flex; gap: 14px; align-items: flex-start; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 0 0 28px; }
-        .tier-box strong { display: block; font-family: 'Manrope', sans-serif; font-size: 1.05rem; }
-        .tier-box p { margin: 2px 0 0; color: var(--muted); font-size: .95rem; }
-        .tier-box a { color: var(--ink); font-size: .9rem; }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin: 8px 0 24px; }
-        .gallery figure { margin: 0; }
-        .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; display: block; }
-        .gallery figcaption { font-size: .8rem; color: var(--muted); margin-top: 4px; }
-        .sources { margin: 8px 0 0 18px; font-size: .9rem; }
-        .sources a { color: var(--ink); word-break: break-word; }
-        .brand-meta { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); font-size: .9rem; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-        .brand-meta a { color: var(--ink); font-weight: 600; }
-        @media (max-width: 768px) {
-            .brand-card { padding: 22px; }
-            .brand-head { gap: 18px; }
-            .brand-head h1 { font-size: 1.8rem; }
-        }
-    </style>
     <script type="application/ld+json">{{ {
         "@context": "https://schema.org",
         "@type": "Organization",
@@ -64,93 +24,120 @@
         "address": { "@type": "PostalAddress", "addressLocality": city or undefined, "addressRegion": state or undefined, "addressCountry": country },
         "sameAs": [instagram] if instagram else undefined
     } | json | safe }}</script>
+    <script type="application/ld+json">{{ {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Directory", "item": site.url + "/directory.html" },
+            { "@type": "ListItem", "position": 2, "name": region.name, "item": site.url + (region | regionUrl) } if region else undefined,
+            { "@type": "ListItem", "position": 3 if region else 2, "name": name }
+        ] | select
+    } | json | safe }}</script>
 {% endblock %}
 
 {% block main %}
-        <a class="back-link" href="/directory.html">&larr; Back to the directory</a>
-        <article class="brand-card">
-            <div class="brand-head">
-                {% if country == "US" or country == "CA" %}
-                <div class="flag" title="{{ country | countryName }}"><img src="/images/{{ country | lower }}_flag.png" alt="{{ country | countryName }} flag"></div>
-                {% endif %}
-                {{ m.logo({ name: name, thumb: thumb }, 120) }}
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/directory.html">Directory</a><span class="sep" aria-hidden="true">&rsaquo;</span>
+            {%- if region %}<a href="{{ region | regionUrl }}">{{ region.name }}</a><span class="sep" aria-hidden="true">&rsaquo;</span>{% endif -%}
+            <span aria-current="page">{{ name }}</span>
+        </nav>
+
+        <article>
+            <header class="brand-head">
+                <div class="brand-logo">
+                    <span class="ltile-art">
+                        {%- if thumb -%}
+                        <img src="{{ thumb.src2x }}" srcset="{{ thumb.src2x }} 256w, {{ thumb.large }} 512w" sizes="(max-width: 600px) 96px, 150px" alt="{{ name }} logo" width="256" height="256">
+                        {%- else -%}
+                        <span class="monogram" aria-hidden="true">{{ name | first | upper }}</span>
+                        {%- endif -%}
+                    </span>
+                </div>
                 <div>
                     <h1>{{ name }}</h1>
-                    <div class="brand-loc">
+                    <p class="brand-sub">
                         {%- if region %}{% if city %}{{ city }}, {% endif %}<a href="{{ region | regionUrl }}">{{ region.name }}</a>, {{ country | countryName }}{% else %}{{ loc }}{% endif -%}
+                    </p>
+                    {% if status and statusLabels[status] %}<span class="chip status {{ status }}">{{ statusLabels[status] }}</span>{% endif %}
+                </div>
+            </header>
+
+            <div class="brand-layout">
+                <aside class="card glance" aria-labelledby="glance-h">
+                    <h2 id="glance-h">At a glance</h2>
+                    <dl>
+                        <dt>Based in</dt>
+                        <dd>{{ loc }}{% if state %}, {{ country | countryName }}{% endif %}</dd>
+                        {% if founded %}<dt>Founded</dt><dd>{{ founded }}{% if revived %} (revived {{ revived }}){% endif %}</dd>{% endif %}
+                        {% if products and products.length %}<dt>Makes</dt><dd>{{ products | join(", ") }}</dd>{% endif %}
+                        {% if movements and movements.length %}<dt>Movements</dt><dd>{{ movements | join(", ") | capitalize }}</dd>{% endif %}
+                        {% if tier %}<dt>Made in America</dt><dd>{{ tier.label }}</dd>{% endif %}
+                    </dl>
+                    {% if website or instagram or email %}
+                    <div class="btn-row">
+                        {% if website %}<a class="btn" href="{{ website }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.93-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Website</a>{% endif %}
+                        {% if instagram %}<a class="btn{% if website %} ghost{% endif %}" href="{{ instagram }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true">{% include "icon-instagram.njk" %}</svg>Instagram</a>{% endif %}
+                        {% if email %}<a class="btn ghost" href="mailto:{{ email }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>{% endif %}
                     </div>
-                    <div class="chips">
-                        {% if status and statusLabels[status] %}<span class="chip status {{ status }}">{{ statusLabels[status] }}</span>{% endif %}
-                        {% if tier %}<span class="chip tier">{{ tier.short }}</span>{% endif %}
-                        {% if founded %}<span class="chip">Founded {{ founded }}</span>{% endif %}
-                        {% if revived %}<span class="chip">Revived {{ revived }}</span>{% endif %}
-                        {% for p in products %}<span class="chip light">{{ p }}</span>{% endfor %}
-                        {% for mv in movements %}<span class="chip light">{{ mv | capitalize }}</span>{% endfor %}
+                    {% endif %}
+                </aside>
+
+                <div class="panel brand-main">
+                    {% if status == "inactive" or status == "defunct" %}
+                    <div class="notice">
+                        <span class="chip status {{ status }}">{{ statusLabels[status] }}</span>
+                        <p>As far as we know, {{ name }} is no longer making or selling products. We keep the listing for the record. Know otherwise? <a href="/update/?brand={{ name | urlencode }}">Let us know</a>.</p>
+                    </div>
+                    {% elif status == "upcoming" %}
+                    <div class="notice">
+                        <span class="chip status upcoming">{{ statusLabels.upcoming }}</span>
+                        <p>{{ name }} hasn't released products yet.</p>
+                    </div>
+                    {% endif %}
+
+                    {% if tier %}
+                    <div class="notice tier-box">
+                        <span class="chip tier">{{ tier.short }}</span>
+                        <div>
+                            <strong>{{ tier.label }}</strong>
+                            <p>{{ tier.description }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if photos and photos.length %}
+                    <div class="gallery">
+                        {% for p in photos %}
+                        <figure>
+                            <img src="{{ ('/' + p.src) | replace('//', '/') }}" alt="{{ p.alt }}" loading="lazy" decoding="async">
+                            {% if p.credit %}<figcaption>Photo: {{ p.credit }}</figcaption>{% endif %}
+                        </figure>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="brand-body">
+                        {% if bodyText %}
+                        {{ content | safe }}
+                        {% else %}
+                        <div class="placeholder">
+                            <p>We're still writing this profile. Know {{ name }} well, or work there? <a href="/update/?brand={{ name | urlencode }}">Send us details</a> about what they make and what's made in America.</p>
+                        </div>
+                        {% endif %}
+
+                        {% if sources and sources.length %}
+                        <h2>Sources</h2>
+                        <ol class="sources">
+                            {% for s in sources %}<li><a href="{{ s }}" target="_blank" rel="noopener">{{ s | replace("https://", "") | replace("http://", "") | replace("www.", "") }}</a></li>{% endfor %}
+                        </ol>
+                        {% endif %}
+                    </div>
+
+                    <div class="brand-meta">
+                        <span>{% if last_updated %}Last updated {{ last_updated | readableDate }}{% endif %}</span>
+                        <span>Is this your brand, or is something wrong? <a href="/update/?brand={{ name | urlencode }}">Update this listing</a></span>
                     </div>
                 </div>
-            </div>
-
-            <div class="brand-links">
-                {% if website %}<a class="btn brand-link" href="{{ website }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.93-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Website</a>{% endif %}
-                {% if instagram %}<a class="btn brand-link" href="{{ instagram }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true">{% include "icon-instagram.njk" %}</svg>Instagram</a>{% endif %}
-                {% if email %}<a class="btn brand-link" href="mailto:{{ email }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>{% endif %}
-            </div>
-
-            {% if status == "inactive" or status == "defunct" %}
-            <div class="tier-box">
-                <span class="chip status {{ status }}">{{ statusLabels[status] }}</span>
-                <div>
-                    <p>As far as we know, {{ name }} is no longer making or selling products. We keep the listing for the record. Know otherwise? <a href="/update/?brand={{ name | urlencode }}">Let us know</a>.</p>
-                </div>
-            </div>
-            {% elif status == "upcoming" %}
-            <div class="tier-box">
-                <span class="chip status upcoming">{{ statusLabels.upcoming }}</span>
-                <div><p>{{ name }} hasn't released products yet.</p></div>
-            </div>
-            {% endif %}
-
-            {% if tier %}
-            <div class="tier-box">
-                <span class="chip tier">{{ tier.short }}</span>
-                <div>
-                    <strong>{{ tier.label }}</strong>
-                    <p>{{ tier.description }}</p>
-                </div>
-            </div>
-            {% endif %}
-
-            {% if photos and photos.length %}
-            <div class="gallery">
-                {% for p in photos %}
-                <figure>
-                    <img src="{{ ('/' + p.src) | replace('//', '/') }}" alt="{{ p.alt }}" loading="lazy" decoding="async">
-                    {% if p.credit %}<figcaption>Photo: {{ p.credit }}</figcaption>{% endif %}
-                </figure>
-                {% endfor %}
-            </div>
-            {% endif %}
-
-            <div class="brand-body">
-                {% if bodyText %}
-                {{ content | safe }}
-                {% else %}
-                <div class="placeholder">
-                    <p>We're still writing this profile. Know {{ name }} well, or work there? <a href="/update/?brand={{ name | urlencode }}">Send us details</a> about what they make and what's made in America.</p>
-                </div>
-                {% endif %}
-
-                {% if sources and sources.length %}
-                <h2>Sources</h2>
-                <ol class="sources">
-                    {% for s in sources %}<li><a href="{{ s }}" target="_blank" rel="noopener">{{ s | replace("https://", "") | replace("http://", "") | replace("www.", "") }}</a></li>{% endfor %}
-                </ol>
-                {% endif %}
-            </div>
-
-            <div class="brand-meta">
-                <span>{% if last_updated %}Last updated {{ last_updated | readableDate }}{% endif %}</span>
-                <span>Is this your brand, or is something wrong? <a href="/update/?brand={{ name | urlencode }}">Update this listing</a></span>
             </div>
         </article>
 

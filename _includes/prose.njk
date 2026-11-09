@@ -1,0 +1,26 @@
+{#- Layout for text pages (About, FAQs, Terms, Privacy): title and intro at the
+    top, text in a readable column, and an "On this page" list beside it on
+    wide screens (filled in by js/toc.js from the page's h2 headings). -#}
+{% extends "base.njk" %}
+
+{% block main %}
+        <div class="page-intro">
+            <h1>{{ heading }}</h1>
+            {% if intro %}<p>{{ intro | safe }}</p>{% endif %}
+            {% if meta %}<p class="meta">{{ meta | safe }}</p>{% endif %}
+        </div>
+
+        <div class="prose-layout">
+            <div class="panel prose">
+                {% block content %}{% endblock %}
+            </div>
+            <div class="toc-wrap">
+                <nav class="toc" aria-labelledby="toc-h">
+                    <h2 id="toc-h">On this page</h2>
+                    <ol></ol>
+                </nav>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}<script src="/js/toc.js"></script>{% endblock %}

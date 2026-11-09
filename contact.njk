@@ -2,21 +2,9 @@
 permalink: /contact.html
 title: "Contact | American Watchmaking Directory"
 description: "Get in touch with the American Watchmaking Directory: suggest a brand, update a listing, or ask about partnerships."
-navActive: "contact"
+navActive: ""
 ---
 {% extends "base.njk" %}
-
-{% block head %}
-    <style>
-        .options { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; max-width: 760px; }
-        .option { display: block; background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 18px 20px; color: var(--ink); text-decoration: none; }
-        .option:hover { border-color: var(--ink); }
-        .option strong { display: block; font-family: 'Manrope', sans-serif; font-size: 1.15rem; margin-bottom: 2px; }
-        .option span { color: var(--muted); font-size: .92rem; }
-        .form-panel h2 { font-family: 'Manrope', sans-serif; font-size: 1.3rem; margin-bottom: 14px; }
-        @media (max-width: 640px) { .options { grid-template-columns: 1fr; } }
-    </style>
-{% endblock %}
 
 {% block main %}
         <div class="page-intro">
@@ -24,6 +12,8 @@ navActive: "contact"
             <p>Most messages are about listings, so those have their own forms:</p>
         </div>
 
+        <div class="form-layout">
+        <div>
         <div class="options">
             <a class="option" href="/suggest/"><strong>Suggest a brand &rarr;</strong><span>Tell us about a brand, watchmaker or supplier we're missing.</span></a>
             <a class="option" href="/update/"><strong>Update a listing &rarr;</strong><span>Fix something wrong, or add detail to your brand's listing.</span></a>
@@ -36,6 +26,7 @@ navActive: "contact"
                 <input type="hidden" name="_subject" value="New contact form submission">
                 <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
 
+                <p class="required-note">Fields marked * are required.</p>
                 <div class="form-grid">
                     <div class="field">
                         <label for="name">Name *</label>
@@ -74,6 +65,18 @@ navActive: "contact"
                 <h2>Message received</h2>
                 <p>Thanks for writing. We'll get back to you soon.</p>
             </div>
+        </div>
+        </div>
+            <aside class="form-aside">
+                <div class="card">
+                    <h2>Other ways to reach us</h2>
+                    <p>Send us a message on Instagram at <a href="{{ site.instagram }}" target="_blank" rel="noopener">@watchmakingusa</a>.</p>
+                </div>
+                <div class="card">
+                    <h2>Quick answers</h2>
+                    <p>How listings work, where our information comes from and more are in the <a href="/faqs.html">FAQs</a>.</p>
+                </div>
+            </aside>
         </div>
 {% endblock %}
 

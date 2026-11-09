@@ -11,7 +11,8 @@
 {%- endmacro %}
 
 {#- Brand tile: large logo with a caption underneath. Used on every brand
-    grid; the data-* attributes let js/directory.js filter and sort it. -#}
+    grid; the data-* attributes let js/directory.js filter and sort it.
+    The logo has empty alt text because the caption already names the brand. -#}
 {% macro logoTile(b) -%}
 {%- set d = b.data -%}
 <a class="ltile" href="{{ b.url }}"
@@ -23,7 +24,7 @@
    data-founded="{{ d.founded or '' }}">
   <span class="ltile-art">
     {%- if d.thumb -%}
-    <img src="{{ d.thumb.src2x }}" srcset="{{ d.thumb.src2x }} 256w, {{ d.thumb.large }} 512w" sizes="(max-width: 768px) 33vw, 190px" alt="{{ d.name }} logo" width="256" height="256" loading="lazy" decoding="async">
+    <img src="{{ d.thumb.src2x }}" srcset="{{ d.thumb.src2x }} 256w, {{ d.thumb.large }} 512w" sizes="(max-width: 768px) 33vw, 190px" alt="" width="256" height="256" loading="lazy" decoding="async">
     {%- else -%}
     <span class="monogram" aria-hidden="true">{{ d.name | first | upper }}</span>
     {%- endif -%}

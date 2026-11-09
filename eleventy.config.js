@@ -5,7 +5,7 @@ const byName = (a, b) => a.data.name.localeCompare(b.data.name, "en", { sensitiv
 
 export default function (eleventyConfig) {
   // Hand-written assets and pages that aren't templates are copied through untouched.
-  for (const p of ["test.html", "test-flags.html", "css", "js", "images", "CNAME"]) {
+  for (const p of ["css", "js", "images", "CNAME"]) {
     eleventyConfig.addPassthroughCopy(p);
   }
 
@@ -76,6 +76,30 @@ export default function (eleventyConfig) {
     const i = (week * 7919) % pool.length; // stride through the list so neighbors aren't consecutive
     return pool[i];
   });
+
+  // The first paragraph of a brand's description as plain text, cut at a word
+  // boundary. Read from the Markdown file so it works before the page renders.
+  eleventyConfig.addFilter("excerpt", (b, n = 240) => {
+    const body = fs.readFileSync(b.page.inputPath, "utf8").replace(/^---[\s\S]*?\n---\s*/, "");
+    const para = body.split(/\n\s*\n/).map((s) => s.trim()).find((s) => s && !s.startsWith("#")) || "";
+    const text = para
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+      .replace(/<[^>]+>/g, "")
+      .replace(/[*_`>]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (text.length <= n) return text;
+    return text.slice(0, text.lastIndexOf(" ", n)).replace(/[,;:]$/, "") + "…";
+  });
+
+  // FAQ groups (from faqs.njk front matter) -> schema.org Question list
+  eleventyConfig.addFilter("faqSchema", (groups) =>
+    groups.flatMap((g) => g.items).map((i) => ({
+      "@type": "Question",
+      name: i.q,
+      acceptedAnswer: { "@type": "Answer", text: i.a.replace(/<[^>]+>/g, "") },
+    })));
 
   eleventyConfig.addFilter("oldest", (brands) =>
     brands.filter((b) => b.data.founded).sort((a, b) => a.data.founded - b.data.founded)[0]);

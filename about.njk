@@ -3,139 +3,52 @@ permalink: /about.html
 title: "About | American Watchmaking Directory"
 description: "Who runs the American Watchmaking Directory, why it exists, and what is next for this volunteer-run guide to watch brands, watchmakers and suppliers in the US."
 navActive: "about"
+heading: "About us"
 ---
-{% extends "base.njk" %}
+{% extends "prose.njk" %}
 
-{% block head %}
-    <style>
-        .content-section {
-            background: #f8f4ec;
-            border-radius: 20px;
-            padding: 50px 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
+{% block content %}
+                <p>Welcome to the definitive online directory for American watchmakers and watch brands. The directory exists to spotlight the passion, creativity, and ingenuity fueling horology across the United States, plus a few of our Canadian neighbors.</p>
+                <p>Our mission is simple: to increase visibility for American watchmakers, foster collaboration, and help drive a new golden era for domestic watchmaking. From independent artisans crafting one-of-a-kind pieces to established brands rooted in tradition, we bring together the full spectrum of talent and innovation in one place.</p>
 
-        .content-section h2 {
-            font-family: 'Manrope', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #304047;
-            margin-bottom: 30px;
-            text-align: center;
-        }
+                <h2>What the directory is for</h2>
+                <div class="aims">
+                    <div class="card">
+                        <h3>Visibility &amp; marketing</h3>
+                        <p>We help watchmakers reach new audiences and grow their brand through enhanced online exposure.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Customer engagement &amp; lead generation</h3>
+                        <p>Whether you're a collector, enthusiast, or first-time buyer, our directory makes it easy to discover and connect with American watchmakers that align with your interests.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Supporting recruitment &amp; supply chains</h3>
+                        <p>We help watchmakers find skilled talent and reliable parts and accessories suppliers to strengthen the backbone of American horology.</p>
+                    </div>
+                </div>
 
-        .content-section h3 {
-            font-family: 'Manrope', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #304047;
-            margin: 40px 0 20px 0;
-        }
+                <h2>Who we are</h2>
+                <p>The American Watchmaking Directory is a wholly volunteer-driven initiative created and maintained by two passionate watch enthusiasts in Seattle, Washington.</p>
+                <h3>Hamza</h3>
+                <p>Head of Partnerships at WatchCharts. One of the chapter heads, RedBar Seattle.</p>
+                <h3>Vivek</h3>
+                <p>Software Development Engineer at Expedia.</p>
 
-        .content-section h4 {
-            font-family: 'Manrope', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #304047;
-            margin-bottom: 15px;
-        }
+                <h2>What's up next</h2>
+                <p>There's lots to do. Here's what's currently next on our to-do list, until we get sufficient feedback convincing us to invest in something else first.</p>
+                <ul>
+                    <li>Add structured info on specific attributes (watchmaker, strapmaker, dial maker, etc).</li>
+                    <li>Brand outreach to confirm current information and contribute information on what they make in America.</li>
+                    <li>(Early user feedback) Tag brands by mechanical/quartz movements.</li>
+                </ul>
 
-        .content-section p {
-            font-size: 1.1rem;
-            color: #304047;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
+                <h2>Acknowledgments</h2>
+                <p>This directory wouldn't be possible without the support and contributions of the American watchmaking community. We'd like to extend our gratitude to:</p>
+                <ul>
+                    <li>All the watchmakers, brands, and artisans who have shared their information and stories with us, helping to build a comprehensive resource for the community.</li>
+                    <li>@kingflum of ScrewDownCrown, David Lindow (Plumier Foundation), Nicholas Manousos (Horological Society of New York), Roland Murphy (RGM Watch Company), Joshua Shapiro (JN Shapiro), John Warren (Cornell Watch Company), and Matthew Zinski (Typsim) for their early feedback and encouragement.</li>
+                    <li>The broader horological community for fostering a culture of craftsmanship, innovation, and appreciation for the art of watchmaking.</li>
+                </ul>
 
-        .aims-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .aim-item {
-            background: #f0ebe0;
-            border-radius: 12px;
-            padding: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .aim-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .aim-item p {
-            font-size: 1rem;
-            margin-bottom: 0;
-        }
-
-        .team-section {
-            background: #f0ebe0;
-            border-radius: 16px;
-            padding: 30px;
-            margin-top: 30px;
-        }
-
-        .team-member {
-            margin-bottom: 25px;
-        }
-
-        @media (max-width: 768px) {
-            .content-section {
-                padding: 30px 20px;
-            }
-
-            .content-section h2 {
-                font-size: 2rem;
-            }
-
-            .aims-list {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-{% endblock %}
-
-{% block main %}
-
-        <div class="content-section">
-            <h2>About Us</h2>
-            <p>Welcome to the definitive online directory for American watchmakers and watch brands. The directory exists to spotlight the passion, creativity, and ingenuity fueling horology across the United States, plus a few of our Canadian neighbors.</p>
-            
-            <p>Our mission is simple: to increase visibility for American watchmakers, foster collaboration, and help drive a new golden era for domestic watchmaking. From independent artisans crafting one-of-a-kind pieces to established brands rooted in tradition, we bring together the full spectrum of talent and innovation in one place.</p>
-
-
-            <h4>Visibility & Marketing</h4>
-            <p>We help watchmakers reach new audiences and grow their brand through enhanced online exposure.</p>
-            <h4>Customer Engagement & Lead Generation</h4>
-            <p>Whether you're a collector, enthusiast, or first-time buyer, our directory makes it easy to discover and connect with American watchmakers that align with your interests.</p>
-            <h4>Supporting Recruitment & Supply Chains</h4>
-            <p>We help watchmakers find skilled talent and reliable parts and accessories suppliers to strengthen the backbone of American horology.</p>
-
-            <h3>Who We Are</h3>
-            <p>The American Watchmaking Directory is a wholly volunteer-driven initiative created and maintained by two passionate watch enthusiasts in Seattle, Washington.</p>
-           
-                    <h4>Hamza</h4>
-                    <p>Head of Partnerships at WatchCharts. One of the chapter heads, RedBar Seattle.</p>
-                    <h4>Vivek</h4>
-                    <p>Software Development Engineer at Expedia.</p>
-
-            <h3>What's Up Next</h3>
-            <p>There's lots to do. Here's what's currently next on our to-do list, until we get sufficient feedback convincing us to invest in something else first.<br>
-            - Add structured info on specific attributes (watchmaker, strapmaker, dial maker, etc)<br>
-            - Brand outreach to confirm current information and contribute information on what they make in America.<br>
-            - (early user feedback) Tag brands by mechanical/quartz movements
-            </p>
-
-            <h3>Acknowledgments</h3>
-            <p>This directory wouldn't be possible without the support and contributions of the American watchmaking community. We'd like to extend our gratitude to:</p>
-            <p>- All the watchmakers, brands, and artisans who have shared their information and stories with us, helping to build a comprehensive resource for the community.</p>
-            <p>- @kingflum of ScrewDownCrown, David Lindow (Plumier Foundation), Nicholas Manousos (Horological Society of New York), Roland Murphy (RGM Watch Company), Joshua Shapiro (JN Shapiro), John Warren (Cornell Watch Company), and Matthew Zinski (Typsim) for their early feedback and encouragement.</p>
-            <p>- The broader horological community for fostering a culture of craftsmanship, innovation, and appreciation for the art of watchmaking.</p>
-
-            <p style="text-align: center; margin-top: 40px; font-size: 0.9rem; opacity: 0.7;">Last updated: October 25, 2025</p>
-        </div>
+                <p class="updated">Last updated: October 25, 2025</p>
 {% endblock %}

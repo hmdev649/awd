@@ -20,7 +20,7 @@ eleventyComputed:
 {% block head %}{{ m.mapAssets() }}{% endblock %}
 
 {% block main %}
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/states/">States &amp; provinces</a> &rsaquo; {{ region.name }}</nav>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/states/">States &amp; provinces</a><span class="sep" aria-hidden="true">&rsaquo;</span><span aria-current="page">{{ region.name }}</span></nav>
         <div class="page-intro">
             <h1>Watch brands &amp; watchmakers in {{ region.name }}</h1>
             <p>

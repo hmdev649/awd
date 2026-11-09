@@ -2,7 +2,7 @@
 permalink: /update/
 title: "Update a Listing | American Watchmaking Directory"
 description: "Spotted something wrong or out of date in the American Watchmaking Directory, or want to add detail to your brand's listing? Send us a correction."
-navActive: "contact"
+navActive: ""
 ---
 {% extends "base.njk" %}
 
@@ -12,12 +12,14 @@ navActive: "contact"
             <p>Spotted something wrong or out of date? Own a brand and want to add detail, like what you make in America? Tell us below. Links to sources help us check changes quickly. Brand not listed yet? <a href="/suggest/">Suggest it</a>.</p>
         </div>
 
+        <div class="form-layout">
         <div class="panel form-panel">
             <form class="js-form" action="{{ site.formspree }}" method="POST" data-subject="Listing update: {brand}" data-success="update-done">
                 <input type="hidden" name="form" value="update-a-listing">
                 <input type="hidden" name="_subject" value="Listing update">
                 <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
 
+                <p class="required-note">Fields marked * are required.</p>
                 <div class="form-grid">
                     <div class="field full">
                         <label for="brand">Which listing? *</label>
@@ -63,6 +65,21 @@ navActive: "contact"
                 <h2>Thanks, got it.</h2>
                 <p>We'll check the details and update the listing. If you're the brand, we may email you to confirm.</p>
             </div>
+        </div>
+            <aside class="form-aside">
+                <div class="card">
+                    <h2>How updates work</h2>
+                    <ol>
+                        <li>We check the change, using your source link if you include one.</li>
+                        <li>We usually update the listing within a week.</li>
+                        <li>If you're the brand, we may email you to confirm.</li>
+                    </ol>
+                </div>
+                <div class="card">
+                    <h2>Not listed yet?</h2>
+                    <p><a href="/suggest/">Suggest a brand</a> instead. It's free.</p>
+                </div>
+            </aside>
         </div>
 {% endblock %}
 

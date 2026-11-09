@@ -12,6 +12,5 @@ export default {
     { key: "map", label: "Map", url: "/map/" },
     { key: "states", label: "States", url: "/states/" },
     { key: "about", label: "About", url: "/about.html" },
-    { key: "contact", label: "Contact", url: "/contact.html" },
   ],
 };

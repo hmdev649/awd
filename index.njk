@@ -9,46 +9,7 @@ description: "A free, volunteer-run directory of watch brands, independent watch
 {%- set pick = brands | weeklyPick -%}
 {%- set oldestBrand = brands | oldest -%}
 
-{% block head %}
-    {{ m.mapAssets() }}
-    <style>
-        .hero {
-            display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center;
-            background: var(--paper); border-radius: 24px; padding: 48px; box-shadow: var(--shadow); color: var(--ink);
-        }
-        .hero h1 { font-family: 'Manrope', sans-serif; font-size: 2.7rem; line-height: 1.12; margin-bottom: 14px; }
-        .hero p { font-size: 1.1rem; color: var(--muted); margin-bottom: 22px; }
-        .hero-search { display: flex; gap: 10px; margin-bottom: 14px; }
-        .hero-search input {
-            flex: 1; min-width: 0; padding: 13px 16px; border: 2px solid var(--line); border-radius: 10px;
-            font: 400 1.05rem 'Poppins', sans-serif; color: var(--ink); background: #fff;
-        }
-        .hero-search input:focus { outline: none; border-color: var(--ink); }
-        .hero-links { display: flex; gap: 8px 18px; flex-wrap: wrap; font-size: .95rem; }
-        .hero-links a { color: var(--ink); font-weight: 500; }
-        .hero-img { width: 100%; max-width: 340px; aspect-ratio: 1; object-fit: cover; border-radius: 50%; justify-self: center; box-shadow: 0 20px 40px rgba(0,0,0,.25); border: 6px solid #304047; }
-        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 24px 0 0; }
-        .stat { background: #fff; border-radius: 14px; padding: 16px 18px; color: var(--ink); box-shadow: 0 4px 14px rgba(0,0,0,.05); }
-        .stat b { display: block; font-family: 'Manrope', sans-serif; font-size: 1.8rem; line-height: 1.1; }
-        .stat span { font-size: .88rem; color: var(--muted); }
-        .stat a { color: inherit; }
-        .feature { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; }
-        .feature h3 { font-family: 'Manrope', sans-serif; font-size: 1.6rem; line-height: 1.2; }
-        .feature .eyebrow { text-transform: uppercase; letter-spacing: .06em; font-size: .78rem; font-weight: 600; color: #b08d57; }
-        .feature p { color: var(--muted); margin: 4px 0 12px; }
-        .feature .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
-        @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; padding: 28px 22px; gap: 20px; }
-            .hero-img { display: none; }
-            .hero h1 { font-size: 1.9rem; }
-            .stats { grid-template-columns: 1fr 1fr; }
-        }
-        @media (max-width: 520px) {
-            .hero-search { flex-direction: column; }
-            .feature { grid-template-columns: 1fr; }
-        }
-    </style>
-{% endblock %}
+{% block head %}{{ m.mapAssets() }}{% endblock %}
 
 {% block main %}
         <section class="hero">
@@ -78,19 +39,26 @@ description: "A free, volunteer-run directory of watch brands, independent watch
         </div>
 
         {% if pick %}
+        {%- set d = pick.data -%}
+        {%- set blurb = pick | excerpt -%}
         <section class="section">
-            <div class="panel feature">
-                {{ m.logo(pick.data, 120) }}
+            <div class="panel botw">
+                <a class="botw-logo" href="{{ pick.url }}" tabindex="-1" aria-hidden="true">
+                    <span class="ltile-art"><img src="{{ d.thumb.src2x }}" srcset="{{ d.thumb.src2x }} 256w, {{ d.thumb.large }} 512w" sizes="200px" alt="" width="256" height="256" loading="lazy" decoding="async"></span>
+                </a>
                 <div>
                     <span class="eyebrow">Brand of the week</span>
-                    <h3>{{ pick.data.name }}</h3>
-                    <p>{{ pick.data.city | location(pick.data.state, pick.data.country) }}{% if pick.data.state %}, {{ pick.data.country | countryName }}{% endif %}</p>
-                    <div class="chips">
-                        {% if pick.data.founded %}<span class="chip">Est. {{ pick.data.founded }}</span>{% endif %}
-                        {% for p in pick.data.products %}<span class="chip light">{{ p }}</span>{% endfor %}
+                    <h2><a href="{{ pick.url }}">{{ d.name }}</a></h2>
+                    <p class="botw-meta">
+                        {{- d.city | location(d.state, d.country) }}{% if d.state %}, {{ d.country | countryName }}{% endif %}
+                        {%- if d.founded %} · Founded {{ d.founded }}{% endif %}
+                        {%- if d.products | length %} · {{ d.products | join(", ") }}{% endif -%}
+                    </p>
+                    {% if blurb %}<p class="botw-excerpt">{{ blurb }}</p>{% endif %}
+                    <div class="btn-row">
+                        <a class="btn" href="{{ pick.url }}">Read the profile</a>
+                        <a class="btn ghost" href="{{ site.instagram }}" target="_blank" rel="noopener">Follow @watchmakingusa</a>
                     </div>
-                    <a class="btn" href="{{ pick.url }}">View profile</a>
-                    <a class="btn ghost" href="{{ site.instagram }}" target="_blank" rel="noopener">Follow @watchmakingusa</a>
                 </div>
             </div>
         </section>
@@ -113,11 +81,14 @@ description: "A free, volunteer-run directory of watch brands, independent watch
         </section>
 
         <section class="section">
-            <div class="section-head"><h2>Browse by type</h2></div>
+            <div class="section-head">
+                <h2>Beyond watches</h2>
+                <p>The strap makers, parts suppliers, tool sellers and restorers around them.</p>
+            </div>
             <div class="chip-list">
-                {% for f in brands | facet("products") %}
+                {% for f in brands | facet("products") %}{% if f.value != "Watches" %}
                 <a class="chip-link" href="/directory.html?product={{ f.value | urlencode }}">{{ f.value }} <span class="n">{{ f.count }}</span></a>
-                {% endfor %}
+                {% endif %}{% endfor %}
             </div>
         </section>
 
