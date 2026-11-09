@@ -33,8 +33,8 @@ eleventyComputed:
         {{ m.map(brands, "map-region", "preview", "small") }}
 
         <section class="section">
-            <div class="bgrid">
-                {% for b in brands %}{{ m.brandCard(b) }}{% endfor %}
+            <div class="lgrid">
+                {% for b in brands %}{{ m.logoTile(b) }}{% endfor %}
             </div>
         </section>
 

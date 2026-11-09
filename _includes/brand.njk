@@ -162,8 +162,8 @@
                 <h2>More in {{ regionGroup.name }}</h2>
                 <a href="{{ region | regionUrl }}">All {{ regionGroup.brands.length }} in {{ regionGroup.name }} &rarr;</a>
             </div>
-            <div class="bgrid">
-                {% for b in neighbors | batch(6) | first %}{{ m.brandCard(b) }}{% endfor %}
+            <div class="lgrid">
+                {% for b in neighbors | batch(6) | first %}{{ m.logoTile(b) }}{% endfor %}
             </div>
         </section>
         {% endif %}

@@ -98,8 +98,8 @@ description: "A free, volunteer-run directory of watch brands, independent watch
 
         <section class="section">
             <div class="section-head"><h2>Recently added</h2><a href="/directory.html">See everyone &rarr;</a></div>
-            <div class="bgrid">
-                {% for b in brands | recentlyAdded(6) %}{{ m.brandCard(b) }}{% endfor %}
+            <div class="lgrid">
+                {% for b in brands | recentlyAdded(6) %}{{ m.logoTile(b) }}{% endfor %}
             </div>
         </section>
 
