@@ -5,7 +5,7 @@
 (function () {
     const $ = (id) => document.getElementById(id);
     const grid = $('grid');
-    const cards = [...grid.querySelectorAll('.bcard')].map((el) => ({
+    const cards = [...grid.querySelectorAll('.ltile')].map((el) => ({
         el,
         search: el.dataset.search,
         name: el.dataset.name,

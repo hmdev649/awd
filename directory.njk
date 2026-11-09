@@ -138,9 +138,9 @@ eras:
             <button id="clear-all" type="button" hidden>Clear all filters</button>
         </div>
 
-        <div class="bgrid" id="grid">
+        <div class="lgrid" id="grid">
             {%- for b in collections.brands %}
-            {{ m.brandCard(b) }}
+            {{ m.logoTile(b) }}
             {%- endfor %}
         </div>
 

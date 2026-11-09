@@ -36,6 +36,35 @@
 </a>
 {%- endmacro %}
 
+{#- Directory tile: large logo with a caption underneath. Carries the same
+    data-* attributes as brandCard so js/directory.js can filter and sort it. -#}
+{% macro logoTile(b) -%}
+{%- set d = b.data -%}
+<a class="ltile" href="{{ b.url }}"
+   data-search="{{ [d.name, d.city, d.state, d.region.name if d.region else ''] | join(' ') | lower }}"
+   data-name="{{ d.name | lower }}"
+   data-country="{{ d.country }}"
+   data-region="{{ (d.country + '-' + d.state) if d.state else '' }}"
+   data-products="{{ d.products | join('|') }}"
+   data-founded="{{ d.founded or '' }}">
+  <span class="ltile-art">
+    {%- if d.thumb -%}
+    <img src="{{ d.thumb.src2x }}" srcset="{{ d.thumb.src2x }} 256w, {{ d.thumb.large }} 512w" sizes="(max-width: 768px) 33vw, 190px" alt="{{ d.name }} logo" width="256" height="256" loading="lazy" decoding="async">
+    {%- else -%}
+    <span class="monogram" aria-hidden="true">{{ d.name | first | upper }}</span>
+    {%- endif -%}
+  </span>
+  <span class="ltile-cap">
+    <span class="ltile-name">{{ d.name }}</span>
+    <span class="ltile-meta">{{ d.city | location(d.state, d.country) }}
+      {%- if d.founded %}<span class="ltile-yr"> · {{ d.founded }}</span>{% endif -%}
+      {%- for p in d.products %}{% if p != "Watches" %} · {{ p }}{% endif %}{% endfor -%}
+    </span>
+    {%- if d.status and statusLabels[d.status] %}<span class="ltile-status {{ d.status }}">{{ statusLabels[d.status] }}</span>{% endif -%}
+  </span>
+</a>
+{%- endmacro %}
+
 {#- A Leaflet map of the given brands. mode: "full" (pannable everywhere) or "preview" (no one-finger drag on phones). -#}
 {% macro map(brands, id, mode="preview", cls="", view="fit") -%}
 <div id="{{ id }}" class="map {{ cls }}" data-mode="{{ mode }}" data-view="{{ view }}" data-points="{{ brands | mapPoints | json }}" role="region" aria-label="Map of brand locations"></div>
