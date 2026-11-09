@@ -8,7 +8,7 @@ instagram: "https://www.instagram.com/wrenwatches/"
 email: 
 contact_name: 
 contact_title: 
-founded: 2023
+founded: 2024
 revived: 
 products: ["Watches"]
 logo: "wren_watches.png"
