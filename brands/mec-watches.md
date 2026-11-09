@@ -1,7 +1,7 @@
 ---
 name: "MEC Watches"
-city: "Ft Lauderdale"
-state: "FL"
+city: "New York"
+state: "NY"
 country: "US"
 website: "https://www.mecwatches.com/"
 instagram: "https://www.instagram.com/mecwatches/"
