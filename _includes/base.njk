@@ -34,10 +34,10 @@
                 {%- for item in site.nav %}
                 <a href="{{ item.url }}" class="nav-link{% if navActive == item.key %} active{% endif %}"{% if navActive == item.key %} aria-current="page"{% endif %}>{{ item.label }}</a>
                 {%- endfor %}
-                <a href="{{ site.instagram }}" target="_blank" rel="noopener" class="instagram-link" title="Follow us on Instagram" aria-label="Instagram">
-                    <svg class="instagram-icon" viewBox="0 0 24 24" aria-hidden="true">{% include "icon-instagram.njk" %}</svg>
-                </a>
             </nav>
+            <a href="{{ site.instagram }}" target="_blank" rel="noopener" class="instagram-link" title="Follow us on Instagram" aria-label="Instagram">
+                <svg class="instagram-icon" viewBox="0 0 24 24" aria-hidden="true">{% include "icon-instagram.njk" %}</svg>
+            </a>
         </header>
 
         <main>

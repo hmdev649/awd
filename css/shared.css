@@ -65,6 +65,7 @@ body {
     display: flex;
     align-items: center;
     gap: 28px;
+    margin-left: auto;
 }
 
 .header-nav .nav-link {
@@ -282,6 +283,37 @@ body {
 .form-success h2 { font-family: 'Manrope', sans-serif; margin-bottom: 6px; }
 .hp { position: absolute; left: -10000px; }
 
+/* ---------- Header on tablets and phones ----------
+   Below 1000px the site name and the links no longer fit on one line, so the
+   site name and Instagram take the first row and the links the second.
+   Nothing scrolls sideways. */
+
+@media (max-width: 1000px) {
+    .top-header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas: "title ig" "nav nav";
+        align-items: center;
+        gap: 4px 8px;
+    }
+    .site-title { grid-area: title; }
+    .instagram-link { grid-area: ig; padding: 10px; margin: -10px -10px -10px 0; }
+    .header-nav { grid-area: nav; margin-left: 0; flex-wrap: wrap; }
+    .header-nav .nav-link { padding: 10px 0; }
+}
+
+@media (max-width: 768px) {
+    .top-header { padding: 8px 0 4px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+    .site-title { font-size: min(1.1rem, 4.6vw); }
+    .instagram-icon { width: 22px; height: 22px; }
+}
+
+@media (max-width: 520px) {
+    /* Spread the five links evenly across a phone screen */
+    .header-nav { justify-content: space-between; gap: 0 10px; }
+    .header-nav .nav-link { font-size: min(.92rem, 4.3vw); }
+}
+
 /* ---------- Mobile ---------- */
 
 @media (max-width: 768px) {
@@ -296,26 +328,6 @@ body {
 
     .container { padding: 12px 16px; }
 
-    .top-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-        padding: 8px 0 12px;
-        margin-bottom: 16px;
-        border-bottom: 1px solid var(--line);
-    }
-
-    .site-title { font-size: 1.25rem; }
-
-    .header-nav {
-        gap: 18px;
-        width: 100%;
-        overflow-x: auto;
-        scrollbar-width: none;
-    }
-    .header-nav::-webkit-scrollbar { display: none; }
-    .header-nav .nav-link { font-size: .95rem; }
-    .instagram-icon { width: 20px; height: 20px; }
 
     .page-intro h1 { font-size: 1.7rem; }
     .section { margin: 36px 0; }
