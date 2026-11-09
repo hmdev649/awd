@@ -3,8 +3,8 @@ name: "Solios"
 city: "Montreal"
 state: "QC"
 country: "CA"
-website: 
-instagram: 
+website: "https://solioswatches.com/"
+instagram: "https://www.instagram.com/solios.watches/"
 email: 
 contact_name: "Samuel Leroux & Alexandre Desabrais"
 contact_title: "Co-Founders"

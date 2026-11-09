@@ -4,7 +4,7 @@ city: "Vancouver"
 state: "BC"
 country: "CA"
 website: "https://vanbannerwatches.com/"
-instagram: 
+instagram: "https://www.instagram.com/vanbannerwatches/"
 email: 
 contact_name: 
 contact_title: 

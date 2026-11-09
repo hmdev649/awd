@@ -4,7 +4,7 @@ city: "Vaughan"
 state: "ON"
 country: "CA"
 website: "https://www.marathonwatch.com/"
-instagram: 
+instagram: "https://www.instagram.com/marathonwatch/"
 email: 
 contact_name: 
 contact_title: 

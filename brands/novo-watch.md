@@ -4,7 +4,7 @@ city: "Lethbridge"
 state: "AB"
 country: "CA"
 website: "https://www.novowatch.com/"
-instagram: 
+instagram: "https://www.instagram.com/novowatch/"
 email: 
 contact_name: "Steve Christensen"
 contact_title: "Founder"

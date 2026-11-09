@@ -4,7 +4,7 @@ city: "Montreal"
 state: "QC"
 country: "CA"
 website: "https://www.josecermeno.com/"
-instagram: 
+instagram: "https://www.instagram.com/josecermenowatches/"
 email: 
 contact_name: "José Cermeño"
 contact_title: "Watchmaker"
