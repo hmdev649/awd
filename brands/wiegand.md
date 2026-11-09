@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Wiegand Custom Watch is a family-run company in Mentor, Ohio, founded in 2007 and led by Chris Wiegand. It designs and builds custom, private-label watches in the USA for more than 100 brands. It sources parts from Switzerland, France, Japan, Hong Kong, the US and Germany, and also offers 3D CAD design.
+Wiegand Custom Watch is a family-run company in Mentor, Ohio, founded in 2007 and led by Chris Wiegand. It says it designs and builds custom, private-label watches in the USA for more than 100 brands. It says it sources parts from Switzerland, France, Japan, Hong Kong, the US and Germany, and also offers 3D CAD design.

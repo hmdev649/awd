@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-ICON is a Los Angeles company led by Jonathan Ward that builds restomodded classic vehicles such as the ICON FJ and BR. Ward, a watch collector, designed the company's first watch, the Duesey. The Duesey is a Swiss-made jump-hour watch limited to 50 pieces, inspired by the instrument cluster and radiator cap of a classic Duesenberg.
+ICON is a Los Angeles company led by Jonathan Ward that builds restomodded classic vehicles such as the ICON FJ and BR. Ward, a watch collector, designed the company's first watch, the Duesey. The Duesey is a jump-hour watch, which the brand describes as Swiss made, limited to 50 pieces and inspired by the instrument cluster and radiator cap of a classic Duesenberg.

@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Shinola was founded in Detroit in 2011 with the goal of bringing watchmaking back to the United States. It assembles watches in Detroit, and also makes leather goods, bicycles and audio products.
+Shinola was founded in Detroit in 2011 with the stated goal of bringing watchmaking back to the United States. It assembles watches in Detroit, and also makes leather goods, bicycles and audio products.

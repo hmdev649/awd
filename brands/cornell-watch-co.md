@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Cornell Watch Co. is a Chicago brand whose first watch is the Lozier. Press coverage has highlighted the Lozier as a compelling option for buyers looking for an American-made watch.
+Cornell Watch Co. is a Chicago brand whose first watch is the Lozier.

@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Waldan was founded in New York in 1979 by Oscar Waldan, a Polish-born watchmaker who learned his trade while imprisoned at Buchenwald during WWII. The company originally made high-end mechanical watches in precious metals, with a factory in Bienne, Switzerland. Today it is run by his son Andrew and makes US-assembled watches with American-made Ameriquartz movements, including the Heritage Collection.
+Waldan was founded in New York in 1979 by Oscar Waldan, a Polish-born watchmaker who learned his trade while imprisoned at Buchenwald during WWII. According to the brand, the company originally made high-end mechanical watches in precious metals, with a factory in Bienne, Switzerland. Today it is run by his son Andrew and makes watches, including the Heritage Collection, that it says are assembled in the US with American-made Ameriquartz movements.

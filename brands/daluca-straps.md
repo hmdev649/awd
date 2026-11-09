@@ -21,6 +21,6 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-DaLuca Straps has made watch straps by hand in San Diego since 2009. It works in Horween leathers such as Shell Cordovan and Chromexcel, and in vintage military leathers.
+DaLuca Straps says it has made watch straps by hand in San Diego since 2009. It works in Horween leathers such as Shell Cordovan and Chromexcel, and in vintage military leathers.
 
 Its range covers two-piece and single-piece straps, nylon, Perlon and FKM rubber, as well as made-to-order and one-of-a-kind work.

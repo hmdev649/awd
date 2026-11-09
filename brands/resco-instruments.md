@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Resco Instruments is a San Clemente, California, brand founded in 2009 by a Navy SEAL, known as R.E., who planned it for years before launching. Resco assembles and tests all its watches in the USA. Models include the Patriot, BullFrog, BlackFrog and Hooper.
+Resco Instruments is a San Clemente, California, brand founded in 2009 by a Navy SEAL, known as R.E., who planned it for years before launching. Resco says it assembles and tests all its watches in the USA. Models include the Patriot, BullFrog, BlackFrog and Hooper.

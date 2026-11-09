@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-SēL Instrument is a Tucson, Arizona, tool-watch brand that began in 2013 with hand sketches. Its first complete prototype, the OmniDiver MK1, was machined and assembled in the United States in 2016. Its range includes the OmniDiver XoS 42 and the Hyperlite GP military-spec field watch.
+SēL Instrument is a Tucson, Arizona, tool-watch brand that began in 2013 with hand sketches. The brand says its first complete prototype, the OmniDiver MK1, was machined and assembled in the United States in 2016. Its range includes the OmniDiver XoS 42 and the Hyperlite GP military-spec field watch.

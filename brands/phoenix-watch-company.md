@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Phoenix Watch Company is a Boston brand whose watches are designed, engineered and hand-built in the USA. Its team pairs collectors Michelle and David with long-time industry veteran Gary and MJ, one of the few Certified Master Watchmakers in the US. Its flagship design is the Phoenix Eagle.
+Phoenix Watch Company is a Boston brand that says its watches are designed, engineered and hand-built in the USA. Its team pairs collectors Michelle and David with long-time industry veteran Gary and MJ, a Certified Master Watchmaker. Its flagship design is the Phoenix Eagle.

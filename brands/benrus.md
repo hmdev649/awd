@@ -23,4 +23,4 @@ added: "2025-09-29"
 ---
 Benrus was founded in Manhattan in 1921. It became known for watches supplied to the US military, such as the field and dive watches issued during the Vietnam era.
 
-Today's Benrus makes tool watches with Swiss automatic movements, sapphire crystals and Super-LumiNova lume, many of them based on its historic military designs.
+Today's Benrus makes tool watches that it says use Swiss automatic movements, sapphire crystals and Super-LumiNova lume, many of them based on its historic military designs.

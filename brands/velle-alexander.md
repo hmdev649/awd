@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Velle Alexander is the strap studio of Alex Gravelle, who has made bespoke leather watch straps by hand in Minneapolis since 2019, one commission at a time. He works in leathers such as alligator and calfskin. The studio began on his apartment dining table and now serves collectors and dealers in more than 27 countries.
+Velle Alexander is the strap studio of Alex Gravelle, who has made bespoke leather watch straps by hand in Minneapolis since 2019, one commission at a time, according to the studio. He works in leathers such as alligator and calfskin. The studio began on his apartment dining table and now serves collectors and dealers in more than 27 countries.

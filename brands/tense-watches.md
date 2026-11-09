@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Tense Watches has handcrafted wooden watches in the Vancouver area since 1971. Each watch is made from 100% recycled or reclaimed wood and uses a Swiss Ronda or Japanese Miyota movement. The company is a member of 1% for the Planet.
+Tense Watches says it has handcrafted wooden watches in the Vancouver area since 1971. The brand says each watch is made from 100% recycled or reclaimed wood and uses a Swiss Ronda or Japanese Miyota movement. The company is a member of 1% for the Planet.

@@ -23,4 +23,4 @@ added: "2025-09-29"
 ---
 Daniel A. Spitz is an independent master watchmaker in Delray Beach, Florida. Before watchmaking he was lead guitarist of the thrash band Anthrax, from 1983 to 1995. He trained in Switzerland on a WOSTEP scholarship, and was later Chopard's watchmaker of complications for North America.
 
-Today he makes his own watches, largely by hand, such as the J11.13. He also runs a restoration and after-sales service for high-grade mechanical watches.
+Today he says he makes his own watches, largely by hand, such as the J11.13. He also runs a restoration and after-sales service for high-grade mechanical watches.

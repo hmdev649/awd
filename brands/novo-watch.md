@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-NOVO Watch makes handcrafted watches in small batches in Lethbridge, Alberta, from reclaimed materials that carry a story. Examples include steel from a historic local mine site and reclaimed streetcar track. It was founded by Steve Christensen, a Lethbridge College graduate.
+NOVO Watch says it makes handcrafted watches in small batches in Lethbridge, Alberta, from reclaimed materials that carry a story. Examples include steel from a historic local mine site and reclaimed streetcar track. It was founded by Steve Christensen, a Lethbridge College graduate.

@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Jack Sloane is a Denver brand that makes durable, classic-looking watches produced in the United States. Its watch runs on the American-made Ameriquartz 7320B quartz movement and is water resistant to 100 m. The founder started the brand to offer a watch that is both trustworthy and affordable, following his motto "invest in your dailies."
+Jack Sloane is a Denver brand that makes durable, classic-looking watches, which it says are produced in the United States. Its watch runs on an Ameriquartz 7320B quartz movement, which the brand describes as American made, and is water resistant to 100 m. The founder started the brand to offer a watch that is both trustworthy and affordable, following his motto "invest in your dailies."

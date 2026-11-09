@@ -21,6 +21,6 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-10-05"
 ---
-AXIA Time is a Warren, New Jersey brand that designs its watches in the US and has them made in Switzerland. It focuses on commemorative and sports watches.
+AXIA Time is a Warren, New Jersey brand that says it designs its watches in the US and has them made in Switzerland. It focuses on commemorative and sports watches.
 
 AXIA holds a license for the FIFA World Cup 2026, and its watches are the official timepieces of the Heisman Trophy, the Philadelphia Marathon and the Tewaaraton Award.

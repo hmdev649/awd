@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Lōcī (Latin for "places") is a Los Angeles brand whose watches use Swiss movements and are designed, assembled, inspected and tested in the USA. Its founder, who has worked in disaster relief, gives 10% of every sale to nonprofits that protect endangered places.
+Lōcī (Latin for "places") is a Los Angeles brand that says its watches use Swiss movements and are designed, assembled, inspected and tested in the USA. Its founder, who has worked in disaster relief, gives 10% of every sale to nonprofits that protect endangered places.

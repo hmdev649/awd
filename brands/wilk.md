@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Wilk Watchworks has designed and built custom handmade watches in Toronto for more than ten years. It makes quartz and automatic models, including a tourbillon, and offers customization of materials and dials as well as full servicing.
+Wilk Watchworks says it has designed and built custom handmade watches in Toronto for more than ten years. It makes quartz and automatic models, including a tourbillon, and offers customization of materials and dials as well as full servicing.

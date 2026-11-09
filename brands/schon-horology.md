@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Schon Horology is the one-person workshop of Ian Schon in Philadelphia, who previously worked near Boston. He makes the hands, dials and other parts himself, and assembles and finishes every watch by hand. His watches include the Cardinal and the Dot, a windup watch with no seconds hand, where a dot appears in a window every 10 seconds instead. He also makes pens under the name Schon DSGN.
+Schon Horology is the one-person workshop of Ian Schon in Philadelphia, who previously worked near Boston. He says he makes the hands, dials and other parts himself, and assembles and finishes every watch by hand. His watches include the Cardinal and the Dot, a windup watch with no seconds hand, where a dot appears in a window every 10 seconds instead. He also makes pens under the name Schon DSGN.

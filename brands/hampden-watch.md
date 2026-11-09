@@ -23,4 +23,4 @@ added: "2025-09-29"
 ---
 Hampden Watch is a family-owned Chicago company. Four generations of the Wein family have made watches in Chicago since 1922. It revives the Hampden name, which has appeared on American watches since 1877, when Hampden pocket watches were known for their precision.
 
-Today's Hampden watches use Swiss movements, and the brand specializes in custom caseback engraving. It also runs hands-on watchmaking workshops.
+The brand says today's Hampden watches use Swiss movements, and the brand specializes in custom caseback engraving. It also runs hands-on watchmaking workshops.

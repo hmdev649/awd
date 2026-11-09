@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-ZENEA is a Toronto brand that designs its watches in Canada and has them made in Switzerland. It makes Swiss automatic watches with contemporary, classically inspired styling, such as the ULA Diver.
+ZENEA is a Toronto brand that says it designs its watches in Canada and has them made in Switzerland. It makes automatic watches with contemporary, classically inspired styling, such as the ULA Diver.

@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-10-05"
 ---
-JGJ Watches is the label of James Goodwin Jr., an independent watchmaker in Gadsden, Alabama, who describes himself as a classically trained horologist. He makes custom timepieces by hand, one at a time, and takes commissions through his website.
+JGJ Watches is the label of James Goodwin Jr., an independent watchmaker in Gadsden, Alabama, who describes himself as a classically trained horologist. He says he makes custom timepieces by hand, one at a time, and takes commissions through his website.

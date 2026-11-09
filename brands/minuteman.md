@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Minuteman is an Illinois brand whose watches are assembled, tuned and tested in the USA. Its range includes the A11 series of field watches and the Parker Chronograph.
+Minuteman is an Illinois brand that says its watches are assembled, tuned and tested in the USA. Its range includes the A11 series of field watches and the Parker Chronograph.

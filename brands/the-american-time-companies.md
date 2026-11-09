@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-10-05"
 ---
-The American Time Companies is a Rochester, New York, company founded in 1990. It makes custom-logo men's and women's watches and other products for unions and organizations, with an emphasis on union-made and American-made goods.
+The American Time Companies is a Rochester, New York, company founded in 1990. It makes custom-logo men's and women's watches and other products for unions and organizations, with what it describes as an emphasis on union-made and American-made goods.

@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-McDowell Time is a Maryland microbrand whose watches are assembled in the USA. Its DelRay has a classic trench-watch design and runs on an AutoQuartz kinetic movement, and it also makes the Maxton chronograph.
+McDowell Time is a Maryland microbrand that says its watches are assembled in the USA. Its DelRay has a classic trench-watch design and runs on an AutoQuartz kinetic movement, and it also makes the Maxton chronograph.

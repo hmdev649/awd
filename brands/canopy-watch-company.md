@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Canopy Watch Company was founded in Minnesota by two watch enthusiasts and now designs watches in Minnesota and Texas. Its two models are the titanium Field One field watch, which uses a Miyota 9015 movement, and the Wake One dive watch, which uses a Swiss Sellita SW200-1.
+Canopy Watch Company was founded in Minnesota by two watch enthusiasts and now designs watches in Minnesota and Texas. Its two models are the titanium Field One field watch, which uses a Miyota 9015 movement, and the Wake One dive watch, which uses a Sellita SW200-1.

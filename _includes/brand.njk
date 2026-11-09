@@ -71,7 +71,7 @@
                         {% if founded %}<dt>Founded</dt><dd>{{ founded }}{% if revived %} (revived {{ revived }}){% endif %}</dd>{% endif %}
                         {% if products and products.length %}<dt>Makes</dt><dd>{{ products | join(", ") }}</dd>{% endif %}
                         {% if movements and movements.length %}<dt>Movements</dt><dd>{{ movements | join(", ") | capitalize }}</dd>{% endif %}
-                        {% if tier %}<dt>Made in America</dt><dd>{{ tier.label }}</dd>{% endif %}
+                        {% if tier %}<dt>Made in America (brand says)</dt><dd>{{ tier.label }}</dd>{% endif %}
                     </dl>
                     {% if website or instagram or email %}
                     <div class="btn-row">

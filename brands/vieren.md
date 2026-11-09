@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-VIEREN is a Toronto brand that makes Swiss-made automatic rectangular watches with an architectural look, in limited editions. Its founder grew up in a watchmaking family: their grandparents worked in watches, and their parents met at Baselworld.
+VIEREN is a Toronto brand that makes automatic rectangular watches with an architectural look, in limited editions. It describes them as Swiss made. Its founder grew up in a watchmaking family: their grandparents worked in watches, and their parents met at Baselworld.

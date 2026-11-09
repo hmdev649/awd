@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-10-05"
 ---
-Montana Watch Company has made heirloom watches by hand in Livingston, Montana, since 1998. It works with artisans near and far, and offers a bespoke service for custom pieces.
+Montana Watch Company says it has made heirloom watches by hand in Livingston, Montana, since 1998. It works with artisans near and far, and offers a bespoke service for custom pieces.

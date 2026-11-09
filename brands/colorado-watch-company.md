@@ -21,6 +21,6 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Colorado Watch Company was a sister brand of Vortic Watch Company in Fort Collins. It was set up to make modern watches inspired by Colorado and built from American-made components.
+Colorado Watch Company was a sister brand of Vortic Watch Company in Fort Collins. It was set up to make modern watches inspired by Colorado. It said they were built from American-made components.
 
 After several years of development and a successful crowdfunding campaign, the company has concluded operations, and its watches are no longer produced or sold.

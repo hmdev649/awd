@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Bradley Taylor is an independent watchmaker with a workshop in North Vancouver. He trained at the Korpela & Hofs Watchmaking Competence Centre and worked in Le Locle, Switzerland. His debut, the Paragon (2021), was made in just 12 pieces. It was followed by the Lutria, whose dial colors are inspired by the ocean near his workshop. His third watch, the Ardea (2026), is his first with an in-house movement and adds a retrograde seconds display.
+Bradley Taylor is an independent watchmaker with a workshop in North Vancouver. He trained at the Korpela & Hofs Watchmaking Competence Centre and worked in Le Locle, Switzerland. His debut, the Paragon (2021), was made in just 12 pieces. It was followed by the Lutria, whose dial colors are inspired by the ocean near his workshop. His third watch, the Ardea (2026), is his first with what he describes as an in-house movement and adds a retrograde seconds display.

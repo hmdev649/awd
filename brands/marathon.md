@@ -23,4 +23,4 @@ added: "2025-09-29"
 ---
 Marathon traces its roots to 1904, when the Wein family started Weinstrum Watch (later Wein Brothers). Morris Wein founded Marathon Watch in 1939. Still family-run, it is based in Vaughan, Ontario.
 
-Marathon designs its watches in Canada and makes them in Switzerland, and is best known for military-issue watches such as the GSAR search-and-rescue diver.
+Marathon says it designs its watches in Canada and makes them in Switzerland. It is best known for military-issue watches such as the GSAR search-and-rescue diver.

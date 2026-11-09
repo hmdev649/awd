@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Hour Precision is a Columbus, Ohio, manufacturer of ultra-precise CNC-machined components. It started in fine watchmaking and now also makes parts for the medical, aerospace and semiconductor industries, alongside watch components.
+Hour Precision is a Columbus, Ohio, company that describes itself as a manufacturer of ultra-precise CNC-machined components. It started in fine watchmaking and now also makes parts for the medical, aerospace and semiconductor industries, alongside watch components.

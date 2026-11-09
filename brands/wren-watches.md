@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Wren is an independent New York brand that makes Swiss-made automatic watches in small numbered runs. It started with the Diver One. Its range now includes the Diver 38 and the Vessel, limited to 150 pieces per dial.
+Wren is an independent New York brand that makes automatic watches in small numbered runs, which it describes as Swiss made. It started with the Diver One. Its range now includes the Diver 38 and the Vessel, limited to 150 pieces per dial.

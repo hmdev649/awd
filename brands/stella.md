@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Stella Watch Company is a New York independent brand founded in 2019 by watch-industry veterans with three decades of experience. Its watches are designed in New York and made in Switzerland.
+Stella Watch Company is a New York independent brand founded in 2019 by watch-industry veterans with three decades of experience. It says its watches are designed in New York and made in Switzerland.

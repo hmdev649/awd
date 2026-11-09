@@ -21,6 +21,6 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-10-05"
 ---
-Alexander James is a one-person watch brand in Chicago. Its founder, AJ, designs and builds every watch himself. He began by modding Seiko watches, started having his own parts made when the colors he wanted didn't exist, and opened a parts store before launching the watch brand in 2015.
+Alexander James is a one-person watch brand in Chicago. The brand says its founder, AJ, designs and builds every watch himself. He began by modding Seiko watches, started having his own parts made when the colors he wanted didn't exist, and opened a parts store before launching the watch brand in 2015.
 
 The brand describes its watches as assembled in the USA. The range includes the A3 collection and the A5 Reserve dress watch.

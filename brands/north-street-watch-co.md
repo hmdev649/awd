@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-North Street Watch Co. is a Connecticut company that makes handmade leather watch straps in the USA. Its straps have quick-release spring bars, hand-painted edges and an "H"-design buckle.
+North Street Watch Co. is a Connecticut company that says it makes its leather watch straps by hand in the USA. Its straps have quick-release spring bars, hand-painted edges and an "H"-design buckle.

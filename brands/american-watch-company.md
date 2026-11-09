@@ -21,6 +21,6 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-American Watch Company is a Los Angeles private-label watch manufacturer. It started in 1988 and makes custom watches, private-label timepieces and smartwatches for other brands.
+American Watch Company is a Los Angeles company that describes itself as a private-label watch manufacturer. It started in 1988 and makes custom watches, private-label timepieces and smartwatches for other brands.
 
 It describes itself as vertically integrated, handling product development, design, production and logistics for clients that range from heritage-style mechanical watches to fashion models.

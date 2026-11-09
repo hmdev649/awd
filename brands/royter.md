@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Royter is the Brooklyn atelier of independent watchmaker Dan Royter, who makes hand-finished, bespoke high-end watches. He limits production to 12 pieces a year and oversees every watch personally, from hand beveling (anglage) to final testing.
+Royter is the Brooklyn atelier of independent watchmaker Dan Royter, who says he makes hand-finished, bespoke high-end watches. He limits production to 12 pieces a year and oversees every watch personally, from hand beveling (anglage) to final testing.

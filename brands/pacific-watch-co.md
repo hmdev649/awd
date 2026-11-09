@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Pacific Watch Company is a Camas, Washington, brand that designs and assembles its watches in America. Its Cascadia Field Watch is a travel-ready quartz watch with a 316L stainless steel case, sapphire crystal, 100 m water resistance and a 30-month battery life. The brand puts weight on local manufacturing and independent retail.
+Pacific Watch Company is a Camas, Washington, brand that says it designs and assembles its watches in America. Its Cascadia Field Watch is a travel-ready quartz watch with a 316L stainless steel case, sapphire crystal, 100 m water resistance and a 30-month battery life. The brand says it puts weight on local manufacturing and independent retail.

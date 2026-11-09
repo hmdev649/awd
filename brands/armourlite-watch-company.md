@@ -21,6 +21,6 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-ArmourLite is an American company in North Miami Beach, Florida, that makes tough, tritium-lit watches. Its watches use Swiss tritium gas tubes, which glow constantly without needing light to charge them.
+ArmourLite is an American company in North Miami Beach, Florida, that makes tough, tritium-lit watches. The brand says its watches use Swiss tritium gas tubes, which glow constantly without needing light to charge them.
 
 The brand sells widely to military, law-enforcement and first-responder customers and offers them a discount. It is part of Prestige Watch Group.

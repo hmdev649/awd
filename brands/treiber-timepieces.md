@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Treiber Timepieces is a San Francisco brand that makes watches inspired by classic cars, assembled by hand in California.
+Treiber Timepieces is a San Francisco brand that makes watches inspired by classic cars, which it says are assembled by hand in California.

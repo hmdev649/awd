@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-Bespoke Watch Projects is the studio of John McConnico, who makes unique, handcrafted timepieces in Oakland, California.
+Bespoke Watch Projects is the studio of John McConnico. The studio says it makes unique, handcrafted timepieces in Oakland, California.

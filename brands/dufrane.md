@@ -21,4 +21,4 @@ instagram_posts: []
 last_updated: "2026-11-08"
 added: "2025-09-29"
 ---
-DuFrane is a family-owned watch brand founded in Austin, Texas, in 2016 by a long-time watch collector. It designs and assembles its watches in Austin with Swiss mechanical movements. Models include the Barton Springs dive watch and the Westlake, a 6.99 mm-thick manual-wind dress watch.
+DuFrane is a family-owned watch brand founded in Austin, Texas, in 2016 by a long-time watch collector. It says it designs and assembles its watches in Austin with Swiss mechanical movements. Models include the Barton Springs dive watch and the Westlake, a 6.99 mm-thick manual-wind dress watch.
