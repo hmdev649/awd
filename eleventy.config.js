@@ -5,7 +5,7 @@ const byName = (a, b) => a.data.name.localeCompare(b.data.name, "en", { sensitiv
 
 export default function (eleventyConfig) {
   // Hand-written assets and pages that aren't templates are copied through untouched.
-  for (const p of ["test.html", "test-flags.html", "css", "js", "images", "sdc", "CNAME"]) {
+  for (const p of ["test.html", "test-flags.html", "css", "js", "images", "CNAME"]) {
     eleventyConfig.addPassthroughCopy(p);
   }
 
