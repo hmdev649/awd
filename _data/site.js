@@ -1,7 +1,7 @@
 export default {
   name: "American Watchmaking Directory",
   url: "https://americanwatchmakingdirectory.org",
-  description: "A free, volunteer-run directory of watch brands, independent watchmakers and suppliers in the United States, plus a few of our Canadian neighbors.",
+  description: "A free, volunteer-run directory of watch brands, independent watchmakers and suppliers based in the United States, plus a few of our Canadian neighbors.",
   ogImage: "/images/watch-movement.jpg",
   instagram: "https://instagram.com/watchmakingusa",
   formspree: "https://formspree.io/f/xanpwjrg",

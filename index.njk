@@ -1,7 +1,7 @@
 ---
 permalink: /
 title: "American Watchmaking Directory | Watch Brands, Watchmakers & Suppliers in the USA"
-description: "A free, volunteer-run directory of watch brands, independent watchmakers and suppliers in the United States, plus a few of our Canadian neighbors. Search by name, state or type."
+description: "A free, volunteer-run directory of watch brands, independent watchmakers and suppliers based in the United States, plus a few of our Canadian neighbors. Search by name, state or type."
 ---
 {% extends "base.njk" %}
 {% import "macros.njk" as m with context %}
@@ -14,8 +14,8 @@ description: "A free, volunteer-run directory of watch brands, independent watch
 {% block main %}
         <section class="hero">
             <div>
-                <h1>Find the people making watches in America</h1>
-                <p>{{ brands.length }} watch brands, independent watchmakers and suppliers across the United States, plus a few of our Canadian neighbors. Free, independent and run by volunteers.</p>
+                <h1>Find the people running watchmaking businesses in America</h1>
+                <p>{{ brands.length }} watch brands, independent watchmakers and suppliers based in the United States, plus a few of our Canadian neighbors, whether they make their watches here or abroad. Free, independent and run by volunteers.</p>
                 <form class="hero-search" action="/directory.html" method="get" role="search">
                     <label for="home-q" class="sr-only">Search the directory</label>
                     <input id="home-q" name="q" type="search" placeholder="Search a brand, city or state">
