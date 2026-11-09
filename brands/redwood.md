@@ -3,8 +3,8 @@ name: "Redwood"
 city: "Montreal"
 state: "QC"
 country: "CA"
-website: 
-instagram: 
+website: "https://www.redwoodwatches.com/"
+instagram: "https://www.instagram.com/redwoodwatches/"
 email: 
 contact_name: 
 contact_title: 

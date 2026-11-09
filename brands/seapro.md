@@ -4,7 +4,7 @@ city: "Los Angeles"
 state: "CA"
 country: "US"
 website: "https://www.seaprowatches.com/"
-instagram: 
+instagram: "https://www.instagram.com/seapro_watches/"
 email: "seaprowatches@gmail.com"
 contact_name: "https://www.instagram.com/seapro_watches/"
 contact_title: 

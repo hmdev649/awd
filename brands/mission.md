@@ -4,7 +4,7 @@ city: "Toronto"
 state: "ON"
 country: "CA"
 website: 
-instagram: 
+instagram: "https://www.instagram.com/missionwatchcompany/"
 email: 
 contact_name: "Peter Carayiannis & Aron Solomon"
 contact_title: "Co-Founders"

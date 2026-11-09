@@ -4,7 +4,7 @@ city: "Seattle"
 state: "WA"
 country: "US"
 website: "https://www.primitivehaus.com/"
-instagram: 
+instagram: "https://www.instagram.com/primitivehaus_/"
 email: "hello@primitivehaus.com"
 contact_name: "Teslim Alabi"
 contact_title: "Founder"

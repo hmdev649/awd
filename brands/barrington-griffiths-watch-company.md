@@ -4,7 +4,7 @@ city: "Calgary"
 state: "AB"
 country: "CA"
 website: "https://bgwatch.com/"
-instagram: 
+instagram: "https://www.instagram.com/bgwatchcompany/"
 email: 
 contact_name: "Mark Griffiths"
 contact_title: "Founder"

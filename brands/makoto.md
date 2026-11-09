@@ -3,8 +3,8 @@ name: "Makoto"
 city: 
 state: "ON"
 country: "CA"
-website: 
-instagram: 
+website: "https://makotowatch.com/"
+instagram: "https://www.instagram.com/makotowatchcompany/"
 email: 
 contact_name: "Ryan LeClair"
 contact_title: "Founder"
