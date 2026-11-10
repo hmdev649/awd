@@ -5,7 +5,7 @@ state: "ON"
 country: "CA"
 website: "https://www.marathonwatch.com/"
 instagram: "https://www.instagram.com/marathonwatch/"
-email: 
+email: "customerservice@marathonwatch.com"
 contact_name: 
 contact_title: 
 founded: 1939
@@ -18,7 +18,7 @@ movements: []
 price_range: ""
 sources: ["https://en.wikipedia.org/wiki/Marathon_Watch", "https://www.marathonwatch.com/pages/faq", "https://www.marathonwatch.com/pages/about-us"]
 instagram_posts: []
-last_updated: "2026-11-08"
+last_updated: "2026-11-09"
 added: "2025-09-29"
 ---
 Marathon traces its roots to 1904, when the Wein family started Weinstrum Watch (later Wein Brothers). Morris Wein founded Marathon Watch in 1939. Still family-run, it is based in Vaughan, Ontario.

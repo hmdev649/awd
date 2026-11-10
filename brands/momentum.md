@@ -5,7 +5,7 @@ state: "BC"
 country: "CA"
 website: "https://momentumwatch.com/"
 instagram: "https://www.instagram.com/momentumwatch/"
-email: 
+email: "watches@momentumwatch.com"
 contact_name: 
 contact_title: 
 founded: 
@@ -18,7 +18,7 @@ movements: []
 price_range: ""
 sources: ["https://www.aurifo.com/ie/history-and-interesting-facts-about-momentum-watch", "https://momentumwatch.com/"]
 instagram_posts: []
-last_updated: "2026-11-08"
+last_updated: "2026-11-09"
 added: "2025-09-29"
 ---
 Momentum is a Canadian watch company that hand-assembles durable, water-resistant watches in Vancouver, British Columbia, and Blaine, Washington. They are built for everyday and outdoor use.

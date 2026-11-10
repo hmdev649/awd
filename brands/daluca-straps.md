@@ -5,7 +5,7 @@ state: "CA"
 country: "US"
 website: "https://dalucastraps.com/"
 instagram: "https://www.instagram.com/dalucastraps/"
-email: 
+email: "info@dalucastraps.com"
 contact_name: "Daniel Luczak"
 contact_title: "Founder"
 founded: 2009
@@ -18,7 +18,7 @@ movements: []
 price_range: ""
 sources: ["https://treptalks.com/interviews/daniel-luczak-daluca-straps", "https://sandiegomagazine.com/?p=38336", "https://dalucastraps.com/pages/about-us"]
 instagram_posts: []
-last_updated: "2026-11-08"
+last_updated: "2026-11-09"
 added: "2025-09-29"
 ---
 DaLuca Straps says it has made watch straps by hand in San Diego since 2009. It works in Horween leathers such as Shell Cordovan and Chromexcel, and in vintage military leathers.
