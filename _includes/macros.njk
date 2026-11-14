@@ -21,7 +21,8 @@
    data-country="{{ d.country }}"
    data-region="{{ (d.country + '-' + d.state) if d.state else '' }}"
    data-products="{{ d.products | join('|') }}"
-   data-founded="{{ d.founded or '' }}">
+   data-founded="{{ d.founded or '' }}"
+   data-verified="{{ '1' if d.verified else '' }}">
   <span class="ltile-art">
     {%- if d.thumb -%}
     <img src="{{ d.thumb.src2x }}" srcset="{{ d.thumb.src2x }} 256w, {{ d.thumb.large }} 512w" sizes="(max-width: 768px) 33vw, 190px" alt="" width="256" height="256" loading="lazy" decoding="async">
@@ -30,7 +31,7 @@
     {%- endif -%}
   </span>
   <span class="ltile-cap">
-    <span class="ltile-name">{{ d.name }}</span>
+    <span class="ltile-name">{{ d.name }}{% if d.verified %} <span class="vmark" title="Details confirmed by the brand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span class="sr-only">Verified by the brand</span></span>{% endif %}</span>
     <span class="ltile-meta">{{ d.city | location(d.state, d.country) }}
       {%- if d.founded %}<span class="ltile-yr"> · {{ d.founded }}</span>{% endif -%}
       {%- for p in d.products %}{% if p != "Watches" %} · {{ p }}{% endif %}{% endfor -%}

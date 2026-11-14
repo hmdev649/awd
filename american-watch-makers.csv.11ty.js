@@ -18,6 +18,7 @@ const columns = [
   ["Movements", (d) => (d.movements || []).join("; ")],
   ["Made in America", (d) => d.made_in_america],
   ["Status", (d) => d.status],
+  ["Verified by Brand", (d) => d.verified],
   ["Last Updated", (d) => d.last_updated],
   ["Directory Page", (d, page, site) => site.url + page.url],
 ];

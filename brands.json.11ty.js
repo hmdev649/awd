@@ -18,6 +18,7 @@ export function render({ collections }) {
     movements: d.movements || [],
     made_in_america: d.made_in_america || "",
     status: d.status || "active",
+    verified: d.verified || "",
     logo: d.logo ? `/images/logos/${d.logo}` : "",
     thumb: d.thumb?.src2x || "",
     region: d.region ? { name: d.region.name, url: `/states/${d.region.slug}/` } : null,

@@ -51,6 +51,7 @@ logo: "otto_frei.png"       # file in images/logos/, exact upper/lower case
 photos:                     # optional gallery; files go in images/brands/<slug>/
   - { src: "images/brands/otto-frei/bench.jpg", alt: "The Oakland warehouse", credit: "Otto Frei" }
 status: "active"            # active, upcoming, inactive, defunct
+verified: ""                # date the brand confirmed its details (intake form or email), YYYY-MM-DD
 made_in_america: ""         # designed, assembled, manufactured, components
 movements: []               # mechanical, quartz, mecha-quartz, solar, smart
 price_range: ""
