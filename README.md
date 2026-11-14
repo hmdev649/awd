@@ -46,7 +46,7 @@ contact_name:
 contact_title:
 founded: 1930               # a year, or leave blank
 revived:                    # year a historic brand was revived
-products: ["Tools", "Components"]   # Watches, Straps, Components, Tools, Restoration
+products: ["Tools", "Components"]   # Watches, Straps, Accessories, Components, Tools, Restoration
 logo: "otto_frei.png"       # file in images/logos/, exact upper/lower case
 photos:                     # optional gallery; files go in images/brands/<slug>/
   - { src: "images/brands/otto-frei/bench.jpg", alt: "The Oakland warehouse", credit: "Otto Frei" }

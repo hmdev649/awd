@@ -1,4 +1,19 @@
 {
+  "|AZ|US": {
+    "lat": 34.3953,
+    "lng": -111.7633,
+    "approximate": true
+  },
+  "|MI|US": {
+    "lat": 43.6212,
+    "lng": -84.6824,
+    "approximate": true
+  },
+  "|NJ|US": {
+    "lat": 40.0757,
+    "lng": -74.4042,
+    "approximate": true
+  },
   "|ON|CA": {
     "lat": 50.0007,
     "lng": -86.001,
@@ -79,6 +94,16 @@
     "lng": -116.7812,
     "approximate": false
   },
+  "Columbia|NJ|US": {
+    "lat": 40.9262,
+    "lng": -75.0927,
+    "approximate": false
+  },
+  "Columbia|TN|US": {
+    "lat": 35.6148,
+    "lng": -87.0338,
+    "approximate": false
+  },
   "Columbus|OH|US": {
     "lat": 39.9623,
     "lng": -83.0007,
@@ -112,6 +137,11 @@
   "El Cajon|CA|US": {
     "lat": 32.7948,
     "lng": -116.9625,
+    "approximate": false
+  },
+  "Ellicott City|MD|US": {
+    "lat": 39.2673,
+    "lng": -76.7983,
     "approximate": false
   },
   "Encinitas|CA|US": {
@@ -199,6 +229,11 @@
     "lng": -79.8729,
     "approximate": false
   },
+  "Hingham|MA|US": {
+    "lat": 42.2418,
+    "lng": -70.8898,
+    "approximate": false
+  },
   "Honolulu|HI|US": {
     "lat": 21.3045,
     "lng": -157.8557,
@@ -214,9 +249,19 @@
     "lng": -81.3931,
     "approximate": false
   },
+  "Kansas City|MO|US": {
+    "lat": 39.1001,
+    "lng": -94.5781,
+    "approximate": false
+  },
   "Lancaster|PA|US": {
     "lat": 40.038,
     "lng": -76.3057,
+    "approximate": false
+  },
+  "Largo|FL|US": {
+    "lat": 27.9095,
+    "lng": -82.7873,
     "approximate": false
   },
   "Las Vegas|NV|US": {
@@ -224,9 +269,19 @@
     "lng": -115.1484,
     "approximate": false
   },
+  "League City|TX|US": {
+    "lat": 29.5075,
+    "lng": -95.0949,
+    "approximate": false
+  },
   "Lethbridge|AB|CA": {
     "lat": 49.6946,
     "lng": -112.8331,
+    "approximate": false
+  },
+  "Lititz|PA|US": {
+    "lat": 40.1571,
+    "lng": -76.3072,
     "approximate": false
   },
   "Little Neck|NY|US": {
@@ -254,6 +309,11 @@
     "lng": -73.6989,
     "approximate": false
   },
+  "Matthews|NC|US": {
+    "lat": 35.116,
+    "lng": -80.7224,
+    "approximate": false
+  },
   "Memphis|TN|US": {
     "lat": 35.146,
     "lng": -90.0518,
@@ -269,6 +329,16 @@
     "lng": -111.8315,
     "approximate": false
   },
+  "Miami Beach|FL|US": {
+    "lat": 25.7929,
+    "lng": -80.1353,
+    "approximate": false
+  },
+  "Miami|FL|US": {
+    "lat": 25.7742,
+    "lng": -80.1936,
+    "approximate": false
+  },
   "Middlebury|CT|US": {
     "lat": 41.5279,
     "lng": -73.1283,
@@ -282,6 +352,11 @@
   "Montreal|QC|CA": {
     "lat": 45.5032,
     "lng": -73.5698,
+    "approximate": false
+  },
+  "Mount Kisco|NY|US": {
+    "lat": 41.2043,
+    "lng": -73.7271,
     "approximate": false
   },
   "Nashville|TN|US": {
@@ -302,6 +377,16 @@
   "Oakland|CA|US": {
     "lat": 37.8045,
     "lng": -122.2714,
+    "approximate": false
+  },
+  "Oceanside|CA|US": {
+    "lat": 33.1959,
+    "lng": -117.3795,
+    "approximate": false
+  },
+  "Orlando|FL|US": {
+    "lat": 28.5421,
+    "lng": -81.379,
     "approximate": false
   },
   "Overland Park|KS|US": {
@@ -339,9 +424,19 @@
     "lng": -76.2977,
     "approximate": false
   },
+  "Powell|OH|US": {
+    "lat": 40.1578,
+    "lng": -83.0752,
+    "approximate": false
+  },
   "Princeton|NJ|US": {
     "lat": 40.3497,
     "lng": -74.6597,
+    "approximate": false
+  },
+  "Providence|RI|US": {
+    "lat": 41.824,
+    "lng": -71.4128,
     "approximate": false
   },
   "Provo|UT|US": {
@@ -362,6 +457,11 @@
   "Salem|MA|US": {
     "lat": 42.5214,
     "lng": -70.8957,
+    "approximate": false
+  },
+  "San Antonio|TX|US": {
+    "lat": 29.4246,
+    "lng": -98.4951,
     "approximate": false
   },
   "San Clemente|CA|US": {
@@ -389,6 +489,11 @@
     "lng": -66.1167,
     "approximate": false
   },
+  "Sandy|UT|US": {
+    "lat": 40.571,
+    "lng": -111.8954,
+    "approximate": false
+  },
   "Santa Barbara|CA|US": {
     "lat": 34.4221,
     "lng": -119.7027,
@@ -402,6 +507,11 @@
   "Santa Monica|CA|US": {
     "lat": 34.0195,
     "lng": -118.4912,
+    "approximate": false
+  },
+  "Savage|MN|US": {
+    "lat": 44.7779,
+    "lng": -93.3356,
     "approximate": false
   },
   "Seattle|WA|US": {
@@ -424,6 +534,16 @@
     "lng": -90.19,
     "approximate": false
   },
+  "St. Louis|MO|US": {
+    "lat": 38.6254,
+    "lng": -90.19,
+    "approximate": false
+  },
+  "St. Paul|MN|US": {
+    "lat": 44.9497,
+    "lng": -93.0931,
+    "approximate": false
+  },
   "Stanwood|WA|US": {
     "lat": 48.2422,
     "lng": -122.352,
@@ -432,6 +552,11 @@
   "Staunton|VA|US": {
     "lat": 38.1496,
     "lng": -79.0726,
+    "approximate": false
+  },
+  "Sunnyvale|CA|US": {
+    "lat": 37.3688,
+    "lng": -122.0363,
     "approximate": false
   },
   "Swarthmore|PA|US": {
@@ -494,9 +619,24 @@
     "lng": -80.819,
     "approximate": false
   },
+  "Wesley Chapel|FL|US": {
+    "lat": 28.1866,
+    "lng": -82.3661,
+    "approximate": false
+  },
   "Whitby|ON|CA": {
     "lat": 43.8798,
     "lng": -78.9422,
+    "approximate": false
+  },
+  "Whitefish|MT|US": {
+    "lat": 48.4108,
+    "lng": -114.3346,
+    "approximate": false
+  },
+  "Wilmington|NC|US": {
+    "lat": 34.2353,
+    "lng": -77.9487,
     "approximate": false
   },
   "Woods Cross|UT|US": {
