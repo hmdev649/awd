@@ -9,7 +9,7 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy(p);
   }
 
-  for (const p of ["README.md", "scripts/**", "lib/**", "node_modules/**"]) eleventyConfig.ignores.add(p);
+  for (const p of ["README.md", "CLAUDE.md", "scripts/**", "lib/**", "node_modules/**"]) eleventyConfig.ignores.add(p);
 
   // All brands, sorted by name. The build fails if any brand file is invalid,
   // so a bad edit can never reach the live site.
@@ -24,6 +24,21 @@ export default function (eleventyConfig) {
       console.warn(`[awd] ${unplaced.length} brand(s) have a location that isn't on the map yet. Run "npm run geocode":\n  ${unplaced.join("\n  ")}`);
     }
     return brands;
+  });
+
+  // Changelog entries (changelog/*.md), newest first. Each is an update or a
+  // decision; decisions have a status. Bad values fail the build.
+  eleventyConfig.addCollection("changelog", (api) => {
+    const entries = api.getFilteredByGlob("changelog/*.md").sort((a, b) => b.date - a.date || a.data.title.localeCompare(b.data.title));
+    const errors = [];
+    for (const e of entries) {
+      const { title, summary, kind, status } = e.data;
+      if (!title || !summary) errors.push(`${e.inputPath}: needs a title and a summary`);
+      if (!["update", "decision"].includes(kind)) errors.push(`${e.inputPath}: kind must be "update" or "decision"`);
+      if (kind === "decision" && !["decided", "pending", "replaced"].includes(status)) errors.push(`${e.inputPath}: a decision's status must be decided, pending or replaced`);
+    }
+    if (errors.length) throw new Error(`Changelog has ${errors.length} problem(s):\n  - ${errors.join("\n  - ")}`);
+    return entries;
   });
 
   // One entry per state/province that has at least one brand:
@@ -50,6 +65,9 @@ export default function (eleventyConfig) {
     const [y, m, d] = String(iso).split("-").map(Number);
     return new Date(y, m - 1, d).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
   });
+  // Date objects (e.g. page.date) -> "2026-11-14" / "November 2026", in UTC as Eleventy reads them
+  eleventyConfig.addFilter("isoDate", (d) => new Date(d).toISOString().slice(0, 10));
+  eleventyConfig.addFilter("monthYear", (d) => new Date(d).toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" }));
   eleventyConfig.addFilter("plainText", (html) => String(html || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
   eleventyConfig.addFilter("truncate", (s, n = 155) => (s.length > n ? s.slice(0, n - 1).trimEnd() + "…" : s));
   // Safe to drop inside <script> tags

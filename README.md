@@ -24,6 +24,7 @@ The site is static and costs nothing to run beyond the domain. Each brand is a t
 | `about.njk`, `faqs.njk`, `privacy.njk`, `terms.njk` | Text pages. |
 | `brands.json.11ty.js`, `american-watch-makers.csv.11ty.js` | Generate the `/brands.json` and `/american-watch-makers.csv` data exports. |
 | `lib/validate-brands.js` | Checks every brand file. Bad data fails the build, so it never reaches the live site. |
+| `changelog/*.md` + `changelog.njk` | The public changelog at `/changelog/`: one file per update or decision (see `CLAUDE.md`). |
 | `scripts/` | `geocode.js` (map coordinates) and `csv-to-brands.js` (the one-time CSV conversion). |
 
 The site rebuilds every Monday, as well as on every push, so that "Brand of the week" on the homepage rotates.

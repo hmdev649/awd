@@ -503,6 +503,14 @@ a:hover { text-decoration-thickness: 2px; }
 .prose p, .prose ul, .prose ol { max-width: var(--measure); margin-bottom: 14px; }
 .prose ul, .prose ol { padding-left: 1.3em; }
 .prose li { margin-bottom: 6px; }
+.log-entry { padding: 18px 0; border-top: 1px solid var(--line); scroll-margin-top: 20px; }
+.prose h2 + .log-entry, .prose h2 + p + .log-entry { border-top: 0; padding-top: 4px; }
+.log-entry h3 { margin-top: 0; }
+.log-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: var(--text-sm); color: var(--muted); }
+.chip.log-kind.decision { background: var(--brass); color: #fff; }
+.chip.status.log-pending { color: var(--info); border-color: var(--info); }
+.chip.status.log-replaced { color: var(--muted); border-color: var(--muted); }
+.log-summary { font-weight: 600; }
 .prose .updated { font-size: var(--text-sm); color: var(--muted); margin-top: 32px; }
 .aims { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 8px 0; }
 .aims .card h3 { font-size: var(--text-md); margin: 0 0 6px; }
