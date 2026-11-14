@@ -12,6 +12,7 @@ summary: "The site can show a badge for where a brand says its products are desi
 - Four levels: designed here, makes components here, assembled here, manufactured here (the site already supports these).
 - The four tiers used by The American Dial, credited to it.
 - A record of what the brand says about each part (movement, case, dial, assembly), each with a link to the brand's statement, with The American Dial's tier shown only as its own credited rating.
+- A badge only for brands that show us evidence for their manufacturing claims, an idea raised in a ScrewDownCrown interview with the founders in October 2025.
 - No badge: keep the details in each brand's description.
 
-**What matters.** Any badge has to be the brand's own claim, not our rating, under the rule above. It should be easy to understand at a glance and backed by a link to the brand's own statement.
+**What matters.** Any badge has to be the brand's own claim, not our rating, under the rule above. Checking evidence ourselves would reward brands that open their books, but we don't have the expertise or time to judge it fairly. It should be easy to understand at a glance and backed by a link to the brand's own statement.

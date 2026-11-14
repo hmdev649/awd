@@ -14,7 +14,7 @@
     --brass: #7c5f30;      /* small accent labels: 5:1 on cream */
     --alert: #8a3b2e;      /* "No longer trading" */
     --info: #2e5e8a;       /* "Coming soon" */
-    --ok: #2f6b45;         /* "Verified by the brand" */
+    --ok: #2f6b45;         /* "Details confirmed by the brand" */
 
     /* ---- Type: one family, one scale ---- */
     --font: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
