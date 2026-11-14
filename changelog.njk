@@ -9,19 +9,24 @@ intro: 'What has changed on the site, how we decided what the directory covers, 
 {% extends "prose.njk" %}
 
 {%- macro entry(e) %}
-                <article class="log-entry" id="{{ e.page.fileSlug | replace(r/^\d{4}-\d{2}-\d{2}-/, '') }}">
-                    <h3>{{ e.data.title }}</h3>
-                    <p class="log-meta">
-                        <span class="chip log-kind {{ e.data.kind }}">{{ "Decision" if e.data.kind == "decision" else "Update" }}</span>
-                        {%- if e.data.status and e.data.status != "decided" %} <span class="chip status log-{{ e.data.status }}">{{ { pending: "Open question", replaced: "Replaced" }[e.data.status] }}</span>{% endif %}
-                        <time datetime="{{ e.page.date | isoDate }}">{{ e.page.date | isoDate | readableDate }}</time>
-                    </p>
-                    <p class="log-summary">{{ e.data.summary }}</p>
+                <details class="faq log-entry" id="{{ e.page.fileSlug | replace(r/^\d{4}-\d{2}-\d{2}-/, '') }}">
+                    <summary>
+                        <h3>{{ e.data.title }}</h3>
+                        <span class="log-meta">
+                            <span class="chip log-kind {{ e.data.kind }}">{{ "Decision" if e.data.kind == "decision" else "Update" }}</span>
+                            {%- if e.data.status and e.data.status != "decided" %} <span class="chip status log-{{ e.data.status }}">{{ { pending: "Open question", replaced: "Replaced" }[e.data.status] }}</span>{% endif %}
+                            <time datetime="{{ e.page.date | isoDate }}">{{ e.page.date | isoDate | readableDate }}</time>
+                        </span>
+                        <span class="log-summary">{{ e.data.summary }}</span>
+                    </summary>
+                    <div class="faq-a">
                     {{ e.content | safe }}
-                </article>
+                    </div>
+                </details>
 {%- endmacro %}
 
 {% block content %}
+                {% include "expand-all.njk" %}
                 <h2 id="open-questions">Open questions</h2>
                 <p>Decisions we haven't made yet.</p>
                 {%- for e in collections.changelog %}{% if e.data.status == "pending" %}{{ entry(e) }}{% endif %}{% endfor %}

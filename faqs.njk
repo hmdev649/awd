@@ -4,7 +4,7 @@ title: "FAQs | American Watchmaking Directory"
 description: "Answers about the American Watchmaking Directory: who is listed, how to get a brand added or corrected, where the information comes from, and how to use the data."
 navActive: "faqs"
 heading: "Frequently asked questions"
-intro: 'Tap a question to see the answer. Something else? <a href="/contact.html">Ask us</a>.'
+intro: 'Tap a question to see the answer, or expand them all. Something else? <a href="/contact.html">Ask us</a>.'
 groups:
   - title: "Using the directory"
     items:
@@ -98,6 +98,7 @@ groups:
 {% endblock %}
 
 {% block content %}
+                {% include "expand-all.njk" %}
                 {% for g in groups %}
                 <h2>{{ g.title }}</h2>
                 <div class="faq-group">
