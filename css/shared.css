@@ -503,6 +503,10 @@ a:hover { text-decoration-thickness: 2px; }
 .prose p, .prose ul, .prose ol { max-width: var(--measure); margin-bottom: 14px; }
 .prose ul, .prose ol { padding-left: 1.3em; }
 .prose li { margin-bottom: 6px; }
+.prose dl.claims { max-width: var(--measure); margin-bottom: 14px; }
+.prose dl.claims dt { font-weight: 600; margin-top: 14px; }
+.prose dl.claims dt:first-child { margin-top: 0; }
+.prose dl.claims dd { margin: 4px 0 0; color: var(--muted); }
 .log-entry { padding: 18px 0; border-top: 1px solid var(--line); scroll-margin-top: 20px; }
 .prose h2 + .log-entry, .prose h2 + p + .log-entry { border-top: 0; padding-top: 4px; }
 .log-entry h3 { margin-top: 0; }
