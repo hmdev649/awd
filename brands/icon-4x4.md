@@ -5,7 +5,7 @@ state: "CA"
 country: "US"
 website: "https://shop.icon4x4.com/"
 instagram: "https://www.instagram.com/icon4x4/"
-email: 
+email: "frank@icon4x4.com"
 contact_name: "Jonathan Ward"
 contact_title: "Founder"
 founded: 

@@ -5,7 +5,7 @@ state: "CA"
 country: "US"
 website: "https://parivas.com/"
 instagram: "https://www.instagram.com/parivas_watches/"
-email: 
+email: "concierge@parivas.com"
 contact_name: "Mickey Brown"
 contact_title: "Co-Founder & CEO"
 founded: 

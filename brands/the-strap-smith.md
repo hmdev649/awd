@@ -5,7 +5,7 @@ state: "MT"
 country: "US"
 website: "https://www.thestrapsmith.com/"
 instagram: "https://www.instagram.com/thestrapsmith/"
-email: ""
+email: "support@thestrapsmith.com"
 contact_name: "Rob Montana"
 contact_title: "Founder and maker"
 founded: 

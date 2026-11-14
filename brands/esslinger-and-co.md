@@ -5,7 +5,7 @@ state: "MN"
 country: "US"
 website: "https://www.esslinger.com/"
 instagram: ""
-email: ""
+email: "mail@esslinger.com"
 contact_name: 
 contact_title: 
 founded: 1923

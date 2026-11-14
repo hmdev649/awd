@@ -5,7 +5,7 @@ state: "TN"
 country: "US"
 website: "https://www.originwatch.com/"
 instagram: "https://www.instagram.com/origin.watch.co/"
-email: 
+email: "dennis.shirokov@originwatchco.com"
 contact_name: 
 contact_title: 
 founded: 2014

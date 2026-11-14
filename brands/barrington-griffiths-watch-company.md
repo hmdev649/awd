@@ -5,7 +5,7 @@ state: "AB"
 country: "CA"
 website: "https://bgwatch.com/"
 instagram: "https://www.instagram.com/bgwatchcompany/"
-email: 
+email: "info@bgwatch.com"
 contact_name: "Mark Griffiths"
 contact_title: "Founder"
 founded: 2010

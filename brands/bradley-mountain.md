@@ -5,7 +5,7 @@ state: "TN"
 country: "US"
 website: "https://www.bradleymountain.com/"
 instagram: "https://www.instagram.com/bradleymountain/"
-email: ""
+email: "shipping@bradleymountain.com"
 contact_name: "Tyler"
 contact_title: "Founder"
 founded: 2012
