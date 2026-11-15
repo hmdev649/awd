@@ -1,5 +1,6 @@
 // Shared handler for the Formspree forms (suggest, update, contact).
 // - Pre-fills fields from the URL, e.g. /update/?brand=Halios
+// - Adds https:// to web addresses typed without it
 // - Builds a descriptive email subject from the form's data-subject template
 // - Submits in the background and shows the success panel
 (function () {
@@ -18,6 +19,12 @@
             const button = form.querySelector('[type=submit]');
             const status = form.querySelector('.form-status');
             const data = new FormData(form);
+
+            // Web addresses can be typed without https:// ("www.example.com"); add it.
+            for (const key of ['website', 'source']) {
+                const v = (data.get(key) || '').trim();
+                if (v && !/^[a-z][a-z0-9+.-]*:\/\//i.test(v)) data.set(key, `https://${v}`);
+            }
 
             // "Brand suggestion: {brand}" -> "Brand suggestion: Fleux"
             const template = form.dataset.subject;
