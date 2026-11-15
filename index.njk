@@ -65,13 +65,6 @@ description: "A free, volunteer-run directory of watch brands, independent watch
         {% endif %}
 
         <section class="section">
-            <div class="section-head"><h2>Recently added</h2><a href="/directory.html">See everyone &rarr;</a></div>
-            <div class="lgrid">
-                {% for b in brands | recentlyAdded(6) %}{{ m.logoTile(b) }}{% endfor %}
-            </div>
-        </section>
-
-        <section class="section">
             <div class="section-head"><h2>Browse by state &amp; province</h2><a href="/states/">All {{ collections.regions.length }} &rarr;</a></div>
             <div class="chip-list">
                 {% for r in collections.regions | largest(14) %}

@@ -4,7 +4,7 @@ eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{%- for p in ["/", "/directory.html", "/map/", "/states/", "/suggest/", "/update/", "/about.html", "/contact.html", "/faqs.html", "/changelog/", "/made-in-america/"] %}
+{%- for p in ["/", "/directory.html", "/map/", "/states/", "/suggest/", "/update/", "/about.html", "/contact.html", "/faqs.html", "/changelog/", "/made-in-america/", "/resources/"] %}
   <url><loc>{{ site.url }}{{ p }}</loc></url>
 {%- endfor %}
 {%- for r in collections.regions %}
