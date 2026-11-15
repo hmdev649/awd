@@ -49,6 +49,11 @@
     "lng": -71.4814,
     "approximate": false
   },
+  "Bismarck|ND|US": {
+    "lat": 46.8083,
+    "lng": -100.7837,
+    "approximate": false
+  },
   "Boston|MA|US": {
     "lat": 42.3588,
     "lng": -71.0578,
@@ -129,6 +134,11 @@
     "lng": -83.0466,
     "approximate": false
   },
+  "Duluth|MN|US": {
+    "lat": 46.7838,
+    "lng": -92.1053,
+    "approximate": false
+  },
   "Dunedin|FL|US": {
     "lat": 28.0117,
     "lng": -82.7894,
@@ -142,6 +152,11 @@
   "Ellicott City|MD|US": {
     "lat": 39.2673,
     "lng": -76.7983,
+    "approximate": false
+  },
+  "Elmhurst|IL|US": {
+    "lat": 41.8995,
+    "lng": -87.9403,
     "approximate": false
   },
   "Encinitas|CA|US": {

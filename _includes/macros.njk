@@ -32,7 +32,7 @@
   </span>
   <span class="ltile-cap">
     <span class="ltile-name">{{ d.name }}{% if d.verified %} <span class="vmark" title="Details confirmed by the brand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span class="sr-only">Details confirmed by the brand</span></span>{% endif %}</span>
-    <span class="ltile-meta">{{ d.city | location(d.state, d.country) }}
+    <span class="ltile-meta">{{ d.city | cardLocation(d.state, d.country) }}
       {%- if d.founded %}<span class="ltile-yr"> · {{ d.founded }}</span>{% endif -%}
       {%- for p in d.products %}{% if p != "Watches" %} · {{ p }}{% endif %}{% endfor -%}
     </span>

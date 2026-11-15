@@ -59,6 +59,11 @@ export default function (eleventyConfig) {
   // {{ city | location(state, country) }} -> "Oakland, CA" (or the country if both are blank)
   eleventyConfig.addFilter("location", (city, state, country) =>
     [city, state].filter(Boolean).join(", ") || (country === "CA" ? "Canada" : "United States"));
+  // Short location for cards and map labels: US brands read "City, ST"; Canadian
+  // ones add "Canada" so readers can tell a province from a state.
+  eleventyConfig.addFilter("cardLocation", (city, state, country) =>
+    country === "CA" && state ? [city, state, "Canada"].filter(Boolean).join(", ")
+      : [city, state].filter(Boolean).join(", ") || (country === "CA" ? "Canada" : "United States"));
   eleventyConfig.addFilter("countryName", (c) => ({ US: "United States", CA: "Canada" })[c] || c);
   eleventyConfig.addFilter("readableDate", (iso) => {
     if (!iso) return "";
@@ -141,7 +146,7 @@ export default function (eleventyConfig) {
     brands.filter((b) => b.data.place).map((b) => ({
       n: b.data.name,
       u: b.url,
-      l: [b.data.city, b.data.state].filter(Boolean).join(", "),
+      l: [b.data.city, b.data.state, b.data.country === "CA" && b.data.state ? "Canada" : ""].filter(Boolean).join(", "),
       lat: b.data.place.lat,
       lng: b.data.place.lng,
       a: b.data.place.approximate || undefined,
