@@ -1,6 +1,6 @@
 ---
 permalink: /states/
-title: "American Watch Brands by State & Province | American Watchmaking Directory"
+title: "American Watch Brands by State | American Watchmaking Directory"
 description: "Browse watch brands, independent watchmakers and suppliers by US state and Canadian province, from California and New York to British Columbia."
 navActive: "states"
 ---
@@ -12,8 +12,8 @@ navActive: "states"
 
 {% block main %}
         <div class="page-intro">
-            <h1>Browse by state &amp; province</h1>
-            <p>{{ collections.regions.length }} states and provinces have at least one listing. Pick one to see who's there.</p>
+            <h1>Browse by state</h1>
+            <p>{{ collections.regions.length }} states have at least one listing, counting Canadian provinces. Pick one to see who's there.</p>
         </div>
 
         {{ m.map(collections.brands, "map-states", "preview", "small", "north-america") }}
@@ -30,7 +30,7 @@ navActive: "states"
         {% endfor %}
 
         {% if collections.brands.length > placed %}
-        <p class="map-note">{{ collections.brands.length - placed }} listings don't have a state or province yet. <a href="/directory.html">See them all in the directory</a>.</p>
+        <p class="map-note">{{ collections.brands.length - placed }} listings don't have a state yet. <a href="/directory.html">See them all in the directory</a>.</p>
         {% endif %}
 {% endblock %}
 

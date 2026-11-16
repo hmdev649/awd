@@ -108,11 +108,11 @@
                     {% endif %}
 
                     {% if photos and photos.length %}
-                    <div class="gallery">
+                    <div class="gallery" aria-label="Photos">
                         {% for p in photos %}
                         <figure>
                             <img src="{{ ('/' + p.src) | replace('//', '/') }}" alt="{{ p.alt }}" loading="lazy" decoding="async">
-                            {% if p.credit %}<figcaption>Photo: {{ p.credit }}</figcaption>{% endif %}
+                            {% if p.caption or p.credit %}<figcaption>{{ p.caption }}{% if p.caption and p.credit %} · {% endif %}{% if p.credit %}Photo: {{ p.credit }}{% endif %}</figcaption>{% endif %}
                         </figure>
                         {% endfor %}
                     </div>

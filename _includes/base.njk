@@ -35,7 +35,7 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="container">
         <header class="top-header">
-            <a href="/" class="site-title">{{ site.name }}</a>
+            <a href="/" class="site-title"><img class="site-mark" src="/images/logo-mark.webp" alt="" width="40" height="40">{{ site.name }}</a>
             <nav class="header-nav" aria-label="Main">
                 {%- for item in site.nav %}
                 <a href="{{ item.url }}" class="nav-link{% if navActive == item.key %} active{% endif %}"{% if navActive == item.key %} aria-current="page"{% endif %}>{{ item.label }}</a>
@@ -61,11 +61,11 @@
                 <nav class="footer-col" aria-labelledby="f-explore">
                     <h2 id="f-explore">Explore</h2>
                     <ul>
+                        <li><a href="/made-in-america/">&ldquo;Made in America&rdquo;</a></li>
                         <li><a href="/directory.html">Directory</a></li>
                         <li><a href="/map/">Map</a></li>
-                        <li><a href="/states/">States &amp; provinces</a></li>
+                        <li><a href="/states/">States</a></li>
                         <li><a href="/resources/">Resources</a></li>
-                        <li><a href="/made-in-america/">Made in America</a></li>
                     </ul>
                 </nav>
                 <nav class="footer-col" aria-labelledby="f-contribute">

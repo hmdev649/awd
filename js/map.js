@@ -6,7 +6,16 @@
     const STYLE = 'https://tiles.openfreemap.org/styles/positron';
     const NORTH_AMERICA = [[-125, 24.5], [-66.5, 50]]; // contiguous US + southern Canada
     const CLUSTER_MAX_ZOOM = 12;
-    const INK = '#304047', CREAM = '#fbe9cd', GREY = '#8a9aa0';
+    // US and Canadian brands get their own colors and are clustered separately,
+    // so a cluster's count never mixes the two countries. Colors come from
+    // the site's --ink and --brass variables.
+    const css = getComputedStyle(document.documentElement);
+    const cssVar = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
+    const CREAM = cssVar('--cream', '#fbe9cd');
+    const COUNTRIES = [
+        { code: 'US', name: 'United States', color: cssVar('--ink', '#304047') },
+        { code: 'CA', name: 'Canada', color: cssVar('--brass', '#7c5f30') },
+    ];
 
     const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     const logo = (p) => p.t
@@ -56,47 +65,55 @@
             // Start the credits collapsed behind the (i) button so they don't cover small maps
             el.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
 
-            map.addSource('brands', {
-                type: 'geojson',
-                data: {
-                    type: 'FeatureCollection',
-                    features: points.map((p, i) => ({
-                        type: 'Feature',
-                        geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
-                        properties: { i, a: p.a ? 1 : 0 },
-                    })),
-                },
-                cluster: true,
-                clusterRadius: 36,
-                clusterMaxZoom: CLUSTER_MAX_ZOOM,
-            });
-
-            map.addLayer({
-                id: 'clusters', type: 'circle', source: 'brands', filter: ['has', 'point_count'],
-                paint: {
-                    'circle-color': INK, 'circle-opacity': 0.92,
-                    'circle-radius': ['step', ['get', 'point_count'], 14, 10, 18, 30, 23],
-                    'circle-stroke-width': 3, 'circle-stroke-color': CREAM,
-                },
-            });
-            map.addLayer({
-                id: 'cluster-count', type: 'symbol', source: 'brands', filter: ['has', 'point_count'],
-                layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['Noto Sans Bold'], 'text-size': 12, 'text-allow-overlap': true },
-                paint: { 'text-color': CREAM },
-            });
-            map.addLayer({
-                id: 'points', type: 'circle', source: 'brands', filter: ['!', ['has', 'point_count']],
-                paint: {
-                    'circle-color': ['case', ['==', ['get', 'a'], 1], GREY, INK],
-                    'circle-radius': 7, 'circle-stroke-width': 2, 'circle-stroke-color': CREAM,
-                },
-            });
+            const present = COUNTRIES.filter((c) => points.some((p) => (p.c || 'US') === c.code));
+            for (const { code, color } of present) {
+                const src = `brands-${code}`;
+                map.addSource(src, {
+                    type: 'geojson',
+                    data: {
+                        type: 'FeatureCollection',
+                        features: points.flatMap((p, i) => ((p.c || 'US') === code ? [{
+                            type: 'Feature',
+                            geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
+                            properties: { i, a: p.a ? 1 : 0 },
+                        }] : [])),
+                    },
+                    cluster: true,
+                    clusterRadius: 36,
+                    clusterMaxZoom: CLUSTER_MAX_ZOOM,
+                });
+                map.addLayer({
+                    id: `clusters-${code}`, type: 'circle', source: src, filter: ['has', 'point_count'],
+                    paint: {
+                        'circle-color': color, 'circle-opacity': 0.92,
+                        'circle-radius': ['step', ['get', 'point_count'], 14, 10, 18, 30, 23],
+                        'circle-stroke-width': 3, 'circle-stroke-color': CREAM,
+                    },
+                });
+                map.addLayer({
+                    id: `cluster-count-${code}`, type: 'symbol', source: src, filter: ['has', 'point_count'],
+                    layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['Noto Sans Bold'], 'text-size': 12, 'text-allow-overlap': true },
+                    paint: { 'text-color': CREAM },
+                });
+                // Pins placed at the state level only (approximate) are hollow
+                map.addLayer({
+                    id: `points-${code}`, type: 'circle', source: src, filter: ['!', ['has', 'point_count']],
+                    paint: {
+                        'circle-color': ['case', ['==', ['get', 'a'], 1], CREAM, color],
+                        'circle-radius': 7, 'circle-stroke-width': ['case', ['==', ['get', 'a'], 1], 3, 2],
+                        'circle-stroke-color': ['case', ['==', ['get', 'a'], 1], color, CREAM],
+                    },
+                });
+            }
 
             const popup = new maplibregl.Popup({ maxWidth: '300px', offset: 12 });
 
-            map.on('click', 'clusters', async (e) => {
+            const clusterLayers = present.map((c) => `clusters-${c.code}`);
+            const pointLayers = present.map((c) => `points-${c.code}`);
+
+            map.on('click', clusterLayers, async (e) => {
                 const f = e.features[0];
-                const leaves = await map.getSource('brands').getClusterLeaves(f.properties.cluster_id, f.properties.point_count, 0);
+                const leaves = await map.getSource(f.source).getClusterLeaves(f.properties.cluster_id, f.properties.point_count, 0);
                 const members = leaves.map((l) => points[l.properties.i]);
                 const bounds = boundsOf(members);
                 const span = Math.max(bounds.getNorth() - bounds.getSouth(), bounds.getEast() - bounds.getWest());
@@ -109,17 +126,29 @@
                 }
             });
 
-            map.on('click', 'points', (e) => {
+            map.on('click', pointLayers, (e) => {
                 const list = e.features.map((f) => points[f.properties.i]);
                 popup.setLngLat(e.features[0].geometry.coordinates).setHTML(popupHtml(list)).addTo(map);
             });
 
-            for (const layer of ['clusters', 'points']) {
+            for (const layer of [...clusterLayers, ...pointLayers]) {
                 map.on('mouseenter', layer, () => { map.getCanvas().style.cursor = 'pointer'; });
                 map.on('mouseleave', layer, () => { map.getCanvas().style.cursor = ''; });
             }
         });
     }
 
-    document.querySelectorAll('.map[data-points]').forEach(init);
+    // A key under maps that show both countries
+    function legend(el) {
+        let points = [];
+        try { points = JSON.parse(el.dataset.points || '[]'); } catch (e) { return; }
+        const present = COUNTRIES.filter((c) => points.some((p) => (p.c || 'US') === c.code));
+        if (present.length < 2) return;
+        const key = document.createElement('p');
+        key.className = 'map-legend';
+        key.innerHTML = present.map((c) => `<span><i style="background:${c.color}"></i>${c.name}</span>`).join('');
+        el.after(key);
+    }
+
+    document.querySelectorAll('.map[data-points]').forEach((el) => { legend(el); init(el); });
 })();

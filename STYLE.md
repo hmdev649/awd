@@ -19,7 +19,7 @@ Warm, quiet and plain: cream page, paper-colored panels, white cards, one dark s
 | `--ink-dark` | Button hover only |
 | `--muted` | Secondary text: intros, captions, meta lines, counts |
 | `--line` | Borders and dividers |
-| `--brass` | Small uppercase accent labels ("Brand of the week") and the decision chip |
+| `--brass` | Small uppercase accent labels ("Brand of the week"), the decision chip, and Canadian pins and clusters on maps |
 | `--ok` (green) | "Details confirmed by the brand" only |
 | `--alert` (red) | "No longer trading" only |
 | `--info` (blue) | "Coming soon" and "Open question" only |
@@ -60,11 +60,15 @@ Reuse these; don't restyle them per page.
 - **Panel** (`.panel`, or the paper background on text pages and forms): paper, `--radius-lg`, `--shadow`, 32px padding (20px on phones).
 - **Card** (`.card`, `.stat`, `.region-tile`, `.option`, logo tiles): white, `--radius`, `--shadow-sm`. Clickable cards get a 2px ink border on hover.
 - **Buttons** (`.btn`): ink fill, cream text, 44px minimum height. `.btn.ghost` is transparent with a `--line` border that turns ink on hover. `.btn-sm` is for small header and toolbar buttons.
-- **Text boxes and dropdowns**: all share one rule. They're 48px tall (`--control-h`), white, with a 2px `--line` border and `--radius-sm` corners. On focus the border turns ink and gets `--focus-ring`. Dropdowns use the custom chevron, not the browser's arrow. Multi-choice pickers (the directory's state picker) use the same button look and open a white checklist card.
+- **Text boxes and dropdowns**: all share one rule. They're 48px tall (`--control-h`), white, with a 2px `--line` border and `--radius-sm` corners. On focus the border turns ink and gets `--focus-ring`. Dropdowns use the custom chevron, not the browser's arrow. Multi-choice pickers (the directory's State and Founded pickers) use the same button look and open a white checklist card.
 - **Pills**: filter pills (`.fchip`) and link pills (`.chip-link`) are the same size (about 36px tall), white, with a 2px `--line` border, `--text-sm` text at weight 600, and a muted count after the label. When selected, a pill fills with ink.
 - **Status chips** (`.chip`): small and fully rounded. Status chips have a colored outline.
 - **"Details confirmed by the brand" mark**: always a filled green circle with a white check. It's small beside a name on cards and inside the outlined chip on brand pages. It must stay visible when a name is cut off.
 - **Term lists** (`dl.claims`): bold term, plain ink definition, and a 3px ink bar down the left of each pair.
+- **Site mark**: the round AWD mark (the favicon image) sits before the site name in the header, 40px on desktop and 28px on phones.
+- **Directory results line**: the count ("Showing 12 of 215") and "Clear all filters" on the left, the Sort dropdown on the right with its label beside it. Sort is not inside the filter panel.
+- **Maps**: United States pins and clusters are `--ink`, Canadian ones `--brass`, and the two are clustered separately so a count never mixes countries. Pins placed only at state level are hollow. Maps showing both countries get a color key underneath.
+- **Photo gallery** (`.gallery`, brand pages): up to three photos in one row, 4:3, `--radius` corners, with an optional caption and credit.
 - **Expandable rows** (`.faq`): a line above each row, a "+" or "−" on the right, and an "Expand all" button above the list.
 
 ## Layout and phones
@@ -73,7 +77,7 @@ Reuse these; don't restyle them per page.
 - Nothing may scroll sideways at 375px, 768px or 1280px wide. Long names get cut off with "…" instead.
 - Tap targets are at least 32px tall: small buttons (`.btn-sm`) are about 33px, pills 36px, main buttons 44px and text boxes 48px.
 - Grids drop to fewer columns on phones; logo tiles go three per row, state tiles two per row.
-- The header shows Directory, Map and About, plus the "Suggest a brand" button; on phones the button reads "Suggest".
+- The header shows the site mark and name, then Directory, Map and About, plus the "Suggest a brand" button; on phones the button reads "Suggest".
 
 ## Writing on the page
 

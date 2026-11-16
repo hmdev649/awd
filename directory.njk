@@ -1,8 +1,13 @@
 ---
 permalink: /directory.html
 title: "Directory of American Watch Brands & Watchmakers | American Watchmaking Directory"
-description: "Search and filter watch brands, independent watchmakers and suppliers in the United States and Canada by state and product type."
+description: "Search and filter watch brands, independent watchmakers and suppliers in the United States and Canada by state, product type and founding year."
 navActive: "directory"
+eras:
+  - { value: "pre-1950", label: "Before 1950" }
+  - { value: "1950-1999", label: "1950–1999" }
+  - { value: "2000-2019", label: "2000–2019" }
+  - { value: "2020-plus", label: "2020 or later" }
 ---
 {% extends "base.njk" %}
 {% import "macros.njk" as m with context %}
@@ -12,7 +17,7 @@ navActive: "directory"
 {% block main %}
         <div class="page-intro page-intro-wide">
             <h1>Directory</h1>
-            <p>{{ collections.brands.length }} watch brands, independent watchmakers and suppliers. Also browse by <a href="/states/">state or province</a> or on the <a href="/map/">map</a>.</p>
+            <p>{{ collections.brands.length }} watch brands, independent watchmakers and suppliers. Also browse by <a href="/states/">state</a> or on the <a href="/map/">map</a>.</p>
         </div>
 
         <section class="filterbar" aria-label="Filter the directory">
@@ -39,8 +44,8 @@ navActive: "directory"
                     </select>
                 </div>
                 <div class="msel" id="region-msel">
-                    <span class="label" id="region-label">State / Province</span>
-                    <button type="button" class="msel-btn" id="region-btn" aria-haspopup="true" aria-expanded="false" aria-controls="region-panel" aria-labelledby="region-label region-btn">All states &amp; provinces</button>
+                    <span class="label" id="region-label">State</span>
+                    <button type="button" class="msel-btn" id="region-btn" aria-haspopup="true" aria-expanded="false" aria-controls="region-panel" aria-labelledby="region-label region-btn">All states</button>
                     <div class="msel-panel" id="region-panel" role="group" aria-labelledby="region-label" hidden>
                         <div class="msel-head"><span>Pick one or more</span><button type="button" id="region-clear" class="msel-clear">Clear</button></div>
                         {%- for c in [{code: "US", name: "United States"}, {code: "CA", name: "Canada"}] %}
@@ -53,28 +58,43 @@ navActive: "directory"
                         {%- endfor %}
                     </div>
                 </div>
+                <div class="msel" id="era-msel">
+                    <span class="label" id="era-label">Founded</span>
+                    <button type="button" class="msel-btn" id="era-btn" aria-haspopup="true" aria-expanded="false" aria-controls="era-panel" aria-labelledby="era-label era-btn">Any year</button>
+                    <div class="msel-panel msel-narrow" id="era-panel" role="group" aria-labelledby="era-label" hidden>
+                        <div class="msel-head"><span>Pick one or more</span><button type="button" id="era-clear" class="msel-clear">Clear</button></div>
+                        <fieldset class="msel-group msel-one-col">
+                            <legend class="sr-only">Founded</legend>
+                            {%- for e in eras %}
+                            <label><input type="checkbox" value="{{ e.value }}" data-name="{{ e.label }}"> <span class="msel-name">{{ e.label }}</span> <span class="n"></span></label>
+                            {%- endfor %}
+                        </fieldset>
+                    </div>
+                </div>
                 <div class="verified-group">
                     <span class="label" id="verified-label">Brand input</span>
                     <div class="chip-row" role="group" aria-labelledby="verified-label">
                         <button type="button" class="fchip" id="verified-chip" aria-pressed="false">Details confirmed by the brand <span class="n"></span></button>
                     </div>
                 </div>
-                <div>
-                    <label for="sort">Sort</label>
-                    <select id="sort">
-                        <option value="name">Name (A–Z)</option>
-                        <option value="name-desc">Name (Z–A)</option>
-                        <option value="oldest">Oldest first</option>
-                        <option value="newest">Newest first</option>
-                        <option value="state">State / Province</option>
-                    </select>
-                </div>
             </div>
         </section>
 
         <div class="results-bar">
-            <span id="results-info" aria-live="polite">Showing all {{ collections.brands.length }}</span>
-            <button id="clear-all" type="button" hidden>Clear all filters</button>
+            <div class="results-count">
+                <span id="results-info" aria-live="polite">Showing all {{ collections.brands.length }}</span>
+                <button id="clear-all" type="button" hidden>Clear all filters</button>
+            </div>
+            <div class="sort-control">
+                <label for="sort">Sort</label>
+                <select id="sort">
+                    <option value="name">Name (A–Z)</option>
+                    <option value="name-desc">Name (Z–A)</option>
+                    <option value="oldest">Oldest first</option>
+                    <option value="newest">Newest first</option>
+                    <option value="state">State</option>
+                </select>
+            </div>
         </div>
 
         <div class="lgrid" id="grid">

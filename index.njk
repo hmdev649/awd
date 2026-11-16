@@ -32,8 +32,8 @@ description: "A free, volunteer-run directory of watch brands, independent watch
         </section>
 
         <div class="stats">
-            <div class="stat"><b>{{ brands.length }}</b><span>brands, watchmakers &amp; suppliers</span></div>
-            <div class="stat"><b>{{ collections.regions.length }}</b><span><a href="/states/">states &amp; provinces</a></span></div>
+            <div class="stat"><b>{{ brands.length }}</b><span><a href="/directory.html">brands, watchmakers &amp; suppliers</a></span></div>
+            <div class="stat"><b>{{ collections.regions.length }}</b><span><a href="/states/">states</a></span></div>
             <div class="stat"><b>{{ brands | foundedSince(2020) }}</b><span>founded since 2020</span></div>
             {% if oldestBrand %}<div class="stat"><b>{{ oldestBrand.data.founded }}</b><span>oldest: <a href="{{ oldestBrand.url }}">{{ oldestBrand.data.name }}</a></span></div>{% endif %}
         </div>
@@ -65,7 +65,7 @@ description: "A free, volunteer-run directory of watch brands, independent watch
         {% endif %}
 
         <section class="section">
-            <div class="section-head"><h2>Browse by state &amp; province</h2><a href="/states/">All {{ collections.regions.length }} &rarr;</a></div>
+            <div class="section-head"><h2>Browse by state</h2><a href="/states/">All {{ collections.regions.length }} &rarr;</a></div>
             <div class="chip-list">
                 {% for r in collections.regions | largest(14) %}
                 <a class="chip-link" href="{{ r | regionUrl }}">{{ r.name }} <span class="n">{{ r.brands.length }}</span></a>

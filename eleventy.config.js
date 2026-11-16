@@ -150,6 +150,7 @@ export default function (eleventyConfig) {
       lat: b.data.place.lat,
       lng: b.data.place.lng,
       a: b.data.place.approximate || undefined,
+      c: b.data.country,
       t: b.data.thumb?.src2x,
     })));
 

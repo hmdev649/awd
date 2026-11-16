@@ -49,8 +49,8 @@ founded: 1930               # a year, or leave blank
 revived:                    # year a historic brand was revived
 products: ["Tools", "Components"]   # Watches, Straps, Accessories, Components, Tools, Restoration
 logo: "otto_frei.png"       # file in images/logos/, exact upper/lower case
-photos:                     # optional gallery; files go in images/brands/<slug>/
-  - { src: "images/brands/otto-frei/bench.jpg", alt: "The Oakland warehouse", credit: "Otto Frei" }
+photos:                     # optional gallery of up to 3 photos (watches, key people, key processes); files go in images/brands/<slug>/
+  - { src: "images/brands/otto-frei/bench.jpg", alt: "The Oakland warehouse", caption: "The Oakland warehouse", credit: "Otto Frei" }
 status: "active"            # active, upcoming, inactive, defunct
 verified: ""                # date the brand confirmed its details (intake form or email), YYYY-MM-DD
 made_in_america: ""         # designed, assembled, manufactured, components

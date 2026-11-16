@@ -20,7 +20,7 @@ eleventyComputed:
 {% block head %}{{ m.mapAssets() }}{% endblock %}
 
 {% block main %}
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/states/">States &amp; provinces</a><span class="sep" aria-hidden="true">&rsaquo;</span><span aria-current="page">{{ region.name }}</span></nav>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/states/">States</a><span class="sep" aria-hidden="true">&rsaquo;</span><span aria-current="page">{{ region.name }}</span></nav>
         <div class="page-intro">
             <h1>Watch brands &amp; watchmakers in {{ region.name }}</h1>
             <p>
@@ -39,7 +39,7 @@ eleventyComputed:
         </section>
 
         <section class="section">
-            <div class="section-head"><h2>Other states &amp; provinces</h2><a href="/states/">All &rarr;</a></div>
+            <div class="section-head"><h2>Other states</h2><a href="/states/">All &rarr;</a></div>
             <div class="chip-list">
                 {% for r in collections.regions %}{% if r.key != region.key %}<a class="chip-link" href="{{ r | regionUrl }}">{{ r.name }} <span class="n">{{ r.brands.length }}</span></a>{% endif %}{% endfor %}
             </div>

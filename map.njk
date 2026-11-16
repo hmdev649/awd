@@ -13,11 +13,11 @@ navActive: "map"
 {% block main %}
         <div class="page-intro">
             <h1>Map</h1>
-            <p>Where America's watch brands, watchmakers and suppliers are based. Click a cluster to zoom in, or a pin for details. Alaska, Hawaii and Puerto Rico are a short pan away. You can also <a href="/states/">browse by state or province</a>.</p>
+            <p>Where America's watch brands, watchmakers and suppliers are based. Click a cluster to zoom in, or a pin for details. Alaska, Hawaii and Puerto Rico are a short pan away. You can also <a href="/states/">browse by state</a>.</p>
         </div>
 
         {{ m.map(collections.brands, "map-full", "full", "", "north-america") }}
-        <p class="map-note">{{ collections.brands.length - unplaced.length }} of {{ collections.brands.length }} listings are on the map. Grey pins are placed at the state level because we only know the state.</p>
+        <p class="map-note">{{ collections.brands.length - unplaced.length }} of {{ collections.brands.length }} listings are on the map. Hollow pins are placed at the state level because we only know the state. United States and Canada are counted separately.</p>
 
         {% if unplaced.length %}
         <section class="section">

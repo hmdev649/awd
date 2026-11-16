@@ -1,7 +1,7 @@
 // Directory page. Every brand card is already in the HTML (rendered at build
 // time); this script filters, counts and sorts them, and keeps the current
-// filters in the URL (?q=&product=&country=&region=&verified=&sort=; region can hold
-// several states, comma-separated) so a filtered
+// filters in the URL (?q=&product=&country=&region=&era=&verified=&sort=; region and
+// era can hold several values, comma-separated) so a filtered
 // view can be shared or linked to.
 (function () {
     const $ = (id) => document.getElementById(id);
@@ -17,7 +17,7 @@
         verified: el.dataset.verified === '1',
     }));
 
-    const DEFAULTS = { q: '', product: '', country: '', region: '', verified: '', sort: 'name' };
+    const DEFAULTS = { q: '', product: '', country: '', region: '', era: '', verified: '', sort: 'name' };
     const state = { ...DEFAULTS };
 
     // ---- read initial state from the URL ----
@@ -25,10 +25,16 @@
     for (const k of Object.keys(DEFAULTS)) if (params.get(k)) state[k] = params.get(k);
     if (state.verified !== '1') state.verified = '';
 
-    // Selected states and provinces, kept as a comma-separated string in state.region
-    const regions = () => (state.region ? state.region.split(',') : []);
-    const setRegions = (list) => { state.region = list.join(','); };
-    const regionBoxes = [...$('region-panel').querySelectorAll('input[type=checkbox]')];
+    // Multi-choice filters (states, which include Canadian provinces, and founding eras) are kept as comma-separated strings
+    const list = (k) => (state[k] ? state[k].split(',') : []);
+    const setList = (k, values) => { state[k] = values.join(','); };
+    const regions = () => list('region');
+    const boxesOf = (k) => [...$(`${k}-panel`).querySelectorAll('input[type=checkbox]')];
+    const regionBoxes = boxesOf('region');
+    const eraBoxes = boxesOf('era');
+
+    // Founding eras, matching the options in directory.njk
+    const eraOf = (y) => (y == null ? null : y < 1950 ? 'pre-1950' : y < 2000 ? '1950-1999' : y < 2020 ? '2000-2019' : '2020-plus');
 
     const productChips = [...$('product-chips').querySelectorAll('.fchip')];
 
@@ -38,6 +44,7 @@
         product: (c) => !state.product || c.products.includes(state.product),
         country: (c) => !state.country || c.country === state.country,
         region: (c) => !state.region || regions().includes(c.region),
+        era: (c) => !state.era || list('era').includes(eraOf(c.founded)),
         verified: (c) => !state.verified || c.verified,
     };
     const matches = (c, except) => Object.entries(tests).every(([k, t]) => k === except || t(c));
@@ -65,13 +72,13 @@
         for (const c of sorted) { c.el.hidden = !shown.includes(c); frag.appendChild(c.el); }
         grid.appendChild(frag);
 
-        const active = ['q', 'product', 'country', 'region', 'verified'].filter((k) => state[k]).length;
+        const active = ['q', 'product', 'country', 'region', 'era', 'verified'].filter((k) => state[k]).length;
         $('results-info').textContent = shown.length === cards.length
             ? `Showing all ${cards.length}`
             : `Showing ${shown.length} of ${cards.length}`;
         $('no-results').hidden = shown.length > 0;
         $('clear-all').hidden = active === 0;
-        const moreActive = ['country', 'region', 'verified'].filter((k) => state[k]).length;
+        const moreActive = ['country', 'region', 'era', 'verified'].filter((k) => state[k]).length;
         $('active-count').textContent = moreActive ? ` (${moreActive})` : '';
 
         // product chips
@@ -97,21 +104,9 @@
             if (!opt.value) continue;
             opt.textContent = `${opt.dataset.label || (opt.dataset.label = opt.textContent)} (${cc[opt.value] || 0})`;
         }
-        const rc = countBy('region', (c) => (c.region ? [c.region] : []));
-        const picked = regions();
-        for (const box of regionBoxes) {
-            const n = rc[box.value] || 0;
-            box.checked = picked.includes(box.value);
-            box.disabled = n === 0 && !box.checked;
-            box.closest('label').querySelector('.n').textContent = n;
-        }
+        renderPicker('region', regionBoxes, countBy('region', (c) => (c.region ? [c.region] : [])), 'All states');
         for (const g of $('region-panel').querySelectorAll('.msel-group')) g.hidden = !!state.country && g.dataset.country !== state.country;
-        const names = regionBoxes.filter((b) => b.checked).map((b) => b.dataset.name);
-        $('region-btn').textContent = names.length === 0 ? 'All states & provinces'
-            : names.length === 1 ? names[0]
-            : `${names[0]} + ${names.length - 1} more`;
-        $('region-btn').classList.toggle('has-value', names.length > 0);
-        $('region-clear').hidden = names.length === 0;
+        renderPicker('era', eraBoxes, countBy('era', (c) => (c.founded == null ? [] : [eraOf(c.founded)])), 'Any year');
 
         // controls reflect state
         $('q').value = state.q;
@@ -125,6 +120,24 @@
         history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
     }
 
+    // Tick the chosen boxes, show counts and summarize the choice on the button
+    function renderPicker(k, boxes, counts, allLabel) {
+        const picked = list(k);
+        for (const box of boxes) {
+            const n = counts[box.value] || 0;
+            box.checked = picked.includes(box.value);
+            box.disabled = n === 0 && !box.checked;
+            box.closest('label').querySelector('.n').textContent = n;
+        }
+        const names = boxes.filter((b) => b.checked).map((b) => b.dataset.name);
+        const btn = $(`${k}-btn`);
+        btn.textContent = names.length === 0 ? allLabel
+            : names.length === 1 ? names[0]
+            : `${names[0]} + ${names.length - 1} more`;
+        btn.classList.toggle('has-value', names.length > 0);
+        $(`${k}-clear`).hidden = names.length === 0;
+    }
+
     const set = (k, v) => { state[k] = v; render(); };
 
     // ---- wire up controls ----
@@ -133,22 +146,23 @@
     for (const chip of productChips) chip.addEventListener('click', () => set('product', chip.dataset.value));
     $('country').addEventListener('change', (e) => {
         state.country = e.target.value;
-        if (state.country) setRegions(regions().filter((r) => r.startsWith(state.country + '-')));
+        if (state.country) setList('region', regions().filter((r) => r.startsWith(state.country + '-')));
         render();
     });
     $('verified-chip').addEventListener('click', () => set('verified', state.verified ? '' : '1'));
-    for (const box of regionBoxes) box.addEventListener('change', () => {
-        setRegions(regionBoxes.filter((b) => b.checked).map((b) => b.value));
-        render();
-    });
-    $('region-clear').addEventListener('click', () => { setRegions([]); render(); });
-
-    // Open and close the state list like a dropdown
-    const regionBtn = $('region-btn'), regionPanel = $('region-panel');
-    const openRegions = (open) => { regionPanel.hidden = !open; regionBtn.setAttribute('aria-expanded', String(open)); };
-    regionBtn.addEventListener('click', () => openRegions(regionPanel.hidden));
-    document.addEventListener('click', (e) => { if (!$('region-msel').contains(e.target)) openRegions(false); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !regionPanel.hidden) { openRegions(false); regionBtn.focus(); } });
+    // Each checklist opens and closes like a dropdown
+    for (const [k, boxes] of [['region', regionBoxes], ['era', eraBoxes]]) {
+        for (const box of boxes) box.addEventListener('change', () => {
+            setList(k, boxes.filter((b) => b.checked).map((b) => b.value));
+            render();
+        });
+        $(`${k}-clear`).addEventListener('click', () => { setList(k, []); render(); });
+        const btn = $(`${k}-btn`), panel = $(`${k}-panel`);
+        const open = (o) => { panel.hidden = !o; btn.setAttribute('aria-expanded', String(o)); };
+        btn.addEventListener('click', () => open(panel.hidden));
+        document.addEventListener('click', (e) => { if (!$(`${k}-msel`).contains(e.target)) open(false); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) { open(false); btn.focus(); } });
+    }
     $('sort').addEventListener('change', (e) => set('sort', e.target.value));
     $('clear-all').addEventListener('click', () => { Object.assign(state, DEFAULTS, { sort: state.sort }); render(); });
 
@@ -157,7 +171,7 @@
         const open = panel.classList.toggle('open');
         e.currentTarget.setAttribute('aria-expanded', String(open));
     });
-    if (state.country || state.region || state.verified) {
+    if (state.country || state.region || state.era || state.verified) {
         $('more-filters').classList.add('open');
         $('filters-toggle').setAttribute('aria-expanded', 'true');
     }
