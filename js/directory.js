@@ -1,6 +1,7 @@
 // Directory page. Every brand card is already in the HTML (rendered at build
 // time); this script filters, counts and sorts them, and keeps the current
-// filters in the URL (?q=&product=&country=&region=&verified=&sort=) so a filtered
+// filters in the URL (?q=&product=&country=&region=&verified=&sort=; region can hold
+// several states, comma-separated) so a filtered
 // view can be shared or linked to.
 (function () {
     const $ = (id) => document.getElementById(id);
@@ -24,6 +25,11 @@
     for (const k of Object.keys(DEFAULTS)) if (params.get(k)) state[k] = params.get(k);
     if (state.verified !== '1') state.verified = '';
 
+    // Selected states and provinces, kept as a comma-separated string in state.region
+    const regions = () => (state.region ? state.region.split(',') : []);
+    const setRegions = (list) => { state.region = list.join(','); };
+    const regionBoxes = [...$('region-panel').querySelectorAll('input[type=checkbox]')];
+
     const productChips = [...$('product-chips').querySelectorAll('.fchip')];
 
     // ---- matching ----
@@ -31,7 +37,7 @@
         q: (c) => !state.q || state.q.toLowerCase().split(/\s+/).every((w) => c.search.includes(w)),
         product: (c) => !state.product || c.products.includes(state.product),
         country: (c) => !state.country || c.country === state.country,
-        region: (c) => !state.region || c.region === state.region,
+        region: (c) => !state.region || regions().includes(c.region),
         verified: (c) => !state.verified || c.verified,
     };
     const matches = (c, except) => Object.entries(tests).every(([k, t]) => k === except || t(c));
@@ -92,23 +98,30 @@
             opt.textContent = `${opt.dataset.label || (opt.dataset.label = opt.textContent)} (${cc[opt.value] || 0})`;
         }
         const rc = countBy('region', (c) => (c.region ? [c.region] : []));
-        for (const opt of $('region').querySelectorAll('option')) {
-            if (!opt.value) continue;
-            const n = rc[opt.value] || 0;
-            opt.textContent = `${opt.dataset.label || (opt.dataset.label = opt.textContent)} (${n})`;
-            opt.disabled = n === 0 && opt.value !== state.region;
+        const picked = regions();
+        for (const box of regionBoxes) {
+            const n = rc[box.value] || 0;
+            box.checked = picked.includes(box.value);
+            box.disabled = n === 0 && !box.checked;
+            box.closest('label').querySelector('.n').textContent = n;
         }
+        for (const g of $('region-panel').querySelectorAll('.msel-group')) g.hidden = !!state.country && g.dataset.country !== state.country;
+        const names = regionBoxes.filter((b) => b.checked).map((b) => b.dataset.name);
+        $('region-btn').textContent = names.length === 0 ? 'All states & provinces'
+            : names.length === 1 ? names[0]
+            : `${names[0]} + ${names.length - 1} more`;
+        $('region-btn').classList.toggle('has-value', names.length > 0);
+        $('region-clear').hidden = names.length === 0;
 
         // controls reflect state
         $('q').value = state.q;
         $('country').value = state.country;
-        $('region').value = state.region;
         $('sort').value = state.sort;
 
         // URL reflects state
         const p = new URLSearchParams();
         for (const [k, v] of Object.entries(state)) if (v && v !== DEFAULTS[k]) p.set(k, v);
-        const qs = p.toString();
+        const qs = p.toString().replace(/%2C/g, ',');
         history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
     }
 
@@ -120,11 +133,22 @@
     for (const chip of productChips) chip.addEventListener('click', () => set('product', chip.dataset.value));
     $('country').addEventListener('change', (e) => {
         state.country = e.target.value;
-        if (state.region && state.country && !state.region.startsWith(state.country + '-')) state.region = '';
+        if (state.country) setRegions(regions().filter((r) => r.startsWith(state.country + '-')));
         render();
     });
     $('verified-chip').addEventListener('click', () => set('verified', state.verified ? '' : '1'));
-    $('region').addEventListener('change', (e) => set('region', e.target.value));
+    for (const box of regionBoxes) box.addEventListener('change', () => {
+        setRegions(regionBoxes.filter((b) => b.checked).map((b) => b.value));
+        render();
+    });
+    $('region-clear').addEventListener('click', () => { setRegions([]); render(); });
+
+    // Open and close the state list like a dropdown
+    const regionBtn = $('region-btn'), regionPanel = $('region-panel');
+    const openRegions = (open) => { regionPanel.hidden = !open; regionBtn.setAttribute('aria-expanded', String(open)); };
+    regionBtn.addEventListener('click', () => openRegions(regionPanel.hidden));
+    document.addEventListener('click', (e) => { if (!$('region-msel').contains(e.target)) openRegions(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !regionPanel.hidden) { openRegions(false); regionBtn.focus(); } });
     $('sort').addEventListener('change', (e) => set('sort', e.target.value));
     $('clear-all').addEventListener('click', () => { Object.assign(state, DEFAULTS, { sort: state.sort }); render(); });
 

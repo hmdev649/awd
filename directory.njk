@@ -38,21 +38,20 @@ navActive: "directory"
                         <option value="CA">Canada</option>
                     </select>
                 </div>
-                <div>
-                    <label for="region">State / Province</label>
-                    <select id="region">
-                        <option value="">All states &amp; provinces</option>
-                        <optgroup label="United States">
-                            {%- for r in collections.regions %}{% if r.country == "US" %}
-                            <option value="{{ r.key }}">{{ r.name }}</option>
+                <div class="msel" id="region-msel">
+                    <span class="label" id="region-label">State / Province</span>
+                    <button type="button" class="msel-btn" id="region-btn" aria-haspopup="true" aria-expanded="false" aria-controls="region-panel" aria-labelledby="region-label region-btn">All states &amp; provinces</button>
+                    <div class="msel-panel" id="region-panel" role="group" aria-labelledby="region-label" hidden>
+                        <div class="msel-head"><span>Pick one or more</span><button type="button" id="region-clear" class="msel-clear">Clear</button></div>
+                        {%- for c in [{code: "US", name: "United States"}, {code: "CA", name: "Canada"}] %}
+                        <fieldset class="msel-group" data-country="{{ c.code }}">
+                            <legend>{{ c.name }}</legend>
+                            {%- for r in collections.regions %}{% if r.country == c.code %}
+                            <label><input type="checkbox" value="{{ r.key }}" data-name="{{ r.name }}"> <span class="msel-name">{{ r.name }}</span> <span class="n"></span></label>
                             {%- endif %}{% endfor %}
-                        </optgroup>
-                        <optgroup label="Canada">
-                            {%- for r in collections.regions %}{% if r.country == "CA" %}
-                            <option value="{{ r.key }}">{{ r.name }}</option>
-                            {%- endif %}{% endfor %}
-                        </optgroup>
-                    </select>
+                        </fieldset>
+                        {%- endfor %}
+                    </div>
                 </div>
                 <div class="verified-group">
                     <span class="label" id="verified-label">Brand input</span>

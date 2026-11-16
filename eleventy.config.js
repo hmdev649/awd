@@ -9,7 +9,7 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy(p);
   }
 
-  for (const p of ["README.md", "CLAUDE.md", "scripts/**", "lib/**", "node_modules/**"]) eleventyConfig.ignores.add(p);
+  for (const p of ["README.md", "CLAUDE.md", "STYLE.md", "scripts/**", "lib/**", "node_modules/**"]) eleventyConfig.ignores.add(p);
 
   // All brands, sorted by name. The build fails if any brand file is invalid,
   // so a bad edit can never reach the live site.
