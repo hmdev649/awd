@@ -1,6 +1,6 @@
 # American Watchmaking Directory: notes for Claude
 
-americanwatchmakingdirectory.org: a free, volunteer-run directory of watchmaking businesses based in the US, plus a few in Canada. Run by Hamza and Vivek. `README.md` explains how the site is built; read it before changing code or data.
+americanwatchmakingdirectory.org: a free, volunteer-run directory of watchmaking businesses based in the US, plus a few in Canada. Maintained by Hamza alone. `README.md` explains how the site is built; read it before changing code or data.
 
 **This repository is public.** Everything in this file and in `changelog/` can be read by anyone. Keep private notes (personal contacts, frank opinions about specific businesses) out of the repo.
 
@@ -18,6 +18,8 @@ americanwatchmakingdirectory.org: a free, volunteer-run directory of watchmaking
 - **Design changes follow `STYLE.md`.** Read it before changing anything visual (CSS, layout, components, new pages). Use the variables and components it lists, check phone and desktop widths, and add any new pattern to it.
 
 - `checked` is the date someone last looked a listing over against the business's own site and found it still right; set it whenever you do that, even if nothing changed. `last_updated` is for changes, `verified` only for the brand's own confirmation. A passing health check is not a check.
+- Factual fixes taken from a business's own site (a new web address, city or Instagram handle) can be made without asking first; report them afterwards. Status changes, claims, additions and removals still wait for a yes.
+- Aim for completeness over curation: list every business that qualifies. Repair and service businesses stay out of scope.
 - The weekly health check (`npm run health`) only reports. Don't change a listing's `status` because of it without asking. Its results name businesses whose sites are failing, so they go in the private tracker sheet, never in an issue, a workflow log or anything else public.
 - Brand data lives in `brands/<slug>.md`. Edit those, never the CSV (it is generated). Allowed values are in `lib/validate-brands.js`; a bad value fails the build and leaves the live site unchanged.
 - New city or state: run `npm run geocode`. New logo: put the original in `logo-sources/<slug>.<ext>`, run `npm run logos`, and make sure the brand file has a `logo:` line.
