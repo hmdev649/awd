@@ -17,6 +17,8 @@ americanwatchmakingdirectory.org: a free, volunteer-run directory of watchmaking
 
 - **Design changes follow `STYLE.md`.** Read it before changing anything visual (CSS, layout, components, new pages). Use the variables and components it lists, check phone and desktop widths, and add any new pattern to it.
 
+- `checked` is the date someone last looked a listing over against the business's own site and found it still right; set it whenever you do that, even if nothing changed. `last_updated` is for changes, `verified` only for the brand's own confirmation. A passing health check is not a check.
+- The weekly health check (`npm run health`, the "Listing health" issue) only reports. Don't change a listing's `status` because of it without asking.
 - Brand data lives in `brands/<slug>.md`. Edit those, never the CSV (it is generated). Allowed values are in `lib/validate-brands.js`; a bad value fails the build and leaves the live site unchanged.
 - New city or state: run `npm run geocode`. New logo: put the original in `logo-sources/<slug>.<ext>`, run `npm run logos`, and make sure the brand file has a `logo:` line.
 - Every push to `main` deploys in about a minute. `gh` isn't installed; check runs at `https://api.github.com/repos/hmdev649/awd/actions/runs`.

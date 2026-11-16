@@ -25,6 +25,7 @@ The site is static and costs nothing to run beyond the domain. Each brand is a t
 | `brands.json.11ty.js`, `american-watch-makers.csv.11ty.js` | Generate the `/brands.json` and `/american-watch-makers.csv` data exports. |
 | `lib/validate-brands.js` | Checks every brand file. Bad data fails the build, so it never reaches the live site. |
 | `changelog/*.md` + `changelog.njk` | The public changelog at `/changelog/`: one file per update or decision (see `CLAUDE.md`). |
+| `scripts/check-links.js` + `.github/workflows/health.yml` | The weekly health check (see below). |
 | `scripts/` | `geocode.js` (map coordinates) and `csv-to-brands.js` (the one-time CSV conversion). |
 
 The site rebuilds every Monday, as well as on every push, so that "Brand of the week" on the homepage rotates.
@@ -58,7 +59,8 @@ movements: []               # mechanical, quartz, mecha-quartz, solar, smart
 price_range: ""
 sources: []                 # URLs the facts came from
 instagram_posts: []         # links to our posts featuring this brand
-last_updated: "2026-11-07"
+last_updated: "2026-11-07"   # date the listing's facts or text last changed
+checked: ""                 # date we last looked it over and it was still right, even if nothing changed
 added: "2026-11-07"         # date it was first listed (drives "Recently added")
 ---
 
@@ -73,6 +75,12 @@ What they make here, and what they source elsewhere.
 
 3. If the brand has a new city or state, run `npm run geocode` to put it on the map.
 4. Commit and push to `main`. The site rebuilds in about a minute. If a field is wrong, the Actions run fails and says which file and field to fix.
+
+## Health check
+
+Every Monday a GitHub Action (`.github/workflows/health.yml`) visits each listing's website and source links and keeps one issue, "Listing health", up to date with the ones that don't answer, look parked, or now go to a different site. It changes no files. Run it yourself with `npm run health`.
+
+A flagged link is a prompt to look, not a verdict: a redirect may be a rebrand, and a site that turns away automated visits is listed separately as "couldn't be checked". After looking a listing over, set its `checked` date; change `status` only once it's clear the business has stopped trading.
 
 ## Running locally
 

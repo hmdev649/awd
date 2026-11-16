@@ -20,6 +20,7 @@ const columns = [
   ["Status", (d) => d.status],
   ["Verified by Brand", (d) => d.verified],
   ["Last Updated", (d) => d.last_updated],
+  ["Last Checked", (d) => d.checked],
   ["Directory Page", (d, page, site) => site.url + page.url],
 ];
 

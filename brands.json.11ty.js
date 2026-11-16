@@ -26,6 +26,7 @@ export function render({ collections }) {
     lng: d.place?.lng ?? null,
     added: d.added || "",
     last_updated: d.last_updated || "",
+    checked: d.checked || "",
   }));
   return JSON.stringify(brands);
 }

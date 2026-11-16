@@ -136,8 +136,8 @@
                     </div>
 
                     <div class="brand-meta">
-                        <span>{% if last_updated %}Last updated {{ last_updated | readableDate }}{% endif %}</span>
-                        <span>Is this your brand, or is something wrong? <a href="/update/?brand={{ name | urlencode }}">Update this listing</a></span>
+                        <span>{% if last_updated %}Last updated {{ last_updated | readableDate }}{% endif %}{% if checked %}{% if last_updated %} · {% endif %}<span title="The date we last looked over this listing against the business's own website">Last checked {{ checked | readableDate }}</span>{% endif %}</span>
+                        <span>Is this your brand, or is something wrong? <a href="/update/?brand={{ name | urlencode }}">Update this listing</a> or <a href="/update/?brand={{ name | urlencode }}&amp;about=problem">report a problem</a></span>
                     </div>
                 </div>
             </div>
