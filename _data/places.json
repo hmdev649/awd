@@ -4,6 +4,16 @@
     "lng": -111.7633,
     "approximate": true
   },
+  "|FL|US": {
+    "lat": 27.7568,
+    "lng": -81.464,
+    "approximate": true
+  },
+  "|MA|US": {
+    "lat": 42.3789,
+    "lng": -72.0324,
+    "approximate": true
+  },
   "|MI|US": {
     "lat": 43.6212,
     "lng": -84.6824,
@@ -17,6 +27,11 @@
   "|ON|CA": {
     "lat": 50.0007,
     "lng": -86.001,
+    "approximate": true
+  },
+  "|UT|US": {
+    "lat": 39.4225,
+    "lng": -111.7144,
     "approximate": true
   },
   "Alamo|NV|US": {
@@ -77,6 +92,16 @@
   "Camas|WA|US": {
     "lat": 45.5863,
     "lng": -122.4033,
+    "approximate": false
+  },
+  "Charlotte|NC|US": {
+    "lat": 35.2272,
+    "lng": -80.8431,
+    "approximate": false
+  },
+  "Chatham|NJ|US": {
+    "lat": 40.7409,
+    "lng": -74.3837,
     "approximate": false
   },
   "Chenoa|IL|US": {
