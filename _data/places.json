@@ -254,6 +254,11 @@
     "lng": -70.8898,
     "approximate": false
   },
+  "Hollywood|FL|US": {
+    "lat": 26.0112,
+    "lng": -80.1495,
+    "approximate": false
+  },
   "Honolulu|HI|US": {
     "lat": 21.3045,
     "lng": -157.8557,
@@ -412,6 +417,11 @@
   "Overland Park|KS|US": {
     "lat": 38.9743,
     "lng": -94.6852,
+    "approximate": false
+  },
+  "Paramus|NJ|US": {
+    "lat": 40.9453,
+    "lng": -74.0736,
     "approximate": false
   },
   "Philadelphia|PA|US": {
