@@ -10,7 +10,6 @@ export default {
   nav: [
     { key: "directory", label: "Directory", url: "/directory.html" },
     { key: "map", label: "Map", url: "/map/" },
-    { key: "states", label: "States", url: "/states/" },
     { key: "about", label: "About", url: "/about.html" },
   ],
 };

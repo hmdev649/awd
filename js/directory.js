@@ -1,6 +1,6 @@
 // Directory page. Every brand card is already in the HTML (rendered at build
 // time); this script filters, counts and sorts them, and keeps the current
-// filters in the URL (?q=&product=&country=&region=&era=&verified=&sort=) so a filtered
+// filters in the URL (?q=&product=&country=&region=&verified=&sort=) so a filtered
 // view can be shared or linked to.
 (function () {
     const $ = (id) => document.getElementById(id);
@@ -16,23 +16,15 @@
         verified: el.dataset.verified === '1',
     }));
 
-    const ERAS = {
-        'pre-1950': (y) => y < 1950,
-        '1950-1999': (y) => y >= 1950 && y <= 1999,
-        '2000-2019': (y) => y >= 2000 && y <= 2019,
-        '2020-plus': (y) => y >= 2020,
-    };
-    const DEFAULTS = { q: '', product: '', country: '', region: '', era: '', verified: '', sort: 'name' };
+    const DEFAULTS = { q: '', product: '', country: '', region: '', verified: '', sort: 'name' };
     const state = { ...DEFAULTS };
 
     // ---- read initial state from the URL ----
     const params = new URLSearchParams(location.search);
     for (const k of Object.keys(DEFAULTS)) if (params.get(k)) state[k] = params.get(k);
-    if (!ERAS[state.era]) state.era = '';
     if (state.verified !== '1') state.verified = '';
 
     const productChips = [...$('product-chips').querySelectorAll('.fchip')];
-    const eraChips = [...$('era-chips').querySelectorAll('.fchip')];
 
     // ---- matching ----
     const tests = {
@@ -40,7 +32,6 @@
         product: (c) => !state.product || c.products.includes(state.product),
         country: (c) => !state.country || c.country === state.country,
         region: (c) => !state.region || c.region === state.region,
-        era: (c) => !state.era || (c.founded != null && ERAS[state.era](c.founded)),
         verified: (c) => !state.verified || c.verified,
     };
     const matches = (c, except) => Object.entries(tests).every(([k, t]) => k === except || t(c));
@@ -68,13 +59,13 @@
         for (const c of sorted) { c.el.hidden = !shown.includes(c); frag.appendChild(c.el); }
         grid.appendChild(frag);
 
-        const active = ['q', 'product', 'country', 'region', 'era', 'verified'].filter((k) => state[k]).length;
+        const active = ['q', 'product', 'country', 'region', 'verified'].filter((k) => state[k]).length;
         $('results-info').textContent = shown.length === cards.length
             ? `Showing all ${cards.length}`
             : `Showing ${shown.length} of ${cards.length}`;
         $('no-results').hidden = shown.length > 0;
         $('clear-all').hidden = active === 0;
-        const moreActive = ['country', 'region', 'era', 'verified'].filter((k) => state[k]).length;
+        const moreActive = ['country', 'region', 'verified'].filter((k) => state[k]).length;
         $('active-count').textContent = moreActive ? ` (${moreActive})` : '';
 
         // product chips
@@ -85,15 +76,6 @@
             chip.setAttribute('aria-pressed', String(v === state.product));
             const n = v ? pc[v] || 0 : pTotal;
             if (v) { chip.querySelector('.n').textContent = n; chip.disabled = n === 0 && v !== state.product; }
-        }
-
-        // era chips
-        const ec = countBy('era', (c) => (c.founded == null ? [] : Object.keys(ERAS).filter((e) => ERAS[e](c.founded))));
-        for (const chip of eraChips) {
-            const v = chip.dataset.value;
-            chip.setAttribute('aria-pressed', String(v === state.era));
-            chip.querySelector('.n').textContent = ec[v] || 0;
-            chip.disabled = !ec[v] && v !== state.era;
         }
 
         // verified chip
@@ -136,7 +118,6 @@
     let typing;
     $('q').addEventListener('input', (e) => { clearTimeout(typing); typing = setTimeout(() => set('q', e.target.value.trim()), 120); });
     for (const chip of productChips) chip.addEventListener('click', () => set('product', chip.dataset.value));
-    for (const chip of eraChips) chip.addEventListener('click', () => set('era', state.era === chip.dataset.value ? '' : chip.dataset.value));
     $('country').addEventListener('change', (e) => {
         state.country = e.target.value;
         if (state.region && state.country && !state.region.startsWith(state.country + '-')) state.region = '';
@@ -152,7 +133,7 @@
         const open = panel.classList.toggle('open');
         e.currentTarget.setAttribute('aria-expanded', String(open));
     });
-    if (state.country || state.region || state.era || state.verified) {
+    if (state.country || state.region || state.verified) {
         $('more-filters').classList.add('open');
         $('filters-toggle').setAttribute('aria-expanded', 'true');
     }

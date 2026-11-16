@@ -13,3 +13,5 @@ summary: "We list watchmaking businesses based in the US (and a few in Canada), 
 - List every watchmaking business based here, wherever it makes things (chosen).
 
 **Why.** Many businesses based here design in America and make or assemble abroad, and they are still part of American watchmaking. Earlier wording such as "the people making watches in America" suggested every listed brand makes its products here, which isn't true.
+
+**Update, November 16, 2026.** We changed the tagline to "A free, volunteer-run guide to watchmaking businesses based in America." It now describes the businesses rather than the people running them.

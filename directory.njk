@@ -1,13 +1,8 @@
 ---
 permalink: /directory.html
 title: "Directory of American Watch Brands & Watchmakers | American Watchmaking Directory"
-description: "Search and filter watch brands, independent watchmakers and suppliers in the United States and Canada by state, product type and founding year."
+description: "Search and filter watch brands, independent watchmakers and suppliers in the United States and Canada by state and product type."
 navActive: "directory"
-eras:
-  - { value: "pre-1950", label: "Before 1950" }
-  - { value: "1950-1999", label: "1950–1999" }
-  - { value: "2000-2019", label: "2000–2019" }
-  - { value: "2020-plus", label: "2020 or later" }
 ---
 {% extends "base.njk" %}
 {% import "macros.njk" as m with context %}
@@ -15,7 +10,7 @@ eras:
 
 
 {% block main %}
-        <div class="page-intro">
+        <div class="page-intro page-intro-wide">
             <h1>Directory</h1>
             <p>{{ collections.brands.length }} watch brands, independent watchmakers and suppliers. Also browse by <a href="/states/">state or province</a> or on the <a href="/map/">map</a>.</p>
         </div>
@@ -59,15 +54,7 @@ eras:
                         </optgroup>
                     </select>
                 </div>
-                <div class="era-group">
-                    <span class="label" id="era-label">Founded</span>
-                    <div class="chip-row" role="group" aria-labelledby="era-label" id="era-chips">
-                        {%- for e in eras %}
-                        <button type="button" class="fchip" data-value="{{ e.value }}" aria-pressed="false">{{ e.label }} <span class="n"></span></button>
-                        {%- endfor %}
-                    </div>
-                </div>
-                <div>
+                <div class="verified-group">
                     <span class="label" id="verified-label">Brand input</span>
                     <div class="chip-row" role="group" aria-labelledby="verified-label">
                         <button type="button" class="fchip" id="verified-chip" aria-pressed="false">Details confirmed by the brand <span class="n"></span></button>

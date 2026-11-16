@@ -7,7 +7,8 @@ americanwatchmakingdirectory.org: a free, volunteer-run directory of watchmaking
 ## Rules that always apply
 
 - **Free services only.** The project has no income. Don't propose paid hosting, databases, APIs or SaaS. Git is the database, Eleventy builds the site, GitHub Pages hosts it.
-- **Based in America, not made in America.** A listing means a business is *based* in the US (or Canada), wherever its products are made. Never describe listed brands, or the directory, as "American-made", "domestic" or "making watches in America". Tagline: "A free, volunteer-run guide to the people running watchmaking businesses in America."
+- **Based in America, not made in America.** A listing means a business is *based* in the US (or Canada), wherever its products are made. Never describe listed brands, or the directory, as "American-made", "domestic" or "making watches in America". Tagline: "A free, volunteer-run guide to watchmaking businesses based in America."
+- **About the businesses, not the people behind them.** The directory is a guide to companies. In taglines, headlines and descriptions, talk about the businesses (brands, makers, suppliers), not "the people running" them.
 - **Only report what brands claim.** Never say in our own voice what is or isn't made in America (or Swiss made, handmade, in-house). Attribute every such claim: "the brand says its watches are assembled in Texas". Don't repeat press claims as fact. Third-party ratings may only appear credited to their source.
 - **Makers, not repairers, when searching for new listings** (the 2026-11-14 search). Restoration is a product type, but repair and service businesses weren't in scope for that search.
 - **Ask before adding a business** that doesn't clearly fit (for example, a company with offices in several countries). Research, then present candidates for approval; don't add them unasked.
