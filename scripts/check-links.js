@@ -5,13 +5,12 @@
 //   npm run health            print the report
 //   npm run health -- --json  print the raw results
 //
-// In GitHub Actions (GITHUB_TOKEN set) it keeps one issue, "Listing health",
-// up to date, and remembers how many weeks in a row each link has failed.
+// The results name businesses whose sites are failing, so they are kept in the
+// private tracker sheet, not in this public repo or its issues.
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 
-const ISSUE_TITLE = "Listing health";
 const TIMEOUT_MS = 25000;
 const CONCURRENCY = 6;
 const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36";
@@ -44,11 +43,11 @@ async function visit(url) {
     });
     const finalHost = host(res.url);
     if ([401, 403, 405, 429, 503, 999].includes(res.status)) return { kind: "blocked", detail: `answered ${res.status}` };
-    if (!res.ok) return { kind: "dead", detail: `answered ${res.status}` };
     const type = res.headers.get("content-type") || "";
     const body = type.includes("html") ? (await res.text()).slice(0, 200000) : "";
     const parked = PARKED.find((re) => re.test(body));
     if (parked) return { kind: "parked", detail: `page says "${body.match(parked)[0].toLowerCase()}"` };
+    if (!res.ok) return { kind: "dead", detail: `answered ${res.status}` };
     if (finalHost && !sameSite(finalHost, host(url))) return { kind: "moved", detail: `now goes to ${finalHost}` };
     return { kind: "ok" };
   } catch (e) {
@@ -94,43 +93,21 @@ function loadLinks() {
   return links;
 }
 
-// ---- The GitHub issue ----
-const repo = process.env.GITHUB_REPOSITORY;
-const token = process.env.GITHUB_TOKEN;
-async function gh(method, url, body) {
-  const res = await fetch(`https://api.github.com/repos/${repo}${url}`, {
-    method,
-    headers: { authorization: `Bearer ${token}`, accept: "application/vnd.github+json", "content-type": "application/json" },
-    body: body ? JSON.stringify(body) : undefined,
-  });
-  if (!res.ok) throw new Error(`GitHub ${method} ${url}: ${res.status} ${await res.text()}`);
-  return res.json();
-}
-async function findIssue() {
-  const issues = await gh("GET", `/issues?state=open&creator=github-actions%5Bbot%5D&per_page=100`);
-  return issues.find((i) => i.title === ISSUE_TITLE && !i.pull_request);
-}
-const readStreaks = (body) => {
-  const m = /<!-- streaks: (.*?) -->/s.exec(body || "");
-  try { return m ? JSON.parse(m[1]) : {}; } catch { return {}; }
-};
-
-function report(results, streaks, today) {
+function report(results, today) {
   const problems = results.filter((r) => ["dead", "parked", "moved"].includes(r.kind));
   const sites = problems.filter((r) => r.field === "website");
   const sources = problems.filter((r) => r.field === "source");
   const blocked = results.filter((r) => r.kind === "blocked" && r.field === "website");
   const websites = results.filter((r) => r.field === "website");
-  const weeks = (r) => { const n = streaks[r.url] || 1; return n === 1 ? "new this week" : `${n} weeks in a row`; };
-  const row = (r) => `| [${r.name}](https://americanwatchmakingdirectory.org/brands/${r.slug}/) | ${r.url} | ${r.detail} | ${weeks(r)} |`;
-  const table = (rows) => ["| Listing | Link | What happened | How long |", "|---|---|---|---|", ...rows.map(row)].join("\n");
+  const row = (r) => `| [${r.name}](https://americanwatchmakingdirectory.org/brands/${r.slug}/) | ${r.url} | ${r.detail} |`;
+  const table = (rows) => ["| Listing | Link | What happened |", "|---|---|---|", ...rows.map(row)].join("\n");
   const label = { dead: "Not answering", parked: "Parked or closed", moved: "Goes somewhere else" };
 
   const out = [`Checked ${today}: ${websites.length} websites and ${results.length - websites.length} source links. ` +
     `${websites.filter((r) => r.kind === "ok").length} websites are fine, ${sites.length} need a look, ${blocked.length} couldn't be checked.`, ""];
   if (!sites.length) out.push("No website problems this week.", "");
   for (const kind of ["parked", "dead", "moved"]) {
-    const rows = sites.filter((r) => r.kind === kind).sort((a, b) => (streaks[b.url] || 1) - (streaks[a.url] || 1) || a.name.localeCompare(b.name));
+    const rows = sites.filter((r) => r.kind === kind).sort((a, b) => a.name.localeCompare(b.name));
     if (rows.length) out.push(`## Websites: ${label[kind].toLowerCase()} (${rows.length})`, "", table(rows), "");
   }
   if (sources.length) out.push(`## Source links with problems (${sources.length})`, "", table(sources.sort((a, b) => a.name.localeCompare(b.name))), "");
@@ -143,20 +120,10 @@ function report(results, streaks, today) {
 }
 
 const links = loadLinks();
-const results = (await pool(links, async (l) => ({ ...l, ...(await check(l.url)) })));
+const results = (await pool(links, async (l) => ({ ...l, ...(await check(l.url)) })))
+  // A closed business's site pointing somewhere else is expected, not news.
+  .map((r) => (r.kind === "moved" && r.status === "inactive" ? { ...r, kind: "ok" } : r));
 const today = new Date().toISOString().slice(0, 10);
 
-if (process.argv.includes("--json")) {
-  console.log(JSON.stringify(results.filter((r) => r.kind !== "ok"), null, 2));
-} else if (token && repo) {
-  const issue = await findIssue();
-  const before = readStreaks(issue?.body);
-  const streaks = {};
-  for (const r of results) if (["dead", "parked", "moved"].includes(r.kind)) streaks[r.url] = (before[r.url] || 0) + 1;
-  const body = `${report(results, streaks, today)}\n\n<!-- streaks: ${JSON.stringify(streaks)} -->`;
-  if (issue) await gh("PATCH", `/issues/${issue.number}`, { body });
-  else await gh("POST", "/issues", { title: ISSUE_TITLE, body });
-  console.log(`Updated the "${ISSUE_TITLE}" issue.`);
-} else {
-  console.log(report(results, {}, today));
-}
+if (process.argv.includes("--json")) console.log(JSON.stringify(results.filter((r) => r.kind !== "ok"), null, 2));
+else console.log(report(results, today));

@@ -25,7 +25,7 @@ The site is static and costs nothing to run beyond the domain. Each brand is a t
 | `brands.json.11ty.js`, `american-watch-makers.csv.11ty.js` | Generate the `/brands.json` and `/american-watch-makers.csv` data exports. |
 | `lib/validate-brands.js` | Checks every brand file. Bad data fails the build, so it never reaches the live site. |
 | `changelog/*.md` + `changelog.njk` | The public changelog at `/changelog/`: one file per update or decision (see `CLAUDE.md`). |
-| `scripts/check-links.js` + `.github/workflows/health.yml` | The weekly health check (see below). |
+| `scripts/check-links.js` | The weekly health check (see below). |
 | `scripts/` | `geocode.js` (map coordinates) and `csv-to-brands.js` (the one-time CSV conversion). |
 
 The site rebuilds every Monday, as well as on every push, so that "Brand of the week" on the homepage rotates.
@@ -78,7 +78,7 @@ What they make here, and what they source elsewhere.
 
 ## Health check
 
-Every Monday a GitHub Action (`.github/workflows/health.yml`) visits each listing's website and source links and keeps one issue, "Listing health", up to date with the ones that don't answer, look parked, or now go to a different site. It changes no files. Run it yourself with `npm run health`.
+`npm run health` visits each listing's website and source links and prints the ones that don't answer, look parked, or now go to a different site. It changes no files. It is run once a week and the results are kept in the maintainer's private tracker, not in this repository or its issues, because they name businesses whose sites are failing.
 
 A flagged link is a prompt to look, not a verdict: a redirect may be a rebrand, and a site that turns away automated visits is listed separately as "couldn't be checked". After looking a listing over, set its `checked` date; change `status` only once it's clear the business has stopped trading.
 
