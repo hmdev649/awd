@@ -16,9 +16,9 @@ status: "active"
 made_in_america: ""
 movements: []
 price_range: ""
-sources: ["https://treptalks.com/interviews/daniel-luczak-daluca-straps", "https://sandiegomagazine.com/?p=38336", "https://dalucastraps.com/pages/about-us"]
+sources: ["https://sandiegomagazine.com/?p=38336", "https://dalucastraps.com/pages/about-us"]
 instagram_posts: []
-last_updated: "2026-11-09"
+last_updated: "2026-11-16"
 added: "2025-09-29"
 ---
 DaLuca Straps says it has made watch straps by hand in San Diego since 2009. It works in Horween leathers such as Shell Cordovan and Chromexcel, and in vintage military leathers.
