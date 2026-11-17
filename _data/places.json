@@ -14,6 +14,11 @@
     "lng": -72.0324,
     "approximate": true
   },
+  "|MD|US": {
+    "lat": 39.5162,
+    "lng": -76.9382,
+    "approximate": true
+  },
   "|MI|US": {
     "lat": 43.6212,
     "lng": -84.6824,
@@ -39,14 +44,29 @@
     "lng": -111.7144,
     "approximate": true
   },
+  "Ajax|ON|CA": {
+    "lat": 43.8505,
+    "lng": -79.0209,
+    "approximate": false
+  },
   "Alamo|NV|US": {
     "lat": 37.365,
     "lng": -115.1645,
     "approximate": false
   },
+  "Antelope|CA|US": {
+    "lat": 38.7082,
+    "lng": -121.33,
+    "approximate": false
+  },
   "Asheville|NC|US": {
     "lat": 35.5954,
     "lng": -82.5508,
+    "approximate": false
+  },
+  "Astoria|NY|US": {
+    "lat": 40.772,
+    "lng": -73.9303,
     "approximate": false
   },
   "Austin|TX|US": {
@@ -59,9 +79,19 @@
     "lng": -76.6108,
     "approximate": false
   },
+  "Barrie|ON|CA": {
+    "lat": 44.3893,
+    "lng": -79.6901,
+    "approximate": false
+  },
   "Bedford|NY|US": {
     "lat": 41.2041,
     "lng": -73.6425,
+    "approximate": false
+  },
+  "Bellevue|WA|US": {
+    "lat": 47.6144,
+    "lng": -122.1923,
     "approximate": false
   },
   "Belmont|NH|US": {
@@ -74,9 +104,19 @@
     "lng": -100.7837,
     "approximate": false
   },
+  "Boise|ID|US": {
+    "lat": 43.6166,
+    "lng": -116.2009,
+    "approximate": false
+  },
   "Boston|MA|US": {
     "lat": 42.3588,
     "lng": -71.0578,
+    "approximate": false
+  },
+  "Boulder|CO|US": {
+    "lat": 40.015,
+    "lng": -105.2705,
     "approximate": false
   },
   "Brandon|MB|CA": {
@@ -89,6 +129,11 @@
     "lng": -73.9497,
     "approximate": false
   },
+  "Buffalo|NY|US": {
+    "lat": 42.8864,
+    "lng": -78.8781,
+    "approximate": false
+  },
   "Calgary|AB|CA": {
     "lat": 51.0456,
     "lng": -114.0575,
@@ -99,6 +144,26 @@
     "lng": -122.4033,
     "approximate": false
   },
+  "Cambridge|MA|US": {
+    "lat": 42.3656,
+    "lng": -71.104,
+    "approximate": false
+  },
+  "Campbelltown|PA|US": {
+    "lat": 40.2774,
+    "lng": -76.5855,
+    "approximate": false
+  },
+  "Carlsbad|CA|US": {
+    "lat": 33.1352,
+    "lng": -117.3291,
+    "approximate": false
+  },
+  "Casper|WY|US": {
+    "lat": 42.8501,
+    "lng": -106.3251,
+    "approximate": false
+  },
   "Charlotte|NC|US": {
     "lat": 35.2272,
     "lng": -80.8431,
@@ -107,6 +172,11 @@
   "Chatham|NJ|US": {
     "lat": 40.7409,
     "lng": -74.3837,
+    "approximate": false
+  },
+  "Chattanooga|TN|US": {
+    "lat": 35.0457,
+    "lng": -85.3095,
     "approximate": false
   },
   "Chenoa|IL|US": {
@@ -144,9 +214,24 @@
     "lng": -83.0007,
     "approximate": false
   },
+  "Cotati|CA|US": {
+    "lat": 38.3267,
+    "lng": -122.7068,
+    "approximate": false
+  },
+  "Cottonwood Heights|UT|US": {
+    "lat": 40.6135,
+    "lng": -111.8256,
+    "approximate": false
+  },
   "Dallas|TX|US": {
     "lat": 32.7763,
     "lng": -96.7969,
+    "approximate": false
+  },
+  "Darien|CT|US": {
+    "lat": 41.0787,
+    "lng": -73.4693,
     "approximate": false
   },
   "Delray Beach|FL|US": {
@@ -174,9 +259,24 @@
     "lng": -82.7894,
     "approximate": false
   },
+  "Durham|NC|US": {
+    "lat": 35.9967,
+    "lng": -78.9018,
+    "approximate": false
+  },
+  "Duxbury|MA|US": {
+    "lat": 42.0418,
+    "lng": -70.6723,
+    "approximate": false
+  },
   "El Cajon|CA|US": {
     "lat": 32.7948,
     "lng": -116.9625,
+    "approximate": false
+  },
+  "El Dorado Hills|CA|US": {
+    "lat": 38.6561,
+    "lng": -121.0743,
     "approximate": false
   },
   "Ellicott City|MD|US": {
@@ -194,9 +294,24 @@
     "lng": -117.285,
     "approximate": false
   },
+  "Eugene|OR|US": {
+    "lat": 44.0505,
+    "lng": -123.0951,
+    "approximate": false
+  },
+  "Excelsior|MN|US": {
+    "lat": 44.9033,
+    "lng": -93.5663,
+    "approximate": false
+  },
   "Fairfax|VA|US": {
     "lat": 38.8462,
     "lng": -77.3064,
+    "approximate": false
+  },
+  "Fairfield|CT|US": {
+    "lat": 41.1412,
+    "lng": -73.2637,
     "approximate": false
   },
   "Fajardo|PR|US": {
@@ -264,6 +379,11 @@
     "lng": -86.1095,
     "approximate": false
   },
+  "Groton|CT|US": {
+    "lat": 41.3466,
+    "lng": -72.0389,
+    "approximate": false
+  },
   "Guelph|ON|CA": {
     "lat": 43.5461,
     "lng": -80.2493,
@@ -274,6 +394,11 @@
     "lng": -87.902,
     "approximate": false
   },
+  "Hackensack|NJ|US": {
+    "lat": 40.8871,
+    "lng": -74.0411,
+    "approximate": false
+  },
   "Hagerstown|MD|US": {
     "lat": 39.643,
     "lng": -77.7191,
@@ -282,6 +407,11 @@
   "Hamilton|ON|CA": {
     "lat": 43.2561,
     "lng": -79.8729,
+    "approximate": false
+  },
+  "High Point|NC|US": {
+    "lat": 35.9557,
+    "lng": -80.0053,
     "approximate": false
   },
   "Hingham|MA|US": {
@@ -309,6 +439,11 @@
     "lng": -118,
     "approximate": false
   },
+  "Indianapolis|IN|US": {
+    "lat": 39.7683,
+    "lng": -86.1584,
+    "approximate": false
+  },
   "Jacksonville Beach|FL|US": {
     "lat": 30.2947,
     "lng": -81.3931,
@@ -317,6 +452,11 @@
   "Kansas City|MO|US": {
     "lat": 39.1001,
     "lng": -94.5781,
+    "approximate": false
+  },
+  "King of Prussia|PA|US": {
+    "lat": 40.0851,
+    "lng": -75.3888,
     "approximate": false
   },
   "Lancaster|PA|US": {
@@ -364,6 +504,16 @@
     "lng": -110.5616,
     "approximate": false
   },
+  "London|ON|CA": {
+    "lat": 42.9837,
+    "lng": -81.2496,
+    "approximate": false
+  },
+  "Long Island City|NY|US": {
+    "lat": 40.7455,
+    "lng": -73.9485,
+    "approximate": false
+  },
   "Los Angeles|CA|US": {
     "lat": 34.0537,
     "lng": -118.2428,
@@ -372,6 +522,11 @@
   "Lynchburg|VA|US": {
     "lat": 37.4138,
     "lng": -79.1422,
+    "approximate": false
+  },
+  "Manalapan|NJ|US": {
+    "lat": 40.2853,
+    "lng": -74.3335,
     "approximate": false
   },
   "Manhasset|NY|US": {
@@ -414,6 +569,11 @@
     "lng": -73.1283,
     "approximate": false
   },
+  "Milwaukee|WI|US": {
+    "lat": 43.0386,
+    "lng": -87.9091,
+    "approximate": false
+  },
   "Minneapolis|MN|US": {
     "lat": 44.9773,
     "lng": -93.2655,
@@ -439,9 +599,24 @@
     "lng": -74.006,
     "approximate": false
   },
+  "Newmarket|ON|CA": {
+    "lat": 44.0563,
+    "lng": -79.4617,
+    "approximate": false
+  },
+  "Normal|IL|US": {
+    "lat": 40.5093,
+    "lng": -88.9844,
+    "approximate": false
+  },
   "North Miami Beach|FL|US": {
     "lat": 25.9331,
     "lng": -80.1625,
+    "approximate": false
+  },
+  "Novi|MI|US": {
+    "lat": 42.4806,
+    "lng": -83.4755,
     "approximate": false
   },
   "Oakland|CA|US": {
@@ -457,6 +632,11 @@
   "Orlando|FL|US": {
     "lat": 28.5421,
     "lng": -81.379,
+    "approximate": false
+  },
+  "Ottawa|ON|CA": {
+    "lat": 45.4209,
+    "lng": -75.6901,
     "approximate": false
   },
   "Overland Park|KS|US": {
@@ -534,6 +714,16 @@
     "lng": -77.1517,
     "approximate": false
   },
+  "Rockwall|TX|US": {
+    "lat": 32.9312,
+    "lng": -96.4597,
+    "approximate": false
+  },
+  "Round Rock|TX|US": {
+    "lat": 30.5086,
+    "lng": -97.6788,
+    "approximate": false
+  },
   "Salem|MA|US": {
     "lat": 42.5214,
     "lng": -70.8957,
@@ -604,9 +794,24 @@
     "lng": -122.3301,
     "approximate": false
   },
+  "Seymour|CT|US": {
+    "lat": 41.3944,
+    "lng": -73.0742,
+    "approximate": false
+  },
+  "Simcoe|ON|CA": {
+    "lat": 42.8372,
+    "lng": -80.3039,
+    "approximate": false
+  },
   "Sisters|OR|US": {
     "lat": 44.2909,
     "lng": -121.5493,
+    "approximate": false
+  },
+  "Springfield|IL|US": {
+    "lat": 39.799,
+    "lng": -89.644,
     "approximate": false
   },
   "Springfield|OR|US": {
@@ -629,6 +834,11 @@
     "lng": -93.0931,
     "approximate": false
   },
+  "St. Petersburg|FL|US": {
+    "lat": 27.7712,
+    "lng": -82.634,
+    "approximate": false
+  },
   "Stanwood|WA|US": {
     "lat": 48.2422,
     "lng": -122.352,
@@ -649,9 +859,19 @@
     "lng": -122.0363,
     "approximate": false
   },
+  "Swannanoa|NC|US": {
+    "lat": 35.5998,
+    "lng": -82.4034,
+    "approximate": false
+  },
   "Swarthmore|PA|US": {
     "lat": 39.9021,
     "lng": -75.3499,
+    "approximate": false
+  },
+  "Talkeetna|AK|US": {
+    "lat": 62.3235,
+    "lng": -150.1126,
     "approximate": false
   },
   "Texas City|TX|US": {
@@ -674,6 +894,11 @@
     "lng": -110.9748,
     "approximate": false
   },
+  "Tustin|CA|US": {
+    "lat": 33.7459,
+    "lng": -117.8262,
+    "approximate": false
+  },
   "Twin Falls|ID|US": {
     "lat": 42.5559,
     "lng": -114.4701,
@@ -683,6 +908,11 @@
     "lat": 40.2338,
     "lng": -111.6585,
     "approximate": true
+  },
+  "Vallejo|CA|US": {
+    "lat": 38.1041,
+    "lng": -122.2566,
+    "approximate": false
   },
   "Vancouver|BC|CA": {
     "lat": 49.2609,
@@ -697,6 +927,11 @@
   "Venice Beach|CA|US": {
     "lat": 33.985,
     "lng": -118.4695,
+    "approximate": false
+  },
+  "Venice|FL|US": {
+    "lat": 27.0998,
+    "lng": -82.4443,
     "approximate": false
   },
   "Warren|NJ|US": {
@@ -714,6 +949,16 @@
     "lng": -77.0364,
     "approximate": false
   },
+  "Wayland|MI|US": {
+    "lat": 42.6745,
+    "lng": -85.6458,
+    "approximate": false
+  },
+  "Wayne|PA|US": {
+    "lat": 40.044,
+    "lng": -75.3879,
+    "approximate": false
+  },
   "Wesley Chapel|FL|US": {
     "lat": 28.1866,
     "lng": -82.3661,
@@ -727,6 +972,16 @@
   "Whitefish|MT|US": {
     "lat": 48.4108,
     "lng": -114.3346,
+    "approximate": false
+  },
+  "Willoughby|OH|US": {
+    "lat": 41.6398,
+    "lng": -81.4065,
+    "approximate": false
+  },
+  "Wilmington|DE|US": {
+    "lat": 39.7383,
+    "lng": -75.5527,
     "approximate": false
   },
   "Wilmington|NC|US": {
