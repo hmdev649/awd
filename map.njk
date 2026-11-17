@@ -16,8 +16,15 @@ navActive: "map"
             <p>Where America's watch brands, watchmakers and suppliers are based. Click a cluster to zoom in, or a pin for details. Alaska, Hawaii and Puerto Rico are a short pan away. You can also <a href="/states/">browse by state</a>.</p>
         </div>
 
+        {%- set placed = collections.brands | placed %}
+        <div class="chip-row map-filter" role="group" aria-label="Company type" data-map="map-full">
+            <button type="button" class="fchip" data-value="" aria-pressed="true">All <span class="n">{{ placed.length }}</span></button>
+            {%- for f in placed | facet("products") %}
+            <button type="button" class="fchip" data-value="{{ f.value }}" aria-pressed="false">{{ f.value }} <span class="n">{{ f.count }}</span></button>
+            {%- endfor %}
+        </div>
         {{ m.map(collections.brands, "map-full", "full", "", "north-america") }}
-        <p class="map-note">{{ collections.brands.length - unplaced.length }} of {{ collections.brands.length }} listings are on the map. Hollow pins are placed at the state level because we only know the state. United States and Canada are counted separately.</p>
+        <p class="map-note"><span id="map-count" aria-live="polite">{{ placed.length }} of {{ collections.brands.length }} listings are on the map.</span> Hollow pins are placed at the state level because we only know the state. United States and Canada are counted separately.</p>
 
         {% if unplaced.length %}
         <section class="section">

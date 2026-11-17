@@ -66,18 +66,20 @@
             el.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
 
             const present = COUNTRIES.filter((c) => points.some((p) => (p.c || 'US') === c.code));
+            // One GeoJSON source per country; `type` limits it to one company type
+            const features = (code, type) => ({
+                type: 'FeatureCollection',
+                features: points.flatMap((p, i) => ((p.c || 'US') === code && (!type || (p.k || []).includes(type)) ? [{
+                    type: 'Feature',
+                    geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
+                    properties: { i, a: p.a ? 1 : 0 },
+                }] : [])),
+            });
             for (const { code, color } of present) {
                 const src = `brands-${code}`;
                 map.addSource(src, {
                     type: 'geojson',
-                    data: {
-                        type: 'FeatureCollection',
-                        features: points.flatMap((p, i) => ((p.c || 'US') === code ? [{
-                            type: 'Feature',
-                            geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
-                            properties: { i, a: p.a ? 1 : 0 },
-                        }] : [])),
-                    },
+                    data: features(code, ''),
                     cluster: true,
                     clusterRadius: 36,
                     clusterMaxZoom: CLUSTER_MAX_ZOOM,
@@ -107,6 +109,26 @@
             }
 
             const popup = new maplibregl.Popup({ maxWidth: '300px', offset: 12 });
+
+            // Company type pills above the map (<div class="map-filter" data-map="<id>">)
+            const bar = document.querySelector(`.map-filter[data-map="${el.id}"]`);
+            const countEl = document.getElementById('map-count');
+            const allText = countEl?.textContent;
+            if (bar) {
+                const chips = [...bar.querySelectorAll('.fchip')];
+                bar.addEventListener('click', (e) => {
+                    const chip = e.target.closest('.fchip');
+                    if (!chip) return;
+                    const type = chip.dataset.value;
+                    chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+                    popup.remove();
+                    for (const { code } of present) map.getSource(`brands-${code}`).setData(features(code, type));
+                    if (countEl) {
+                        const n = type ? points.filter((p) => (p.k || []).includes(type)).length : 0;
+                        countEl.textContent = type ? `Showing ${n} of ${points.length} listings on the map: ${type.toLowerCase()}.` : allText;
+                    }
+                });
+            }
 
             const clusterLayers = present.map((c) => `clusters-${c.code}`);
             const pointLayers = present.map((c) => `points-${c.code}`);

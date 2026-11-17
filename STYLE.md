@@ -67,7 +67,7 @@ Reuse these; don't restyle them per page.
 - **Term lists** (`dl.claims`): bold term, plain ink definition, and a 3px ink bar down the left of each pair.
 - **Site mark**: the round AWD mark (the favicon image) sits before the site name in the header, 40px on desktop and 28px on phones.
 - **Directory results line**: the count ("Showing 12 of 215") and "Clear all filters" on the left, the Sort dropdown on the right with its label beside it. Sort is not inside the filter panel.
-- **Maps**: United States pins and clusters are `--ink`, Canadian ones `--brass`, and the two are clustered separately so a count never mixes countries. Pins placed only at state level are hollow. Maps showing both countries get a color key underneath.
+- **Maps**: United States pins and clusters are `--ink`, Canadian ones `--brass`, and the two are clustered separately so a count never mixes countries. Pins placed only at state level are hollow. Maps showing both countries get a color key underneath. The full map has a row of company type filter pills (`.map-filter`, the same `.fchip` pills as the directory) above it; picking one redraws the pins and updates the count line under the map.
 - **Photo gallery** (`.gallery`, brand pages): up to three photos in one row, 4:3, `--radius` corners, with an optional caption and credit.
 - **Expandable rows** (`.faq`): a line above each row, a "+" or "−" on the right, and an "Expand all" button above the list.
 
@@ -80,6 +80,9 @@ Reuse these; don't restyle them per page.
 - The header shows the site mark and name, then Directory, Map and About, plus the "Suggest a brand" button; on phones the button reads "Suggest".
 
 ## Writing on the page
+
+When counting places, call only US states "states". D.C., Puerto Rico and Canadian provinces are named separately (the `regionSummary` filter does this).
+
 
 Copy follows the rules in `CLAUDE.md`: describe businesses (not the people running them), say "based in America", and attribute every made-in claim to the brand.
 

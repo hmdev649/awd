@@ -132,6 +132,22 @@ export default function (eleventyConfig) {
     [...regions].sort((a, b) => b.brands.length - a.brands.length || a.name.localeCompare(b.name)).slice(0, n));
   eleventyConfig.addFilter("brandCount", (regions) => regions.reduce((sum, r) => sum + r.brands.length, 0));
   eleventyConfig.addFilter("unplaced", (brands) => brands.filter((b) => !b.data.place));
+  eleventyConfig.addFilter("placed", (brands) => brands.filter((b) => b.data.place));
+  // How many of the regions are US states, and what else is in there, so a count
+  // never calls D.C., Puerto Rico or a Canadian province a "state".
+  // -> "39 states, plus D.C., Puerto Rico and 6 Canadian provinces"
+  eleventyConfig.addFilter("regionSummary", (regions) => {
+    const states = regions.filter((r) => r.kind === "state").length;
+    const extra = [];
+    if (regions.some((r) => r.code === "DC" && r.country === "US")) extra.push("D.C.");
+    if (regions.some((r) => r.code === "PR" && r.country === "US")) extra.push("Puerto Rico");
+    const prov = regions.filter((r) => r.country === "CA" && r.kind === "province").length;
+    const terr = regions.filter((r) => r.country === "CA" && r.kind === "territory").length;
+    if (prov) extra.push(`${prov} Canadian province${prov === 1 ? "" : "s"}`);
+    if (terr) extra.push(`${terr} Canadian territor${terr === 1 ? "y" : "ies"}`);
+    const list = extra.length > 1 ? `${extra.slice(0, -1).join(", ")} and ${extra.at(-1)}` : extra.join("");
+    return { states, rest: list, text: `${states} state${states === 1 ? "" : "s"}${list ? `, plus ${list}` : ""}` };
+  });
   eleventyConfig.addFilter("others", (brands, self) => brands.filter((b) => b.url !== self));
 
   // "Houston (3), Austin (2)" style city breakdown
@@ -152,6 +168,7 @@ export default function (eleventyConfig) {
       a: b.data.place.approximate || undefined,
       c: b.data.country,
       t: b.data.thumb?.src2x,
+      k: b.data.products,
     })));
 
   return {

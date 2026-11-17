@@ -13,7 +13,7 @@ navActive: "states"
 {% block main %}
         <div class="page-intro">
             <h1>Browse by state</h1>
-            <p>{{ collections.regions.length }} states have at least one listing, counting Canadian provinces. Pick one to see who's there.</p>
+            <p>There are listings in {{ (collections.regions | regionSummary).text }}. Pick one to see who's there.</p>
         </div>
 
         {{ m.map(collections.brands, "map-states", "preview", "small", "north-america") }}
