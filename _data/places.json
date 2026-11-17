@@ -189,6 +189,11 @@
     "lng": -117.285,
     "approximate": false
   },
+  "Fairfax|VA|US": {
+    "lat": 38.8462,
+    "lng": -77.3064,
+    "approximate": false
+  },
   "Fajardo|PR|US": {
     "lat": 18.3245,
     "lng": -65.6532,
@@ -294,6 +299,11 @@
     "lng": -95.3677,
     "approximate": false
   },
+  "Huntington Beach|CA|US": {
+    "lat": 33.6783,
+    "lng": -118,
+    "approximate": false
+  },
   "Jacksonville Beach|FL|US": {
     "lat": 30.2947,
     "lng": -81.3931,
@@ -337,6 +347,11 @@
   "Little Neck|NY|US": {
     "lat": 40.762,
     "lng": -73.7382,
+    "approximate": false
+  },
+  "Little Rock|AR|US": {
+    "lat": 34.7465,
+    "lng": -92.2896,
     "approximate": false
   },
   "Livingston|MT|US": {
@@ -614,6 +629,11 @@
     "lng": -79.0726,
     "approximate": false
   },
+  "Sterling|VA|US": {
+    "lat": 39.0017,
+    "lng": -77.4033,
+    "approximate": false
+  },
   "Sunnyvale|CA|US": {
     "lat": 37.3688,
     "lng": -122.0363,
@@ -679,6 +699,11 @@
     "lng": -80.819,
     "approximate": false
   },
+  "Washington|DC|US": {
+    "lat": 38.8951,
+    "lng": -77.0364,
+    "approximate": false
+  },
   "Wesley Chapel|FL|US": {
     "lat": 28.1866,
     "lng": -82.3661,
@@ -697,6 +722,11 @@
   "Wilmington|NC|US": {
     "lat": 34.2353,
     "lng": -77.9487,
+    "approximate": false
+  },
+  "Woodland Hills|CA|US": {
+    "lat": 34.1684,
+    "lng": -118.6058,
     "approximate": false
   },
   "Woods Cross|UT|US": {
