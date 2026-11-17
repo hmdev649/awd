@@ -11,7 +11,7 @@ contact_title:
 founded: 
 revived: 
 products: ["Watches"]
-logo: 
+logo: "watchly.png"
 status: "active"
 made_in_america: ""
 movements: []

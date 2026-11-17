@@ -11,7 +11,7 @@ contact_title:
 founded: 2021
 revived: 
 products: ["Watches"]
-logo: 
+logo: "mark-time-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

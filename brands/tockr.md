@@ -11,7 +11,7 @@ contact_title:
 founded: 2017
 revived: 
 products: ["Watches"]
-logo: 
+logo: "tockr.png"
 status: "active"
 made_in_america: ""
 movements: []

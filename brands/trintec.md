@@ -11,7 +11,7 @@ contact_title:
 founded: 1984
 revived: 
 products: ["Watches", "Accessories"]
-logo: 
+logo: "trintec.png"
 status: "active"
 made_in_america: ""
 movements: []

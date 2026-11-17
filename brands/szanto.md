@@ -11,7 +11,7 @@ contact_title:
 founded: 2013
 revived: 
 products: ["Watches"]
-logo: 
+logo: "szanto.png"
 status: "active"
 made_in_america: ""
 movements: []

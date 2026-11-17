@@ -11,7 +11,7 @@ contact_title:
 founded: 2012
 revived: 
 products: ["Watches"]
-logo: 
+logo: "verdure-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

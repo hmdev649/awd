@@ -11,7 +11,7 @@ contact_title:
 founded: 2002
 revived: 
 products: ["Watches"]
-logo: 
+logo: "mk-ii.png"
 status: "active"
 made_in_america: ""
 movements: []

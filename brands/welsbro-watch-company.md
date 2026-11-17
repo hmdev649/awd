@@ -11,7 +11,7 @@ contact_title:
 founded: 
 revived: 
 products: ["Watches", "Straps"]
-logo: 
+logo: "welsbro-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

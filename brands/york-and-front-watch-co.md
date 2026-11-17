@@ -11,7 +11,7 @@ contact_title:
 founded: 
 revived: 
 products: ["Watches"]
-logo: 
+logo: "york-and-front-watch-co.png"
 status: "active"
 made_in_america: ""
 movements: []

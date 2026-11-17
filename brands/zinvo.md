@@ -11,7 +11,7 @@ contact_title:
 founded: 2014
 revived: 
 products: ["Watches"]
-logo: 
+logo: "zinvo.png"
 status: "active"
 made_in_america: ""
 movements: []

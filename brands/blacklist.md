@@ -11,7 +11,7 @@ contact_title:
 founded: 2013
 revived: 
 products: ["Watches"]
-logo: 
+logo: "blacklist.png"
 status: "active"
 made_in_america: ""
 movements: []

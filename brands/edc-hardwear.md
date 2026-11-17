@@ -11,7 +11,7 @@ contact_title:
 founded: 2007
 revived: 
 products: ["Watches", "Accessories"]
-logo: 
+logo: "edc-hardwear.png"
 status: "active"
 made_in_america: ""
 movements: []

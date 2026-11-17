@@ -11,7 +11,7 @@ contact_title:
 founded: 
 revived: 
 products: ["Watches", "Accessories"]
-logo: 
+logo: "big-idea-design.png"
 status: "active"
 made_in_america: ""
 movements: []

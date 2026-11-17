@@ -11,7 +11,7 @@ contact_title:
 founded: 2025
 revived: 
 products: ["Watches"]
-logo: 
+logo: "jwalker-watch-co.png"
 status: "active"
 made_in_america: ""
 movements: []

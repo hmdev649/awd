@@ -11,7 +11,7 @@ contact_title:
 founded: 
 revived: 
 products: ["Watches"]
-logo: 
+logo: "heitis-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

@@ -11,7 +11,7 @@ contact_title:
 founded: 
 revived: 
 products: ["Watches"]
-logo: 
+logo: "liv-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

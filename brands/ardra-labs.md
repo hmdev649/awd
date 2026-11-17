@@ -11,7 +11,7 @@ contact_title:
 founded: 
 revived: 
 products: ["Watches"]
-logo: 
+logo: "ardra-labs.png"
 status: "active"
 made_in_america: ""
 movements: []

@@ -11,7 +11,7 @@ contact_title:
 founded: 1994
 revived: 
 products: ["Watches", "Straps"]
-logo: 
+logo: "watchcraft.png"
 status: "active"
 made_in_america: ""
 movements: []

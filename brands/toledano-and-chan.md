@@ -11,7 +11,7 @@ contact_title:
 founded: 2024
 revived: 
 products: ["Watches"]
-logo: 
+logo: "toledano-and-chan.png"
 status: "active"
 made_in_america: ""
 movements: []
