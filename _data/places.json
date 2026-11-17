@@ -29,6 +29,11 @@
     "lng": -86.001,
     "approximate": true
   },
+  "|TX|US": {
+    "lat": 31.2639,
+    "lng": -98.5456,
+    "approximate": true
+  },
   "|UT|US": {
     "lat": 39.4225,
     "lng": -111.7144,
@@ -582,6 +587,11 @@
   "Santa Monica|CA|US": {
     "lat": 34.0195,
     "lng": -118.4912,
+    "approximate": false
+  },
+  "Saskatoon|SK|CA": {
+    "lat": 52.1318,
+    "lng": -106.6608,
     "approximate": false
   },
   "Savage|MN|US": {
