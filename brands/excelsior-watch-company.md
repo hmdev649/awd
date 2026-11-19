@@ -11,7 +11,7 @@ contact_title:
 founded: 2015
 revived: 
 products: ["Watches"]
-logo: 
+logo: "excelsior-watch-company.png"
 status: "active"
 made_in_america: ""
 movements: []

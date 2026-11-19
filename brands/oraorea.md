@@ -11,7 +11,7 @@ contact_title: "Founder"
 founded: 2025
 revived: 
 products: ["Watches", "Straps"]
-logo: 
+logo: "oraorea.png"
 status: "active"
 made_in_america: ""
 movements: []
