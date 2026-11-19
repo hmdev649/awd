@@ -11,7 +11,7 @@ contact_title: "Co-founder and watchmaker"
 founded: 
 revived: 
 products: ["Watches"]
-logo: 
+logo: "zltd-watches.png"
 status: "active"
 made_in_america: ""
 movements: []

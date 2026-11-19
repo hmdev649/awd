@@ -11,7 +11,7 @@ contact_title: "Watchmaker"
 founded: 
 revived: 
 products: ["Watches"]
-logo: 
+logo: "fernando-ronzon.png"
 status: "active"
 made_in_america: ""
 movements: []
